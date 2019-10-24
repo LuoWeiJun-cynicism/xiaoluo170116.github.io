@@ -7,7 +7,7 @@ header,
 }
 body {
   background-color: #eee;
-  color: #3c4858;
+  color: #00FFFF;
 }
 body a {
   color: #3c4858;
@@ -21,11 +21,6 @@ body a:hover {
 }
 .hover-with-bg:hover {
   background-color: #f8f9fa !important;
-}
-.visitors {
-  font-size: 0.8em;
-  padding: 0.45rem;
-  float: right;
 }
 #board {
   position: relative;
@@ -66,19 +61,19 @@ body a:hover {
 .navbar {
   background-color: transparent;
   font-size: 0.875rem;
-  color: white;
+  color: #00FFFF;
 }
 .navbar a {
-  color: white;
+  color: #00FFFF;
 }
 .navbar a:hover {
   background-color: rgba(0,0,0,0.1);
 }
 .navbar-custom {
-  color: white;
+  color: #00FFFF;
 }
 .navbar-custom a {
-  color: white;
+  color: #00FFFF;
 }
 .top-nav-collapse {
   background-color: #2f4154;
@@ -419,7 +414,7 @@ h6::before {
   padding-left: 1rem;
 }
 .tocbot-link {
-  color: #3c4858;
+  color: #00FFFF;
 }
 .tocbot-active-link {
   font-weight: 600;
