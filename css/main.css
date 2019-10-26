@@ -7,7 +7,7 @@ header,
 }
 body {
   background-color: #eee;
-  color: #00FFFF;
+  color: #FF9900;
 }
 body a {
   color: #3c4858;
@@ -414,7 +414,7 @@ h6::before {
   padding-left: 1rem;
 }
 .tocbot-link {
-  color: #00FFFF;
+  color: #FF9900;
 }
 .tocbot-active-link {
   font-weight: 600;
