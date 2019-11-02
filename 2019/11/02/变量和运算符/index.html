@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>变量及运算符 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 2:12 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>变量的声明、使用、修改以及python支持的运算符及应用</p>
+<a id="more"></a>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="1-什么是变量？"><a href="#1-什么是变量？" class="headerlink" title="1.什么是变量？"></a>1.什么是变量？</h4><p>变量是用来申请空间存储数据的</p>
+<h4 id="2-变量的声明（创建变量）"><a href="#2-变量的声明（创建变量）" class="headerlink" title="2.变量的声明（创建变量）"></a>2.变量的声明（创建变量）</h4><p>1）语法：<br>变量名 = 值</p>
+<p>2）说明：<br>变量名——程序员自己命名<br>要求：只能是标识符，不能是关键字</p>
+<pre><code class="python">规范：见名知义（看见变量名，大概知道变量存储的什么数据）
+     所有字母都小写，如果有多个单词，单词之间用下划线隔开
+     不能使用系统提供的函数名、类名或者模块名给变量命名
+
+= （赋值符号） 作用：将右边的值赋给左边的变量
+值  ：任何有结果的表达式都可以作为值；例如 a）任何类型的数据
+    b）已经声明(赋值)过的变量   c）运算表达式
+
+a = 10
+b = a
+c = (10 + 20)/2
+# 使用变量就是使用变量中的值
+print(a, b, c)</code></pre>
+<h4 id="3-同时声明多个变量"><a href="#3-同时声明多个变量" class="headerlink" title="3.同时声明多个变量"></a>3.同时声明多个变量</h4><p>1）同时声明多个变量赋相同的值</p>
+<pre><code class="python">a1 = a2 = a3 =18</code></pre>
+<p>2）同时声明多个变量，赋不同的值(注意：变量个数和值的个数要相同)</p>
+<pre><code class="python">b1, b2 = 12, 13
+print(b1, b2)</code></pre>
+<h4 id="4-使用变量（使用变量就是使用变量中的存储的值）"><a href="#4-使用变量（使用变量就是使用变量中的存储的值）" class="headerlink" title="4.使用变量（使用变量就是使用变量中的存储的值）"></a>4.使用变量（使用变量就是使用变量中的存储的值）</h4><pre><code class="python">print(b1, b2)
+new = b1*2
+print(new)</code></pre>
+<h4 id="5-修改变量的值（重新赋值）"><a href="#5-修改变量的值（重新赋值）" class="headerlink" title="5.修改变量的值（重新赋值）"></a>5.修改变量的值（重新赋值）</h4><pre><code class="python"># python中已经声明过的变量中的值可以修改
+b1 = 122
+# 重新赋值后变量的值变成新值
+print(b1)</code></pre>
+<h4 id="6-python中声明变量的原理"><a href="#6-python中声明变量的原理" class="headerlink" title="6.python中声明变量的原理"></a>6.python中声明变量的原理</h4><p><strong>声明变量和变量赋值的时候，是先在内存中开辟空间存储数据，空间的大小由数据的大小来决定；然后将数据对应内存空间的地址给变量</strong><br>变量三要素：值（和变量关联的数据）、地址（变量关联的数据对应的地址）、类型（变量关联的数据类型）<br>1）id函数：id(变量/数据)——获取变量/数据的地址</p>
+<pre><code class="python">b3 = 520
+print(id(b3))
+b3 = 13
+print(id(b3))</code></pre>
+<p>2）type函数：type（变量/数据）——获取变量/数据的类型</p>
+<pre><code class="python">print(type(b3))     
+# int(整型)、float(浮点型)、str(字符串)、bool（布尔类型）</code></pre>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><h4 id="1-python支持的运算符：数学运算符、比较运算符、逻辑运算符、赋值运算符"><a href="#1-python支持的运算符：数学运算符、比较运算符、逻辑运算符、赋值运算符" class="headerlink" title="1.python支持的运算符：数学运算符、比较运算符、逻辑运算符、赋值运算符"></a>1.python支持的运算符：数学运算符、比较运算符、逻辑运算符、赋值运算符</h4><p><strong><em><code>1、数学运算符：</code></em></strong>+(加)， -（减）， * （乘），/（除）， % （取余），//（整除）， **（幂运算）</p>
+<p>1)  +，-，*，/和数学中的加减乘除功能一致</p>
+<pre><code class="python">print(5+2, 5*2, 5-2, 10/2)</code></pre>
+<p>2) %(求余数)：数字1%数字2——数字1除数字2的余数</p>
+<pre><code class="python">print(5 % 2)
+# 应用1：判断一个数是否能被另一个数整除（判断奇数或偶数）
+# 应用2：取整数的个位数（对10取余）
+num = 123
+num1 = num % 10
+print(&#39;个位数：&#39;, num1)</code></pre>
+<p>3) //(整除)：数字1//数字2——数字1除数字2，商只取整数部分</p>
+<pre><code class="python">print(5 // 2)
+print(3.6 // 2)
+# 应用：取指定长度的数字的最高位
+num = 2546
+print(num // 1000)</code></pre>
+<p>4) (幂运算)</p>
+<pre><code class="python"># **(幂运算)：x**y —— 计算x的y次方
+print(4**5)
+print(0.3**3)
+# 应用：可以开平方
+print(100**(1/2))
+print(27**(1/3))</code></pre>
+<p><strong><em><code>2、比较运算符：</code></em></strong>&gt;(大于符号), &lt;（小于符合）, &gt;=（大于等于符号）, &lt;=（小于等于符号）, ==（等于）, !=（不等于）<br>所有比较运算符的结果都是布尔值</p>
+<pre><code class="python">print(20 &gt; 10)
+print(10&lt;3)
+a = 10
+b = 13
+print(a == b)
+print(a is b)    # True
+# 列表
+list1 = [1, 2]
+list2 = [1, 2]
+print(list1 == list2)
+print(list1 is list2)  # False
+# list1与list2的数据地址不相等</code></pre>
+<p><strong><em>补充：is的用法</em></strong></p>
+<pre><code>is也是用来判断两个数据是否相等，判断的是两个数据的地址是否相等； ==判断的是数据的值是否相等</code></pre><p><strong><em><code>3、逻辑运算符:</code></em></strong>and（逻辑与运算），or（逻辑或运算），not（逻辑非运算）</p>
+<p>逻辑运算符的运算对象和运算结果都是布尔值<br>（1）and ——相当于生活中并且</p>
+<pre><code>运算规则：两个都为True，结果才为True
+什么时候用：判断多个条件是否同时满足，多个条件间用and连接</code></pre><p>（2）or ——相当于生活中的或者</p>
+<pre><code>运算规则：只要一个为True，结果就为True
+什么时候用：判断多个条件是否有条件满足，多个条件间用or连接</code></pre><p>（3）not ——对条件进行否定</p>
+<pre><code class="python">&quot;&quot;&quot;
+运算规则：对指定条件进行否定，True变False，False变True
+not True ——False
+not False ——True
+&quot;&quot;&quot;
+条件：不大于20
+num = 30
+print(&#39;不大于20&#39;, not num &gt; 20)
+n = 2020
+print(&#39;是闰年&#39;, (n % 4 == 0 or n % 400 == 0) and not n % 100 == 0)</code></pre>
+<p>(4) 短路操作</p>
+<pre><code>and的短路操作：and前边的条件如果是False，那么and后面的条件语句不会执行
+or的短路操作：or的前边条件如果是True，那么or后边的条件语句不会执行</code></pre><p>(5)逻辑运算符的数字运算</p>
+<pre><code class="python">&quot;&quot;&quot;
+num1 and num2 —— 如果num1为0，结果就是0；如果num1不为0，结果就为num2
+num1 or num2 —— 如果num1为0，结果就为num2；如果num1不为0，结果就为num2
+&quot;&quot;&quot;
+print(6 and 7, 8 and 10, 0 and 9)
+print(13 or 12, 11 or 3, 0 or 6)</code></pre>
+<p><strong><em><code>4.赋值运算符:</code></em></strong>  =， +=， -=， <em>=， /=， %=， *</em>=</p>
+<pre><code class="python"># 所有赋值运算符的左边必须是变量；如果是复合的赋值运算符，左边的变量必须已经赋过值
+# （1）变量 = 值 ——将右边的值赋给左边的变量
+# 注意：如果值是已经赋过值的变量，它是将将赋过值的变量的地址赋过变量
+# （2）复合运算符：+=， -=， *=， /=， %=， **=
+# 变量 += 值 —— 变量 = 变量 + 值
+num = 20
+num += 2
+print(num)</code></pre>
+<p><strong><em><code>5.运算顺序:</code></em></strong>  ——先算优先级高的，再优先级低的，有括号先算括号内的</p>
+<pre><code>优先级：数学运算符 &gt; 比较运算符 &gt; 逻辑运算符 &gt; 赋值运算符</code></pre><h4 id="2-位运算（用的少）"><a href="#2-位运算（用的少）" class="headerlink" title="2.位运算（用的少）"></a>2.位运算（用的少）</h4><p><strong><em><code>1、位运算符：</code></em></strong>   &amp;（按位与运算），/（按位或运算），^(按位异或)，~（按位取反），&gt;&gt;(右移)，&lt;&lt;(左移)</p>
+<pre><code>所有位运算都是针对数据在计算机中存储位置的每一位进行操作
+所有的位运算相比其他运算符的特点：运行速度快（高效），内存消耗小</code></pre><p><strong><em><code>2、位运算符的应用</code></em></strong></p>
+<p>1）&amp;（按位与运算）</p>
+<pre><code class="python"># 数字1 &amp; 数字2 —— 两个数字的补码同一位置都是1，结果就是1；同一位置有一个0，结果就是0
+# 101 &amp; 110 —— 100
+
+print(2 &amp; 3)</code></pre>
+<p>2）|（按位或运算）</p>
+<pre><code class="python"># 数字1 / 数字2 —— 两个数字的补码同一位置有一个是1，都是1；两个都是0，结果才是0
+# 101 / 110 —— 111
+print(2 / 3)</code></pre>
+<p>3）^(按位异或)</p>
+<pre><code class="python"># 数字1 ^ 数字2 —— 两个数字的补码同一位置的值相同就是0，不相同就是1
+# 1011 ^ 1101 —— 0110
+print(2 ^ 3)</code></pre>
+<p>4)~（按位取反）</p>
+<pre><code class="python"># ~ 数字1 —— 将数字1的补码每一位的1变0，0变成1
+# ~11101 —— 00010
+print(~ -3)</code></pre>
+<p>5) &gt;&gt;(右移)和&lt;&lt;（左移）</p>
+<pre><code class="python">&quot;&quot;&quot;
+运算规则：&lt;&lt;
+数字1 &lt;&lt; n —— 数字1的补码整体向左移动n位
+规律：print（m &lt;&lt; n）= m*(2**n)
+数字1 &gt;&gt; n —— 数字1的补码整体向右移动n位
+规律：print（m &gt;&gt; n）= m//(2**n)
+m**n:m的n次方
+&quot;&quot;&quot;
+print(2 &lt;&lt; 1)  # 4 = 2*2
+print(2 &lt;&lt; 2)  # 8 = 2*4
+print(2 &lt;&lt; 3)  # 16 = 2*8
+
+print(100 &gt;&gt; 1)
+print(100 &gt;&gt; 2)
+print(100 &gt;&gt; 3)</code></pre>
+<p><strong><em><code>3.位运算的应用</code></em></strong></p>
+<pre><code class="python">&quot;&quot;&quot;
+1)判断数字的奇偶性：让指定的数字与1进行按位与运算，看结果是0（偶数），还是1（奇数）
+11111001 &amp; 1 == 1
+11010100 &amp; 1 == 0
+优点：比用%2更方便快捷
+&quot;&quot;&quot;
+print(100 &amp; 1, 11 &amp; 1, 24 &amp; 1)
+&quot;&quot;&quot;
+2）乘2和整除2使用左移和右移
+&quot;&quot;&quot;</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%AC%E5%8F%98%E9%87%8F%E5%8F%8A%E8%BF%90%E7%AE%97%E7%AC%A6">玩转变量及运算符</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/变量和运算符/';
+      this.page.identifier = '/2019/11/02/变量和运算符/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "变量及运算符&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

@@ -1,24 +1,3226 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vim编辑器</title>
+    <url>/2019/11/02/vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B9%8B%E7%A5%9E/</url>
+    <content><![CDATA[<p>vim编辑器的常用操作、配置方法等</p>
+<a id="more"></a>
+
+
+<h3 id="配置vimrc配置"><a href="#配置vimrc配置" class="headerlink" title="配置vimrc配置"></a>配置vimrc配置</h3><p>在shell中可以通过 <code>vim ~/.vimrc</code> 或者 <code>vim /etc/vimrc</code> 打开vimrc文件对vim进行配置。在这个文件中可以进行很多和vim相关的配置</p>
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="1-模式切换"><a href="#1-模式切换" class="headerlink" title="1.模式切换"></a>1.模式切换</h4><p>我们可以将vim分为命令模式、编辑模式和末行模式三种<br><strong>命令模式：</strong>进入vim的时候vim是处于命令模式状态下的，这个时候输入内容不会出现在编辑区  (最末什么都没有)</p>
+<p><strong>末行模式：</strong>在命令模式下输入冒号，让vim进入末行模式。在末行模式的冒号后面可以输入相关的一些指令进行相关操作  (最后有一个冒号)</p>
+<p><strong>编辑模式：</strong>在命令模式下按’i’进入编辑模式。在编辑模式下可以对文件内容进行编辑 (最后 –INSERT– 或者 –插入–)  </p>
+<h4 id="2-保存和退出"><a href="#2-保存和退出" class="headerlink" title="2.保存和退出"></a>2.保存和退出</h4><p>在末行模式下输入相应的指令可以对编辑区的内容进行保存和退出vim界面<br><strong>w</strong> – 只保存(类似快捷键ctr+s)<br><strong>q</strong> – 退出（在编辑区的内容全部都保存的情况下才有效）<br><strong>wq</strong> – 保存并退出<br><strong>q!</strong>  – 强制退出（不保存修改信息）    </p>
+<h4 id="3-光标操作"><a href="#3-光标操作" class="headerlink" title="3.光标操作"></a>3.光标操作</h4><p>以下光标操作都是在命令模式下输入的<br><strong>^(shift+6)</strong>  – 移动到行首<br><strong>$(shift+4)</strong>  – 移动到行尾<br><strong>G(shift+g)</strong>    – 移动到文件末尾<br><strong>行号G</strong>            – 移动到指定行,例如:30G, 让光标直接跳转到行号是30的那一行<br><strong>gg</strong>                – 移动到文件开头  </p>
+<h4 id="4-文本操作"><a href="#4-文本操作" class="headerlink" title="4.文本操作"></a>4.文本操作</h4><p>以下操作不带冒号的是在命令模式下输入，前面有冒号代码后面的内容是在末行模式下输入<br><strong>dd</strong>            – 删除光标所在的行<br><strong>数字dd</strong>        – 从光标所在行开始往后面开始删，删除指定数量行内容<br><strong>:%d</strong>        – 删除所有     </p>
+<p><strong>yy</strong>         – 复制光标所在的行<br><strong>数字yy</strong>        – 从光标所在行开始复制指定行数的内容<br><strong>p</strong>            – 将复制的内容粘贴到光标所在的位置<br><strong>u</strong>            – 撤销<br><strong>ctr+r</strong>    – 反撤销    </p>
+<p><strong>:%!sort</strong>  – 对内容排序(将一行内容看成一个字符串，然后按字符串大小进行排序)  </p>
+<p><strong>:/正则表达式</strong>  – 搜索匹配正则表达式的内容，按回车回到命令模式后按n往前查找，按N往后查找<br>注意: 正则表达式除了表示次数的符号前需要加,别的和python是一样的.例如:    </p>
+<pre><code>:/\d\{2}    -&gt; 查找两个数字  
+:/a\+          -&gt; 查找a出现一次或者多次</code></pre><p><strong>:1,$s/被替换对象/替换内容/参数</strong>    – 将正则表达式匹配到的内容替换成指定内容<br>注意： 参数可以没有</p>
+<pre><code>-    g: 全局匹配  
+-     i: 忽略大小写 
+-   c: 替换时需要提示  
+-   e: 忽略错误  </code></pre>]]></content>
+      <categories>
+        <category>Linux系统</category>
+      </categories>
+      <tags>
+        <tag>玩转vim编辑器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux系统常用指令</title>
+    <url>/2019/11/02/%E5%B8%B8%E7%94%A8Linux%E7%B3%BB%E7%BB%9F%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<p>Linux系统指令，方便灵活快捷操作Linux系统</p>
+<a id="more"></a>
+
+
+<p>命令名称 [命名参数][命令对象]</p>
+<h3 id="日常操作"><a href="#日常操作" class="headerlink" title="日常操作"></a>日常操作</h3><p>1.cd指令       - 进入指定文件夹</p>
+<pre><code>cd  目录     - 进入指定目录(也可以是文件夹对应的路径)
+               ~相对路径 — 绝对路径
+cd  ..       - 返回上层目录
+cd  ~    - 回到根目录
+cd  /    - 进入系统根目录</code></pre><p>2.ls指令        - 查看当前目录中的内容</p>
+<pre><code>ls
+ls  -l/-lh              -  查看详情
+ls -a               - 隐藏文件也一起显示
+ls -R            - 递归显示所有内容
+ls -S/-t            - 按大小/时间排序</code></pre><p>注意: 多个功能不冲突的参数可以同时使用，中间用空格隔开, 例如 -  (ls -lh -S)</p>
+<p>3.pwd指令         - 显示当前完整目录<br><code>pwd</code></p>
+<p>4.文件操作指令</p>
+<pre><code>touch  文件名        - 新建文件
+cat 文件名           - 查看文件内容
+vim/vi  文件名          -打开文件
+rm    文件名        - 删除文件(询问是否删除)
+rm -f  文件名  - 强制删除文件(不询问)
+rm - r 目录        - 删除文件夹
+rm -rf   目录、 rm -r  -f 目录       -  删除文件夹(不询问)
+
+cp  文件名1  文件名2    - 将文件1中的内容拷贝到文件2中
+cp  文件  目录    -  将指定文件拷贝到指定目录中
+cp -r  文件名/目录名   目录2    - 将文件/目录拷贝到目录2中
+
+mv    文件名1  文件名2    - 将文件1中的内容移动到文件2中 ,并且删除文件1（文件重命名）
+mv  文件1路径   文件2路径
+mv 文件名1  新文件名    -   重命名
+mv    文件名1  文件目录    - 将文件1移动到指定目录中  
+注意: mv指令不能加-r来操作目录
+(注意：cp/mv/rm 后面可以跟： -i询问  -f强制  -n不覆盖)
+
+mkdir  目录名        - 新建文件夹
+mkdir -p a/b/c        - 按层级创建a,b,c三个文件夹
+mkdir -p a/{b,c}/{d,e,f}    -同一层级常见多个
+
+rmdir  目录名        - 删除指定空目录</code></pre><p>5.history        - 显示历史指令记录</p>
+<pre><code>bashrc 配置显示时间：export  HISTTIMEFORMAT=&quot;[%y‐%m‐%d_%T] &quot; 
+修改bashrc 后使其生效:  source ~/.bashrc  或 ..bashrc  </code></pre><p>6.链接</p>
+<pre><code>ln -s 源路径  目标路径        - 给源路径对应的文件在目标路径下创建一个软链接(可以看成是快捷键)(源路径是绝对路径) (掌握！)
+
+ln 源路径  目标路径            - 给源路径对应的文件在目标路径下创建一个硬链接(看成一个数据的多个引用)（了解）
+
+注意: 源文件不存在的时候，软件无效，硬链接变成普通文件</code></pre><p>8.快捷键</p>
+<pre><code>ctr + f         - 前进一个字符
+ctr + b        - 后退一个字符
+ctr + a        - 回到行首
+ctr + e         - 回到行尾
+ctr + w        - 向左删除一个单词
+ctr + u        - 向左删除全部
+ctr + k        - 向右删除全部
+ctr + y        - 粘贴上次删除的内容
+ctr + l        - 清屏  </code></pre><h3 id="进程相关指令-用得较少"><a href="#进程相关指令-用得较少" class="headerlink" title="进程相关指令(用得较少)"></a>进程相关指令(用得较少)</h3><p>1.ps指令</p>
+<pre><code>ps                        - 进程状态
+ps -aux  或者  ps ex            - 查看进程
+ps -aux|grep 进程名        - 查看指定进程
+ps grep  进程ID</code></pre><p>2.top指令</p>
+<pre><code>top                         - 动态监控进程
+top  -p PID1,PID2,….        - 动态监控指定进程</code></pre><p>3.free指令</p>
+<pre><code>free -单位                    - 以指定单位查看内存, 例如 free -m (以Mb为单位显示内存状况), -g,  -k等！</code></pre><p>4.kill指令</p>
+<pre><code>kill 进程号                    - 杀死指定的进程
+kill -1/-9/-15 进程号        - -1(HUP)不间断重启，-9(KILL)强制杀死进程, -15(TERM)正常终止进程  
+pkill  进程名                - 按名字处理进程
+killall 进程名                - 处理名字匹配的进程</code></pre><p>5.uptime                    - 查看系统状态</p>
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><p>1.user和group : 一个系统可以有多个用户和多个分组； 一个分组中可以有多个用户，一个用户在不同的分组中(多对多)</p>
+<pre><code>users                 - 查看当前用户
+groups                 - 查看当前分组
+groupadd  分组名      - 添加分组   (能在/etc/group文件中查看到新的分组, root才有的权限)
+
+useradd  用户名         - 创建新的用户(还是在home中自动创建这个用户对应的文件夹， root才有的权限)
+
+useradd ‐G 分组列表 ‐m ‐s /bin/bash 用户名        - 创建一个用户添加到指定的分组中(在home创建相应的文件夹)
+
+usermod -G 分组列表 用户名         - 修改分组(root才有的权限)
+passwd 用户名        - 修改密码（root才有权限）
+passwd            - 修改当前账号密码
+su  用户名            - 切换用户身份(root不需要密码，其他用户需要密码)
+sudo            - 以管理员执行其他程序
+
+注意： a.在ubuntu需要将用户添加到sudo分组中，才能使用sudo以管理员的身份执行程序
+
+     b.在centOS中需要先执行vi 指令进入/etc/sudoers文件中在指定的位置添加内容
+
+        ## Allow root to run any commands anywhere
+        root    ALL=(ALL)       ALL
+        xiaoming ALL=(ALL)      ALL        (自己添加的，xiaoming是用户名)</code></pre><p>2.chmod(记住！) </p>
+<pre><code>chmod       权限值   文件    - 修改指定文件的权限
+chmod    [a,u,g,o][+,-][r,w,x]  文件    - 为指定文件，给所有用户添加相应的权限
+
+    (a:所有，u:自己，g:同组，o:其他；
+    +：添加， -: 取消；
+    r:读，w:写，x:执行)
+chown  用户名     文件            - 改变文件所有者</code></pre><p><a href="https://github.com/jackfrued/Python-100-Days/blob/master/Day31-35/res/file-mode.png" target="_blank" rel="noopener">![file-mode.png](/Users/yuting/Library/Application Support/typora-user-images/17C12B13-6680-4C3A-8E21-C9C9250DEAE1/file-mode.png)</a></p>
+<p>(权限制是三组二进制值)</p>
+<p>self      group    other</p>
+<p>rwx      rwx        rwx</p>
+<p>111       101        001            - 自己读写可执行，同一分组的只读可执行，其他的只可执行</p>
+<p>110      100        000</p>
+<p>chmod  644  文件</p>
+<p>chmod  777   文件</p>
+<p>chmod 666    文件</p>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><p>1.cat指令</p>
+<pre><code>cat       文件                - 查看文件内容</code></pre><p>2.查看部分</p>
+<pre><code>head -n  N  文件        - 查看前N行内容
+tail  -n  N    文件         - 查看后N行内容</code></pre><p>3.</p>
+<pre><code>less  文件
+    - 按 j 向下
+    - 按 k 向上
+    - 按 f 向下翻屏
+    - 按    b 向上翻屏
+    - 按 g 到全文开头
+    - 按 G 到全文结尾
+    - 按 Q 退出  
+more [-N]  文件            - 和less差不多，这个是尽可能多，less是尽可能少的加载</code></pre><p>4.处理(对通过其他指令获取的结果进行处理)</p>
+<pre><code>sort                  - 排序  (cat 文件 |sort)
+uniq                - 去重  (cat 文件 |uniq) - 只会去重相邻的重复是数据，一般结合sort一起使用:  |sort|uniq
+awk ‘{print $N}’    - 打印第N列的内容(netstat -natp|awk ‘{print $4}’)
+
+awk ‘{print $N1,$N2,$N3,…}’
+
+history |awk &#39;{print $4}&#39; |sort |uniq ‐c | sort ‐rnk 1 | head ‐n 3           -获取历史指令中，使用最频繁的三个指令
+
+uniq ‐c       -去重的时候统计每一行内容的重复出现的次数
+sort -nk 1    - 数值大小从小到大排序
+sort -nk 2   - 字符大小从小到大排序(默认)
+sort -rnk 1    - 数值大小从大到小排序
+sort -rnk 2   - 字符大小从大到小排序(默认)</code></pre><p>5.重定向</p>
+<pre><code>执行获取数据的指令  &gt; 文件  （将执行指定的结果存储到文件中 - 覆盖原文件中内容）
+
+执行获取数据的指令 &gt;&gt; 文件   (将执行指定的结果存储到文件中 - 在原文件的最后追加)</code></pre><p>5.统计  </p>
+<pre><code>wc -c(字符)/-w(单词)/-l(行)  文件</code></pre><p>6.查找</p>
+<pre><code>grep  查看对象    目录/文件  参数
+    参数：
+        -i    忽略大小写:         grep you bb.txt   -i
+        -n   显示行标号：      grep you bb.txt -n   /   grep you bb.txt -i -n
+
+        -E   通过正则表达式匹配:     grep -E  ‘正则表达式’  文件
+        注意： Linux中，正则不支持: \d, \s,\w,\b,\D,\S,\W,\B
+        支持：.   +, *, ?, {N,M}, [], ^, $
+        -v   忽略字段:   grep you bb.txt -v  (在bb.txt中找不包含you的所有行)
+
+        grep -E  &#39;[0-9]+\.[0-9]+&#39;  abb.txt  -v
+        -rn  递归查找目录，并打印行号
+        grep -r  you ./   (在当前文件夹下中所有文件中去找包行’you’的行)
+
+        // 对文件格式进行约束
+
+        —include=‘*.py’    仅包含 py文件: grep -r you ./ --include=‘*.txt&#39;
+
+        —exclude=‘*.js’    不包含 js 文件: grep -r you ./ --exclude=&#39;*.c&#39;
+
+    例如：
+        grep you bb.txt  
+        grep you bb.txt -i
+        grep you bb.txt -i -n
+        grep -E &#39;[0-9]+&#39; bb.txt 
+
+//  在文件夹下找满足条件的文件
+
+find       DIR    -name  ‘*.xxx’        找到目录下所有名字匹配的文件:  find a1 -name &#39;*.txt’(在文件夹a1中找所有txt文件)
+
+find 路径  -size  +/-文件大小      例如: find ./  +20k  (在当前目录下找文件大小大于20k的文件)
+
+    例：find ./ -size +20k -size -100k -name &#39;*.txt&#39;   (找当前目录下大于20k并且小于100k的所有txt文件)
+
+// 查指令
+
+which  指令        - 精确查找当前可执行的指令
+whereis  指令    - 查找所有匹配的命令
+man 指令   -使用指令手册</code></pre><h3 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h3><pre><code>ifconfig     查看网卡状态
+netstat   -natp                    - 查看网络连接状态
+netstat   -natp|grep  端口号            - 查看指定端口的网络连接状态
+*ping  地址 
+ping  -i   时间    地址
+ping  -c  次数    地址
+telnet  ip地址 端口  - 查看远程主机网络连接状况（需要telnet环境）
+dig 地址            - 查看DNS   (需要环境支持)
+** wget  地址            - 下载  </code></pre><h3 id="使用包管理工具-掌握"><a href="#使用包管理工具-掌握" class="headerlink" title="使用包管理工具(掌握)"></a>使用包管理工具(掌握)</h3><pre><code>包管理工具：yum 
+
+- yum search：搜索软件包，例如yum search nginx。
+- yum list installed：列出已经安装的软件包，例如yum list installed | grep zlib。
+- yum install：安装软件包，例如yum install nginx。
+- yum remove：删除软件包，例如yum remove nginx。
+- yum update：更新软件包，例如yum update可以更新所有软件包，而yum update tar只会更新tar。
+- yum check-update：检查有哪些可以更新的软件包。
+- yum info ：显示软件包的相关信息，例如yum info nginx。</code></pre><pre><code>源代码构建安装
+
+1. wget  安装包的路径        -下载安装包
+2. gunzip/tar  压缩包         - 解压、解归档
+3. (设置安装路径)
+4. cd 安装包目录 执行: make &amp;&amp; make install       -编译安装包程序
+5. 给可执行文件添加软连接到usr/bin目录下            -添加快捷方式</code></pre><pre><code>压缩/解压缩和归档/解归档 - **gzip** / **gunzip** / **xz** / **tar**</code></pre><p>发送远程文件 - scp指令：</p>
+<pre><code>scp 文件   root@IP地址:服务器上保存被发送文件的路径</code></pre>]]></content>
+      <categories>
+        <category>Linux系统</category>
+      </categories>
+      <tags>
+        <tag>玩转Linux系统常用指令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多线程</title>
+    <url>/2019/11/02/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<p>python中多线程操作是为了增加整个程序的效率，多线程并发</p>
+<a id="more"></a>
+
+<p>进程：系统中正在运行的程序；每个进程都是独立的<br>线程：一个进程执行任务必须至少有一条线程<br>一个进程（程序）的所有任务都在线程中执行<br>一个线程中任务的执行是串行的，同一时间内，一个线程只能执行一个任务</p>
+<p>多线程：一个进程有多条线程，每条线程可以并行，同一时间执行不同的任务</p>
+<h3 id="多线程原理"><a href="#多线程原理" class="headerlink" title="多线程原理"></a><strong>多线程原理</strong></h3><p>（利用CPU空闲时间去快速调度）<br>···同一时间，CPU只能处理一条线程，只有一条线程在工作（执行）<br>···多线程并发（同时）执行，其实是CPU快速的在多条线程间“调度”<br>···CPU调度线程的速度足够快，就造成了多线程并发执行的假象</p>
+<pre><code>默认情况下一个程序都有一个线程，这个线程叫做主线程；主线程以外的线程叫子线程</code></pre><pre><code class="python">threading模块提供了python中相关的多线程方法和类；继承Thread类的对象就是线程对象</code></pre>
+<h3 id="设置多线程第一种"><a href="#设置多线程第一种" class="headerlink" title="设置多线程第一种"></a>设置多线程第一种</h3><h4 id="1）导入threading模块"><a href="#1）导入threading模块" class="headerlink" title="1）导入threading模块"></a>1）导入threading模块</h4><pre><code class="python">import threading</code></pre>
+<h4 id="2-声明一个实现线程功能的函数"><a href="#2-声明一个实现线程功能的函数" class="headerlink" title="2) 声明一个实现线程功能的函数"></a>2) 声明一个实现线程功能的函数</h4><pre><code class="python">def 函数名(参数):
+    实现函数功能的代码</code></pre>
+<h4 id="3）创建线程对象"><a href="#3）创建线程对象" class="headerlink" title="3）创建线程对象"></a>3）创建线程对象</h4><p><strong><code>threading.Thread(target,args)</code></strong><br>​    <strong>必须用关键字传参</strong><br>​    target —— 函数，需要在子线程调用的函数<br>​    args —— 元组，接收子线程中被调用函数的实参（调用函数无参时，args不用赋值）</p>
+<pre><code class="python">线程对象 = threading.Thread(target=实现线程功能的函数, args=(函数的参数))</code></pre>
+<h4 id="4）启动线程"><a href="#4）启动线程" class="headerlink" title="4）启动线程"></a>4）启动线程</h4><p><strong><code>线程对象.start（）</code></strong></p>
+<h3 id="设置多线程第二种"><a href="#设置多线程第二种" class="headerlink" title="设置多线程第二种"></a>设置多线程第二种</h3><h4 id="1）导入threading模块-1"><a href="#1）导入threading模块-1" class="headerlink" title="1）导入threading模块"></a>1）导入threading模块</h4><pre><code class="python">import threading</code></pre>
+<h4 id="2）通过创建Thread的子类对象来创建线程"><a href="#2）通过创建Thread的子类对象来创建线程" class="headerlink" title="2）通过创建Thread的子类对象来创建线程"></a>2）通过创建Thread的子类对象来创建线程</h4><pre><code class="python">class 类名(Thread):
+    def __init__(self, 参数1，参数2...):
+        super().__init__()  # 获取父类对象属性
+        self.参数1 = 参数1
+        ......
+
+    def run(self) -&gt; None:  # -&gt; None 起提示返回值的作用
+        实现线程功能的代码</code></pre>
+<h4 id="3）创建子类对象"><a href="#3）创建子类对象" class="headerlink" title="3）创建子类对象"></a>3）创建子类对象</h4><p>子类对象（线程对象） = 类名(参数)</p>
+<h4 id="4-启动线程"><a href="#4-启动线程" class="headerlink" title="4)启动线程"></a>4)启动线程</h4><p>子类对象.start()</p>
+<h3 id="join的使用——非常重要"><a href="#join的使用——非常重要" class="headerlink" title="join的使用——非常重要"></a>join的使用——非常重要</h3><p><code>线程对象.join()</code> —— 当线程对象中的任务全部完成后，在执行这条语句后面的其他语句</p>
+<pre><code class="python">t1.start()
+t2.start()
+t1.join()
+t2.join()
+print(&#39;下载完成&#39;)
+---&gt; 先执行t1，t1执行完成后再执行t2</code></pre>
+<h4 id="创建多个线程示例"><a href="#创建多个线程示例" class="headerlink" title="创建多个线程示例"></a>创建多个线程示例</h4><pre><code class="python">import socket
+import threading
+
+# 写一个向客户端接收数据、发送数据的函数
+def creat_client(connection):
+    while True:
+        # 接收客户端消息
+        re_data = connection.recv(1024)
+        # 给客户端发送数据
+        connection.send(&#39;hello,guys&#39;.encode())
+
+# 创建套接字对象
+server = socket.socket()
+# 服务器绑定IP和端口
+server.bind((&#39;10.7.185.98&#39;, 3333))
+# 开始监听，等待连接
+server.listen(511)
+# 让服务器持续运行
+# 加入多线程
+while True:
+    # 接收连接客户端（对象）—— 每次都是不同的客户端
+    connection, addr = server.accept()
+    while True:
+        # 创建线程对象
+        t1 = threading.Thread(target=creat_client, args=(connection,))
+        t1.start()</code></pre>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>socket网络编程</title>
+    <url>/2019/11/02/socket%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<p>python中socket网络编程主要是进行网络通讯，程序向服务器发送请求，服务器再向程序发送数据</p>
+<a id="more"></a>
+
+
+<p>​    socket又称”套接字”，应用程序通常通过”套接字”向网络发出请求或者应答网络请求，使主机间或者一台计算机上的进程间可以通讯。</p>
+<p>​    <strong>套接字编程</strong> —— 给予传输层提供的传输服务来构建自己的网络应用套接字是操作系统提供的一套网络编程接口（函数），可以通过套接字编程来调用传输层甚至是IP层（寻址和路由）提供的传输服务</p>
+<p>python中用socket函数创建套接字：</p>
+<p>​    语法：*<em>socket.socket(family=,type=)  *</em></p>
+<p>​    说明：</p>
+<ul>
+<li>family: 套接字家族可以使哪种形式的地址：AF_UNIX或者AF_INET（代表IPv4）、AF_INET6（代表IPv6）</li>
+<li>type: 套接字类型使用哪种传输服务：<code>SOCK_STREAM 代表 TCP</code>或<code>SOCK_DGRAM 代表 UDP</code></li>
+<li>protocol: 一般不填默认为0.</li>
+</ul>
+<h3 id="1-服务器端套接字内建方法"><a href="#1-服务器端套接字内建方法" class="headerlink" title="1.服务器端套接字内建方法"></a>1.服务器端套接字内建方法</h3><h4 id="第一步：创建服务器套接字对象"><a href="#第一步：创建服务器套接字对象" class="headerlink" title="第一步：创建服务器套接字对象"></a>第一步：创建服务器套接字对象</h4><p><strong><code>socket.socket(family=, type=)</code></strong></p>
+<pre><code class="python">server = socket(family=AF_INET, type=SOCK_STREAM)
+# 指定使用哪种形式的地址和传输服务</code></pre>
+<h4 id="第二步：绑定服务器IP地址和端口"><a href="#第二步：绑定服务器IP地址和端口" class="headerlink" title="第二步：绑定服务器IP地址和端口"></a>第二步：绑定服务器IP地址和端口</h4><p>​    端口的取值范围：0-65535，建议使用1024以上的端口</p>
+<p>​    注意：同一个IP地址可以绑定多个不同的服务，端口就是用来区分这些服务的</p>
+<p><strong><code>套接字.bind(&#39;IP地址&#39;,端口)</code></strong></p>
+<pre><code class="python">server.bind((&#39;10.7.185.98&#39;, 3333))</code></pre>
+<h4 id="第三步：监听连接（等待其他的程序连接到该服务）"><a href="#第三步：监听连接（等待其他的程序连接到该服务）" class="headerlink" title="第三步：监听连接（等待其他的程序连接到该服务）"></a>第三步：监听连接（等待其他的程序连接到该服务）</h4><p><strong><code>套接字.listen(程序最大排队等待数)</code></strong></p>
+<pre><code class="python">server.listen(511)  # 排队等待</code></pre>
+<h4 id="第四步：接收连接到服务的客户端（返回一个二元组：（客户端-客户端IP地址））"><a href="#第四步：接收连接到服务的客户端（返回一个二元组：（客户端-客户端IP地址））" class="headerlink" title="第四步：接收连接到服务的客户端（返回一个二元组：（客户端,客户端IP地址））"></a>第四步：接收连接到服务的客户端（返回一个二元组：（客户端,客户端IP地址））</h4><p><strong><code>客户端,客户端IP地址 = 套接字.accept()</code></strong></p>
+<pre><code class="python">client, addr = server.accept()
+print(f&#39;{addr}成功！&#39;)</code></pre>
+<h4 id="第五步：给客户端发送数据"><a href="#第五步：给客户端发送数据" class="headerlink" title="第五步：给客户端发送数据"></a>第五步：给客户端发送数据</h4><p>注意：对于一个请求可以启动一个线程或一个进程来受理这个请求，这样才不会因为一个请求可能耗费比较多的时间而导致其他的请求被阻塞</p>
+<p><strong><code>客户端.send(发送的数据)</code></strong></p>
+<pre><code class="python">with open(&#39;./sol.png&#39;, &#39;rb&#39;) as f1:
+    content = f1.read()
+    size = len(content)
+client.send(str(size).encode())
+client.send(content)</code></pre>
+<h3 id="2-客户端套接字内建方法："><a href="#2-客户端套接字内建方法：" class="headerlink" title="2.客户端套接字内建方法："></a>2.客户端套接字内建方法：</h3><h4 id="第一步：创建客户端套接字"><a href="#第一步：创建客户端套接字" class="headerlink" title="第一步：创建客户端套接字"></a>第一步：创建客户端套接字</h4><p><strong><code>socket.socket(family=, type=)</code></strong></p>
+<pre><code class="python">client = socket(family=AF_INET, type=SOCK_STREAM)
+# client就是客户端套接字对象</code></pre>
+<h4 id="第二步：连接到服务器"><a href="#第二步：连接到服务器" class="headerlink" title="第二步：连接到服务器"></a>第二步：连接到服务器</h4><p><strong><code>客户端套接字.connect((&#39;服务器IP地址&#39;，端口))</code></strong></p>
+<pre><code class="python">client.connect((&#39;10.7.185.98&#39;, 3333))
+# 客户端连接到服务器</code></pre>
+<h4 id="第三步：客户端接收数据（每次接收1024），用循环接收大文件"><a href="#第三步：客户端接收数据（每次接收1024），用循环接收大文件" class="headerlink" title="第三步：客户端接收数据（每次接收1024），用循环接收大文件"></a>第三步：客户端接收数据（每次接收1024），用循环接收大文件</h4><p><strong><code>客户端套接字.recv(1024)</code></strong></p>
+<p>可以先接收大文件的大小信息，判断循环终止的条件</p>
+<pre><code class="python">data = client.recv(1024)
+total, size = 0, int(data.decode())
+with open(&#39;./yua.png&#39;, &#39;wb&#39;) as files:
+    while total &lt; size:
+        # 接收文件的内容
+        data = client.recv(1024)
+        f2 = files.write(data)
+        total += 1024</code></pre>
+<h4 id="第四步：客户端主动跟服务器断开连接"><a href="#第四步：客户端主动跟服务器断开连接" class="headerlink" title="第四步：客户端主动跟服务器断开连接"></a>第四步：客户端主动跟服务器断开连接</h4><p><strong><code>客户端套接字.close()</code></strong></p>
+<p>补充：格式化字符串的新方法,这样的写法更优美</p>
+<pre><code class="python">变量m = n
+f&#39;{变量m}字符串&#39;</code></pre>
+<pre><code class="python">name = &#39;小花&#39;
+print(f&#39;我的名字是{name}&#39;)</code></pre>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转socket网络编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正则表达式</title>
+    <url>/2019/11/02/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<p>python中正则表达式是描述字符串规律的，可以让我们更高效的进行字符串的相关操作，提高工作的效率</p>
+<a id="more"></a>
+
+<p><strong>re模块</strong>：Python中提供正则表达式相关方法的模块</p>
+<h3 id="什么是正则表达式"><a href="#什么是正则表达式" class="headerlink" title="什么是正则表达式"></a>什么是正则表达式</h3><p>正则表达式是用来描述字符串规律的一种方法，可以更加方便的解决字符串匹配、字符串查找、字符串切割等相关操作</p>
+<h3 id="正则表达式语法（所有语言通用）"><a href="#正则表达式语法（所有语言通用）" class="headerlink" title="正则表达式语法（所有语言通用）"></a>正则表达式语法（所有语言通用）</h3><p><code>re.fullmatch(正则表达式,字符串)</code> —— 判断字符串和正则表达式是否<strong>完全匹配</strong>；如果不匹配，返回None</p>
+<p>python是将正则表达式放在引号内，引号前加字母r，目的是防止正则表达式内的符号变成转义字符</p>
+<h3 id="用来匹配字符的符号"><a href="#用来匹配字符的符号" class="headerlink" title="用来匹配字符的符号"></a>用来匹配字符的符号</h3><h4 id="1）普通字符"><a href="#1）普通字符" class="headerlink" title="1）普通字符"></a>1）普通字符</h4><p>如果正则表达式中出现普通字符，那么这个字符就表示这个字符本身</p>
+<pre><code class="python">fr1 = re.fullmatch(r&#39;a&#39;, &#39;a&#39;)
+print(fr1)</code></pre>
+<h4 id="2）-——-匹配任意字符"><a href="#2）-——-匹配任意字符" class="headerlink" title="2）. —— 匹配任意字符"></a>2）. —— 匹配任意字符</h4><p><strong>正则表达式中的每一个.都匹配一个任意字符</strong></p>
+<pre><code class="python"># a匹配a，b匹配b，中间的.匹配任意一个字符
+fr2 = re.fullmatch(r&#39;a.b&#39;,&#39;a8b&#39;)
+print(fr2)</code></pre>
+<p>3) \w —— 匹配字母、数字、下划线（但使用中问题很多，不建议使用）</p>
+<h4 id="4）-s-——-匹配空白字符"><a href="#4）-s-——-匹配空白字符" class="headerlink" title="4）\s —— 匹配空白字符"></a>4）\s —— 匹配空白字符</h4><p>** 空白字符：空格、回车（\n）、制表符(\t)**</p>
+<pre><code class="python">fr3 = re.fullmatch(r&#39;ad\sff&#39;, &#39;ad ff&#39;)
+print(fr3)</code></pre>
+<h4 id="5）-d-——-匹配一个数字字符"><a href="#5）-d-——-匹配一个数字字符" class="headerlink" title="5）\d —— 匹配一个数字字符"></a>5）\d —— 匹配一个数字字符</h4><pre><code class="python">fr4 = re.fullmatch(r&#39;ag\df&#39;, &#39;ag8f&#39;)
+print(fr4)</code></pre>
+<h4 id="6）-S-W-D"><a href="#6）-S-W-D" class="headerlink" title="6）\S \W \D"></a>6）\S \W \D</h4><p> \S —— 匹配一个非空白字符        \D —— 匹配一个非数字字符         \W —— </p>
+<pre><code class="python">rs = r&#39;a.n\SB\D&#39;
+fr5 = re.fullmatch(rs,&#39;a2nlBe&#39;)
+print(fr5)</code></pre>
+<h4 id="7）-字符集-——-匹配字符集中任意一个字符-——–务必掌握"><a href="#7）-字符集-——-匹配字符集中任意一个字符-——–务必掌握" class="headerlink" title="7）[字符集] —— 匹配字符集中任意一个字符 ——–务必掌握"></a>7）<code>[字符集]</code> —— 匹配字符集中任意一个字符 ——–务必掌握</h4><p>a.[字符集] —— 匹配字符集中的任意一个字符<br>例如：[ad5f] —— [ad5f]可以匹配a、d、5、f中的任意一个<br>b.[字符1-字符2] —— 匹配编码值在字符1的编码值到字符2的编码值中的任意一个字符<br>注意：<br>    - 表示字符1到字符2，不是一个减号<br>    字符1的编码值必须小于字符2的编码值<br>    有多个范围时还可以这样写：[字符1-字符2字符3-字符4..]<br>    范围和字符可以混写：[字符1-字符2hjgahjv]<br>    匹配中文字符：[\u4e00-\u9fa5]</p>
+<pre><code class="python"># a.---------
+rs1 = r&#39;f[luo!]k&#39;
+fr6 = re.fullmatch(rs1,&#39;f!k&#39;)
+print(fr6)
+# b.--------------
+rs2 = r&#39;4[0-9ahkj]k&#39;
+fr7 = re.fullmatch(rs2,&#39;45k&#39;)
+print(fr7)</code></pre>
+<h4 id="8）-字符集-——-匹配不在字符集中的任意一个字符-——–务必掌握"><a href="#8）-字符集-——-匹配不在字符集中的任意一个字符-——–务必掌握" class="headerlink" title="8）[^字符集]—— 匹配不在字符集中的任意一个字符 ——–务必掌握"></a>8）<code>[^字符集]</code>—— 匹配不在字符集中的任意一个字符 ——–务必掌握</h4><p>[^0-9] —— 非数字<br>[^a-z] —— 非小写字母<br>[^A-Z] —— 非大写字母<br>[^\u4e00-\u9fa5] —— 非中文字符</p>
+<pre><code class="python">rs3 = r&#39;gh[^0-9a-zA-Z]5&#39;
+fr8 = re.fullmatch(rs3,&#39;gh05&#39;)
+fr9 = re.fullmatch(rs3,&#39;gh!5&#39;)
+print(fr8,fr9)</code></pre>
+<h3 id="检测字符的符号"><a href="#检测字符的符号" class="headerlink" title="检测字符的符号"></a>检测字符的符号</h3><h4 id="1-b-——-检测是否是单词边界"><a href="#1-b-——-检测是否是单词边界" class="headerlink" title="1) \b —— 检测是否是单词边界"></a>1) \b —— 检测是否是单词边界</h4><p>单词边界:可以区分出两个不同单词的符号都是单词边界；例如：空白字符、标点符号、字符串开头结尾等</p>
+<p><strong>检测时，先将检测符号去掉，看字符是否匹配成功，匹配成功后再检测</strong></p>
+<h4 id="2）-B-——-检测是否不是单词边界"><a href="#2）-B-——-检测是否不是单词边界" class="headerlink" title="2）\B —— 检测是否不是单词边界"></a>2）\B —— 检测是否不是单词边界</h4><h4 id="3）-——-检测是否是字符串开头"><a href="#3）-——-检测是否是字符串开头" class="headerlink" title="3）^ —— 检测是否是字符串开头"></a>3）^ —— 检测是否是字符串开头</h4><pre><code class="python">rs5 = r&#39;f^[luo!]k&#39;
+fr10 = re.fullmatch(rs5,&#39;f!k&#39;)
+print(fr10)   # None</code></pre>
+<h4 id="4）-——-检测是否是字符串结尾"><a href="#4）-——-检测是否是字符串结尾" class="headerlink" title="4）$ —— 检测是否是字符串结尾"></a>4）$ —— 检测是否是字符串结尾</h4><pre><code class="python">rs6 = r&#39;f[luo!]$k&#39;
+fr11 = re.fullmatch(rs6,&#39;f!k&#39;)
+print(fr11)   # None</code></pre>
+<h3 id="控制匹配次数的符号"><a href="#控制匹配次数的符号" class="headerlink" title="控制匹配次数的符号"></a>控制匹配次数的符号</h3><h4 id="1）-（星号）-——-匹配0次或多次"><a href="#1）-（星号）-——-匹配0次或多次" class="headerlink" title="1）*（星号） —— 匹配0次或多次"></a>1）*（星号） —— 匹配0次或多次</h4><pre><code>用法：
+普通字符*
+    r&#39;a*123&#39; ——&gt; &#39;aaa123&#39; (a出现的次数由自己定)
+非普通字符*
+---：\d*
+    r&#39;\d*lk&#39;  ——&gt; &#39;2154lk&#39; (数字出现的次数，由自己定，且数字可以不一样)
+---：[字符集]*
+    r&#39;[abc]*lk&#39;  ——&gt; &#39;lk&#39; (出现0次)</code></pre><h4 id="2）-加号-——-匹配1次或多次"><a href="#2）-加号-——-匹配1次或多次" class="headerlink" title="2） + (加号) —— 匹配1次或多次"></a>2） + (加号) —— 匹配1次或多次</h4><h4 id="3）？（问号）-——-匹配0次或1次"><a href="#3）？（问号）-——-匹配0次或1次" class="headerlink" title="3）？（问号） —— 匹配0次或1次"></a>3）？（问号） —— 匹配0次或1次</h4><h4 id="4）-—————务必掌握"><a href="#4）-—————务必掌握" class="headerlink" title="4）{}    —————务必掌握"></a>4）{}    —————务必掌握</h4><p>{n} —— 匹配n次（匹配次数确定，只有这一种写法）<br>{m,n} —— 匹配m到n次（至少m次，最多n次）<br>{m,} —— 至少匹配m次<br>{,n} —— 匹配最多n次</p>
+<pre><code>print(re.fullmatch(r&#39;a{3}luo&#39;,&#39;aaaluo&#39;))
+print(re.fullmatch(r&#39;a{3,5}luo&#39;,&#39;aaaaluo&#39;))
+# 6-12的数字、字母
+print(re.fullmatch(r&#39;[0-9a-z]{6,12}luo&#39;,&#39;aa23aaluo&#39;))
+print(re.fullmatch(r&#39;[0-9a-z]{6,12}luo&#39;,&#39;aa罗3aaluo&#39;))</code></pre><h4 id="5）贪婪和非贪婪"><a href="#5）贪婪和非贪婪" class="headerlink" title="5）贪婪和非贪婪"></a>5）贪婪和非贪婪</h4><p><strong>当<code>匹配次数不确定时</code>，匹配分为贪婪和非贪婪；默认都是贪婪的</strong><br>贪婪 —— 在匹配成功的前提下，尽可能匹配多的次数<br>非贪婪 —— 在匹配成功的前提下，尽可能匹配少的次数<br>​             <code>*？ +？ ？？ {m,n}?  {m,}?  {,n}?</code></p>
+<h3 id="分之、分组"><a href="#分之、分组" class="headerlink" title="分之、分组"></a>分之、分组</h3><pre><code class="python"># 写一个正则表达式要求匹配三个数字或三个字母
+print(re.fullmatch(r&#39;\d{3}|[a-zA-Z]{3}&#39;,&#39;233&#39;))</code></pre>
+<h4 id="1）-——分之"><a href="#1）-——分之" class="headerlink" title="1）| ——分之"></a>1）| ——分之</h4><p><strong><code>正则表达式1 | 正则表达式2</code></strong> —— 一个字符串匹配正则表达式1或正则表达式2</p>
+<pre><code class="python">sr = re.fullmatch(r&#39;\d{3}|[a-z]123&#39;,&#39;2213jnjk&#39;)
+print(sr)</code></pre>
+<h4 id="2）（）——-分组"><a href="#2）（）——-分组" class="headerlink" title="2）（）—— 分组"></a>2）（）—— 分组</h4><p><strong>a.做整体操作 —— **<br>**b.重复内容 —— 正则表达式中在数字n前加\，用来重复前面第n个分组匹配到的内容</strong></p>
+<pre><code class="python"># ----分组做整体操作
+# lk123hg154ji785....
+# 整体的部分有规律的出现
+sr2 = r&#39;([a-z]{2}\d{3})+&#39;
+fr1 = re.fullmatch(sr2,&#39;sf456rt489we458&#39;)
+print(fr1)
+# ----分组重复内容
+sr3 = r&#39;(\d{3})luo\1&#39;
+fr2 = re.fullmatch(sr3,&#39;456luo456&#39;)
+fr3 = re.fullmatch(sr3,&#39;456luo786&#39;)
+print(fr2,fr3)  # &lt;re.Match object; span=(0, 9), match=&#39;456luo456&#39;&gt; None</code></pre>
+<h3 id="转义符号"><a href="#转义符号" class="headerlink" title="转义符号"></a>转义符号</h3><h4 id="1-转义符号"><a href="#1-转义符号" class="headerlink" title="1.转义符号"></a>1.转义符号</h4><pre><code>—— 为了让正则表达式中有特殊意义的符号的意义消失，而在这个符号前加\</code></pre><pre><code class="python">sr4 = r&#39;\d{2}\.[a-z]+&#39;
+fr4 = re.fullmatch(sr4,&#39;12.sdssf&#39;)
+print(fr4)
+
+sr5 = r&#39;\d\*[a-z]+&#39;
+fr5 = re.fullmatch(sr5,&#39;12sdssf&#39;)
+print(fr5)  # None</code></pre>
+<h4 id="2"><a href="#2" class="headerlink" title="2. ^,-"></a>2. ^,-</h4><p>除了^放在[]的开头，-放在[]中两个字符之间，其他单独存在有特殊意义的符号在[]中都变成了普通字符</p>
+<p> 例如：<code>+ * ？ | .  （）等</code></p>
+<pre><code class="python">sr6 = r&#39;\d{2}[.*+?()$-][a-z]+&#39;
+fr6 = re.fullmatch(sr6,&#39;12.sdssf&#39;)
+fr7 = re.fullmatch(sr6,&#39;12?sdssf&#39;)
+print(fr6,fr7)</code></pre>
+<h3 id="re模块的使用"><a href="#re模块的使用" class="headerlink" title="re模块的使用"></a>re模块的使用</h3><p>1.compile—— 没有意义</p>
+<p>compile(正则表达式) - 根据正则表达式创建正则对象</p>
+<h4 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h4><p>​    <code>fullmatch（正则表达式，字符串）</code>—— 完全匹配，整个字符串和正则表达式进行匹配；匹配成功返回匹配对象，否则返回None</p>
+<p>​    <code>match（正则表达式，字符串）</code>—— <strong>匹配字符串开头</strong>；匹配成功返回匹配对象，否则返回None</p>
+<pre><code class="python">sr1 = r&#39;\d{3}&#39;
+fr1 = re.fullmatch(sr1,&#39;155&#39;)
+fr2 = re.match(sr1,&#39;456hjgajsf&#39;)
+# 456就是字符串开头
+print(fr1)
+print(fr2)</code></pre>
+<h4 id="匹配对象"><a href="#匹配对象" class="headerlink" title="匹配对象"></a>匹配对象</h4><pre><code class="python">sr2 = r&#39;(\d{3}[a-z])213(\d*)&#39;
+# -------------------------------fr3就是匹配对象
+fr3 = re.fullmatch(sr2,&#39;155f21355&#39;)</code></pre>
+<h5 id="1）获取匹配结果（匹配到的子串）"><a href="#1）获取匹配结果（匹配到的子串）" class="headerlink" title="1）获取匹配结果（匹配到的子串）"></a>1）获取匹配结果（匹配到的子串）</h5><p><code>匹配对象.group()</code> —— 获取整个正则表达式匹配到的结果<br><code>匹配对象.group(n)</code> —— 获取正则表达式中第n个分组匹配到的结果</p>
+<pre><code class="python">sr2 = r&#39;(\d{3}[a-z])213(\d*)&#39;
+fr3 = re.fullmatch(sr2,&#39;155f21355&#39;)
+re1 = fr3.group()
+re2 = fr3.group(1)
+re3  = fr3.group(2)
+print(re1,re2,re3)   # 155f21355 155f 55</code></pre>
+<h5 id="2）获取匹配结果在原字符串中的范围"><a href="#2）获取匹配结果在原字符串中的范围" class="headerlink" title="2）获取匹配结果在原字符串中的范围"></a>2）获取匹配结果在原字符串中的范围</h5><p>——返回:(开始小标，结束下标)，结束下标取不到</p>
+<p><code>匹配对象.span()</code> —— 获取整个正则表达式匹配结果在原字符串中的范围<br><code>匹配对象.span(n)</code> —— 获取指定分组的匹配结果在原字符串中的范围</p>
+<h5 id="3）获取原字符串"><a href="#3）获取原字符串" class="headerlink" title="3）获取原字符串"></a>3）获取原字符串</h5><p> <code>匹配结果.string</code></p>
+<h4 id="3-查找"><a href="#3-查找" class="headerlink" title="3.查找"></a>3.查找</h4><h5 id="1）搜索"><a href="#1）搜索" class="headerlink" title="1）搜索"></a>1）搜索</h5><p><code>search(正则表达式，字符串)</code> —— 获取指定字符串中第一个满足正则表达式的子串；如果有就返回匹配对象，没有返回None<br><code>findall(正则表达式，字符串)</code> —— 获取字符串中所有满足正则表达式的子串；返回值是一个列表，列表元素就是满足的子串</p>
+<pre><code class="python">sr3 = r&#39;[a-z]\d{2}&#39;
+print(re.search(sr3,&#39;jgfh46878hjg&#39;))  # h46
+print(re.findall(sr3,&#39;sf212hjgh1544hjgggjh4568&#39;))  # [&#39;f21&#39;, &#39;h15&#39;, &#39;h45&#39;]</code></pre>
+<p><strong>注意：如果findall中的正则表达式中有一个分组；返回的结果只取匹配结果中分组对应的部分</strong></p>
+<pre><code class="python">print(re.findall(r&#39;([a-z])\d{2}&#39;,&#39;sf212hjgh1544hjgggjh4568&#39;))
+# [&#39;f&#39;, &#39;h&#39;, &#39;h&#39;]</code></pre>
+<p><strong>注意：如果正则表达式中有多个分组，返回的列表中的元素是元组，元组中的元素是每个分组对应的匹配结果</strong></p>
+<pre><code class="python">print(re.findall(r&#39;([a-z])(\d{2})&#39;,&#39;sf212hjgh1544hjgggjh4568&#39;))
+# [(&#39;f&#39;, &#39;21&#39;), (&#39;h&#39;, &#39;15&#39;), (&#39;h&#39;, &#39;45&#39;)]</code></pre>
+<h5 id="2）finditer"><a href="#2）finditer" class="headerlink" title="2）finditer"></a>2）finditer</h5><p><code>finditer(正则表达式，字符串)</code> —— 获取字符串中所有满足正则表达式的子串；返回值是迭代器，迭代器中的元素是匹配对象</p>
+<pre><code class="python">res = re.finditer(r&#39;([a-z]{2})(\d{3})&#39;,&#39;ghf564shgsfs2155f555dd&#39;)
+res1 = list(res)
+print(res1)
+s1 = res1[0]
+print(s1.group(),s1.group(1),s1.group(2))
+# hf564 hf 564</code></pre>
+<h5 id="3）切割"><a href="#3）切割" class="headerlink" title="3）切割"></a>3）切割</h5><p><code>re.split（正则表达式,字符串）</code> —— 将字符串中所有和正则表达式匹配的子串作为切割点，对字符串进行切割；返回值是列表，元素是切剩下的子字符串</p>
+<pre><code class="python">res2 = re.split(r&#39;[?!,.]\d&#39;,&#39;dg,,h555?5j55fdfe5ffee?45&#39;)
+print(res2) # [&#39;dg,,h555&#39;, &#39;j55fdfe5ffee&#39;, &#39;5&#39;]</code></pre>
+<h5 id="4）替换"><a href="#4）替换" class="headerlink" title="4）替换"></a>4）替换</h5><p><code>re.sub(正则表达式，字符串1，字符串2)</code> —— 将字符串2中的所有满足正则表达式的子串替换成字符串1</p>
+<pre><code class="python">res3 = r&#39;[a-z]{2}\d&#39;
+print(re.sub(res3,&#39;❀&#39;,&#39;ghh54?gf4gg47&#39;))  # g❀4?❀❀7</code></pre>
+<h5 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h5><p>所有re模块的函数参数最后都可以加上参数flag=re.IGNORECASE,表示忽略大小写</p>
+<p><code>re.函数（参数1,参数2,...,flag=re.IGNORECASE）</code></p>
+<p>[^字符集]: </p>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转正则表达式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内存管理和拷贝</title>
+    <url>/2019/11/02/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E6%8B%B7%E8%B4%9D/</url>
+    <content><![CDATA[<p>python中内存管理和拷贝都很重要，他可以提高我们计算机的性能和效率</p>
+<a id="more"></a>
+
+<h3 id="内存管理（面试常问）"><a href="#内存管理（面试常问）" class="headerlink" title="内存管理（面试常问）"></a>内存管理（面试常问）</h3><p>内存管理分为<strong>开辟内存和释放内存</strong></p>
+<h4 id="1-内存的开辟"><a href="#1-内存的开辟" class="headerlink" title="1.内存的开辟"></a>1.内存的开辟</h4><p>​    <strong>内存分为栈区间和堆区间，python中所有的数据本身都是保存在堆区间的，栈区间中保存数据的地址</strong><br>​    每次需要数据时，python会自动去开辟相应的空间；原则上只要有新数据就会开辟一个新的空间，哪怕新数据和之前的数据一样；但是<strong>字符串和数字例外</strong>，新数据是字符串或数字时，开辟新空间前会先检查这个数据是否已经存在，存在的话就不会去开辟新的空间，直接使用之前存储的数据，否则再去开辟新的空间</p>
+<pre><code class="python">p1 = [1,2]
+p2 = [1,2]
+print(id(p1),id(p2))
+p3 = 1314
+p4 = 1314
+print(id(p3),id(p4))</code></pre>
+<h4 id="2-内存的释放"><a href="#2-内存的释放" class="headerlink" title="2.内存的释放"></a>2.内存的释放</h4><p>​    python中内存释放采用的是“<strong>垃圾回收机制</strong>”：当堆中数据的引用计数为0时，数据就会被自动的销毁</p>
+<p>引用：保存对象的地址的数据就是对这个对象的引用<br>增加引用：让更多的变量存储数据的地址<br>减少引用：删除引用，让变量保存别的数据地址</p>
+<p>​    注意：python中针对数据的循环引用已经做了特殊处理，使用者不用写代码去处理循环引用</p>
+<pre><code class="python">from sys import getrefcount
+class Person:
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+p = Person(&#39;麻子&#39;,25)
+# 引用计数函数 getrefcount（） —— 统计时，引用计数函数会比实际的引用计数多一个
+print(getrefcount(p))</code></pre>
+<h3 id="赋值、浅拷贝、深拷贝"><a href="#赋值、浅拷贝、深拷贝" class="headerlink" title="赋值、浅拷贝、深拷贝"></a>赋值、浅拷贝、深拷贝</h3><h4 id="1-直接赋值："><a href="#1-直接赋值：" class="headerlink" title="1.直接赋值："></a>1.直接赋值：</h4><p>​    一个变量给另一个变量赋值，赋的是这个变量的地址，两个变量公用一个地址</p>
+<pre><code class="python">a = [1, 2, 3]
+b = a  # 给b赋a的地址
+a.append(13)
+print(b)   # [1, 2, 3, 13]  a改变，b也改变</code></pre>
+<h4 id="2-浅拷贝："><a href="#2-浅拷贝：" class="headerlink" title="2.浅拷贝："></a>2.浅拷贝：</h4><p>列表切片、列表.copy（）、字典.copy（）等都属于浅拷贝<br>copy模块中copy也是浅拷贝，可以拷贝任何数据</p>
+<pre><code class="python">import copy
+class Person:
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+p1 = Person(&#39;麻子&#39;,25)
+p2 = copy.copy(p1)  # copy模块
+p2.name = &#39;王二&#39;
+print(p1.__dict__,p2.__dict__)</code></pre>
+<h4 id="3-深拷贝"><a href="#3-深拷贝" class="headerlink" title="3.深拷贝"></a>3.深拷贝</h4><p>只有copy模块中的deepcopy是深拷贝</p>
+<pre><code class="python">p3 = copy.deepcopy(p1)
+p3.name = &#39;李四&#39;
+print(p3.__dict__)</code></pre>
+<h4 id="浅拷贝和深拷贝的区别："><a href="#浅拷贝和深拷贝的区别：" class="headerlink" title="浅拷贝和深拷贝的区别："></a>浅拷贝和深拷贝的区别：</h4><p>​    不管是浅拷贝还是深拷贝，都是先复制原数据产生一个新的数据，然后再将地址赋给新数据</p>
+<p>​    如果拷贝对象中有子对象（变量），浅拷贝地址会原样赋值，<strong>不会拷贝子对象</strong>；深拷贝<strong>会拷贝子对象（即拷贝子对象的数据，产生新的数据，并赋给新的地址）</strong>;所有的都产生新的</p>
+<pre><code class="python">a = [13, 14]
+list1 = [1, 2, 3, a]  # 子对象a
+list2 = copy.copy(list1)   # 拷贝子对象a
+list3 = copy.deepcopy(list1)  # 直接拷贝子对象a的数据
+a.append(25)
+print(list2, list3)</code></pre>
+<h3 id="包"><a href="#包" class="headerlink" title="包"></a>包</h3><h4 id="1-什么是包"><a href="#1-什么是包" class="headerlink" title="1.什么是包"></a>1.什么是包</h4><p>Python中的包就是拥有一个 <strong>init</strong>.py 文件的文件夹</p>
+<h4 id="2-怎么使用包"><a href="#2-怎么使用包" class="headerlink" title="2.怎么使用包"></a>2.怎么使用包</h4><p>1）import 包名 —— 需要在 <strong>init</strong>.py文件中通过“包名.模块名”的方式导入包中相应的模块</p>
+<p>2）import 包名.模块名</p>
+<p>3）from 包 import 模块1，模块2，……</p>
+<p>4)   import 包名.模块名 as 新名字</p>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转内存拷贝和管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>类和对象</title>
+    <url>/2019/11/02/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<p>python中类和对象非常重要，最优的编程思想就是面向对象编程。在这个阶段中主要学了类的声明、使用和继承；对象的声明和利用对象进行编程的方法</p>
+<a id="more"></a>
+
+<h3 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h3><p>​    面向过程编程 —— 以逻辑和算法为工具<br>​    函数式编程 —— 以函数为工具<br>​    <strong>面向对象编程 —— 以类和对象为工具</strong></p>
+<p>什么是类和对象：</p>
+<p>类是拥有相同功能、相同属性的对象的集合 —— 类是一个抽象的概念<br>对象是类的实例 —— 对象是具体的</p>
+<h3 id="类和对象的声明"><a href="#类和对象的声明" class="headerlink" title="类和对象的声明"></a>类和对象的声明</h3><p>什么是类：</p>
+<p>​    类就是拥有<strong>相同功能（函数）、相同属性（保存数据的变量，也叫属性）</strong>的对象的集合</p>
+<h4 id="类的声明："><a href="#类的声明：" class="headerlink" title="类的声明："></a>类的声明：</h4><p>1）语法<br>    class 类名：<br>        类的说明文档<br>        类的内容</p>
+<p>2）说明：<br>class —— 关键字，固定写法<br>类名 —— 自主命名；要求：必须是标识符，不能是关键字<br>​                     规范：见名知义；驼峰式命名，首字母大写；<br>​                     不能是系统的函数名、模块名、类名</p>
+<p>类的说明文档 —— 注释，主要说明类提供的功能，不会影响类的功能<br>类的内容 —— 函数（方法）和属性<br>​            方法：<strong>对象方法、类方法、静态方法</strong><br>​            属性：<strong>类的字段和对象属性</strong></p>
+<pre><code class="python">class Person:
+    &quot;&quot;&quot;人类：吃饭、学习、睡觉三个功能&quot;&quot;&quot;
+    def study(self):
+        print(&#39;学习&#39;)
+    def eat(self):
+        print(&#39;吃火锅&#39;)
+    def sleep(self):
+        print(&#39;睡瞌睡&#39;)</code></pre>
+<p>====================================================================</p>
+<h4 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h4><p>1）语法：<br>​    <code>类（）</code> —— 创建指定类对应的对象<br>2）说明：<br>类 —— 必须是已经声明过的类</p>
+<pre><code class="python">per1 = Person()  # 创建person类的对象p1</code></pre>
+<h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><p>1）怎么声明：<strong>直接声明在类中的函数就是对象方法</strong><br>2）特点：自带一个参数self（系统默认的是参数名self，但他并不是一个关键字，自己可以更改）；<br>​        当通过对象调用对象方法时self不用传参；<br>​        系统会自动将当前对象传给当前方法的self（谁调用当前方法（方法），谁就是当前对象）<br>3）怎么调用：通过对象来调用<br>​             调用：<strong><code>对象.方法名（）</code></strong></p>
+<pre><code class="python">class Person:
+    # 对象方法：eat（）
+    def eat(self):
+        print(&#39;吃点东西&#39;)
+p1 = Person()  # 创建person的对象
+p1.eat()  # 调用eat（）方法
+# p1传给self</code></pre>
+<h3 id="构造方法和init方法"><a href="#构造方法和init方法" class="headerlink" title="构造方法和init方法"></a>构造方法和init方法</h3><p>1.构造方法<br>构造方法是用来创建对象函数（方法），构造方法的名字和类名一样<br>1）python中的构造方法：<br>a.当声明类时，系统会自动创建一个函数名和类名同名的构造方法<br>b.当通过构造方法创建对象时，会自动调用<strong>init</strong>方法来对对象进行初始化操作</p>
+<pre><code class="python">class Person:
+    pass
+p1 = Person()</code></pre>
+<p>2.init方法</p>
+<p><strong>必须掌握：</strong></p>
+<p>​    通过构造方法创建对象时，<strong><strong>init</strong></strong>会自动被调用<br>​    __ init__方法可以不写，也可以写；写的话函数名和参数self不能更改，可以添加其他参数；<br>​    如果<strong><strong>init</strong></strong>方法中有除self以外的参数，必须通过构造方法创建对象时给这些参数传参</p>
+<pre><code class="python">class Person:
+    def __init__(self, name,age):
+        print(&#39;haah&#39;)
+p2 = Person(&#39;luo&#39;, 23)   # 创建对象时传参</code></pre>
+<h3 id="对象属性的增删查改"><a href="#对象属性的增删查改" class="headerlink" title="对象属性的增删查改"></a>对象属性的增删查改</h3><h4 id="1-查-——-获取对象属性的值"><a href="#1-查-——-获取对象属性的值" class="headerlink" title="1.查 —— 获取对象属性的值"></a>1.查 —— 获取对象属性的值</h4><p>a.<br><code>对象.属性</code> —— 获取指定对象属性的值属性，不存在时会报错<br>b.<br><code>getattr(对象，属性名)</code> —— 属性不存在时也会报错;属性名要是字符串<br><code>getattr(对象，属性名, 默认值)</code> —— 属性不存在时不会报错，而是返回指定的默认值</p>
+<pre><code class="python">class Dog:
+    def __init__(self, name1, age1, color1):
+        self.name = name1
+        self.age = age1
+        self.color = color1
+dog1 = Dog(&#39;哈士奇&#39;, 3, &#39;黄色&#39;)
+# a.
+print(dog1.name)
+# b.
+print(getattr(dog1, &#39;name&#39;))</code></pre>
+<h4 id="2-增改"><a href="#2-增改" class="headerlink" title="2.增改"></a>2.增改</h4><p>a.<br><code>对象.属性 = 值</code> —— 当属性存在时，修改指定对象属性的值；属性不存在时，添加此对象属性<br>b.<br><code>setattr(对象，属性名，值)</code> —— 当属性存在时，修改指定属性的值；属性不存在时，添加对象属性</p>
+<pre><code class="python">class Dog:
+    def __init__(self, name1, age1, color1):
+        self.name = name1
+        self.age = age1
+        self.color = color1
+dog2 = Dog(&#39;哈士奇&#39;, 3, &#39;黄色&#39;)
+# a.
+dog2.name = &#39;牧羊犬&#39;
+print(dog2.name)
+dog2.breed = &#39;藏獒&#39;
+print(dog2.breed)
+# b.
+setattr(dog2, &#39;age&#39;, 6)
+print(dog2.age)</code></pre>
+<h4 id="3-删-——-删除对象属性"><a href="#3-删-——-删除对象属性" class="headerlink" title="3.删 —— 删除对象属性"></a>3.删 —— 删除对象属性</h4><p>a.<br><code>del 对象.属性</code> —— 删除对象中指定的属性<br>b.<br><code>delattr(对象，属性名)</code> —— 删除对象中指定的属性</p>
+<pre><code class="python">class Dog:
+    def __init__(self, name1, age1, color1):
+        self.name = name1
+        self.age = age1
+        self.color = color1
+dog2 = Dog(&#39;哈士奇&#39;, 3, &#39;黄色&#39;)
+del dog2.age
+print(dog2.age)
+delattr(dog2, &#39;color&#39;)</code></pre>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><h4 id="1-属性是声明在类中的变量"><a href="#1-属性是声明在类中的变量" class="headerlink" title="1.属性是声明在类中的变量"></a>1.属性是声明在类中的变量</h4><p>python中类的属性分为类的字段和对象属性</p>
+<h4 id="2-类的字段（要了解）"><a href="#2-类的字段（要了解）" class="headerlink" title="2.类的字段（要了解）"></a>2.类的字段（要了解）</h4><p>直接声明在类中、但在函数（方法）外的变量就是类的字段<br>1）怎么声明：直接声明在类中<br>2）怎么使用：通过类来使用；以“类.字段”的方式<br>3)什么时候用：保存的属性不会因为对象的不同而改变时</p>
+<pre><code class="python">class Person:
+    # num1就是字段
+    num1 = 1
+    def eat(self):
+        print(&#39;lala&#39;)
+Person.num1</code></pre>
+<h4 id="3-对象属性（超重点）"><a href="#3-对象属性（超重点）" class="headerlink" title="3.对象属性（超重点）"></a>3.对象属性（超重点）</h4><p>1）怎么声明：直接声明在类中的<strong><strong>init</strong></strong>方法中；<br>    格式：“self.属性 = 值”<br>2）怎么使用：通过对象来使用；以“<code>对象.属性</code>”来使用<br>3)什么时候用：保存的属性会因为对象的不同而改变时，需要声明对象属性<br>注意：<strong>init</strong>方法中如果要给对象属性赋值时，可以添加其他的参数，并与对象属性一一对应</p>
+<pre><code class="python">class Person:
+    def __init__(self, name1, age1):
+        self.name = name1
+        self.age = age1
+        print(&#39;lala&#39;)
+p1 = Person(&#39;luo&#39;, 23)
+print(p1.name, p1.age)</code></pre>
+<p>练习：给Person类添加一个学习的对象方法，要求实现打印：“xx在学习”</p>
+<pre><code class="python">class Person:
+    def __init__(self, name1, age1=19):
+        self.name = name1
+        self.age = age1
+        # print(name1+&#39;在学习！&#39;)
+    def study(self):
+        print(&#39;%s在学习&#39; % self.name)
+p1 = Person(&#39;扎西德勒&#39;)
+p1.study()</code></pre>
+<h4 id="slots魔法"><a href="#slots魔法" class="headerlink" title="slots魔法"></a>slots魔法</h4><p><strong><strong><strong>slots</strong></strong>赋值后可以约束类中的对象属性，防止误操作</strong></p>
+<p>注意：如果类中设置了<strong><strong>slots</strong></strong>，那这个类中的对象就不能使用<strong><strong>dict</strong></strong></p>
+<pre><code class="python">class Person:
+    # __slots__是控制类能够有哪些对象属性,当添加其他对象属性时就会报错
+    __slots__ = (&#39;name&#39;, &#39;age&#39;, &#39;gender&#39;)
+
+    def __init__(self,name1,age1):
+        self.name = name1
+        self.age = age1
+p1 = Person(&#39;罗&#39;,23)</code></pre>
+<h3 id="内置类属性"><a href="#内置类属性" class="headerlink" title="内置类属性"></a>内置类属性</h3><p>创建类的时候，系统自动添加的属性就是内置类属性</p>
+<h4 id="常见内置类属性"><a href="#常见内置类属性" class="headerlink" title="常见内置类属性"></a>常见内置类属性</h4><pre><code class="python">class Dog:
+    &quot;&quot;&quot;狗类&quot;&quot;&quot;
+    num1 = 10
+    def __init__(self,name1,age1,weight1):
+        self.name = name1
+        self.age = age1
+        self.weight = weight1
+    def eat(self,food):
+        print(&#39;%s在吃%s&#39; % (self.name, food))
+    # 定制当前类的对象的打印方式===========打印对象时，自动调用
+    # 法1：
+    def __str__(self):
+        return &#39;&lt;%s&gt;&#39; % str(self.__dict__)[1: -1]
+    # 法2：
+    def __repr__(self):
+        return &#39;&lt;%s&gt;&#39; % str(self.__dict__)[1:-1]
+    # =========================================================
+p1 = Dog(&#39;哈士奇&#39;, 3, 20)</code></pre>
+<p>1)<strong><strong>name</strong></strong><br>它是一个字段<br><code>类.__name__</code> —— 获取当前类的类名</p>
+<pre><code class="python"># 取类名
+print(Dog)  # &lt;class &#39;__main__.Dog&#39;&gt;
+print(&#39;他的类型是%s类型&#39; % Dog.__name__)    # 他的类型是Dog类型</code></pre>
+<p>2)<strong><strong>doc</strong></strong><br>它是一个字段<br><code>类.__doc__</code> —— 获取类的说明文档</p>
+<pre><code class="python">print(Dog.__doc__)    # 狗类</code></pre>
+<p>3)<strong><strong>class</strong></strong><br>它是一个对象属性<br><code>对象.__class__</code> —— 获取指定对象对应的类（和type功能类似）</p>
+<pre><code class="python">print(p1.__class__)</code></pre>
+<p>4)<strong><strong>dict</strong></strong><br><code>类.__dict__</code> —— 获取指定类中所有的字段和每个字段对应的值，并以字典的形式返回<br>===================重点（面试可能会考到）<br><code>对象.__dict__</code> —— 获取指定对象的所有属性和对应的值，以字典的形式返回</p>
+<pre><code class="python">print(p1.__dict__)
+print(Dog.__dict__)</code></pre>
+<p>5）<strong>str</strong>   或者 <strong>repr</strong><br>可以用来<strong>定制对象打印方式</strong>,打印对象时，自动调用<br>    def <strong>str</strong>(self):<br>        return 定制打印内容<br>    # 法2：推荐2<br>    def <strong>repr</strong>(self):<br>        return 定制打印内容</p>
+<h4 id="字典转对象"><a href="#字典转对象" class="headerlink" title="字典转对象"></a>字典转对象</h4><pre><code class="python">class Dog0:
+    def __init__(self,dict1):
+        for key in dict1:
+            setattr(self, key, dict1[key])  # 添加属性
+    def __repr__(self):
+        return &#39;&lt;%s&gt;&#39; % str(self.__dict__)[1: -1]
+
+dict1 = {&#39;name&#39;: &#39;哈士奇&#39;, &#39;age&#39;: 3, &#39;weight&#39;: 20}
+p2 = Dog0(dict1)
+print(p2)</code></pre>
+<p>6)<strong><strong>module</strong></strong><br><code>类.__module__</code> —— 获取指定类的对应的模块名</p>
+<p>7)<strong><strong>bases</strong></strong><br><code>类.__bases__</code> —— 获取指定类的父类<br>object —— 基类</p>
+<h3 id="类中的方法"><a href="#类中的方法" class="headerlink" title="类中的方法"></a>类中的方法</h3><p>类中的方法有三种:对象方法、类方法、静态方法</p>
+<h4 id="1）对象方法"><a href="#1）对象方法" class="headerlink" title="1）对象方法"></a>1）对象方法</h4><p>怎么声明：直接声明在类中<br>特点：自带参数self，调用时不用传参，系统自动将当前对象传给self<br>怎么调用：对象.方法名（）<br>什么时候用：实现函数功能需要对象（对象属性）</p>
+<h4 id="2-类方法"><a href="#2-类方法" class="headerlink" title="2)类方法"></a>2)类方法</h4><p>怎么声明：声明前加@classmethod<br>特点：有默认参数cls，cls在调用时不用传参，系统会自动将当前类传给它；在类中，类能做的，cls都能做<br>怎么调用：类.方法名（）<br>什么时候用：实现函数功能不需要对象</p>
+<h4 id="3）静态方法"><a href="#3）静态方法" class="headerlink" title="3）静态方法"></a>3）静态方法</h4><p>怎么声明：声明前加@staticmethod<br>特点：没有默认参数<br>怎么调用：类.方法名（）<br>什么时候用：实现函数功能不需要对象和类</p>
+<pre><code class="python">class Student:
+    def __init__(self,name,score):
+        self.name = name
+        self.score = score
+    # 对象方法
+    def func1(self):
+        print(&#39;lala&#39;)
+    # 类方法
+    @classmethod
+    def func2(cls):
+        # cls与self类似
+        print(&#39;haha&#39;)
+    # 静态方法
+    @staticmethod
+    def func3():
+        print(&#39;gua&#39;)
+p1 = Student(&#39;luo&#39;, 98)
+Student.func2()</code></pre>
+<h3 id="私有化"><a href="#私有化" class="headerlink" title="私有化"></a>私有化</h3><h4 id="1-访问权限"><a href="#1-访问权限" class="headerlink" title="1.访问权限"></a>1.访问权限</h4><p>类中的属性和方法因访问权限的不同分为三种：公开的、保护的、私有的<br>​    public：类的内部和外部都可以使用，可以被继承<br>​    protect：类的内部可以用，外部不可以使用，可以被继承<br>​    private：只有类的内部可以使用，无法被继承</p>
+<h4 id="2-python中属性和方法的访问权限"><a href="#2-python中属性和方法的访问权限" class="headerlink" title="2.python中属性和方法的访问权限"></a>2.python中属性和方法的访问权限</h4><p>python中所有的属性和方法<strong>本质上只有公开的这一种访问权限</strong><br>私有化是假的私有化，只是告诉使用者这个属性和方法是私有的，不要在外部使用</p>
+<h4 id="3-私有化的方式"><a href="#3-私有化的方式" class="headerlink" title="3.私有化的方式"></a>3.私有化的方式</h4><p><strong>在需要私有化的属性名或者方法名前加两个下划线；“__”</strong><br>私有化的原理：设置带有两个下划线”__“开头的属性名和变量名，系统在保存时会自动在前面加‘_类名’，导致直接访问不了</p>
+<pre><code class="python">class Person:
+    def __init__(self,name,age):
+        self.__name = name
+        self.__age = age
+p1 = Person(&#39;luo&#39;,23)
+print(p1.name)  # AttributeError: &#39;Person&#39; object has no attribute &#39;name&#39;</code></pre>
+<h3 id="属性的getter和setter"><a href="#属性的getter和setter" class="headerlink" title="属性的getter和setter"></a>属性的getter和setter</h3><h4 id="1-getter和setter的作用"><a href="#1-getter和setter的作用" class="headerlink" title="1.getter和setter的作用"></a>1.getter和setter的作用</h4><p>如果需要在<strong>获取属性值之前做别的事情</strong>，就给这个属性添加getter<br>如果需要在<strong>给属性赋值之前做别的事情</strong>，就给这个属性添加setter</p>
+<h4 id="2-怎么添加getter和setter"><a href="#2-怎么添加getter和setter" class="headerlink" title="2.怎么添加getter和setter"></a>2.怎么添加getter和setter</h4><p>1）添加getter<br>​    a.在需要添加getter的属性名前加一个下划线“<em>”<br>​    b.第二步在类中声明一个函数（方法），声明前加<code>@property</code>.函数名就是不带下划线”</em>“的属性名;除了自带参数self，不能在添加其他参数；需要一个返回值（表达式），返回值就是你需要的返回值<br>​    c.在类的外边使用时，不需要给属性名前添加下划线;类中使用都要加下划线</p>
+<p>2）添加setter<br>注意：<strong>属性要添加setter，必须先添加getter</strong><br>​    a.保证属性名前有一个下划线；“_”<br>​    b.声明一个函数(不带下划线的属性名)，声明前加“<code>@属性名.setter</code>”<br>​    c.<strong>除了自带参数self，还需要添加一个参数；没有返回值，需要完成给属性赋值</strong><br>​    d.在类的外边使用时，也不需要给属性名前加下划线</p>
+<pre><code class="python">class Person:
+    def __init__(self,name):
+        self.name = name
+        self._age = 18
+    @property   # ===============添加getter，获得age之前让他执行下边的代码
+    def age(self):
+        if self._age &lt; 18:
+            return &#39;未成年&#39;
+        else:
+            return &#39;成年&#39;
+    @age.setter   # ==============添加setter，给age赋值之前先执行下边的代码
+    def age(self,value):
+        if isinstance(value,int):
+            if 0 &lt;= value &lt;= 100:
+                p1._age = value
+            else:
+                raise ValueError
+        else:
+            raise ValueError
+p1 = Person(&#39;大红&#39;)
+print(p1.age) # 希望输出想要的内容
+p1.age = 23  # 给age赋值时，自动调用age（self，value）</code></pre>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h4 id="1-什么是继承"><a href="#1-什么是继承" class="headerlink" title="1.什么是继承"></a>1.什么是继承</h4><p>让一个类直接拥有另一个类的属性和方法，这个过程就是继承<br>父类：被继承的类，又叫超类<br>子类：去继承别人的类（继承者）</p>
+<h4 id="2-怎么继承"><a href="#2-怎么继承" class="headerlink" title="2.怎么继承"></a>2.怎么继承</h4><p>语法：<br>    class 类名（父类1，父类2，….）:<br>        类的说明文档<br>        类的内容<br>说明：<br>（）—— 可以省略，相当于“（object）”；object是python中所有类直接或间接父类，也叫基类<br>父类 —— 有（）时，括号内可以写一个或多个父类</p>
+<h4 id="3-能继承哪些内容"><a href="#3-能继承哪些内容" class="headerlink" title="3.能继承哪些内容"></a>3.能继承哪些内容</h4><p>所有的属性和方法（<strong>slots不能被继承</strong>）</p>
+<pre><code class="python">class Person:
+    # __slots__不能被继承，只能约束当前类的属性
+    __slots__ = (&#39;name&#39;, &#39;age&#39;)
+    num = 101
+    def __init__(self):
+        self.name = &#39;麻子&#39;
+        self.age = 18
+    def eat(self,food):
+        print(&#39;%s在吃%s&#39; % (self.name,food))
+
+
+class Student(Person):
+    pass
+stu = Student()
+print(Student.num) # 使用Person类的字段
+print(stu.name)</code></pre>
+<h4 id="4-子类添加属于自己的专有属性和方法"><a href="#4-子类添加属于自己的专有属性和方法" class="headerlink" title="4.子类添加属于自己的专有属性和方法"></a>4.子类添加属于自己的专有属性和方法</h4><p>子类继承父类会拥有父类所有的属性和方法，还需要添加属于自己的专有属性和方法，否则继承父类没有意义<br>1）添加字段<br>​    在子类中直接写</p>
+<p>2）添加对象属性<br>​    <strong>需要在子类的init方法中通过super()去调用父类的init方法，来保留从父类继承下来的对象属性</strong><br>​    <strong>当父类有参数时</strong>：将父类的所有参数写进子类的init方法的参数里，子类有参数时，将子类参数一起写进子类的init方法的参数中，后分别将父类和子类对应的参数赋给super（）.<strong>init</strong>(父类参数)、self.属性 = 子类参数<br>​    <strong>当父类无参数时</strong>：直接在子类的init方法中通过super()调用父类的init方法，不需要给父类的inti方法赋参数</p>
+<h5 id="父类无参"><a href="#父类无参" class="headerlink" title="父类无参"></a>父类无参</h5><pre><code class="python">class Person:
+    num = 101
+    def __init__(self):
+        self.name = &#39;麻子&#39;
+        self.age = 18
+    def eat(self,food):
+        print(&#39;%s在吃%s&#39; % (self.name,food))
+    @classmethod
+    def count(cls):
+        print(Person.num)
+
+# 子类
+class Student(Person):
+    identity = &#39;学生&#39;
+    def __init__(self):
+        super().__init__()   # 调用父类的属性（固定写法）;父类有参数时，参数要写上
+        self.score = 98
+    def play_game(self):
+        print(&#39;%s玩游戏&#39; % self.name)
+    # 重新父类功能
+    @classmethod
+    def count(cls):
+        super().count()   # super().父类函数；调用父类的此功能时，必须用super()，接着再写新功能
+        print(&#39;haha&#39;)
+
+# ==========如果要重写父类功能的方法，直接在子类中重写就行
+stu = Student()
+print(Student.num) # 使用Person类的字段
+print(stu.name)
+stu.play_game()
+print(Student.identity)</code></pre>
+<h5 id="父类有参"><a href="#父类有参" class="headerlink" title="父类有参"></a>父类有参</h5><pre><code class="python">class Person:
+    num = 101
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+    def eat(self,food):
+        print(&#39;%s在吃%s&#39; % (self.name, food))
+    @classmethod
+    def count(cls):
+        print(Person.num)
+
+# 子类
+class Student(Person):
+    identity = &#39;学生&#39;
+    def __init__(self,name,age,score):
+        super().__init__(name,age)   # 调用父类的属性（固定写法）;父类有参数，参数要写上
+        self.score = score
+    def play_game(self):
+        print(&#39;%s玩游戏&#39; % self.name)
+    # 重新父类功能
+    @classmethod
+    def count(cls):
+        super().count()   # super().父类函数；调用父类的此功能时，必须用super()，接着再写新功能
+        print(&#39;haha&#39;)
+
+stu = Student(&#39;麻子&#39;,23,98)
+print(stu)</code></pre>
+<p><strong>补充：类中的函数调用过程</strong></p>
+<p>当通过类和对象取调用函数时，是先看当前类中有没有声明这个函数，如果有直接调用自己的；当前类没有就去父类看有没有，父类有就调用父类的；如果父类也没有，就看父类的父类有没有……，以此类推；如果找到object都没有声明这个函数，才报错</p>
+<p>####多继承</p>
+<p>不要用多继承</p>
+<h3 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h3><p>java/c++/c#/objective_c等语言的重载：<br>​    指的是函数名相同，但是参数不一样的多个函数；<br>​    <strong>python不支持函数的重载，支持运算符的重载</strong></p>
+<p><code>在类中写出对应的方法，让不支持的数据计算方式，变成支持的数据运算方式</code></p>
+<p>python中使用不同的运算符对数据进行运算的时候，本质是在调用相应的方法。<br>当不同类型的数据使用相同的运算符时，调用方法的方法名一样，但是方法不一样</p>
+<p><strong>看数据是否支持某种运算符，就看这种运算符对应的类中是否实现了相应的方法</strong></p>
+<pre><code class="python">class Person:
+    def __init__(self,name,age,gender=&#39;男&#39;):
+        self.name = name
+        self.age = age
+        self.gender = gender
+    # 定制对象的打印方式
+    def __repr__(self):
+        return str(self.__dict__)
+    # 运算符对应的方法
+    &quot;&quot;&quot;
+    self —— 运算符前边的那个数据
+    other —— 运算符后边的数据
+    返回值 —— 运算结果
+    &quot;&quot;&quot;
+    # 重载加法
+    def __add__(self, other):
+        return self.name + other.name
+    #  重载&lt;符号
+    # &gt; &lt;比较运算符只需要重载一个，另一个会自动重载
+    def __lt__(self, other):
+        return self.age &lt; other.age
+
+p1 = Person(&#39;小明&#39;,20)
+p2 = Person(&#39;小花&#39;,19,&#39;女&#39;)
+print(p1+p2)
+Persons = [p1, p2]
+Persons.sort()
+print(Persons)</code></pre>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转类和对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件操作和异常捕获</title>
+    <url>/2019/11/02/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%92%8C%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7/</url>
+    <content><![CDATA[<p>python中对文件的操作，读、写等；以及异常的捕获，错误类型的定制</p>
+<a id="more"></a>
+
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="1-数据存储和数据本地化（数据持久化）"><a href="#1-数据存储和数据本地化（数据持久化）" class="headerlink" title="1.数据存储和数据本地化（数据持久化）"></a>1.数据存储和数据本地化（数据持久化）</h4><p>​    程序中产生的数据默认都是存储在运行内存，这些数据在程序运行结束后自动销毁<br>​    如果希望数据在程序结束后不销毁，就必须将数据存储在硬盘上（通过文件保存）</p>
+<p>txt文件、json文件、plist文件、各种数据库文件<br>图片文件（png、jpg、jpeg）、视频文件、音频文件</p>
+<h4 id="2-怎么把数据保存在硬盘中"><a href="#2-怎么把数据保存在硬盘中" class="headerlink" title="2.怎么把数据保存在硬盘中"></a>2.怎么把数据保存在硬盘中</h4><p>基本步骤：打开文件（创建文件）——&gt; 操作文件（读文件/写文件）——&gt; 关闭文件</p>
+<h5 id="1）打开文件"><a href="#1）打开文件" class="headerlink" title="1）打开文件"></a>1）打开文件</h5><pre><code>方法：
+open(file,mode,encoding) —— 以指定方式打开指定文件并返回文件对象
+说明：
+file —— 字符串（文件路径，可以是绝对路径(文件在电脑的全路径)，也可以是相对路径）
+          相对路径：相对当前目录
+                    .\ —— 代表当前目录
+                    ..\ —— 代表当前目录的上一级目录
+mode —— 字符串（读写方式）；决定打开文件后能做什么，以及读写的数据类型
+          mode有默认值：‘r’，‘w’，‘a’，‘b’，‘t’
+          ‘r’—— 只读；‘w’—— 只写（清空源文件）；‘a’——只写，接着写；
+          ‘b’——读写数据类型（二进制）；‘t’——读写数据类型（文本）
+          ====注意：‘b’‘t’必须有一个，如果不写，默认为‘t’
+          ===========写法：
+          ‘r’/‘rt’—— 只读，读到的数据类型是字符串
+          ‘rb’/‘br’—— 只读，读到的数据类型是二进制
+          ‘wt’/‘tw’—— 只写，清空原文件的内容，后写入文件的数据只能是字符串
+          ‘wb’/‘bw’—— 只写，清空原文件的内容，后写入文件的数据只能是二进制
+          ‘at’/‘ta’—— 只写，写入文件的数据只能是字符串
+          ‘ab’/‘ba’—— 只写，写入文件的数据只能是二进制
+encoding —— 字符串（文本文件的编码方式）；一般使用‘utf-8’
+              注意：1.二进制数据不能设置encoding（mode带b不能设置）
+                    2.同一文件创建和读写文件的编码方式都必须一样 </code></pre><pre><code class="python">file_f =open(&#39;./text.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;)</code></pre>
+<h5 id="2）操作文件"><a href="#2）操作文件" class="headerlink" title="2）操作文件"></a>2）操作文件</h5><p>（1）读操作——获取文件内容<br>  a.  *<em><code>文件对象.read()</code> *</em> —— 可以写入参数，指定每次读的数据的大小–&gt;<code>文件对象.read(1024)</code></p>
+<p>，如果读取的文件很大，就采用循环的方式去读，免得程序崩溃，知直到读完为止</p>
+<p>—— 获取指定文件对象中的所有内容（从文件读写位置开始到文件结束）,并返回<br>  b.  <strong><code>文件对象.readline()</code></strong><br>—— 读一行的内容（一行读完后，光标移动到第二行开头）<br>（2）写操作——修改文件内容<br>   *<em><code>文件对象.write(数据)</code> *</em><br>—— 将指定的数据写入指定的文件；数据只能是字符串或二进制</p>
+<p>============================读操作===============================</p>
+<pre><code class="python">f = file_f.read()
+file_f.seek(0)   # 将文件读写位置设置在开头==========
+f1 = file_f.readline()
+print(f)
+print(&#39;==========&#39;, f1)</code></pre>
+<p>练习：将文件中的内容一行一行的读，读完位置</p>
+<pre><code class="python">file_ =open(&#39;./text.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;)
+while True:
+    f2 = file_.readline()
+    if not f2:
+        break
+    print(f2)</code></pre>
+<p>=========================写操作======================</p>
+<pre><code class="python">file_txt =open(&#39;./text.txt&#39;, &#39;a&#39;, encoding=&#39;utf-8&#39;)
+file_txt.write(&#39;\n Hei,Guys!&#39;)</code></pre>
+<h5 id="3）关闭文件"><a href="#3）关闭文件" class="headerlink" title="3）关闭文件"></a>3）关闭文件</h5><p>语法：<code>文件对象.close()</code></p>
+<pre><code class="python">file_txt.close()</code></pre>
+<h4 id="3-文件作用域"><a href="#3-文件作用域" class="headerlink" title="3.文件作用域"></a>3.文件作用域</h4><pre><code>with open(file,mode,encoding) as 文件对象：
+    文件作用域</code></pre><p>文件作用域 —— 只有在这个文件作用域范围内才能操作文件；离开文件作用域，文件会自动关闭</p>
+<pre><code class="python">with open(&#39;./text.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;) as file_t:
+    print(file_t.readline())
+#=============================
+file_t.seek(0)   # ValueError: I/O operation on closed file.在文件作用域外，文件已经关闭</code></pre>
+<h3 id="数据本地化"><a href="#数据本地化" class="headerlink" title="数据本地化"></a>数据本地化</h3><h4 id="1-怎么将数据持久化"><a href="#1-怎么将数据持久化" class="headerlink" title="1.怎么将数据持久化"></a>1.怎么将数据持久化</h4><p>步骤：<br>1）将需要持久化的数据保存到本地文件中<br>2）需要使用这个数据时从文件中去读这个数据<br>3）数据发生改变后，要将最新的数据保存在本地文件</p>
+<h4 id="2-打开不存在文件"><a href="#2-打开不存在文件" class="headerlink" title="2.打开不存在文件"></a>2.打开不存在文件</h4><p>如果以读的方式打开不存在的文件，程序会报错；<br>如果以写的方式打开不存在的文件，程序不会报错，而是会自动创建这个文件再打开<br>注意：如果路径中的文件夹不存在，以写的方式打开也会报错<br>====<strong>列表转字符串:</strong></p>
+<pre><code>str(列表)</code></pre><p>====<strong>字符串转列表、字典:</strong></p>
+<pre><code>eval(字符串)
+    要求：去掉引号后，本身就是列表或字典</code></pre><pre><code class="python">str1 = &#39;[2, 6, 8, 45]&#39;
+list1 = eval(str1)
+print(list1)</code></pre>
+<p>练习：输入学生姓名和成绩，输入完成后打印学生信息，之前的学生信息要一起打印</p>
+<pre><code class="python">要先创建一个本地文件
+name = input(&#39;请输入姓名：&#39;)
+age = int(input(&#39;请输入年龄：&#39;))
+st = [{&#39;name&#39;: name, &#39;age&#39;: age}]
+with open(&#39;./信息.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;) as f1:
+    f2 = eval(f1.read())
+    f2.append(st)
+with open(&#39;./信息.txt&#39;, &#39;w&#39;, encoding=&#39;utf-8&#39;) as f3:
+    f3.write(str(f2))</code></pre>
+<h3 id="json数据"><a href="#json数据" class="headerlink" title="json数据"></a>json数据</h3><h4 id="1-json数据"><a href="#1-json数据" class="headerlink" title="1.json数据"></a>1.json数据</h4><p><strong>json是一种数据格式</strong><br>——json的数据格式：一个json有且只有一个数据；这个数据必须是json支持的数据类型<br>——json支持的数据类型：<br>    a、数字类型：包含所有的数字；小数支持科学计数法，如89，45，3e4<br>    b、字符串：使用双引号引起来的数据。如”hello”,”guys”<br>    c、布尔：只有true和false两个值<br>    d、空值：null<br>    e、数组：相当于python中的列表；<br>             [元素1，元素2，元素3，….],元素必须都是json支持的数据类型<br>    f、字典：相当于python中的字典；<br>             {key1:value1,key2:value2,….},key必须是字符串</p>
+<h4 id="2-json和python互相转换-——json模块"><a href="#2-json和python互相转换-——json模块" class="headerlink" title="2.json和python互相转换 ——json模块"></a>2.json和python互相转换 ——json模块</h4><h5 id="1）json数据转换成python数据（爬虫、数据可视化、数据分析方向）"><a href="#1）json数据转换成python数据（爬虫、数据可视化、数据分析方向）" class="headerlink" title="1）json数据转换成python数据（爬虫、数据可视化、数据分析方向）"></a>1）json数据转换成python数据（爬虫、数据可视化、数据分析方向）</h5><p>方法：<code>json.loads(数据)</code><br>——数据必须是字符串；字符串的内容必须是json格式的数据<br>| json | ——&gt;  | python                          |<br>| —- | —- | ——————————- |<br>| 数字   | ——&gt;  | int/float                       |<br>| 字符串  | ——&gt;  | str;可能键双引号变成单引号                 |<br>| 布尔   | ——&gt;  | bool；true ——True，false —— False |<br>| 空值   | ——&gt;  | null —— None                    |<br>| 数组   | ——&gt;  | list                            |<br>| 字典   | ——&gt;  | dict                            |</p>
+<pre><code class="python">import json
+str1 = json.loads(&#39;&quot;ha&quot;&#39;)
+print(str1)   # ha</code></pre>
+<h5 id="2-python数据转换成json数据（wen后端开发——写服务器程序、接口）"><a href="#2-python数据转换成json数据（wen后端开发——写服务器程序、接口）" class="headerlink" title="2) python数据转换成json数据（wen后端开发——写服务器程序、接口）"></a>2) python数据转换成json数据（wen后端开发——写服务器程序、接口）</h5><p>写法：<code>json.dumps(数据)</code><br>——将python数据转换成json格式的字符串<br>| python     | ——&gt;  | json                       |<br>| ———- | —- | ————————– |<br>| int/float  | ——&gt;  | 数字                         |<br>| str        | ——&gt;  | 字符串；单引号变成双引号               |<br>| bool       | ——&gt;  | 布尔；True——true、False——false |<br>| None       | ——&gt;  | null                       |<br>| list，tuple | ——&gt;  | 数组                         |<br>| dict       | ——&gt;  | 字典                         |</p>
+<pre><code class="python">import json
+str2 = json.dumps(&#39;13&#39;)
+str3 = json.dumps((1, &#39;辣鸡&#39;))
+print(str2, str3)  # &quot;13&quot; [1, &quot;\u8fa3\u9e21&quot;]</code></pre>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><h4 id="1-异常捕获"><a href="#1-异常捕获" class="headerlink" title="1.异常捕获"></a>1.异常捕获</h4><p>异常 —— 程序执行过程中出现错误（报错）<br>异常捕获 —— 让程序出现异常时不崩溃，还可以接着往后执行<br><strong>什么时候需要捕获异常</strong> —— 明知道某个位置程序可能会出现异常，但没办法通过程序来控制，就需要异常捕获</p>
+<h5 id="异常捕获语法："><a href="#异常捕获语法：" class="headerlink" title="异常捕获语法："></a><strong>异常捕获语法：</strong></h5><p>===语法1：能<strong>捕获任何异常，除了语法错误</strong><br>    try:<br>        代码块1<br>    except:<br>        代码块2<br>    其他语句<br>说明：try: —— 关键字，固定写法<br>​       代码块1 —— 和try保持一个缩进的一条或多条语句（需要捕获异常的语句）<br>​       except: —— 关键字，固定写法<br>​       代码块2 —— 和except保持一个缩进的一条或多条语句（出现异常后对异常进行处理的代码）<br>执行过程：<br>​    先执行代码块1，如果代码块1没有出现异常，跳过代码块2，直接继续执行其他语句；<br>​    如果代码块1出现异常，会接着执行代码块2，后再接着执行其他语句；<br>===语法2：<strong>捕获指定类型的异常</strong><br>    try:<br>        代码块1<br>    except 异常类型:<br>        代码块2<br>    其他语句<br>说明：try: —— 关键字，固定写法<br>​    代码块1 —— 和try保持一个缩进的一条或多条语句（需要捕获异常的语句）<br>​    except: —— 关键字，固定写法<br>​    异常类型 —— 指定一个错误的类型<br>​    代码块2 —— 和except保持一个缩进的一条或多条语句（出现异常后对异常进行处理的代码）<br>执行过程：<br>​    先执行代码块1，如果代码块1没出现异常，跳过except，直接执行后边的其他语句；<br>​    如果代码块1出现异常，且代码块1中的第一个异常类型和except中的异常类型一样，程序不崩溃，接着执行代码块2<br>​    如果代码块1出现异常，且代码块1中的第一个异常类型和except中的异常类型不一样，程序直接崩溃，后边所有代码不再执行</p>
+<p>===语法3、语法4：<strong>同时捕获指定的多种异常类型</strong><br>==语法3<br>    try：<br>        代码块1<br>    except (异常类型1，异常类型2，…….):<br>        代码块2<br>    其他语句<br>说明：<br>执行过程：<br>​    只会捕获到第一个出现的异常，不管第一个出现的异常类型except中异常类型的哪一种，执行的都是代码块2<br>==语法4<br>    try:<br>        代码块1<br>    except 异常类型1:<br>        代码块2<br>    except 异常类型2:<br>        代码块3<br>    except 异常类型3:<br>        代码块4<br>    ………<br>    其他语句<br>说明：<br>执行过程：<br>​    只会捕获到第一个出现的异常，并根据下边except中对应的异常类型，执行相应的代码块</p>
+<h5 id="finally关键字，只能写在异常捕获的后边"><a href="#finally关键字，只能写在异常捕获的后边" class="headerlink" title="finally关键字，只能写在异常捕获的后边"></a><strong>finally关键字，只能写在异常捕获的后边</strong></h5><p>以上所有的异常捕获语法结构的最后都可以加一个finally，加了不会影响原结构的功能<br>功能：<br><strong>try后面的代码块不管会不会发生异常，有没有被捕获到,程序会不会崩溃，finally后面的代码都会执行</strong></p>
+<pre><code class="python"># 语法1 和 finally
+print(&#39;lalalallalallalal&#39;)
+# 如果程序出现异常，那么程序就会直接结束，不再执行后边的其他代码
+try:
+    num = int(input(&#39;请输入年龄：&#39;))
+    # 上一行代码输入错误时，后边代码就停止执行，直接执行except后边的代码
+    print(&#39;输入完成！&#39;)
+except:
+    print(&#39;年龄输入有误，请正确输入！&#39;)
+finally:
+    print(&#39;finally=================&#39;)</code></pre>
+<h4 id="2-抛出异常-——-主动让程序崩溃"><a href="#2-抛出异常-——-主动让程序崩溃" class="headerlink" title="2.抛出异常 —— 主动让程序崩溃"></a>2.<strong>抛出异常 —— 主动让程序崩溃</strong></h4><h5 id="定制错误类型"><a href="#定制错误类型" class="headerlink" title="定制错误类型"></a>定制错误类型</h5><pre><code>class 错误名(Exception):
+    def __str__(self):
+    return &#39;提示的信息(只能是中文)&#39;</code></pre><p>语法：<br>​    <strong><code>raise 异常类型</code></strong><br>——还可以自定义异常类型</p>
+<pre><code class="python">age = int(input(&#39;请输入年龄：&#39;))
+if age &lt; 0 or age &gt; 100:
+    raise ValueError</code></pre>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h4 id="1-什么是模块"><a href="#1-什么是模块" class="headerlink" title="1.什么是模块"></a>1.什么是模块</h4><p>​    python中一个py文件就是一个模块；模块名就是py文件的文件名</p>
+<h4 id="2-模块间的相互引用"><a href="#2-模块间的相互引用" class="headerlink" title="2.模块间的相互引用"></a>2.模块间的相互引用</h4><p>怎么在一个模块中使用另一个模块的内容：导入模块(3种导入方式)<br>语法：</p>
+<pre><code>a. import 模块名
+                功能：导入指定的模块，导入后可以使用指定模块的所有全局变量
+                使用方式：模块名.变量名
+
+例如：
+    import test   
+    使用被导入的变量 
+    test.a
+    test.func1  </code></pre><pre><code>b. from 模块名 import 变量名/函数名
+                功能：导入指定模块中的指定全局变量，导入后只能使用被导入的全局变量
+                使用方式（直接使用）：变量名
+例如：
+    from test import func1,a
+    使用被导入的变量  
+    a
+    func1  </code></pre><pre><code>c. from 模块名 import *
+                功能：导入指定的模块，导入后可以使用指定模块的所有全局变量
+                使用方式（直接使用）：变量名          
+例如：
+    from test import *
+    使用被导入的变量  
+    a
+    func1 
+    func2</code></pre><pre><code>d. 当需要导入的指定模块名字与当前模块里的变量名有冲突时，可以修改要导入的指定模块名
+        import 模块名 as 修改后的模块名
+        使用方式：修改后的模块名.变量
+   当导入模块中的变量与当前模块中的变量有冲突时，可以修改要导入当前模块的变量名
+        from 模块名 import 变量名1 as 新变量名1,变量名2 as 新变量名2,.......</code></pre><h4 id="3-导入模块的原理"><a href="#3-导入模块的原理" class="headerlink" title="3.导入模块的原理"></a>3.导入模块的原理</h4><p><strong>通过import 或 from import导入一个模块时，会将这个模块的代码全部执行一遍</strong></p>
+<p>=========<strong>如何在导入模块时选择性执行部分代码：</strong><br>语法：<br>    代码段1<br>    if <strong>name</strong> == ‘<strong>main</strong>‘:<br>        代码段2<br>说明：<br>​    导入时只执行代码段1，不会执行if后边的代码段2（代码段1可以被导入，代码段2不会被导入）<br>但是运行本模块时，if后边的代码段2就会执行<br>​<br><strong>导入模块时选择性执行代码的原理：</strong><br>​    创建模块时，每个模块都会自动产生一个<strong>name</strong>属性，用来保存当前模块的模块名，它的值默认就是py文件的文件名；<br>​    当直接运行这个模块时，模块中的’<strong>name</strong>‘属性会临时变成’<strong>main</strong>‘，从而<strong>name</strong> == ‘<strong>main</strong>‘，可以执行代码段2</p>
+<h3 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a>hashlib模块</h3><h4 id="1-什么是hashlib"><a href="#1-什么是hashlib" class="headerlink" title="1.什么是hashlib"></a>1.什么是hashlib</h4><p><strong>python用来提供产生摘要算法（哈希算法、离散算法）的模块；例如 md5、sha算法</strong></p>
+<h4 id="2-哈希算法特点"><a href="#2-哈希算法特点" class="headerlink" title="2.哈希算法特点"></a>2.<strong>哈希算法特点</strong></h4><p>​    1）算法不可逆 —— 根据摘要（密文）不能获取/推导出原文<br>​    2）使用相同算法对一样的数据加密后的结果是一致的<br>​    3）不同长度的原文数据通过相同的算法加密后获得的密文长度是一样的</p>
+<h4 id="3-怎么生成数据对应的摘要（密文）"><a href="#3-怎么生成数据对应的摘要（密文）" class="headerlink" title="3.怎么生成数据对应的摘要（密文）"></a>3.怎么生成数据对应的摘要（密文）</h4><p>1）根据算法创建hash对象</p>
+<p>语法：<code>hashlib.算法名（）</code></p>
+<pre><code class="python">hash1 = hashlib.md5()</code></pre>
+<p>2）对数据进行加密</p>
+<p>语法：<code>哈希对象.update(数据)</code></p>
+<p>要求 —— 指定加密数据，数据必须是二进制数据<br>补充：二进制数据与字符串的相互转换<br>​    二进制数据：bytes<br>​    字符串转二进制： bytes（字符串,encoding=’utf-8’） 或  字符串.encode（）<br>​    二进制转字符串：str(二进制数据,encoding=’utf-8’)  或  二进制.decode(encoding=’utf-8’)</p>
+<pre><code class="python">hash1.update(password.encode())</code></pre>
+<p>3）获取摘要（密文）</p>
+<p>语法：</p>
+<p><code>哈希对象.digest()</code> —— 获取二进制形式的密文（摘要），数据类型是字符串</p>
+<p><code>哈希对象.hexdigest()</code> —— 获取十六进行形式的密文（摘要），数据类型是字符串</p>
+<pre><code class="python">sc = hash1.digest()
+sc1 = hash1.hexdigest()
+print(sc)    # b&#39;J\xa5\xa13\x18\xe1\x0bu\x01\xc2l\x163d\xfe\x87&#39;
+print(sc1)   # 4aa5a13318e10b7501c26c163364fe87</code></pre>
+<h3 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h3><h4 id="什么是时间戳"><a href="#什么是时间戳" class="headerlink" title="什么是时间戳"></a>什么是时间戳</h4><p>时间戳：<strong>指的是一个时间到1970年1月1日0点0分0秒之间的时间差，用秒表示</strong></p>
+<pre><code class="python"># t1就是一个时间戳
+t1 = time.time()</code></pre>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转文件操作和异常捕获</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>函数</title>
+    <url>/2019/11/02/%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>函数的定义、声明、调用，以及高阶函数的声明及使用；迭代器、生成器、装饰器</p>
+<a id="more"></a>
+
+<h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><h4 id="1-什么是函数（非常重要！）"><a href="#1-什么是函数（非常重要！）" class="headerlink" title="1.什么是函数（非常重要！）"></a>1.什么是函数（非常重要！）</h4><p>——函数就是<code>对实现某一特定功能代码的封装</code></p>
+<h4 id="2-函数的分类"><a href="#2-函数的分类" class="headerlink" title="2.函数的分类"></a>2.函数的分类</h4><p>按照函数是谁来声明将函数分为系统函数和自定义函数<br>​    <code>系统函数</code>—— 由系统声明，开发者直接使用的函数；例如：max、min、sum、print、input等<br>​    <code>自定义函数</code>——由程序员自己来声明，可以自己用，也可以给别人使用</p>
+<h4 id="3-函数的声明（定义）"><a href="#3-函数的声明（定义）" class="headerlink" title="3.函数的声明（定义）"></a>3.函数的声明（定义）</h4><p>语法：</p>
+<pre><code class="python">def 函数名（参数列表）：
+    函数说明文档
+    函数体</code></pre>
+<p>声明：</p>
+<pre><code class="python">def —— python中声明函数的关键字
+函数名 —— 程序员自己命名（要求：必须是标识符，不能是关键字  
+                        规范：所有字母小写，单词用下划线隔开；见名知义；不能使用系统函数名、类型名）
+（  ）—— 固定写法，不能省略
+参数列表 —— 这里的参数叫形参；以&quot;变量名1，变量名2，变量名3，....&quot;的形式存在
+              形参的作用是将函数外的数据传递给函数
+：—— 固定写法
+函数说明文档 —— 使用三个双引号引起来的文本信息，对函数体进行说明
+函数体 —— 和def保持一个缩进的一条或多条语句；就是实现函数功能的代码段</code></pre>
+<p>初学者声明函数的步骤：</p>
+<pre><code>a、确定函数功能
+b、根据功能确定函数名字
+c、确定函数的参数；看实现函数的功能需不需要额外的数据，需要的话，需要几个
+d、实现函数的功能（写出函数体）
+e、写函数说明文档</code></pre><p>注意：函数在声明时，不会执行函数体；函数必须调用才能执行<br>——————————————————<br>练习：写一个函数，求两个数的和</p>
+<pre><code class="python">def sum_two(a, b):
+    &quot;&quot;&quot;
+    功能说明:求两个数的和
+    :param a: 参数说明
+    :param b: 参数说明
+    :return: None
+    &quot;&quot;&quot;
+    print(a + b)
+a, b = 10, 20
+sum_two(a, b)</code></pre>
+<p>练习：写一个函数，打印指定字符串中所有的中文字符</p>
+<pre><code class="python">def print_ch(str1):
+    &quot;&quot;&quot;
+    功能说明：打印指定字符串中所有的中文字符
+    :param str1: 指定的字符串
+    :return: 
+    &quot;&quot;&quot;
+    for x in str1:
+        if 0x4e00 &lt;= ord(x) &lt;= 0x9fa5:
+            print(x)
+str1 = &#39;jdjk5545我545是&#39;
+print_ch(str1)
+# ord() —— 是求字符的编码值
+# chr() —— 是求编码值对应的字符</code></pre>
+<h3 id="函数的调用"><a href="#函数的调用" class="headerlink" title="函数的调用"></a>函数的调用</h3><p>语法：</p>
+<pre><code>函数名(实参列表)</code></pre><p>说明：</p>
+<pre><code>    函数名 —— 已经声明过的函数名
+    （）—— 固定写法
+    实参列表 —— 以‘值1，值2，值3，....’的形式存在
+                实参是给形参赋值的
+注意：函数可以调用多次</code></pre><pre><code class="python"># 声明函数
+def sum_two(a, b):
+    &quot;&quot;&quot;
+    功能说明:求两个数的和
+    :param a: 参数说明
+    :param b: 参数说明
+    :return: None
+    &quot;&quot;&quot;
+    print(a + b)
+a, b = 10, 20
+# 调用函数
+sum_two(a, b)</code></pre>
+<h4 id="函数调用过程"><a href="#函数调用过程" class="headerlink" title="函数调用过程"></a>函数调用过程</h4><p>1）回到函数声明的位置<br>2）传参——用实参给形参赋值；传参时要保证每个参数都有值<br>3）执行函数体<br>4）确定函数返回值<br>5）回到函数调用的位置</p>
+<h3 id="函数的参数"><a href="#函数的参数" class="headerlink" title="函数的参数"></a>函数的参数</h3><h4 id="1）位置参数和关键字参数-——-实参分类"><a href="#1）位置参数和关键字参数-——-实参分类" class="headerlink" title="1）位置参数和关键字参数 —— 实参分类"></a>1）位置参数和关键字参数 —— 实参分类</h4><p>位置参数：让实参和形参一一对应给不同形参赋不同的值<br>关键字参数：以’参数名1 = 值1，参数名2 = 值2，….’的形式来传参<br>注意：如果位置参数和关键字参数同时存在，位置参数必须在关键字参数前</p>
+<pre><code class="python"># 声明函数
+def print_c(x, y):
+    x + y
+# 位置参数
+print_c(13, 14)
+# 关键字参数
+print_c(x=100, y=14)
+# 位置参数+关键字参数
+print_c(100, y=14)</code></pre>
+<h4 id="2）参数默认值-——-针对形参"><a href="#2）参数默认值-——-针对形参" class="headerlink" title="2）参数默认值 —— 针对形参"></a>2）参数默认值 —— 针对形参</h4><p>声明函数的时候可以给形参赋默认值；已经有默认值的参数在调用时可以不用再传参<br>注意：没有默认值的参数必须放在有默认值参数的前边</p>
+<h4 id="3-参数类型说明"><a href="#3-参数类型说明" class="headerlink" title="3)参数类型说明"></a>3)参数类型说明</h4><p>a.给参数设置默认值，默认值的类型就是参数的类型<br>b.（形参：类型名）—— 可以提示后边的操作</p>
+<pre><code class="python">def print_c(x:list, y:str, z=14):
+    num = x + y + z</code></pre>
+<h4 id="4-不定长参数——参数个数不确定"><a href="#4-不定长参数——参数个数不确定" class="headerlink" title="4)不定长参数——参数个数不确定"></a>4)不定长参数——参数个数不确定</h4><p>a.<code>在参数名前加*</code>，那么这个参数就会变成一个元组去接收多个参数（调用时只能用位置参数）<br>b.<code>在参数名前加**</code>,那么这个参数就会变成一个字典去接收多个参数（调用时只能关键字参数）</p>
+<pre><code class="python"># a.在参数名前加*
+def print_x(*num):
+    print(num)
+# 调用
+print_x(1)
+print_x(1,2)
+
+# b.在参数名前加**
+def print_t(**num):
+    print(num)
+# 调用
+print_t(x=13,y=14)</code></pre>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>1.返回值</p>
+<p>1）什么是返回值：返回值就是return后面的值（怎么确定返回值）；就是函数调用表达式的值（怎么获取返回值）</p>
+<p>a：return是函数体中的关键字</p>
+<p>——返回返回值（确定函数返回值）：return 表达式——表达式的值就是函数的返回值</p>
+<p>——结束函数：执行函数体时遇到return，函数直接结束</p>
+<p>b：函数调用表达式：调用函数的语句</p>
+<p>2）作用：将函数内的数据传递到函数外面（外边要用的话，必须保存返回值）</p>
+<p>3）怎么确定函数返回值：看执行函数体的时候会不会遇到return；</p>
+<pre><code>如果遇到return，return后边是什么返回值就是什么
+没有遇到return，返回值就为None</code></pre><p>4）怎么获取函数返回值：获取函数调用表达式的值</p>
+<p>5）多个返回值：python支持一个函数有多个返回值</p>
+<pre><code>return 值1，值2，...</code></pre><p>2.初学者确定函数返回值的方式</p>
+<p>看实现函数的功能会不会产生新的数据，一般将新数据作为返回值返回</p>
+<pre><code class="python">def sum1(x, y):
+    sum1 = x + y
+    return sum1
+x, y = 10, 20
+num = sum1(x, y)  # 保存返回值
+print(num)</code></pre>
+<h3 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h3><p>1.变量的作用域：变量可以使用的范围</p>
+<p>1）全局变量：没有声明在函数或类里面的变量</p>
+<p>——从声明开始到文件结束任何地方都可以使用</p>
+<p>2）局部变量：声明在函数里的变量</p>
+<p>——从声明开始到函数结束的地方都可以使用</p>
+<p>3）为什么局部变量不能在函数外使用：</p>
+<p>——当调用函数时，系统会自动为函数在栈区间开辟一个临时内存区域，来保存在函数中声明的变量（形参也是）；当调用函数结束时，这个临时内存区域会自动销毁，里边的变量也会消失</p>
+<pre><code>for x in range(5):
+    # x是全局变量
+    print(x)
+print(x)</code></pre><p>2.global和nonlocal：只能在函数体中使用</p>
+<p>1）global</p>
+<p>作用：在函数中声明或修改全局变量</p>
+<p>格式——global 变量名</p>
+<pre><code class="python"># 未声明成全局变量
+a1 = 100
+def func1():
+    a1 = 200 # 保存在临时的栈区间，函数结束销毁
+func1()
+print(a1)
+# 用global把a1声明成全局变量
+a1 = 100
+def func2():
+    global a1    # 保存在栈区间
+    a1 = 200
+func2()
+print(a1)</code></pre>
+<p>2）nonlocal</p>
+<p>作用：在局部的局部中修改局部变量的值，就用nonlocal</p>
+<p>格式——nonlocal 变量名</p>
+<pre><code class="python">def func3():
+    a1 = 10
+    def func4():
+        nonlocal a1
+        a1 = 101
+    func4()
+    print(a1)
+func3()</code></pre>
+<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p>1.匿名函数</p>
+<p>匿名函数就是没有名字的函数，除了声明的语法与普通函数不同，其他都几乎一样</p>
+<p>1)声明匿名函数</p>
+<p>a.语法</p>
+<pre><code>lambda 形参列表:返回值</code></pre><p>b.说明</p>
+<p>lambda —— 关键字</p>
+<p>形参列表 —— 和普通函数的形参列表一样</p>
+<p>：—— 固定写法</p>
+<p>返回值 —— 函数体，相当于普通函数中的return</p>
+<p>匿名函数改成普通函数：给匿名函数加个名字</p>
+<pre><code>def 函数名（）：
+    return 返回值</code></pre><p>2)匿名函数调用</p>
+<p>函数名（实参列表）</p>
+<p>注意：参数类型说明在匿名函数中不能用</p>
+<p>3）匿名函数和普通函数的关系</p>
+<p>匿名函数可以做的普通函数都可以做；普通函数能做的，匿名函数不一定能做。</p>
+<p>在函数功能简单的情况下可以用匿名函数，代码更简洁</p>
+<pre><code class="python">    # 写一个匿名函数求两个数的和
+    func1 = lambda x, y: x + y
+    func1(10, 20)
+    print(func1(10, 20))
+
+    # 写一个匿名函数判断指定年是否是闰年
+    # 三目运算符
+    func2 = lambda year: &#39;是闰年&#39; if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0 else &#39;不是闰年&#39;
+    sum1 = func2(2019)
+    print(sum1)</code></pre>
+<h3 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数</h3><p>1.什么是递归函数</p>
+<p>——声明函数时，调用自己的函数</p>
+<p>循环能做的，递归都可以做（死循环不行）</p>
+<p>结论：解决循环问题时，能不用递归就不用递归，因为它会消耗额外的内存的cpu资源</p>
+<pre><code>def func1():
+    print(&#39;lalala&#39;)
+    func1()
+func1()</code></pre><p>2.怎么写递归函数</p>
+<p>1）找临界值（让循环结束的条件），在这儿必须让函数结束（return）</p>
+<p>2）找关系：当次循环f(n)和上次循环f(n-1)的关系</p>
+<p>3）假设函数的功能已经实现，通过f(n-1)去实现f(n)的功能</p>
+<pre><code class="python"># 用递归实现1+2+3+4......+n
+def sum1(n):
+    # 1.找临界值
+    if n == 1:
+        return 1
+    # 2.找关系
+    &quot;&quot;&quot;
+    sum1(n) = 1+2+3+...n-1,n
+    sum1(n-1) = 1+2+3+...n-1
+    sum1(n) = sum1(n-1) + n
+    &quot;&quot;&quot;
+    # 3.
+    return sum1(n-1) + n
+print(sum1(100))
+
+# 用递归实现：求斐波拉且数列的第n个数（1，1，2，3，5，8，13，....,n）
+def feibolaqie(n):
+    if n == 1 or n == 2:
+        return 1
+    &quot;&quot;&quot;
+    f(n) = f(n-1) + f(n-2)
+    &quot;&quot;&quot;
+    return feibolaqie(n-1) + feibolaqie(n-2)
+print(feibolaqie(5))
+
+# 用递归实现下边的
+&quot;&quot;&quot;
+r = 1
+*
+r = 2
+*
+**
+r = 3
+*
+**
+***
+r = n
+*
+**
+........
+&quot;&quot;&quot;
+def huaxing(n):
+    if n == 1:
+        print(&#39;*&#39;)
+        return
+    # 找关系
+    &quot;&quot;&quot;
+    f(n-1)
+    print(&#39;*&#39;*n)
+    &quot;&quot;&quot;
+    huaxing(n-1)
+    print(&#39;*&#39;*n)
+print(huaxing(4))</code></pre>
+<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><pre><code>函数就是变量：python中声明函数其实就是声明一个类型是function的变量，函数名就是变量名；变量能做的函数也能做</code></pre><h4 id="1）给别的变量赋值"><a href="#1）给别的变量赋值" class="headerlink" title="1）给别的变量赋值"></a>1）给别的变量赋值</h4><pre><code class="python">def func1(x,y):
+    sum1 = x + y
+    return sum1
+c = func1
+print(c(13, 14))</code></pre>
+<h4 id="2）重新赋值"><a href="#2）重新赋值" class="headerlink" title="2）重新赋值"></a>2）重新赋值</h4><pre><code class="python">def func2(x,y):
+    sum1 = x + y
+    return sum1
+func2 = 100
+print(type(fun</code></pre>
+<h4 id="3）函数作为容器类型数据的元素"><a href="#3）函数作为容器类型数据的元素" class="headerlink" title="3）函数作为容器类型数据的元素"></a>3）函数作为容器类型数据的元素</h4><pre><code class="python">def func3(x,y):
+    sum1 = x + y
+    return sum1
+list1 = [1, 13,14, func3]
+     # 调用func3
+list1[-1](13, 14)</code></pre>
+<h4 id="4-作为别的函数的参数"><a href="#4-作为别的函数的参数" class="headerlink" title="4)作为别的函数的参数"></a>4)作为别的函数的参数</h4><p> <strong><code>实参高阶函数</code></strong>（函数的参数还是函数）</p>
+<pre><code class="python">def func4(x):
+    sum1 = x**6
+    return sum1
+def func_z(y):
+    return y
+print(func4(func_z(3)))</code></pre>
+<pre><code class="python">系统实参高阶函数：列表.sort、sorted、max、min....等函数中有个参数key，类型就是function
+key的用法：
+    key是一个函数，有且只有一个参数（代表序列中的元素），还有一个返回值（返回值就是比较标准）
+    可以直接写（1）匿名函数：key= lambda num:返回值 （2）定义一个函数，赋给key
+
+（1）list.sort(key= )</code></pre>
+<pre><code class="python">students = [
+    {&#39;name&#39;: &#39;tom&#39;, &#39;age&#39;: 15, &#39;gender&#39;: &#39;man&#39;},
+    {&#39;name&#39;: &#39;rose&#39;, &#39;age&#39;: 19, &#39;gender&#39;: &#39;woman&#39;},
+    {&#39;name&#39;: &#39;kolley&#39;, &#39;age&#39;: 18, &#39;gender&#39;: &#39;woman&#39;},
+    {&#39;name&#39;: &#39;james&#39;, &#39;age&#39;: 20, &#39;gender&#39;: &#39;man&#39;}
+]
+# 法1：声明一个函数，再赋给key
+def paixu(x):   # 函数paixu（）挨个取列表里的元素，x就是列表里的元素
+    return x[&#39;age&#39;]  # 排序的标准
+students.sort(key=paixu)
+
+# 法2：可以直接写成匿名函数
+students.sort(key=lambda x: x[&#39;age&#39;])
+print(students)</code></pre>
+<p>练习：将列表元素按个位数和的大小排序</p>
+<pre><code class="python">list2 = [19, 89, 123, 75, 90]
+# 法1
+def func5(x):
+    sum1 = 0
+    str1 = str(x)
+    for num in str1:
+        sum1 += int(num)
+    return sum1
+list2.sort(key=func5)
+# 法2
+list2.sort(key=lambda num: (num%10+num//10%10+num//100))
+print(list2)</code></pre>
+<p>(2)max(序列，key=)   ——与list.sort(key=)中key要求一致</p>
+<pre><code class="python">max1 = max(students, key=lambda num: num[&#39;age&#39;])
+print(max1)</code></pre>
+<h4 id="5）作为别的函数的返回值-——-返回值高阶函数"><a href="#5）作为别的函数的返回值-——-返回值高阶函数" class="headerlink" title="5）作为别的函数的返回值 —— 返回值高阶函数"></a>5）作为别的函数的返回值 —— 返回值高阶函数</h4><pre><code class="python">def operation(str1):
+    if str1 == &#39;+&#39;:
+        def sum1(*nums):
+            x = 0
+            for num in nums:
+                x += num
+            return x
+        # 返回到函数sum1
+        return sum1
+    elif str1 == &#39;*&#39;:
+        def sum2(*nums):
+            x = 1
+            for num in nums:
+                x *= num
+            return x
+        return sum2
+print(operation(&#39;+&#39;)(13, 14, 10))</code></pre>
+<h3 id="装饰器（非常重要！！）"><a href="#装饰器（非常重要！！）" class="headerlink" title="装饰器（非常重要！！）"></a>装饰器（非常重要！！）</h3><h4 id="1-什么是装饰器"><a href="#1-什么是装饰器" class="headerlink" title="1.什么是装饰器"></a>1.什么是装饰器</h4><p>装饰器的本质就是函数，用来给函数添加功能<br>装饰器 = 实参高阶函数 + 返回值高阶函数</p>
+<p>示例一：给函数添加 统计执行时间功能</p>
+<pre><code class="python"># 传统方法
+def count1(x, y):
+    t1 = time.time()
+    print(x + y)
+    print(x + y)
+    t2 = time.time()
+    print(&#39;函数执行时间：&#39;, t2 - t1)
+count1(10, 20)
+# 装饰器方法
+def count_time(fn,*num1, **num2):
+    t1 = time.time()
+    fn(*num1, **num2)  # *num1表示将容器打破，将元素拎出来
+    t2 = time.time()
+    print(&#39;函数执行时间：&#39;, t2 - t1)
+def fn(x, y) :
+    print(x + y)
+count_time(fn, 13, 14)</code></pre>
+<h4 id="无参数装饰器"><a href="#无参数装饰器" class="headerlink" title="无参数装饰器"></a>无参数装饰器</h4><p>语法：</p>
+<pre><code>def 函数名1（fn）：
+    def 函数名2（*args, **kwargs）:
+        实现添加功能的代码
+        fn（*args, **kwargs）
+    return 函数2</code></pre><p>说明：<br>函数名1——装饰器的名字（根据添加功能命名）<br>fn —— 随便命名，类型是函数，指向需要添加功能的函数<br>函数名2 —— 实现添加功能的函数，名字随便命名，一般为test</p>
+<pre><code class="python"># 有顺序要求============================
+def add_time(fn):
+    def test(*args, **kwargs):
+        t1 = time.time()
+        fn(*args, **kwargs)
+        t2 = time.time()
+        print(&#39;运行时间：&#39;,t2 - t1)
+    return test
+@add_time  # 放在装饰器后边；@后加装饰器名字
+# 要增加功能的函数放在唐语法后边
+def operation():
+    print(&#39;lala&#39;)
+operation()
+# ========================================</code></pre>
+<pre><code class="python"># 练习1：写装饰器，实现函数结束调用结束后打印‘调用完成’
+def print_end(fn):
+    def test(*args, **kwargs):
+        num = fn(*args, **kwargs)
+        print(&#39;调用完成&#39;)
+        return num
+    return test
+@print_end
+def func_a(m):
+    return m**2
+print(func_a(4))</code></pre>
+<pre><code class="python"># 练习2：写装饰器，将返回值是整数的函数以十六进制的形式返回
+def print_end(fn):
+    def test(*args, **kwargs):
+        num = fn(*args, **kwargs)
+        print(&#39;调用完成&#39;)
+        return hex(num)
+    return test
+@print_end
+def func_a(m):
+    return m**2
+print(func_a(4))</code></pre>
+<h4 id="有参装饰器"><a href="#有参装饰器" class="headerlink" title="有参装饰器"></a>有参装饰器</h4><p>写法：</p>
+<pre><code>def 函数名3（参数列表）：
+    def 函数名1（fn）：
+        def 函数名2（*args, **kwargs）:
+            实现添加功能的代码
+            fn（*args, **kwargs）
+        return 函数2
+    return 函数1</code></pre><p>参数列表 —— 装饰器添加功能时变化的部分通过参数列表来确定<br>函数名3就是装饰器名</p>
+<pre><code class="python">def add_tag(name):
+    def test1(fn):
+        def test2(*args, **kwargs):
+            re = fn(*args, **kwargs)
+            return &#39;&lt;{0}&gt;{1}&lt;{0}&gt;&#39;.format(name, re)
+        return test2
+    return test1
+
+@add_tag(&#39;haha&#39;)
+def render():
+    return &#39;lala&#39;
+
+print(render())</code></pre>
+<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><h4 id="1-什么是迭代器（iter）"><a href="#1-什么是迭代器（iter）" class="headerlink" title="1.什么是迭代器（iter）"></a>1.什么是迭代器（iter）</h4><p>​    迭代器是容器型数据类型（序列），迭代器中的元素只能通过将其他序列转换成迭代器或者创建生成器<br>​    迭代器中元素特点：如果需要查看元素，需将元素从迭代器中取出，且取出不能再放回去</p>
+<h4 id="2-创建迭代器"><a href="#2-创建迭代器" class="headerlink" title="2.创建迭代器"></a>2.创建迭代器</h4><p>​    <code>iter(序列)</code> —— 将序列转换成迭代器并返回</p>
+<pre><code class="python">item1 = iter((13, 14, 15, 16))</code></pre>
+<h4 id="3-获取元素"><a href="#3-获取元素" class="headerlink" title="3.获取元素"></a>3.获取元素</h4><p>1）获取单个元素<br>​    <code>next(迭代器)</code><br>2）遍历迭代器</p>
+<pre><code class="python"># 获取单个元素================
+item1 = iter((13, 14, 15, 16))
+print(next(item1))
+print(next(item1))
+print(next(item1))
+print(next(item1))
+# print(next(item1))    # StopIteration,迭代器元素取完会报错</code></pre>
+<pre><code class="python"># 遍历迭代器
+item2 = iter(&#39;hello&#39;)
+for x in item2:
+    print(x)</code></pre>
+<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><h4 id="1-什么是生成器"><a href="#1-什么是生成器" class="headerlink" title="1.什么是生成器"></a>1.什么是生成器</h4><p>生成器就是迭代器，有产生数据的能力</p>
+<h5 id="1-怎么创建生成器："><a href="#1-怎么创建生成器：" class="headerlink" title="1)怎么创建生成器："></a>1)怎么创建生成器：</h5><p>调用一个带有yield关键字的函数，可以得到一个生成器对象</p>
+<h5 id="2-生成器产生数据的原理："><a href="#2-生成器产生数据的原理：" class="headerlink" title="2)生成器产生数据的原理："></a>2)生成器产生数据的原理：</h5><p>​    调用一个带有yield关键字的函数时，不会执行函数体，也不会获得返回值，而是创建一个生成器<br>​    生成器能产生多少个数据，以及每个数据的值，看执行完函数体会遇到几次yield，yield后边的数据就是会产生的数据<br>​    每次获取生成器的元素的时候，都会去执行相应的函数体，执行到yield为止，取下一个元素，从上一次结束的位置接着往后执行</p>
+<pre><code class="python">def func1():
+    print(&#39;=========&#39;)
+    yield 13
+    print(&#39;lalala&#39;)
+    yield 14
+fun = func1()
+print(fun)
+print(next(fun))
+print(next(fun))</code></pre>
+<pre><code class="python"># 写一个学号生成器，能够产生的学号范围和学号的前缀自己决定
+def func_student_number(qz,num):
+    # 字符串的长度要知道，好确定中间填充多少指定字符
+    length = len(str(num))
+    for x in range(1, num+1):
+        yield qz + str(x).zfill(length)
+fun1 = func_student_number(&#39;py&#39;,20000)
+for x in fun1:
+    # 已经遍历了fun1，不能再print(next(fun1))
+    print(x)</code></pre>
+<h3 id="生成式-重要"><a href="#生成式-重要" class="headerlink" title="生成式 -重要!!!!!"></a>生成式 -重要!!!!!</h3><h4 id="1-什么是生成式"><a href="#1-什么是生成式" class="headerlink" title="1.什么是生成式"></a>1.什么是生成式</h4><p>生成式就是生成器的一种简写方式<br>1）形式一：<br>    (表达式 for 变量 in 序列) —— 序列有多少个元素，生成器就能产生多少个数据；<br>                                每次循环，表达式的值就是产生数据的值<br>相当于：<br>    def func1():<br>        for 变量 in 序列：<br>            yield 表达式</p>
+<p>2）形式二：<br>    (表达式 for 变量 in 序列 if 条件语句) —— if条件语句为True时，才会执行表达式</p>
+<p>相当于：<br>    def func1():<br>        for 变量 in 序列：<br>            if 条件语句：<br>                yield 表达式<br>练习：</p>
+<pre><code class="python"># 形式一
+gen1 = (x*2 for x in range(5))
+print(next(gen1))
+
+# 形式二
+gen2 = (x*2 for x in range(5) if x % 2)
+print(next(gen2))</code></pre>
+<h4 id="2-变形"><a href="#2-变形" class="headerlink" title="2.变形"></a>2.变形</h4><h5 id="1-列表生成式"><a href="#1-列表生成式" class="headerlink" title="1)列表生成式"></a>1)列表生成式</h5><p><strong>[表达式 for 变量 in 序列]</strong> —— 相当于list((表达式 for 变量 in 序列))<br><strong>[表达式 for 变量 in 序列 if 条件语句]</strong> —— 相当于list((表达式 for 变量 in 序列 if 条件语句))</p>
+<h5 id="2）集合生成式"><a href="#2）集合生成式" class="headerlink" title="2）集合生成式"></a>2）集合生成式</h5><p><strong>{表达式 for 变量 in 序列}</strong> —— 相当于set（（表达式 for 变量 in 序列））<br><strong>{表达式 for 变量 in 序列 if 条件语句}</strong> —— 相当于set((表达式 for 变量 in 序列 if 条件语句))</p>
+<h5 id="3-字典生成式"><a href="#3-字典生成式" class="headerlink" title="3)字典生成式"></a>3)字典生成式</h5><p><strong>dict(表达式 for 变量 in 序列)</strong><br>注意：表达式必须是只有两个元素的序列</p>
+<p>练习：一行代码实现将字典的键值对交换，产生新的字典</p>
+<pre><code class="python">dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}
+# 遍历字典取的是键
+dict2 = dict((dict1[x], x) for x in dict1)
+print(dict2)</code></pre>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转Python函数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串</title>
+    <url>/2019/11/02/%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
+    <content><![CDATA[<p>python中字符串的定义、查找以及相关方法</p>
+<a id="more"></a>
+
+<h2 id="字符串和字符"><a href="#字符串和字符" class="headerlink" title="字符串和字符"></a>字符串和字符</h2><h3 id="1-什么是字符串（str）"><a href="#1-什么是字符串（str）" class="headerlink" title="1.什么是字符串（str）"></a>1.什么是字符串（str）</h3><p>字符串是容器型数据类型（序列），将’ ‘或” “作为容器标志，多个字符（元素）直接包含在引号中<br>字符串是<strong>不可变（不支持增、删、改），且有序的</strong></p>
+<pre><code class="python">str1 = &#39;halabashabi♥&#39;</code></pre>
+<h3 id="2-字符串中的元素（字符）"><a href="#2-字符串中的元素（字符）" class="headerlink" title="2.字符串中的元素（字符）"></a>2.字符串中的元素（字符）</h3><h4 id="1）普通字符："><a href="#1）普通字符：" class="headerlink" title="1）普通字符："></a>1）普通字符：</h4><h4 id="2）特殊字符"><a href="#2）特殊字符" class="headerlink" title="2）特殊字符"></a>2）特殊字符</h4><h5 id="a-转义字符"><a href="#a-转义字符" class="headerlink" title="a.转义字符"></a>a.<code>转义字符</code></h5><p><strong>在指定符号或字母前加 \ 来表示特殊功能或者特殊意义的字符</strong><br>​    &#39; —— 表示一个单引号<br>​    &quot; —— 表示一个双引号<br>​    \n —— 换行符<br>​    \t —— 制表符(缩进)<br>​    \\ —— 表示一个\（普通的反斜杠）<br>注意：一个转义字符的长度是1</p>
+<pre><code class="python">str2 = &#39;123\&#39;a\&quot;16&#39;
+print(str2)
+str3 = &#39;床前明月光，\n疑似地上霜&#39;
+print(str3)
+str4 = &#39;\t床前明月光，\n\t疑似地上霜&#39;
+print(str4)
+str5 = &#39;123\\1314&#39;
+print(str5)</code></pre>
+<p>补充：r语法 —— 在字符串的最前边加r/R，会让字符串中所有的转义字符功能消失（一般在正则表达式中使用）</p>
+<pre><code class="python">str2 = r&#39;lala\nla\tmm&#39;</code></pre>
+<h5 id="b-编码字符"><a href="#b-编码字符" class="headerlink" title="b.编码字符"></a>b.<code>编码字符</code></h5><p><strong><em>\u加4位的十六进制数表示一个字符；数字对应值是字符对应的编码值</em></strong><br>字符编码:计算机在存储数据时只能存储数字。计算机存储文字（字符）时实质存的是文字对<br>​        应的数字，每个数字都会对应一个固定的数字，这个数字就是字符的编码<br>编码表：每个字符和数字的一一对应关系；<br>​        常见编码表：ASCII表、Unicode表（Unicode表中文范围：4E00-9FA5）（Unicode表是    对ASCII表的扩展）</p>
+<p><code>chr(编码值)</code> —— 获取编码值对应的字符<br><code>ord(字符)</code> —— 获取字符对应的编码值</p>
+<pre><code class="python">str6 = &#39;一\u9AF5&#39;
+print(str6)
+print(chr(1314), ord(&#39;罗&#39;), ord(&#39;维&#39;), ord(&#39;君&#39;))  # Ԣ 32599 32500 21531</code></pre>
+<h3 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h3><h4 id="1-字符串操作（查）"><a href="#1-字符串操作（查）" class="headerlink" title="1.字符串操作（查）"></a>1.字符串操作（查）</h4><p>1）获取单个字符：字符串[下标]</p>
+<p>2)字符串切片：字符串[开始下标：结束下标：步长]</p>
+<p>3）遍历字符串：可以直接遍历下标，再拿到每个字符或者直接遍历字符串</p>
+<pre><code># 1)
+str1 = &#39;hello,guys&#39;
+str2 = &#39;shg\u4321la&#39;
+print(str1[-3], str2[3])  # u 䌡
+print(str1[2:5])          # llo
+# 2）
+str3 = &#39;hello,python!&#39;
+print(str3[1:7])  # &#39;ello,p&#39;
+print(str3[-1:7])  # None
+print(str3[-2:2:-1])   # &#39;nohtyp,ol&#39;
+print(str3[:5:2])    # &#39;hlo&#39;
+print(str3[2::-1])  # &#39;leh&#39;
+# 3)
+for x in str3:
+    print(x)</code></pre><h4 id="2-字符串相关操作方法"><a href="#2-字符串相关操作方法" class="headerlink" title="2.字符串相关操作方法"></a>2.字符串相关操作方法</h4><p>————数学运算符：+，*</p>
+<p>1)字符串1 + 字符串2 —— 两个字符串拼接在一起，产生一个新的字符串</p>
+<pre><code>str1 = &#39;hello&#39;
+str2 = &#39;guys&#39;
+print(str1 + str2)   # helloguys</code></pre><p>2)字符串 * N —— 相当于N个字符串相加</p>
+<pre><code>print(str1 * 3)</code></pre><p> ——比较运算符：&gt;, &lt;, &gt;=, &lt;=, ==, !=</p>
+<p>跟比较列表大小一样，相同位置一对字符比较，比较两个字符的编码值大小</p>
+<pre><code>print(&#39;agjf&#39; &gt; &#39;hjhs&#39;)   # False</code></pre><p>字符串比较运算应用：</p>
+<pre><code>判断字符是否是大写字母：&#39;A&#39; &lt;= 字符 &lt;= &#39;Z&#39;
+
+判断字符是否是小写字母：&#39;a&#39; &lt;= 字符 &lt;= &#39;z&#39;
+
+判断字符是否是数字：48 &lt;= ord(字符) &lt;= 57
+
+判断字符是否是中文字符：4e00 &lt;= ord(字符) &lt;= 9fa5
+
+# 练习1：统计输入字符串中数字字符的个数
+str1 = &#39;hjf454jf549kfk&#39;
+num = 0
+for x in str1:
+    if 48 &lt;= ord(x) &lt;= 57:
+        num += 1
+print(&#39;个数&#39;, num)
+# 练习2：将输入的字符串中的字母取出来
+str1 = &#39;kj451fj5FG789F56&#39;
+str2 = &#39;&#39;
+for x in str1:
+    if &#39;a&#39; &lt; x &lt; &#39;z&#39; or &#39;A&#39; &lt;= x &lt;= &#39;Z&#39;:
+        str2 += x
+print(str2)</code></pre><h4 id="3-in-和-not-in"><a href="#3-in-和-not-in" class="headerlink" title="3.in 和 not in"></a>3.in 和 not in</h4><p>字符串1 in 字符串2—— 判断字符串2是否包含字符串1（字符串2中的字符串段顺序也要一样）</p>
+<pre><code>str1 = &#39;fsfe123jkfj&#39;
+str2 = &#39;123&#39;
+str3 = &#39;gfhjg123iory&#39;
+print(str1 in str3, str2 in str3)   # False True</code></pre><h4 id="4-相关函数"><a href="#4-相关函数" class="headerlink" title="4.相关函数"></a>4.相关函数</h4><p>len()、 max()、 min()、 sorted()、str()</p>
+<pre><code>str(数据) —— 将指定数据转换成字符串，所有数据类型都可以转换，转换时直接在数据外加引号
+
+字符串转整型：字符串去掉引号后本身就是整数才能转换成整型
+字符串转浮点型：字符串去掉引号后本身就是数字才能转换成浮点型</code></pre><h4 id="5-字符串相关方法"><a href="#5-字符串相关方法" class="headerlink" title="5.字符串相关方法"></a>5.字符串相关方法</h4><p>什么是格式字符串？</p>
+<p>格式字符串 —— 字符串中使用格式占位符来代替字符串中变化的部分</p>
+<p>1）第一种</p>
+<p>语法：</p>
+<p>带有格式占位符的字符串 % （值1，值2，值3，…..）</p>
+<p>说明：</p>
+<pre><code>% —— 固定写法
+
+() —— 固定写法（当格式占位符只有一个时，括号可以省略）
+
+值 —— 值的个数、类型与前边格式占位符的个数、类型一样</code></pre><p>格式占位符（不是python特有）：</p>
+<pre><code>%s —— 格式化字符串
+
+%d —— 格式化整数
+
+%f —— 格式化浮点数可指定小数点后的精度（%.Nf——让数字保留N位小数,四舍五入）
+
+%c —— 格式化字符（将字符编码转换成字符，拼接到字符串中）
+
+name = input(&#39;请输入姓名：&#39;)
+age = 12
+sex = &#39;男&#39;
+weight = 75.3
+message = &#39;%s今年%d岁，性别%s，体重%.2fkg&#39; % (name, age, sex, weight)
+print(message)</code></pre><p>2)第二种</p>
+<p><code>带有{}的格式字符串.format(值1，值2， 值3，........)</code></p>
+<pre><code>message = &#39;{},今年{}岁&#39;.format(name, age)
+print(message)
+# ===========================
+message = &#39;{1}{0}{2}{1}&#39;.format(10, 20, &#39;abc&#39;)
+print(message)
+# 前边大括号内可以写后边小括号对应值的下标，表示前边的括号填后边下标对应的值
+# ============================</code></pre><p>数字格式</p>
+<p>注意：格式字符串中约束小数位数（%.Nf）的时候采用的是四舍五入</p>
+<pre><code>message = &#39;{:.2f}&#39;.format(3.1419256)
+print(message)</code></pre><h3 id="字符串相关方法"><a href="#字符串相关方法" class="headerlink" title="字符串相关方法"></a>字符串相关方法</h3><h4 id="1-小写字母和大写字母间的转换"><a href="#1-小写字母和大写字母间的转换" class="headerlink" title="1.小写字母和大写字母间的转换"></a>1.小写字母和大写字母间的转换</h4><p>a,b,c = 97,98,99</p>
+<p>A,B,C = 65,66,67</p>
+<p>不利用转换函数的情况：</p>
+<pre><code># 小写转大写
+str1 = &#39;w&#39;
+big_str1 = chr(ord(&#39;w&#39;)-32)
+print(big_str1)
+# 大写转小写
+str2 = &#39;W&#39;
+big_str2 = chr(ord(&#39;W&#39;)+32)
+print(big_str2)</code></pre><p>利用转换函数的情况：</p>
+<p>字符串.lower() —— 大写转小写，产生一个新的列表</p>
+<pre><code>str9 = &#39;LAbaba&#39;
+str10 = str9.lower()
+print(str10)</code></pre><p>字符串.upper() —— 小写转大写，产生一个新的列表</p>
+<h4 id="2-字符串对齐"><a href="#2-字符串对齐" class="headerlink" title="2.字符串对齐"></a>2.字符串对齐</h4><p>字符串.center(长度，fillchar)</p>
+<p>——产生一个指定的宽度 width 且原字符串居中的字符串，fillchar 为填充的字符，默认为空格。</p>
+<p>字符串.ljust(长度，fillchar)</p>
+<p>——产生一个指定的宽度 width 且原字符串居左的字符串，fillchar 为填充的字符，默认为空格。</p>
+<p>字符串.rjust(长度，fillchar)</p>
+<p>——产生一个指定的宽度 width 且原字符串居右的字符串，fillchar 为填充的字符，默认为空格。</p>
+<p>字符串.zfill(长度)          ========这个用的很多</p>
+<p>——产生一个指定长度字符串，原字符串放在右边的字符串，剩下的部分用0填充</p>
+<pre><code>str3 = &#39;guys&#39;
+str4 = str3.center(7, &#39;+&#39;)
+str5 = str3.ljust(7, &#39;l&#39;)
+str6 = str3.rjust(7, &#39;0&#39;)
+print(str4, str5, str6)    # ++guys+ guyslll 000guys
+str8 = str3.zfill(8)
+print(str8)   # 0000guys</code></pre><h4 id="3-字符串查找"><a href="#3-字符串查找" class="headerlink" title="3.字符串查找"></a>3.字符串查找</h4><p>字符串1.find(字符串2) —— 获取字符串2第一次在字符串1出现的位置，如果有返回下标，没有返回-1</p>
+<p>字符串1.index(字符串2) —— 没有时会报错</p>
+<p>字符串1.find(字符串2,开始下标,结束下标) —— 在开始下标和结束下标前的范围内查找字符串2</p>
+<p>字符串1.index(字符串2,开始下标,结束下标) —— 在开始下标和结束下标前的范围内查找字符串2</p>
+<pre><code>str9 = &#39;lalababa&#39;
+str10 = &#39;ba&#39;
+print(str9.find(str10))  # 4</code></pre><h4 id="4-join-重点"><a href="#4-join-重点" class="headerlink" title="4.join()重点"></a>4.join()重点</h4><p>字符串1.join(序列) —— 将序列中的元素用字符串1连接在一起产生一个新的字符串（序列中的元素必须都是字符串）</p>
+<pre><code>list1 = [&#39;我&#39;, &#39;是&#39;, &#39;谁&#39;]
+str11 = &#39;!&#39;.join(list1)
+print(str11)   # 我!是!谁</code></pre><h4 id="5-字符串替换"><a href="#5-字符串替换" class="headerlink" title="5.字符串替换"></a>5.字符串替换</h4><p>1）只能替换单个字符</p>
+<p>字符串1.replace(old,new) —— 将字符串1中的old替换成new，产生一个新的字符串2</p>
+<p>2）——搭配配合使用</p>
+<p>——创建映射表（map）</p>
+<p>str.maketrans(字符串1，字符串2) —— 创建字符串1和字符串2一一对应的映射表，</p>
+<pre><code>                                字符串1是需要被替换的字符，字符串2是目标字符（新字符）</code></pre><p>字符串.translate(映射表) —— 按照映射表将字符串中的字符进行替换，产生一个新的字符串</p>
+<pre><code>tabel1 = str.maketrans(&#39;abc&#39;, &#39;154&#39;)
+str1 = &#39;fsfea12b3jkfcj&#39;
+new_str = str1.translate(tabel1)
+print(new_str)</code></pre><h4 id="6-字符串切割"><a href="#6-字符串切割" class="headerlink" title="6.字符串切割"></a>6.字符串切割</h4><p>字符串1.split(字符串2) —— 将字符串1中的字符串2作为切点，切割字符串1（返回一个列表）</p>
+<pre><code>str1 = &#39;fsf ea12b 3jk fcj&#39;
+list1 = str1.split(&#39; &#39;)
+print(list1)  # [&#39;fsf&#39;, &#39;ea12b&#39;, &#39;3jk&#39;, &#39;fcj&#39;]</code></pre>]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转字符串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>集合</title>
+    <url>/2019/11/02/%E9%9B%86%E5%90%88/</url>
+    <content><![CDATA[<p>python中集合的定义、操作及相关方法和集合相关的运算</p>
+<a id="more"></a>
+
+
+<h3 id="1-什么是集合（set）"><a href="#1-什么是集合（set）" class="headerlink" title="1.什么是集合（set）"></a>1.什么是集合（set）</h3><p>1）集合<br>集合是容器型数据类型；将{}作为容器标志，多个元素用逗号隔开；{元素1，元素2，…..}<br><strong>集合是可变，无序的</strong><br>2）元素<br><strong>集合中的元素必须是不可变的数据，而且唯一（自带去重的功能）</strong></p>
+<pre><code class="python">set1 = {13, 14, &#39;baba&#39;, (13, 14)}</code></pre>
+<p><strong>空集合</strong>的表示({}表示的空字典)</p>
+<pre><code class="python">set_none = set()</code></pre>
+<h4 id="集合应用"><a href="#集合应用" class="headerlink" title="集合应用"></a>集合应用</h4><p>去重：<strong>集合自带去重功能</strong></p>
+<pre><code class="python">list1 = [12, 25, 32, 12, 14, 56]
+list2 = list(set(list1))
+print(list2)</code></pre>
+<h3 id="2-集合的增、删、改、查"><a href="#2-集合的增、删、改、查" class="headerlink" title="2.集合的增、删、改、查"></a>2.集合的增、删、改、查</h3><p>1）查 —— 获取集合元素（只有<strong>遍历集合</strong>一种方法）</p>
+<pre><code>for 变量 in 集合：
+    pass
+补充：遍历字典和集合时，其实是遍历由字典和集合转换后的列表</code></pre><pre><code class="python">names = {&#39;aa&#39;, &#39;bb&#39;, &#39;cc&#39;, &#39;dd&#39;}
+for name in names:
+    print(name)</code></pre>
+<p>2）增<br>a. <code>集合.add(元素)</code> —— 在集合中添加一个元素<br>b. <code>集合.update(序列)</code> —— 将序列中的元素添加到集合</p>
+<pre><code class="python">names = {&#39;aa&#39;, &#39;bb&#39;, &#39;cc&#39;, &#39;dd&#39;}
+names.add(&#39;ha&#39;)
+names.update((1, 2, 13))
+names.update(&#39;laji&#39;)
+print(names)</code></pre>
+<p>3)删<br><code>集合.remove（元素）</code>—— 删除集合指定元素，元素不存在会报错<br><code>集合.discard（元素）</code>—— 删除集合指定元素，元素不存在不会报错</p>
+<pre><code class="python">names = {&#39;aa&#39;, &#39;bb&#39;, &#39;cc&#39;, &#39;dd&#39;}
+names.remove(&#39;bb&#39;)
+print(names)
+names.discard(&#39;aa&#39;)
+print(names)</code></pre>
+<p>4)集合不支持改的操作</p>
+<h3 id="3-集合相关操作"><a href="#3-集合相关操作" class="headerlink" title="3.集合相关操作"></a>3.集合相关操作</h3><p>​    1）运算符：只支持判断 == ，!=<br>​    2）in / not in<br>​    3）len()、max()、min()、sum()、sorted()、set()</p>
+<h3 id="4-数学集合运算（重点）"><a href="#4-数学集合运算（重点）" class="headerlink" title="4.数学集合运算（重点）"></a>4.数学集合运算（重点）</h3><p>python支持数学的集合运算</p>
+<pre><code>集合符号：| (并集) ，&amp; （交集），-（差集）</code></pre><pre><code class="python">set3 = {1, 5, 3, 4, 6, 7}
+set4 = {6, 7, 9, 12}
+
+# ===========1)集合1|集合2 —— 将两个集合合并
+set5 = set3|set4
+print(set5)    # {1, 3, 4, 5, 6, 7, 9, 12}
+
+# ===========2)集合1 &amp; 集合2 —— 获取两个集合的公共部分
+set6 = set3 &amp; set4
+print(set6)  # {6, 7}
+
+# ===========3)集合1 - 集合2 —— 获取集合1中除了集合2与集合1的公共部分剩下的部分
+set7 = set3 - set4
+print(set7)   # {1, 3, 4, 5}
+
+# ===========4)集合1^集合2 —— 获取集合1和集合2公共部分以外的部分
+set8 = set3 ^ set4
+print(set8)  # {1, 3, 4, 5, 9, 12}
+
+# ===========5)集合1 &gt; 集合2 —— 判断集合1是否包含集合2（集合2是否是集合1的子集）
+print(set3 &gt; set4)  # False</code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><pre><code>     需要存储多个数据时一般选择用列表或字典；如果存储多个数据不需要区分，就使用列表。
+     如果存储多个数据需要区分，就使用字典；如果涉及去重或业务逻辑中涉及数学集合运算就用集合；原则上不能被修改的数据用元组</code></pre>]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转集合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>元组和字典</title>
+    <url>/2019/11/02/%E5%85%83%E7%BB%84%E5%92%8C%E5%AD%97%E5%85%B8/</url>
+    <content><![CDATA[<p>元组的定义，操作及方法；字典的操作及方法和函数</p>
+<a id="more"></a>
+
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><h4 id="1-什么是元组（tuple）"><a href="#1-什么是元组（tuple）" class="headerlink" title="1.什么是元组（tuple）"></a>1.什么是元组（tuple）</h4><p>1）元组<br>——<strong>元组就是不可变的列表（除了列表中的增、删、改以及‘列表.’的相关方法，</strong><br>​    <strong>元组不能使用（可以查），其他的都跟列表一样）</strong><br>——元组是容器型数据类型（序列）；将（）作为容器的标志，多个元素用逗号隔开：（元素1,元                          素2,元素3）<br>——<strong>元组不可变，有序</strong><br>2）元组元素的要求<br>——和列表要求一致</p>
+<pre><code class="python">tuple1 = (2, 5, 6, 8, 1)</code></pre>
+<h4 id="2-元组特殊情况"><a href="#2-元组特殊情况" class="headerlink" title="2.元组特殊情况"></a>2.元组特殊情况</h4><p>1）只有一个元素的元组（表示方法：<strong>（元素，）—— 元素后边加个逗号</strong>）<br>2）没有歧义的情况下，<strong>元组符号可以省略,直接用逗号隔开</strong>；例如：tuple1 = 10, 15, 9</p>
+<h4 id="3-获取元组元素"><a href="#3-获取元组元素" class="headerlink" title="3.获取元组元素"></a>3.获取元组元素</h4><p>1）<strong>元组[下标]</strong><br>2）让变量的个数与元组中元素的个数保持一致（适合元组元素少）<br>3）用多个变量去获取元组元素时，在其中一个变量前加<em>；（这个变量就变成列表）<br>​      这时变量个数可以比元组元素少。取元素时先让没有**</em>的取，剩下的变量都是带****的变量的元素</p>
+<pre><code class="python">#1）
+tuple2 = (15, 25, 10)
+a = tuple2[0]
+print(a)
+#2）
+x, y, z = 15, 25, 10
+print(x)
+print(y)
+#3）
+tuple2 = (15, 25, 10, &#39;man&#39;, 23)
+*num, sex, age = tuple2
+print(*num, sex, age)</code></pre>
+<h4 id="的特殊用法（拆包-将容器包装拆开）"><a href="#的特殊用法（拆包-将容器包装拆开）" class="headerlink" title="*的特殊用法（拆包:将容器包装拆开）"></a>*的特殊用法（拆包:将容器包装拆开）</h4><pre><code class="python">num = (1, 3, 6)
+print(*num)   # 1 3 6</code></pre>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><h4 id="1-什么是字典"><a href="#1-什么是字典" class="headerlink" title="1.什么是字典"></a>1.什么是字典</h4><p>1）字典<br>——字典是容器型数据类型（序列），将{}作为容器的标志，多个元素（元素是键值对，写法{键1：值1，键2：值2，…}）间用逗号隔开<br>——<strong>字典是可变，无序的</strong><br>2）字典元素<br>字典中的元素必须都是<strong>键值对，即’键：值’的形式</strong>存在（存数据实质是想存值，键用来区分不同的值）<br>键的要求 —— <strong>不可变（一般用字符串，可以是元组，列表不行）</strong>，唯一（不能重复出现）<br>值的要求 —— 任何类型的数据</p>
+<pre><code class="python">dict1 = {&#39;name&#39;: 10, &#39;height&#39;: 180, 13: 14}</code></pre>
+<h4 id="2-元素的增、删、改、查"><a href="#2-元素的增、删、改、查" class="headerlink" title="2.元素的增、删、改、查"></a>2.元素的增、删、改、查</h4><p>1）查 —— 获取字典中键值对的值<br>a.获取单个元素：<br><code>字典[key]</code>——获取指定key（键）对应的值；key不存在会报错<br><code>字典.get(key)/字典.get(key, 默认值)</code> —— 获取指定key（键）对应的值；<br>​                                      key不存在不会报错,并返回默认值（没有默认值，返回None）</p>
+<pre><code class="python">dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+print(dog1[&#39;color&#39;])
+print(dog1.get(&#39;lala&#39;))  # None</code></pre>
+<p>b.遍历字典<br>——遍历字典取到的是字典中所有的key<br><strong>for 变量 in 字典：</strong>   # 取出的是key（键）<br>​    <strong>循环体</strong></p>
+<pre><code class="python"># ——————直接遍历字典，拿到key，再通过key取值(推荐)——————
+dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+for key in dog1:
+    print(key, dog1[key])</code></pre>
+<p>2）增、改（增、改写法一致，区别在于key是否存在）<br>*<em><code>字典[key] = 值</code> *</em>—— 当key存在时，修改key对应的值;当key不存在，添加‘key：值’的键值对</p>
+<pre><code class="python">dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+dog1[&#39;age&#39;] = 15
+dog1[&#39;speed&#39;] = 45
+print(dog1)  # {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 15, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;, &#39;speed&#39;: 45}</code></pre>
+<p>3）删<br>a. <strong><code>del 字典[key]</code></strong> —— 删除字典中，指定key对应的键值对<br>b. *<em><code>字典.pop(key)</code> *</em>—— 取出字典中指定key对应的值；返回被取出的值</p>
+<pre><code class="python"># ——————del 字典[key]
+dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+del dog1[&#39;color&#39;]
+print(dog1)
+# ——————字典.pop(key)
+dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+word = dog1.pop(&#39;age&#39;)
+print(word)</code></pre>
+<h4 id="3-字典相关操作"><a href="#3-字典相关操作" class="headerlink" title="3.字典相关操作"></a>3.字典相关操作</h4><h5 id="1-运算符"><a href="#1-运算符" class="headerlink" title="1.运算符"></a>1.运算符</h5><p>字典不支持 +，*，&gt;, &lt;, &gt;=, &lt;= ；只支持 ==，!=</p>
+<h5 id="2-in-和-not-in"><a href="#2-in-和-not-in" class="headerlink" title="2.in 和 not in"></a>2.in 和 not in</h5><p>键 in / not in 字典 —— 判断字典中是否存在/不存在指定的键</p>
+<h5 id="3-相关函数"><a href="#3-相关函数" class="headerlink" title="3.相关函数"></a>3.相关函数</h5><p>len() —— 求键值对的个数</p>
+<p>dict(数据) —— 将其他序列转换成字典（数据必须是序列，序列中的元素必须是小序列，</p>
+<pre><code>          每个小序列有且只有两个元素，且小序列第一个元素不可变）</code></pre><p>字典不能转换成数字，可以转换成布尔；</p>
+<p>字典转换成列表时，是将字典的key作为元素</p>
+<pre><code>#——列表转字典
+seq = [(1, 3), (&#39;la&#39;, 3)]
+print(dict(seq))  # {1: 3, &#39;la&#39;: 3}
+
+# ——转列表
+seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq2 = list(seq1)
+print(seq2)  # [&#39;ha&#39;, &#39;lala&#39;]</code></pre><h5 id="4-相关方法"><a href="#4-相关方法" class="headerlink" title="4.相关方法"></a>4.相关方法</h5><p>1）字典.clear() —— 清空字典</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.clear()
+print(seq1)</code></pre><p>2)字典.copy() —— 拷贝产生一个薪字典（浅拷贝）</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq3 = seq1.copy()
+print(seq3)</code></pre><p>3)dict.fromkeys(序列,指定值) —— 创建一个字典，将序列中的元素作为key，key对应的值都是指定的值</p>
+<pre><code>dict2 = dict.fromkeys((&#39;lala&#39;, &#39;haha&#39;, &#39;baba&#39;), 13)
+print(dict2)   # {&#39;lala&#39;: 13, &#39;haha&#39;: 13, &#39;baba&#39;: 13}</code></pre><p>4)字典.items() —— 将字典中每个键值对转换成对应的元组，作为一个序列的元素(获取字典中所        有的key和value，返回的是一个列表中嵌套的小元组[(key1,value1),(key2,value2),…])</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.items()
+print(seq1.items())  # dict_items([(&#39;ha&#39;, 12), (&#39;lala&#39;, 23)])</code></pre><p>5)字典.values() —— 获取字典中所有的值，返回一个列表</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.values()
+print(seq1.values())  # dict_values([12, 23])</code></pre><p>6) 字典.keys() —— 获取字典中所有的key，返回一个列表</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.keys()
+print(seq1.keys())  # dict_keys([&#39;ha&#39;, &#39;lala&#39;])</code></pre><p>7)字典.setdefault(key, 值) —— 当key不存在时添加键值对（无法修改）</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.setdefault(&#39;zizi&#39;, 14)
+print(seq1)  # {&#39;ha&#39;: 12, &#39;lala&#39;: 23, &#39;zizi&#39;: 14}</code></pre><p>8)字典1.update(字典2) —— 将字典2的键值对添加到字典1</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq2 = {&#39;zizi&#39;: 14}
+seq1.update(seq2)
+print(seq1)   # {&#39;ha&#39;: 12, &#39;lala&#39;: 23, &#39;zizi&#39;: 14}</code></pre>]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转元组和字典</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python列表</title>
+    <url>/2019/11/02/%E5%88%97%E8%A1%A8/</url>
+    <content><![CDATA[<p>什么是列表，列表元素的获取以及列表的操作</p>
+<a id="more"></a>
+
+<h3 id="认识列表"><a href="#认识列表" class="headerlink" title="认识列表"></a>认识列表</h3><h4 id="1、什么是列表"><a href="#1、什么是列表" class="headerlink" title="1、什么是列表"></a><em>1、什么是列表</em></h4><p>1）列表</p>
+<p>列表是容器型数据类型（序列），将[ ]作为容器的标志，每个元素用<strong>逗号</strong>隔开；[元素1，元素2，元素3，…..,元素n]</p>
+<p>列表特点：列表是可变（元素的值、顺序、数量可变）和有序（列表一旦确定，列表中<strong>元素的数据地址</strong>是确定的不可变）的<br>​<br>2）列表中的元素<br>任何类型的数据都可以作为列表的元素，并且同一个列表的元素的<strong>数据类型可以不一样</strong><br>[90, 12.9, True, ‘abc’]</p>
+<pre><code class="python">list = [90, 12.9, True, &#39;abc&#39;, [1, 2], (1, 2)]</code></pre>
+<h4 id="2、获取列表元素"><a href="#2、获取列表元素" class="headerlink" title="2、获取列表元素"></a><em>2、获取列表元素</em></h4><h5 id="1）获取单个元素"><a href="#1）获取单个元素" class="headerlink" title="1）获取单个元素"></a>1）获取单个元素</h5><p>（1）语法：—— 只有这一种写法<br><strong>列表[下标] —— 获取列表中下标对应的元素</strong></p>
+<p>（2）说明：<br>列表 —— 结果是列表的表达式，例如：列表数据、存储列表的变量、结果是列表的运算表达式等<br>[] —— 固定写法<br>下标（索引） —— 列表中每个元素都有一个下标来表示这个元素在列表的位置—————超重点<br>    python中下标范围有两种：0 —— （长度 - 1）（解释：0表示第一个元素，从前往后取）<br>                          和 -1 —— 负长度（解释：-1表示最后一个元素，从后往前取）<br>列表的长度：列表中元素的个数<br>注意：下标不能超出范围<br>下标 —— index<br> ———————————————————————————————————————<br>列表数据：[1, 2, 3, 5, 8, 9, 56][-3]——取出的是8<br>存储列表的变量：list[3]——取出的是’abc’<br>结果是列表的运算表达式：</p>
+<h5 id="2）获取部分元素（列表切片）"><a href="#2）获取部分元素（列表切片）" class="headerlink" title="2）获取部分元素（列表切片）"></a>2）获取部分元素（列表切片）</h5><p>语法：<br><strong>列表[开始下标:结束下标:步长]</strong><br>——————与range（m, n, step）方法类似</p>
+<p>说明:<br>——————从开始下标开始取，每次下标值增加步长去取下一个元素，直到取到结束<br>​              下标的前一个元素，取不到结束下标的元素。———返回的数据一定是列表<br>​<br>注意：当步长为正（从前往后取），开始下标元素的位置要在结束下标元素的位置的前面，否则               结果为空；<br>​            当步长为负（从后往前取），开始下标元素的位置要在结束下标元素的位置的后面，否则结果为空；</p>
+<pre><code class="python">films = [&#39;速度与激情&#39;, &#39;哪吒&#39;, &#39;肖申克的救赎&#39;, &#39;小鬼当家&#39;, &#39;功夫&#39;, &#39;扫毒2&#39;, &#39;杀生&#39;]
+print(films[1: 3: 1])
+print(films[-1: 4: -1])</code></pre>
+<h5 id="3）获取部分元素（切片）"><a href="#3）获取部分元素（切片）" class="headerlink" title="3）获取部分元素（切片）"></a>3）获取部分元素（切片）</h5><p>切片语法的变形：<br>（1）省略步长<br><strong>列表[开始下标:结束下标]</strong> —— 默认步长为1<br>（2）省略开始下标<br><strong>列表[:结束下标:步长] *<em>—— 步长为正从第一个元素开始；步长为负从最后一个元素开始取<br>（3）省略结束下标<br>*</em>列表[开始下标::步长] *<em>—— 步长为正取到最后一个元素为止；步长为负取到第一个元素为止<br>（4）开始下标和结束下标都省略<br>*</em>列表[:: 步长]</strong> —— 从第一个取到最后一个</p>
+<pre><code class="python">films = [&#39;速度与激情&#39;, &#39;哪吒&#39;, &#39;肖申克的救赎&#39;, &#39;小鬼当家&#39;, &#39;功夫&#39;, &#39;扫毒2&#39;, &#39;杀生&#39;]
+# （1）
+print(films[1: 3])
+# （2）
+print(films[: 3: 1])
+# （3）
+print(films[2:: 1])
+print(films[2:: -1])
+# （4）
+print(films[:: -1])
+print(films[:: 1])</code></pre>
+<pre><code class="python"># 练习
+print(films[:: -2][-1])   # 速度与激情</code></pre>
+<h4 id="3、遍历列表"><a href="#3、遍历列表" class="headerlink" title="3、遍历列表"></a><em>3、遍历列表</em></h4><h5 id="1-直接遍历列表"><a href="#1-直接遍历列表" class="headerlink" title="1)直接遍历列表"></a>1)直接遍历列表</h5><pre><code>语法：
+for 变量 in 列表：
+    代码块
+变量取到的就是列表中的每个元素</code></pre><pre><code class="python">name_2 = [1, 2, 3, 4, 5]
+for name in name_2:
+    print(name)</code></pre>
+<h5 id="2）通过遍历下标来遍历列表元素"><a href="#2）通过遍历下标来遍历列表元素" class="headerlink" title="2）通过遍历下标来遍历列表元素"></a>2）通过遍历下标来遍历列表元素</h5><pre><code>语法：
+for 下标 in range(列表长度)：
+    元素 = 列表[下标]</code></pre><pre><code class="python"># 获取列表长度：len(列表)
+for index in range(len(name_2)):
+    print(index, name_2[index])</code></pre>
+<h3 id="4、列表的增、删、减"><a href="#4、列表的增、删、减" class="headerlink" title="4、列表的增、删、减"></a><em>4、列表的增、删、减</em></h3><h4 id="1-增（增加元素）"><a href="#1-增（增加元素）" class="headerlink" title="1.增（增加元素）"></a>1.增（增加元素）</h4><p>1）添加</p>
+<p>*<em>列表.append(元素) *</em>—— 在列表最后的位置添加指定的元素（直接影响原列表，不会产生新的列表）</p>
+<pre><code class="python">num_list = [1, 2, &#39;3&#39;, &#39;4&#39;, 5, &#39;6&#39;, &#39;12&#39;, 32, &#39;17&#39;]
+num_list.append(20)
+print(num_list)</code></pre>
+<p>2）插入</p>
+<p>*<em>列表.insert(下标, 元素) *</em>—— 在列表指定下标的位置插入指定元素</p>
+<pre><code class="python">num_list.insert(3, 52)
+print(num_list)</code></pre>
+<h4 id="2-删（删除元素）——-3种方法"><a href="#2-删（删除元素）——-3种方法" class="headerlink" title="2.删（删除元素）—— 3种方法"></a>2.删（删除元素）—— 3种方法</h4><p>1） del 列表[下标] —— 删除列表中指定下标对应的元素<br>​                    （del 列表  ——删除整个列表）<br>2） 列表.remove(元素) —— 删除列表中指定的元素（不用找下标）;如果元素有重复的，只删除第一个指定元素；移除列表里没有的元素，会报错</p>
+<p>3）列表.pop() —— 取出列表最后一个元素；<strong>返回被取出的元素</strong>    </p>
+<p>​      列表.pop(下标) —— 取出列表中指定下标对应的元素；<strong>返回被取出的元素</strong>    </p>
+<p><strong>注意：用pop删除列表后，会返回被取出的元素，还可以使用</strong>_</p>
+<pre><code class="python"># 1)
+del num_list[4]
+print(num_list)
+# 2)
+num_list.remove(2)
+print(num_list)
+# 3）
+num_list = [1, 2, &#39;3&#39;, &#39;4&#39;, 5, &#39;6&#39;, &#39;12&#39;, 32, &#39;17&#39;]
+num_list.pop(2)
+print(num_list)</code></pre>
+<h4 id="3-改"><a href="#3-改" class="headerlink" title="3.改"></a>3.改</h4><p>列表[下标] = 新值 —— 功能：将列表中指定下标对应的元素改成新值</p>
+<pre><code class="python">num_list = [1, 2, &#39;3&#39;, &#39;4&#39;, 5, &#39;6&#39;, &#39;12&#39;, 32, &#39;17&#39;]
+num_list[5] = 21
+print(num_list)</code></pre>
+<h3 id="列表相关运算和操作"><a href="#列表相关运算和操作" class="headerlink" title="列表相关运算和操作"></a>列表相关运算和操作</h3><h4 id="1-数学运算符（只支持加法和乘法运算）：-，"><a href="#1-数学运算符（只支持加法和乘法运算）：-，" class="headerlink" title="1.数学运算符（只支持加法和乘法运算）：+ ， *"></a>1.数学运算符（只支持加法和乘法运算）：+ ， *</h4><p>1）<em>列表1 + 列表2</em> —— 将两个列表的元素合并，产生一个新的列表</p>
+<pre><code class="python">zimi = [&#39;a&#39;, &#39;h&#39;, &#39;l&#39;, &#39;u&#39;]
+num = [1, 5, 6, 8]
+new = zimi + num
+print(new)</code></pre>
+<p>2)列表 * n —— 列表中的元素重复n次，产生一个新列表(相当于n个列表相加)</p>
+<pre><code class="python">num = [1, 5, 6, 8]
+new_num = num * 2
+print(new_num)  # [1, 5, 6, 8, 1, 5, 6, 8]</code></pre>
+<p><code>比较运算：&gt;,&lt;,&gt;=,&lt;=,==,!=</code><br>1）==, !=  —— 判断两个列表相等（<strong>两个列表的元素值、个数、顺序一样</strong>）或是不相等<br>2）比较大小（<strong>不支持字符串</strong>） —— 直接比较两个列表从<strong>左往右的第一个元素的大小</strong>；<br>​                                  如果第一个元素相等，则继续比第二个，比出为止</p>
+<h4 id="2-in-和-not-in"><a href="#2-in-和-not-in" class="headerlink" title="2.in 和 not in"></a>2.in 和 not in</h4><p>写法：<strong>元素 in 列表</strong> —— 判断列表是否存在指定的元素<br>写法：<strong>元素 not in 列表</strong> —— 判断列表是否不存在指定的元素</p>
+<pre><code class="python">num = [1, 5, 6, 8]
+if 1 in num:
+     print(&#39;haha&#39;)
+elif 10 not in num:
+    print(&#39;baibai&#39;)</code></pre>
+<h4 id="3-列表相关的函数"><a href="#3-列表相关的函数" class="headerlink" title="3.列表相关的函数"></a>3.列表相关的函数</h4><p><code>len(序列)</code> —— 统计序列中元素的个数（迭代器和生成器不行）<br><code>max（序列）/min（序列）</code> —— 求序列的最大值或最小值（迭代器和生成器不行）<br>​    注意：序列中元素类型必须一致，而且支持比较运算符</p>
+<pre><code>求最大值最小值的套路:先声明一个变量保存最大值，默认第一个元素为最大值，依次取出序列
+                      中的元素，和默认的最大值进行比较。如果出现比默认最大值大的值，
+                      则更新最大值的变量。否则继续比;最小值反过来</code></pre><pre><code class="python">scores = [1, 56, 78, 98, 63, 57]
+max1 = scores[0]
+for num in scores[1:]:
+    if num &gt; max1:
+        max1 = num
+print(max1)</code></pre>
+<p><code>list(数据)</code> —— 将指定数据转换成列表<br>注意：——所有的序列都能转换成列表,数字不可以——将序列中的元素作为列表中的元素，生成（返回）新的列表</p>
+<pre><code class="python">n = list(&#39;hello&#39;)
+print(n)
+num = list(range(6))
+print(num)</code></pre>
+<h4 id="判断一个列表是否为空-存在"><a href="#判断一个列表是否为空-存在" class="headerlink" title="判断一个列表是否为空/存在"></a>判断一个列表是否为空/存在</h4><pre><code class="python">if num:
+    print(&#39;num列表不为空&#39;)</code></pre>
+<p><code>sum(序列)</code> —— 求序列中所有元素（元素只能是数字）的和</p>
+<pre><code class="python">scores = [1, 56, 78, 98, 63, 57]
+print(sum(scores))</code></pre>
+<h3 id="列表相关方法"><a href="#列表相关方法" class="headerlink" title="列表相关方法"></a>列表相关方法</h3><p>1）<code>列表.count(元素)</code> —— 统计列表中指定元素的个数；返回值是数值</p>
+<pre><code class="python">scores = [102, 56, 78, 98, 63, 56]
+num = scores.count(56)
+print(num)</code></pre>
+<p>2)<code>列表.extend(序列/元素)</code> —— 将序列中的所有元素添加到列表或将元素的基本单元加到列表</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+b = [&#39;ha&#39;, 23]
+a.extend(b)
+a.extend(&#39;ha&#39;)
+print(a)</code></pre>
+<p>3)<code>列表.index(元素)</code> —— 获取指定元素在列表的下标（正值）<br>​                     如果元素不存在会报错；如果元素有多个，只获取第一个元素的下标</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+a.index(2)</code></pre>
+<p>4)<code>列表.reverse()</code> —— 将列表方向（不会产生新列表）</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+a. reverse()
+print(a)    # [6, 3, 2, 1]</code></pre>
+<p>5)<code>列表.clear()</code> —— 清空列表</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+a.clear()
+print(a)</code></pre>
+<p>6)<code>列表.copy()</code> —— 复制/拷贝列表中的元素，产生一个新列表与’列表[:]‘功能一样；这个拷贝是浅拷贝</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+c = a.copy()
+print(c)</code></pre>
+<p>7)——————对列表中元素的排序（用的非常多）<br>===列表专用<br><code>列表.sort()</code> —— （升序）将列表中元素从小到大排序，不产生新列表<br><code>列表.sort(reverse=True)</code> —— （降序）将列表中元素从大到小排序，不产生新列表<br>注意：列表中元素类型必须一致，且支持比较运算</p>
+<p>===序列、列表可用——————都可以用来排序——————<br><code>sorted(序列/列表)</code> —— （升序）除了给列表排序之外，对其他序列也可以排序；会产生一个新的列表<br><code>sorted(序列，reverse=True)</code> —— （降序）</p>
+<pre><code class="python"># ——————————————列表专用
+a = [1, 2, 9, 3, 12, 6, 7]
+a.sort()
+print(a)   # [1, 2, 3, 6, 7, 9, 12]
+a.sort(reverse=True)
+print(a)   # [12, 9, 7, 6, 3, 2, 1]
+#——————————————序列、列表可用
+a = [1, 2, 9, 3, 12, 6, 7]
+d = sorted(a)
+print(d)
+e = sorted(&#39;hello&#39;)
+print(e)</code></pre>
+<p>8) set(列表)————— 删除列表中重复数据，只保留一个,创建一个无序不重复元素集</p>
+<pre><code class="python">a = [1, 2, 9, 2, 12, 9, 7]
+b = set(a)
+print(b)  # {1, 2, 7, 9, 12}</code></pre>
+<h4 id="了解排序算法（选择排序、冒泡排序、二分法、快速排序）"><a href="#了解排序算法（选择排序、冒泡排序、二分法、快速排序）" class="headerlink" title="了解排序算法（选择排序、冒泡排序、二分法、快速排序）"></a>了解排序算法（选择排序、冒泡排序、二分法、快速排序）</h4><h5 id="冒泡排序法："><a href="#冒泡排序法：" class="headerlink" title="冒泡排序法："></a>冒泡排序法：</h5><p>1.默认第一个值为最大值或最小值，比较相邻的元素。如果第一个比第二个大，就交换他们两个。<br>2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。<br>3.针对所有的元素重复以上的步骤，除了最后一个。<br>4.持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/MQ4FoG1HmnIounJsWSXZfDLJt1kG3t5VL4nZJtTUPSe7voA0tTiaHt9ZDshJic0SM9bapHg31OHOGjQiclbQjl1QA/640?wx_fmt=gif" srcset="/img/loading.gif" alt="冒泡法演示"></p>
+<h5 id="选择排序法："><a href="#选择排序法：" class="headerlink" title="选择排序法："></a>选择排序法：</h5><p>1.首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置<br>2.再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。<br>3.重复第二步，直到所有元素均排序完毕。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/MQ4FoG1HmnIounJsWSXZfDLJt1kG3t5VoKfh7759sP997ylM8eZBYibOGiaKTicEviaKmbsjCYBzIbKic3icibZ6VYxpA/640?wx_fmt=gif" srcset="/img/loading.gif" alt="选择"></p>
+<h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5><p>1.从数列中挑出一个元素，称为 “基准”（pivot）;<br>2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；<br>3.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；</p>
+<p><img src="https://images2018.cnblogs.com/blog/1356867/201803/1356867-20180321091055290-1438407463.png" srcset="/img/loading.gif" alt=""></p>
+<h5 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h5><p>假设列表第一个值为最大值，让假设的最大值n依次和列表中其他的元素做比较。如果列表中其他值m大于假设的最大值，则将将m的值赋给n，继续与其他元素比较，一直比到最后一个元素</p>
+<pre><code class="python">scores = [1, 56, 78, 98, 63, 57]
+max1 = scores[0]
+for num in scores[1:]:
+    if num &gt; max1:
+        max1 = num
+print(max1)</code></pre>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转Python列表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>if分之和循环</title>
+    <url>/2019/11/02/if%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF/</url>
+    <content><![CDATA[<p>分支结构：<em><code>python中分之结构只有if，没有switch</code></em>，主要学习if分之和while循环、for循环的语法、使用场景、注意的问题</p>
+<a id="more"></a>
+<h3 id="if分之"><a href="#if分之" class="headerlink" title="if分之"></a>if分之</h3><pre><code>1）语法：
+if  条件语句：
+    代码块   
+2）说明：
+if — 关键字，固定写法
+条件语句 — 有结果的表达式（不要是赋值语句），一般结果是布尔值
+：（冒号） — 固定写法
+代码块 — 和if保持一个缩进的一条或者多条语句（至少一条）；满足上边的条件才会执行
+3）执行过程：
+先判断条件语句结果是否为True（如果不是布尔值，先转换成布尔在判断（所有0或空值才会
+转成False，否则都会转换成True）），如果结果为True就执行代码块，否则不执行代码块
+
+if  0/空值：
+    代码块
+    （代码块不执行）</code></pre><pre><code class="python"># 练习：如果num的值是偶数，就打印偶数，否则不打印
+num = int (input(&#39;请输入数字：&#39;,))
+result = num &amp; 1
+if result == 0:
+    print(&#39;偶数&#39;)
+# 或者
+if not result:
+    print(&#39;偶数&#39;)
+if result:
+    print(&#39;奇数&#39;)</code></pre>
+<h4 id="if-else-结构（重要）"><a href="#if-else-结构（重要）" class="headerlink" title="if else 结构（重要）"></a>if else 结构（重要）</h4><pre><code>1）语法：
+if 条件语句：
+    代码块1
+else：
+    代码块2 
+2）说明：
+    同上
+3）执行过程：
+先判断条件语句结果是否为True（如果不是布尔值，先转换成布尔在判断（所有0或空值才会
+转成False，否则都会转换成True）），如果结果为True就执行代码块1，否则执行代码块2</code></pre><pre><code class="python"># 练习：判断一个人是否成年
+age = int(input(&#39;请输入年龄：&#39;,))
+if age &gt;= 18:
+    print(&#39;成年&#39;)
+else:
+    print(&#39;未成年&#39;)</code></pre>
+<h4 id="if-elif-else-结构"><a href="#if-elif-else-结构" class="headerlink" title="if - elif - else 结构"></a>if - elif - else 结构</h4><pre><code>1）语法：
+if 条件语句1：
+    代码块1
+elif 条件语句2：
+     代码块2
+elif 条件语句3：
+     代码块3
+(elif数量可以根据需要).....
+else:     # else 这部分根据情况可以省略，不是必须的
+    代码块n   
+2)执行过程
+先判断条件语句结果是否为True，如果结果为True就执行代码块1（整个if结构结束），否则判断条件语句2，结构为True就执行代码块2；
+否则继续判断条件语句3.......，所有条件语句都为False，执行else：</code></pre><pre><code class="python"># 练习：将成绩分类
+score = int(input(&#39;请输入分数：&#39;,))
+grade = None
+if score &lt; 60:
+    grade = &#39;不及格&#39;
+elif score &lt; 70:
+    grade = &#39;及格&#39;
+elif score &lt; 90:
+    grade = &#39;良好&#39;
+else:
+    grade = &#39;优秀&#39;
+print(grade)</code></pre>
+<pre><code class="python"># 练习1：判断一个三位数是否是水仙花数
+num = int(input(&#39;请输入三位数：&#39;,))
+ge = num % 10
+shi = (num//10) % 10
+bai = num // 100
+if num == bai**3 + shi**3 + ge**3:
+    print(&#39;是水仙花数&#39;)
+else:
+    print(&#39;不是水仙花数&#39;)
+# 练习2：判断一个数是否是偶数，是偶数打印偶数，奇数就打印奇数，如果这个数能被4整除，打印4的倍数
+num = int(input(&#39;请输入三位数：&#39;,))
+if num &amp; 1 == 0:
+    print(&#39;偶数&#39;)
+    if num % 4 == 0:
+        print(&#39;4的倍数&#39;)
+else:
+    print(&#39;奇数&#39;)</code></pre>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>python中循环分为两种：for循环和while循环</p>
+<h4 id="1-for循环"><a href="#1-for循环" class="headerlink" title="1.for循环"></a>1.for循环</h4><p>1）语法：<br><strong>for 变量名 in 序列：</strong><br>​       <strong>循环体（难点）</strong></p>
+<p>2）说明：<br>for — 关键字，固定写法<br>变量名 — 和声明变量时的变量名要求一致<br>in — 关键字，固定写法<br>序列 — <code>序列就是python中容器型数据类型</code>，常见有：字符串、列表、字典、元祖、集合、迭代器、生成器、range<br>：— 固定写法<br>循环体 — 和for保持一个缩进的一条或多条需要被重复执行的代码，至少有一条代码</p>
+<p>3）执行过程</p>
+<p>让变量去取序列中的值，一个一个的取，每取一个值执行一次循环体，取完为止；<br>——（注意：<strong>只能通过控制序列中元素的个数来控制循环次数</strong>）</p>
+<pre><code class="python"># 执行过程验证
+for da in &#39;hello&#39;:
+    print(da, end=&#39;&#39;)
+# 结果
+# h e l l o
+</code></pre>
+<p><strong>———— ——————range函数 ————————————</strong><br>用法1：range(n) —— 产生一个0 — n-1的数字序列<br>用法2：range(m , n) — 产生一个m到n-1的区间序列<br>用法3：range(m, n, step) — 产生一个m到n-step，公差为step的区间序列；例如range(4, 10, 2) — 4，6，8</p>
+<pre><code class="python"># 用法1
+for x in range(10):
+    print(&#39;da&#39;, end=&#39;&#39;)
+
+# 用法2
+for zi in range(100, 1000):
+    print(zi)</code></pre>
+<pre><code class="python"># 累计求和练习：计算是1 + 2 + 3 + ....+ 100（——累计求和默认套路——）
+# 先声明一个变量
+nu = 0     # 保存最后的和
+for n in range(1, 101):
+    # 求和循环公式
+    nu += n
+print(nu)
+# ————————套路————————</code></pre>
+<p><strong>注意：其他有规律的累计求和都用这个套路</strong></p>
+<h4 id="2-while循环"><a href="#2-while循环" class="headerlink" title="2.while循环"></a>2.while循环</h4><p>1)语法<br><strong>while 条件语句：</strong><br>​    <strong>循环体</strong></p>
+<p>2）声明<br>while — 关键字，固定写法<br>条件语句 — <strong>任何有结果的表达式，不能是赋值语句</strong><br>： — 固定写法<br>循环体 — 与while保持一个缩进的一条或多条需要重复执行的代码</p>
+<p>3）执行过程</p>
+<pre><code>先判断条件语句是否为True（不是布尔，先转换成布尔），为True就执行循环体；
+执行完循环体再回头判断条件语句是否为True，为True继续执行循环体.......
+直到条件语句为False，整个循环结束</code></pre><pre><code class="python"># 应用情况1：控制次数
+# 先在while外边定义一个变量
+x = 0
+n = 5    # n表示次数
+while x &lt; n:
+    # 循环需要执行的操作，不断接近False
+    x += 1
+print(x)</code></pre>
+<pre><code class="python"># 情况2：产生数字序列(麻烦一点，用的少)
+start = 100
+end = 999
+while start &lt;= end:
+    print(start)
+    start += 1</code></pre>
+<h4 id="如何选择使用for循环还是while循环"><a href="#如何选择使用for循环还是while循环" class="headerlink" title="如何选择使用for循环还是while循环"></a>如何选择使用for循环还是while循环</h4><p><strong>当<code>循环次数确定</code>的时候，就用for循环（写不了无限循环）</strong><br><strong>当<code>循环次数不确定</code>的时候，就用while循环</strong></p>
+<pre><code class="python">练习：不断输入密码，直到密码正确位置(循环次数不确定)
+pw = &#39;123456&#39;
+key = &#39;&#39;  # 定义最开始的输入密码是个空值
+while key != pw:
+    # 取出输入的密码，input()会暂停程序，让输入密码
+    key = input(&#39;请重新输入密码：&#39;)
+print(&#39;正确&#39;)</code></pre>
+<h4 id="循环中的两个关键字"><a href="#循环中的两个关键字" class="headerlink" title="循环中的两个关键字"></a>循环中的两个关键字</h4><h5 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h5><pre><code>continue是循环体中的关键字，只能写在循环体里；用的时候直接写continue，前后不用加东西
+
+执行循环体时如果遇到continue，直接结束当次循环，进入下次循环的判断</code></pre><p>例如：</p>
+<pre><code class="python">for x in range(100):
+    print(x)
+    print(&#39;000000&#39;)
+    if x &lt; 50:
+        continue
+    print(&#39;222222&#39;)</code></pre>
+<h5 id="break"><a href="#break" class="headerlink" title="break"></a>break</h5><pre><code>break是循环体中的关键字，只能写在循环体里；用的时候直接写break，前后不用加东西
+
+如果在执行循环体时遇到break，那么整个循环直接结束，且不会在判断条件语句</code></pre><p>例如：</p>
+<pre><code class="python">for x in range(5):
+    print(x)
+    print(&#39;22222&#39;)
+    if x &amp; 1:
+        break
+    print(&#39;555&#39;)</code></pre>
+<h5 id="else"><a href="#else" class="headerlink" title="else"></a>else</h5><pre><code>for循环的完整结构：当for循环上部分（for x in 序列：循环体）自然结束（不是因为continue、break）
+                   后，会自动执行下部分（else：代码块）
+注意：主要关注else后的代码段会不会执行
+for x in 序列：
+    循环体
+else：
+    代码块</code></pre><p>例如：</p>
+<pre><code class="python">for x in range(5):
+    print(x)
+    if x &gt; 3:
+        break
+else:
+    print(&#39;666&#39;)</code></pre>
+<h4 id="循环嵌套"><a href="#循环嵌套" class="headerlink" title="循环嵌套"></a>循环嵌套</h4><pre><code class="python">for x in range(5):
+    for y in range(5):
+        print(x, y)
+# 外边的循环执行一次，里边的循环全部执行</code></pre>
+<h3 id="python数字数据"><a href="#python数字数据" class="headerlink" title="python数字数据"></a>python数字数据</h3><h4 id="支持的数据类型"><a href="#支持的数据类型" class="headerlink" title="支持的数据类型"></a>支持的数据类型</h4><p><strong><em>1、python中和数字相关的数据类型有：int、float、bool、complex</em></strong></p>
+<pre><code>1）int —— 整型，数字中所有整数对应的数据类型，例如：23，45，-65
+
+2）float —— 浮点型，数字中所有小数对应的数据类型；支持科学计数法
+
+3）bool —— 布尔，只有True和False两个值，True的本质就是数字1，False的本质就是数字0
+print(True + 1)
+print(False + 1)
+
+4)complex —— 复数，包含所有的复数：形如a + bj的数就是复数，j是虚数单位，j*j == -1
+    支持复数相关的运算（与数学中复数运算一致）
+print(10 + 1j)     # 虚部为1时，不能省略</code></pre><p><strong><em>2、数据类型相关方法</em></strong></p>
+<pre><code>1）type(数据) —— 获取指定数据的类型
+2)isinstance（数据，类型） —— 判断指定的数据是否是指定的数据类型（判断）
+print(isinstance(100, int))</code></pre><p><strong><em>3、数据类型转换</em></strong></p>
+<p>格式：类型（数据） —— 将数据转换成指定类型</p>
+<pre><code class="python">int(12.5)  # 转换成整型
+float(12)   # 转换成浮点数</code></pre>
+<p><strong>任何类型的数据都可以转换成布尔</strong>；所有为0或空的值，都会转换成False，其他都转成True<br>转换成False的情况：bool(0),bool(0.0),bool(‘’),bool([]),bool({}),bool(()),bool(None)</p>
+<pre><code class="python">print(bool(0),bool(0.0),bool(&#39;&#39;),bool([]),bool({}),bool(()),bool(None))</code></pre>
+<h4 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a><em>随机数</em></h4><p>1)随机挑选<br>​    random.choice(序列) —— 在序列中随机挑选一个元素</p>
+<pre><code class="python">result = random.choice(&#39;2089234&#39;)
+print(result)</code></pre>
+<p>2)在指定范围内随机取一个数<br>​    random.randrange(开始，结束，步长)</p>
+<pre><code class="python">result = random.randrange(0, 20, 2)
+print(result)</code></pre>
+<p>3)产生[0,1)的随机数(要记住)<br>​    random.random()</p>
+<pre><code class="python">result = random.random()
+print(result)
+
+result = random.random()*100
+print(&#39;0到100的随机数&#39;, result)
+
+result = random.random()*10 + 10
+print(&#39;10到20的随机数&#39;, result)</code></pre>
+<p>4)随机排序<br>​    random.shuffle(序列) —— 将序列中的元素随机排序（序列必须是可变的）</p>
+<pre><code class="python">list1 = [1, 2, 3, 4, 5, 6]
+result1 = random.shuffle(list1)
+print(list1)</code></pre>
+<p>5)产生随机浮点数<br>​    random.uniform(m, n ) —— 产生m到n的随机浮点数</p>
+<pre><code class="python">result = random.uniform(6, 10)
+print(result)</code></pre>
+<p>6)产生随机整数<br>​    random.randint(m, n) —— 产生m到n的随机整数</p>
+<pre><code class="python">result = random.randint(1, 12)
+print(result)</code></pre>
+<p><em>练习：猜数字游戏，速记产生一个数字，玩家来猜（输入数字），猜中游戏结束，没猜中，继续，知道猜中为止</em></p>
+<pre><code class="python">num = random.randint(1, 100)
+sz = int(input(&#39;输入一个数：&#39;))
+n = 0
+# 不确定循环次数用while循环
+while True:
+    n += 1
+    if n &gt; 10:
+        print(&#39;你输了&#39;)
+        break
+    elif sz &gt; num:
+        print(&#39;猜大了&#39;)
+        sz = int(input(&#39;输入一个数：&#39;))
+    elif sz &lt; num:
+        print(&#39;猜小了&#39;)
+        sz = int(input(&#39;输入一个数：&#39;))
+    else:
+        print(&#39;猜对了&#39;)
+        break</code></pre>
+<h4 id="补充：python中的三目运算符"><a href="#补充：python中的三目运算符" class="headerlink" title="补充：python中的三目运算符"></a>补充：python中的三目运算符</h4><pre><code class="python"># 格式：  
+num =  a  if  条件语句  else  b
+# if 条件语句为True，则返回结果a，否则返回结果b</code></pre>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转if分之和循环</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>变量及运算符</title>
+    <url>/2019/11/02/%E5%8F%98%E9%87%8F%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[<p>变量的声明、使用、修改以及python支持的运算符及应用</p>
+<a id="more"></a>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="1-什么是变量？"><a href="#1-什么是变量？" class="headerlink" title="1.什么是变量？"></a>1.什么是变量？</h4><p>变量是用来申请空间存储数据的</p>
+<h4 id="2-变量的声明（创建变量）"><a href="#2-变量的声明（创建变量）" class="headerlink" title="2.变量的声明（创建变量）"></a>2.变量的声明（创建变量）</h4><p>1）语法：<br>变量名 = 值</p>
+<p>2）说明：<br>变量名——程序员自己命名<br>要求：只能是标识符，不能是关键字</p>
+<pre><code class="python">规范：见名知义（看见变量名，大概知道变量存储的什么数据）
+     所有字母都小写，如果有多个单词，单词之间用下划线隔开
+     不能使用系统提供的函数名、类名或者模块名给变量命名
+
+= （赋值符号） 作用：将右边的值赋给左边的变量
+值  ：任何有结果的表达式都可以作为值；例如 a）任何类型的数据
+    b）已经声明(赋值)过的变量   c）运算表达式
+
+a = 10
+b = a
+c = (10 + 20)/2
+# 使用变量就是使用变量中的值
+print(a, b, c)</code></pre>
+<h4 id="3-同时声明多个变量"><a href="#3-同时声明多个变量" class="headerlink" title="3.同时声明多个变量"></a>3.同时声明多个变量</h4><p>1）同时声明多个变量赋相同的值</p>
+<pre><code class="python">a1 = a2 = a3 =18</code></pre>
+<p>2）同时声明多个变量，赋不同的值(注意：变量个数和值的个数要相同)</p>
+<pre><code class="python">b1, b2 = 12, 13
+print(b1, b2)</code></pre>
+<h4 id="4-使用变量（使用变量就是使用变量中的存储的值）"><a href="#4-使用变量（使用变量就是使用变量中的存储的值）" class="headerlink" title="4.使用变量（使用变量就是使用变量中的存储的值）"></a>4.使用变量（使用变量就是使用变量中的存储的值）</h4><pre><code class="python">print(b1, b2)
+new = b1*2
+print(new)</code></pre>
+<h4 id="5-修改变量的值（重新赋值）"><a href="#5-修改变量的值（重新赋值）" class="headerlink" title="5.修改变量的值（重新赋值）"></a>5.修改变量的值（重新赋值）</h4><pre><code class="python"># python中已经声明过的变量中的值可以修改
+b1 = 122
+# 重新赋值后变量的值变成新值
+print(b1)</code></pre>
+<h4 id="6-python中声明变量的原理"><a href="#6-python中声明变量的原理" class="headerlink" title="6.python中声明变量的原理"></a>6.python中声明变量的原理</h4><p><strong>声明变量和变量赋值的时候，是先在内存中开辟空间存储数据，空间的大小由数据的大小来决定；然后将数据对应内存空间的地址给变量</strong><br>变量三要素：值（和变量关联的数据）、地址（变量关联的数据对应的地址）、类型（变量关联的数据类型）<br>1）id函数：id(变量/数据)——获取变量/数据的地址</p>
+<pre><code class="python">b3 = 520
+print(id(b3))
+b3 = 13
+print(id(b3))</code></pre>
+<p>2）type函数：type（变量/数据）——获取变量/数据的类型</p>
+<pre><code class="python">print(type(b3))     
+# int(整型)、float(浮点型)、str(字符串)、bool（布尔类型）</code></pre>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><h4 id="1-python支持的运算符：数学运算符、比较运算符、逻辑运算符、赋值运算符"><a href="#1-python支持的运算符：数学运算符、比较运算符、逻辑运算符、赋值运算符" class="headerlink" title="1.python支持的运算符：数学运算符、比较运算符、逻辑运算符、赋值运算符"></a>1.python支持的运算符：数学运算符、比较运算符、逻辑运算符、赋值运算符</h4><p><strong><em><code>1、数学运算符：</code></em></strong>+(加)， -（减）， * （乘），/（除）， % （取余），//（整除）， **（幂运算）</p>
+<p>1)  +，-，*，/和数学中的加减乘除功能一致</p>
+<pre><code class="python">print(5+2, 5*2, 5-2, 10/2)</code></pre>
+<p>2) %(求余数)：数字1%数字2——数字1除数字2的余数</p>
+<pre><code class="python">print(5 % 2)
+# 应用1：判断一个数是否能被另一个数整除（判断奇数或偶数）
+# 应用2：取整数的个位数（对10取余）
+num = 123
+num1 = num % 10
+print(&#39;个位数：&#39;, num1)</code></pre>
+<p>3) //(整除)：数字1//数字2——数字1除数字2，商只取整数部分</p>
+<pre><code class="python">print(5 // 2)
+print(3.6 // 2)
+# 应用：取指定长度的数字的最高位
+num = 2546
+print(num // 1000)</code></pre>
+<p>4) (幂运算)</p>
+<pre><code class="python"># **(幂运算)：x**y —— 计算x的y次方
+print(4**5)
+print(0.3**3)
+# 应用：可以开平方
+print(100**(1/2))
+print(27**(1/3))</code></pre>
+<p><strong><em><code>2、比较运算符：</code></em></strong>&gt;(大于符号), &lt;（小于符合）, &gt;=（大于等于符号）, &lt;=（小于等于符号）, ==（等于）, !=（不等于）<br>所有比较运算符的结果都是布尔值</p>
+<pre><code class="python">print(20 &gt; 10)
+print(10&lt;3)
+a = 10
+b = 13
+print(a == b)
+print(a is b)    # True
+# 列表
+list1 = [1, 2]
+list2 = [1, 2]
+print(list1 == list2)
+print(list1 is list2)  # False
+# list1与list2的数据地址不相等</code></pre>
+<p><strong><em>补充：is的用法</em></strong></p>
+<pre><code>is也是用来判断两个数据是否相等，判断的是两个数据的地址是否相等； ==判断的是数据的值是否相等</code></pre><p><strong><em><code>3、逻辑运算符:</code></em></strong>and（逻辑与运算），or（逻辑或运算），not（逻辑非运算）</p>
+<p>逻辑运算符的运算对象和运算结果都是布尔值<br>（1）and ——相当于生活中并且</p>
+<pre><code>运算规则：两个都为True，结果才为True
+什么时候用：判断多个条件是否同时满足，多个条件间用and连接</code></pre><p>（2）or ——相当于生活中的或者</p>
+<pre><code>运算规则：只要一个为True，结果就为True
+什么时候用：判断多个条件是否有条件满足，多个条件间用or连接</code></pre><p>（3）not ——对条件进行否定</p>
+<pre><code class="python">&quot;&quot;&quot;
+运算规则：对指定条件进行否定，True变False，False变True
+not True ——False
+not False ——True
+&quot;&quot;&quot;
+条件：不大于20
+num = 30
+print(&#39;不大于20&#39;, not num &gt; 20)
+n = 2020
+print(&#39;是闰年&#39;, (n % 4 == 0 or n % 400 == 0) and not n % 100 == 0)</code></pre>
+<p>(4) 短路操作</p>
+<pre><code>and的短路操作：and前边的条件如果是False，那么and后面的条件语句不会执行
+or的短路操作：or的前边条件如果是True，那么or后边的条件语句不会执行</code></pre><p>(5)逻辑运算符的数字运算</p>
+<pre><code class="python">&quot;&quot;&quot;
+num1 and num2 —— 如果num1为0，结果就是0；如果num1不为0，结果就为num2
+num1 or num2 —— 如果num1为0，结果就为num2；如果num1不为0，结果就为num2
+&quot;&quot;&quot;
+print(6 and 7, 8 and 10, 0 and 9)
+print(13 or 12, 11 or 3, 0 or 6)</code></pre>
+<p><strong><em><code>4.赋值运算符:</code></em></strong>  =， +=， -=， <em>=， /=， %=， *</em>=</p>
+<pre><code class="python"># 所有赋值运算符的左边必须是变量；如果是复合的赋值运算符，左边的变量必须已经赋过值
+# （1）变量 = 值 ——将右边的值赋给左边的变量
+# 注意：如果值是已经赋过值的变量，它是将将赋过值的变量的地址赋过变量
+# （2）复合运算符：+=， -=， *=， /=， %=， **=
+# 变量 += 值 —— 变量 = 变量 + 值
+num = 20
+num += 2
+print(num)</code></pre>
+<p><strong><em><code>5.运算顺序:</code></em></strong>  ——先算优先级高的，再优先级低的，有括号先算括号内的</p>
+<pre><code>优先级：数学运算符 &gt; 比较运算符 &gt; 逻辑运算符 &gt; 赋值运算符</code></pre><h4 id="2-位运算（用的少）"><a href="#2-位运算（用的少）" class="headerlink" title="2.位运算（用的少）"></a>2.位运算（用的少）</h4><p><strong><em><code>1、位运算符：</code></em></strong>   &amp;（按位与运算），/（按位或运算），^(按位异或)，~（按位取反），&gt;&gt;(右移)，&lt;&lt;(左移)</p>
+<pre><code>所有位运算都是针对数据在计算机中存储位置的每一位进行操作
+所有的位运算相比其他运算符的特点：运行速度快（高效），内存消耗小</code></pre><p><strong><em><code>2、位运算符的应用</code></em></strong></p>
+<p>1）&amp;（按位与运算）</p>
+<pre><code class="python"># 数字1 &amp; 数字2 —— 两个数字的补码同一位置都是1，结果就是1；同一位置有一个0，结果就是0
+# 101 &amp; 110 —— 100
+
+print(2 &amp; 3)</code></pre>
+<p>2）|（按位或运算）</p>
+<pre><code class="python"># 数字1 / 数字2 —— 两个数字的补码同一位置有一个是1，都是1；两个都是0，结果才是0
+# 101 / 110 —— 111
+print(2 / 3)</code></pre>
+<p>3）^(按位异或)</p>
+<pre><code class="python"># 数字1 ^ 数字2 —— 两个数字的补码同一位置的值相同就是0，不相同就是1
+# 1011 ^ 1101 —— 0110
+print(2 ^ 3)</code></pre>
+<p>4)~（按位取反）</p>
+<pre><code class="python"># ~ 数字1 —— 将数字1的补码每一位的1变0，0变成1
+# ~11101 —— 00010
+print(~ -3)</code></pre>
+<p>5) &gt;&gt;(右移)和&lt;&lt;（左移）</p>
+<pre><code class="python">&quot;&quot;&quot;
+运算规则：&lt;&lt;
+数字1 &lt;&lt; n —— 数字1的补码整体向左移动n位
+规律：print（m &lt;&lt; n）= m*(2**n)
+数字1 &gt;&gt; n —— 数字1的补码整体向右移动n位
+规律：print（m &gt;&gt; n）= m//(2**n)
+m**n:m的n次方
+&quot;&quot;&quot;
+print(2 &lt;&lt; 1)  # 4 = 2*2
+print(2 &lt;&lt; 2)  # 8 = 2*4
+print(2 &lt;&lt; 3)  # 16 = 2*8
+
+print(100 &gt;&gt; 1)
+print(100 &gt;&gt; 2)
+print(100 &gt;&gt; 3)</code></pre>
+<p><strong><em><code>3.位运算的应用</code></em></strong></p>
+<pre><code class="python">&quot;&quot;&quot;
+1)判断数字的奇偶性：让指定的数字与1进行按位与运算，看结果是0（偶数），还是1（奇数）
+11111001 &amp; 1 == 1
+11010100 &amp; 1 == 0
+优点：比用%2更方便快捷
+&quot;&quot;&quot;
+print(100 &amp; 1, 11 &amp; 1, 24 &amp; 1)
+&quot;&quot;&quot;
+2）乘2和整除2使用左移和右移
+&quot;&quot;&quot;</code></pre>
+]]></content>
+      <categories>
+        <category>基础阶段</category>
+      </categories>
+      <tags>
+        <tag>玩转变量及运算符</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL数据库</title>
+    <url>/2019/10/31/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<p>MySQL的安装、数据库的分类，以及MySQL中如何创建库、表，并修改表的数据</p>
+<a id="more"></a>
+
+<p>序列化：把对象变成字符串或字节串(pickle、json模块)</p>
+<p>反序列化：把字符串或字节串还原成对象</p>
+<p>数据库 —— 数据的集散地-数据持久化,可以很好的管理数据，方便将来对数据的检索</p>
+<p>大多数的数据库都能够保证数据的一致性、完整性并减少数据的冗余.</p>
+<p>连接服务器：XShell / FinalShell</p>
+<p>类和类之间的关系：is-a关系（继承关系）、has-a（关联关系：聚合、合成）、use-a（依赖关系）</p>
+<h3 id="数据库分类"><a href="#数据库分类" class="headerlink" title="数据库分类"></a>数据库分类</h3><p>——关系型数据库和非关系型数据库</p>
+<p>1970年-IBM研究院发表了论述关系模型的论文</p>
+<p>####关系型数据库</p>
+<h5 id="关系型数据库的特点"><a href="#关系型数据库的特点" class="headerlink" title="关系型数据库的特点"></a><strong>关系型数据库的特点</strong></h5><p>1.理论基础：集合论+关系代数</p>
+<p>2.具体表象：用二维表来保存数据(行-记录 、列-字段)</p>
+<p>3.编程语言：SQL (结构化查询语言) —— 数据库通用编程语言</p>
+<p>​    <code>—DDL(数据定义语言) :create / drop(删库) /alter</code></p>
+<p>​    <code>—DML(数据操作语言) : insert / delete / update / select</code></p>
+<p>​    —DCL(数据控制语言) :grant / revoke</p>
+<h5 id="关系型数据库的产品"><a href="#关系型数据库的产品" class="headerlink" title="关系型数据库的产品"></a><strong>关系型数据库的产品</strong></h5><p>1.Oracle — 银行、电子政务、大型电商</p>
+<p>2.MySQL — 中小企业</p>
+<p>3.DB2 — IBM</p>
+<h5 id="数据的完整性和一致性"><a href="#数据的完整性和一致性" class="headerlink" title="数据的完整性和一致性"></a><strong>数据的完整性和一致性</strong></h5><p>完整性：</p>
+<pre><code>1.实体完整性— 每条记录都是独一无二的没有冗余-主键/唯一索引
+
+2.参照完整性— 一张表参照另一张表的数据 - 外键
+
+3.域完整性 — 数据是有效正确的 - 数据类型(长度)/非空约束/默认值约束/检查约束(MySQL不支持，其他数据库支持)
+
+    检查约束写法：.....check (条件)</code></pre><p>一致性：通过锁保护数据</p>
+<p>MySQL —&gt; InnoDB存储引擎(MySQL默认使用这个) —&gt; 能够支持互联网的高并发业务—&gt;行级锁/表级锁—&gt; 支持事务操作</p>
+<h5 id="事务"><a href="#事务" class="headerlink" title="事务"></a><strong>事务</strong></h5><p>对数据的多个操作是不可分割的，要么全部成功，要么全失败</p>
+<p>1.开启事务环境：begin / start transaction</p>
+<p>2……..多个SQL操作语句</p>
+<p>3.commit; – 成功就提交(提交事务) / rollback; – 失败就回滚(回滚事务)</p>
+<h5 id="事务的面试题-重要，面试问"><a href="#事务的面试题-重要，面试问" class="headerlink" title="事务的面试题(重要，面试问)"></a>事务的面试题(重要，面试问)</h5><p>事务的ACID特性： </p>
+<p>Atomicity —— 原子性，不可分割</p>
+<p>Consistency —— 一致性，事务前后的状态要一致</p>
+<p>Isolation —— 隔离性，多个并发的事务不知道彼此的中间状态（不能看到张数据）</p>
+<p>Duration —— 持久性，事务完成后数据要持久化</p>
+<h3 id="Linux环境下安装MySQL-—-使用包管理工具"><a href="#Linux环境下安装MySQL-—-使用包管理工具" class="headerlink" title="Linux环境下安装MySQL — 使用包管理工具"></a>Linux环境下安装MySQL — 使用包管理工具</h3><p>1.yum -install /erase(卸载)/update(更新)</p>
+<p>​    安装：yum install -y mariadb mariadb-server</p>
+<p>​    查看：yum list installed | grep marisdb</p>
+<p>​    卸载：yum erase -y mariadb mariadb-server mariadb-libs</p>
+<p>2.rpm -ivh / -e / -qa</p>
+<p>​    下载：wget / tar -xvf</p>
+<p>​    补包：yum install -y libaio</p>
+<p>​     安装：</p>
+<pre><code>    rpm -ivh mysql-community-common-5.7.26-1.el7.x86_64.rpm
+    rpm -ivh mysql-community-libs-5.7.26-1.el7.x86_64.rpm
+    rpm -ivh mysql-community-client-5.7.26-1.el7.x86_64.rpm
+    rpm -ivh mysql-community-server-5.7.26-1.el7.x86_64.rpm</code></pre><p><strong>启动/停止/重启MySQL服务器</strong></p>
+<pre><code>    systemctl start mysqld
+    systemctl stop mysqld
+    systemctl restart mysqld
+    systemctl status mysqld - 查看状态
+    systemctl enable mysqld  - 开机自启
+    netstat - ntlp/</code></pre><p><strong>通过MySQL客户端连接服务器</strong></p>
+<p>​    <code>mysql -u root -p</code></p>
+<p><strong>准备工作</strong></p>
+<p>​    set global validate_password_policy=0;</p>
+<p>​    set global validate_password_length=8;</p>
+<p>​    alter user ‘root’@’localhost’ identified by ‘修改后的密码’</p>
+<h3 id="使用MySQL管理数据"><a href="#使用MySQL管理数据" class="headerlink" title="使用MySQL管理数据"></a>使用MySQL管理数据</h3><h4 id="1-展示数据库"><a href="#1-展示数据库" class="headerlink" title="1.展示数据库"></a>1.展示数据库</h4><p><code>show databases;</code></p>
+<h4 id="2-删除存在的库"><a href="#2-删除存在的库" class="headerlink" title="2.删除存在的库"></a>2.删除存在的库</h4><p><code>drop database if exists 库名;</code></p>
+<h4 id="3-创建自己的数据库"><a href="#3-创建自己的数据库" class="headerlink" title="3.创建自己的数据库"></a>3.创建自己的数据库</h4><p><code>create database 库名 default charset utf8;   例如：creat database schools</code></p>
+<h4 id="4-切换到指定库"><a href="#4-切换到指定库" class="headerlink" title="4.切换到指定库"></a>4.切换到指定库</h4><p><code>use 库名；</code></p>
+<h4 id="5-查看指定库的表"><a href="#5-查看指定库的表" class="headerlink" title="5.查看指定库的表"></a>5.查看指定库的表</h4><p><code>show tables;</code></p>
+<h4 id="6-创建表"><a href="#6-创建表" class="headerlink" title="6.创建表"></a>6.创建表</h4><p>——表名一般命名规范：根据表的内容命名；例如：tb_表的内容</p>
+<p>​    例如：学生的选课系统</p>
+<pre><code>create table tb_student(
+    stuid integer not null comment &#39;学号&#39;,
+    stuname varchar(10) not null comment &#39;姓名&#39;,
+    stusex boolean default 1 comment &#39;性别&#39;,    
+    stubirth date comment &#39;生日&#39;,
+    primary key (stuid)
+);     </code></pre><p>​    说明: –  <strong>not null</strong>表示非空约束，<strong>comment ‘学号’</strong>   是注释</p>
+<p>​         – <strong>varchar(20)</strong>表示输入字符最长为10；<strong>not null</strong>表示非空约束</p>
+<p>​         – <strong>default</strong> 表示默认值约束(没有给列赋值就使用默认值)</p>
+<p>​        – <strong>primary key</strong>  主键约束    :</p>
+<p>如果存在指定表，则删除表：<strong><code>drop table if exists 表名;</code></strong></p>
+<h4 id="7-修改表"><a href="#7-修改表" class="headerlink" title="7.修改表"></a>7.修改表</h4><pre><code>添加列：alter table 表名 add column stuaddr varchar(255);
+    -- stuaddr  新的列名
+
+删除列：alter table 表名 drop column stuaddr;
+    -- stuaddr 列名
+
+修改列的数据类型：alter table 表名 modify column stuaddr varchar(100);
+
+修改列的名字和数据类型：alter table 表名 change column stuaddr foo varchar(50);
+    -- foo 新的列名</code></pre><p><strong>向指定表插入数据</strong>：</p>
+<pre><code>    -- 按表的列的顺序插入
+insert into 表名 values (1001, &#39;梨花&#39;, 1, &#39;1988-9-3&#39;, &#39;成都&#39;);
+    -- 按自己指定的顺序插入
+insert into 表名 (stuid,stuname) values (1003, &#39;菊花&#39;);
+    -- 批量插入
+insert into 表名 (stuid,stuname) values (1004, &#39;菊花&#39;),(1005,&#39;荷花&#39;);</code></pre><p><strong>删除数据</strong>：</p>
+<pre><code>        delete from 表名 where 条件;
+
+        delete from 表名 where stuid=1002;
+
+        或：delete from 表名 where stuid in (1003, 1002);</code></pre><p><strong>更新数据</strong>：</p>
+<pre><code>-- where 条件    表示在判断的基础上执行操作，防止误操作
+
+update 表名 set stuaddr=&#39;南充&#39; where stuid=&#39;1001&#39;;
+
+update 表名 set stuaddr=&#39;南充&#39;,stubirth=&#39;1998-3-25&#39; where stuid=&#39;1001&#39;;</code></pre><p><strong>查看整个表</strong>：<code>select * from 表名</code>   或  <code>/select * from 表名\G</code></p>
+<p><strong>错误类型</strong>：</p>
+<pre><code>    -- 列的数量跟值的数量不匹配
+
+    ERROR 1136 (21S01): Column count doesn&#39;t match value count at row 1
+
+    -- 重复的主键
+
+    ERROR 1062 (23000): Duplicate entry &#39;1001&#39; for key &#39;PRIMARY&#39;
+
+    -- 数据太长列装不下
+
+    ERROR 1406 (22001): Data too long for column &#39;stuname&#39; at row 1</code></pre><p><strong>创建学院表</strong>：</p>
+<pre><code>create table tb_academy(
+    acid integer not null comment &#39;学院编号&#39;,
+    acname varchar(10) not null comment &#39;学院名称&#39;,
+    acbossname varchar(10) not null comment &#39;院长名字&#39;,
+    primary key(acid)
+);</code></pre><p>​     insert into tb_academy(acname,acbossname,acid) values (‘艺术学院’,’罗伊’,’1’),(‘软件学院’,’罗里’,’2’),(‘外国语学院’,’华北’,’3’);</p>
+<p>– 修改学生表，建立学生对学院的多对一关系</p>
+<p>​    alter table tb_student add column acid integer;</p>
+<p>– 通过<strong>添加外键约束</strong>来建立学生表对学院表的参照关系(学生表的学员编号要参照学院表)   ——<strong><code>多对1，在多的一方加外键列</code></strong></p>
+<p>​    alter table tb_student add constraint fk_student_acid </p>
+<p>​    foreign key (acid) references tb_academy (acid);</p>
+<p>​    如果输错了：</p>
+<p>创建老师表：</p>
+<pre><code>create table tb_teacher(
+    teaid integer not null comment &#39;工号&#39;,
+    teaname varchar(20) not null comment &#39;名字&#39;,
+    tattitle varchar(20) not null comment &#39;职称&#39;,
+    acid integer not null comment &#39;所属学院&#39;,
+    primary key (teaid),
+    foreign key (acid) references tb_academy (acid)
+);</code></pre><p>创建课程表：</p>
+<pre><code>create table tb_course(
+    courseid integer not null comment &#39;课程编号&#39;,
+    coursename varchar(50) not null comment &#39;课程名称&#39;,
+    coursescore integer not null comment &#39;课程学分&#39;,
+    teaid integer not null comment &#39;课程老师编号&#39;,
+    primary key (courseid),
+    foreign key (teaid) references tb_teacher(teaid)
+);</code></pre><p>– 创建学生选课记录表：</p>
+<pre><code>create table tb_record (
+     recid integer not null auto_increment comment &#39;选课记录号&#39;,
+     sid integer not null comment &#39;选课学生id&#39;,
+     cid integer not null comment &#39;被选课程id&#39;,
+     seldate datetime default now() comment &#39;选课时间&#39;,
+     score decimal(4, 1) comment &#39;分数&#39;,
+      primary key (recid)
+);</code></pre><p>– 修改选课记录表 ，添加外键约束(也可以建表的时候就加上)</p>
+<pre><code>alter table tb_record add constraint fk_record_sid foreign key (sid) references tb_student (stuid);
+alter table tb_record add constraint fk_record_cid foreign key (cid) references tb_course (courseid);</code></pre><p>– 修改选课记录表添加唯一约束</p>
+<pre><code>alter table tb_record add constraint uni_record_sid_cid unique (sid, cid);</code></pre><h3 id="有条件查找需要的数据（非常重要）"><a href="#有条件查找需要的数据（非常重要）" class="headerlink" title="有条件查找需要的数据（非常重要）"></a>有条件查找需要的数据（非常重要）</h3><h4 id="1-学生选课系统"><a href="#1-学生选课系统" class="headerlink" title="1.学生选课系统"></a>1.学生选课系统</h4><pre><code class="python">-- 如果存在名为school的数据库就删除它
+drop database if exists school;
+-- 创建名为school的数据库并设置默认的字符集和排序方式
+create database school default charset utf8;
+-- 切换到school数据库上下文环境
+use school;
+-- 创建学院表
+create table tb_college
+(
+collid         int auto_increment comment &#39;编号&#39;,
+collname     varchar(50) not null comment &#39;名称&#39;,
+collintro     varchar(500) default &#39;&#39; comment &#39;介绍&#39;,
+primary key (collid)
+);
+-- 创建学生表
+create table tb_student
+(
+stuid         int not null comment &#39;学号&#39;,
+stuname     varchar(20) not null comment &#39;姓名&#39;,
+stusex         boolean default 1 comment &#39;性别&#39;,
+stubirth     date not null comment &#39;出生日期&#39;,
+stuaddr     varchar(255) default &#39;&#39; comment &#39;籍贯&#39;,
+collid         int not null comment &#39;所属学院&#39;,
+primary key (stuid),
+foreign key (collid) references tb_college (collid)
+);
+-- 创建教师表
+create table tb_teacher
+(
+teaid         int not null comment &#39;工号&#39;,
+teaname     varchar(20) not null comment &#39;姓名&#39;,
+teatitle     varchar(10) default &#39;助教&#39; comment &#39;职称&#39;,
+collid         int not null comment &#39;所属学院&#39;,
+primary key (teaid),
+foreign key (collid) references tb_college (collid)
+);
+-- 创建课程表
+create table tb_course
+(
+couid         int not null comment &#39;编号&#39;,
+couname     varchar(50) not null comment &#39;名称&#39;,
+coucredit     int not null comment &#39;学分&#39;,
+teaid         int not null comment &#39;授课老师&#39;,
+primary key (couid),
+foreign key (teaid) references tb_teacher (teaid)
+);
+-- 创建选课记录表
+create table tb_record
+(
+recid         int auto_increment comment &#39;选课记录编号&#39;,
+sid         int not null comment &#39;选课学生&#39;,
+cid         int not null comment &#39;所选课程&#39;,
+seldate     datetime default now() comment &#39;选课时间日期&#39;,
+score         decimal(4,1) comment &#39;考试成绩&#39;,
+primary key (recid),
+foreign key (sid) references tb_student (stuid),
+foreign key (cid) references tb_course (couid),
+unique (sid, cid)
+);
+
+-- 插入学院数据
+insert into tb_college (collname, collintro) values 
+(&#39;计算机学院&#39;, &#39;创建于1956年是我国首批建立计算机专业。学院现有计算机科学与技术一级学科和网络空间安全一级学科博士学位授予权，其中计算机科学与技术一级学科具有博士后流动站。计算机科学与技术一级学科在2017年全国第四轮学科评估中评为A；2019 U.S.News全球计算机学科排名26名；ESI学科排名0.945‰，进入全球前1‰，位列第43位。&#39;),
+(&#39;外国语学院&#39;, &#39;1998年浙江大学、杭州大学、浙江农业大学、浙江医科大学四校合并，成立新的浙江大学。1999年原浙江大学外语系、原杭州大学外国语学院、原杭州大学大外部、原浙江农业大学公外部、原浙江医科大学外语教学部合并，成立浙江大学外国语学院。2003年学院更名为浙江大学外国语言文化与国际交流学院。&#39;),
+(&#39;经济管理学院&#39;, &#39;四川大学经济学院历史悠久、传承厚重，其前身是创办于1905年的四川大学经济科,距今已有100多年的历史。已故著名经济学家彭迪先、张与九、蒋学模、胡寄窗、陶大镛、胡代光，以及当代著名学者刘诗白等曾先后在此任教或学习。在长期的办学过程中，学院坚持以马克思主义的立场、观点、方法为指导，围绕建设世界一流经济学院的奋斗目标，做实“两个伟大”深度融合，不断提高党的建设质量与科学推进一流事业深度融合。&#39;);
+
+-- 插入学生数据
+insert into tb_student (stuid, stuname, stusex, stubirth, stuaddr, collid) values
+(1001, &#39;杨逍&#39;, 1, &#39;1990-3-4&#39;, &#39;四川成都&#39;, 1),
+(1002, &#39;任我行&#39;, 1, &#39;1992-2-2&#39;, &#39;湖南长沙&#39;, 1),
+(1033, &#39;王语嫣&#39;, 0, &#39;1989-12-3&#39;, &#39;四川成都&#39;, 1),
+(1572, &#39;岳不群&#39;, 1, &#39;1993-7-19&#39;, &#39;陕西咸阳&#39;, 1),
+(1378, &#39;纪嫣然&#39;, 0, &#39;1995-8-12&#39;, &#39;四川绵阳&#39;, 1),
+(1954, &#39;林平之&#39;, 1, &#39;1994-9-20&#39;, &#39;福建莆田&#39;, 1),
+(2035, &#39;东方不败&#39;, 1, &#39;1988-6-30&#39;, null, 2),
+(3011, &#39;林震南&#39;, 1, &#39;1985-12-12&#39;, &#39;福建莆田&#39;, 3),
+(3755, &#39;项少龙&#39;, 1, &#39;1993-1-25&#39;, null, 3),
+(3923, &#39;杨不悔&#39;, 0, &#39;1985-4-17&#39;, &#39;四川成都&#39;, 3),
+(4040, &#39;隔壁老王&#39;, 1, &#39;1989-1-1&#39;, &#39;四川成都&#39;, 2);
+
+-- 删除学生数据
+delete from tb_student where stuid=4040;
+
+-- 更新学生数据
+update tb_student set stuname=&#39;杨过&#39;, stuaddr=&#39;湖南长沙&#39; where stuid=1001;
+
+-- 插入老师数据
+insert into tb_teacher (teaid, teaname, teatitle, collid) values 
+(1122, &#39;张三丰&#39;, &#39;教授&#39;, 1),
+(1133, &#39;宋远桥&#39;, &#39;副教授&#39;, 1),
+(1144, &#39;杨逍&#39;, &#39;副教授&#39;, 1),
+(2255, &#39;范遥&#39;, &#39;副教授&#39;, 2),
+(3366, &#39;韦一笑&#39;, &#39;讲师&#39;, 3);
+
+-- 插入课程数据
+insert into tb_course (couid, couname, coucredit, teaid) values 
+(1111, &#39;Python程序设计&#39;, 3, 1122),
+(2222, &#39;Web前端开发&#39;, 2, 1122),
+(3333, &#39;操作系统&#39;, 4, 1122),
+(4444, &#39;计算机网络&#39;, 2, 1133),
+(5555, &#39;编译原理&#39;, 4, 1144),
+(6666, &#39;算法和数据结构&#39;, 3, 1144),
+(7777, &#39;经贸法语&#39;, 3, 2255),
+(8888, &#39;成本会计&#39;, 2, 3366),
+(9999, &#39;审计学&#39;, 3, 3366);
+
+-- 插入选课数据
+insert into tb_record (sid, cid, seldate, score) values 
+(1001, 1111, &#39;2017-09-01&#39;, 95),
+(1001, 2222, &#39;2017-09-01&#39;, 87.5),
+(1001, 3333, &#39;2017-09-01&#39;, 100),
+(1001, 4444, &#39;2018-09-03&#39;, null),
+(1001, 6666, &#39;2017-09-02&#39;, 100),
+(1002, 1111, &#39;2017-09-03&#39;, 65),
+(1002, 5555, &#39;2017-09-01&#39;, 42),
+(1033, 1111, &#39;2017-09-03&#39;, 92.5),
+(1033, 4444, &#39;2017-09-01&#39;, 78),
+(1033, 5555, &#39;2017-09-01&#39;, 82.5),
+(1572, 1111, &#39;2017-09-02&#39;, 78),
+(1378, 1111, &#39;2017-09-05&#39;, 82),
+(1378, 7777, &#39;2017-09-02&#39;, 65.5),
+(2035, 7777, &#39;2018-09-03&#39;, 88),
+(2035, 9999, default, null),
+(3755, 1111, default, null),
+(3755, 8888, default, null),
+(3755, 9999, &#39;2017-09-01&#39;, 92);</code></pre>
+<pre><code>-- 查询所有学生的信息
+select * from tb_student;`
+-- 这样才是精确地查找
+`select stuid,stuname,stusex,stubirth,stuaddr,collid from tb_student;</code></pre><pre><code>-- 查询所有课程名称及学分(投影、别名)
+-- 投影
+select couname,coucredit from tb_course;
+-- 别名，一般是与别的查询项区分，as可以省略
+select couname as 课程名称,coucredit as 学分 from tb_course;</code></pre><pre><code>-- 查询学生姓名、性别、生日
+select stuname,stusex,stubirth from tb_student;
+-- (1)1显示男，0显示女;数据库通用方法
+select stuname,(case stusex when 1 then &#39;男&#39; else &#39;女&#39; end) as stusex,
+stubirth from tb_student;
+-- (2)MySQL专用
+select stuname, if(stusex, &#39;男&#39;, &#39;女&#39;) as stusex,stubirth from tb_student;
+-- (3)将学生的生日变成年龄;datediff(now(),学生出生日期)- 获得的是学生出生的天数；floor代表向下取整
+select floor(datediff(now(), stubirth) / 365) as stuage from tb_student;</code></pre><pre><code>-- 给查到的数据后加字；concat(查找项,字符串)
+select concat(stuname,‘牛逼’) as stuname from tb_student;</code></pre><pre><code>-- 查询所有女学生的姓名和出生日期
+select stuname,stubirth from tb_student where stusex=0;</code></pre><pre><code>-- 查询80后的姓名和出生日期
+-- (1)
+select stuname,stubirth from tb_student where stubirth&gt;=&#39;1980-1-1&#39; and stubirth&lt;=&#39;1989-12-31&#39;;
+-- (2)更直观简洁
+select stuname,stubirth from tb_student where stubirth between &#39;1980-1-1&#39; and &#39;1989-12-31&#39;;
+-- 查询80后女生的姓名和出生日期
+select stuname,stubirth from tb_student where stubirth between &#39;1980-1-1&#39; and &#39;1989-12-31&#39; and stusex=0;</code></pre><pre><code>-- 查询姓杨的学生姓名和性别(模糊)- %是通配符，表示一个字两个字或三个字...
+select stuname,stusex from tb_student where stuname like &#39;杨%&#39;;
+-- 查询姓杨名字两个字的学生姓名和性别(模糊)- _匹配一个字符
+select stuname,stusex from tb_student where stuname like &#39;杨_&#39;;
+
+-- 查询名字中有“不”，“嫣”的学生姓名—— 条件要给全
+select stuname from tb_student where stuname like &#39;%不%&#39; or stuname like &#39;%嫣%&#39;;</code></pre><pre><code>-- 查询没有录入家庭住址的学生姓名;—— 判断是否为null，不能用=，而是用 is 和 is not
+select stuname from tb_student where stuaddr is null;
+select stuname from tb_student where stuaddr is not null;</code></pre><pre><code>-- 查询学生的家庭住址(去重)——  distinct-内置的一个去重函数、关键字
+select distinct stuaddr from tb_student where stuaddr is not null;</code></pre><pre><code>-- 查询男学生的姓名和生日，按生日从大到小排序(先筛选在排序)
+-- (order by 排序标准 升序/降序)-排序标准可以指定多个，用逗号隔开，默认是升序 
+-- 降序：desc   升序：asc
+select stuname, stubirth from tb_student where stusex=1 order by stubirth;
+select floor(datediff(now(), stubirth) / 365) as stuage from tb_student where stusex=1 order by stuage desc, stuid;</code></pre><pre><code>-- 查询年龄最小、最大的学生的出生日期(聚合函数);可以加筛选条件
+select min(stubirth) from tb_student;
+select max(stubirth) from tb_student where stusex=1;</code></pre><pre><code>-- 求选编号1111课程的学生成绩的平均分,以及多少人选择了1111课程
+-- avg(),count() 都会忽略空值
+select avg(score) as avgscore from tb_record where  cid=1111;
+select count(sid) as total from tb_record where cid=1111;</code></pre><pre><code>-- 查询学号为1001的学生所有课程的平均分(筛选和聚合函数)
+select avg(score) as avgscore from tb_record where sid=1001;</code></pre><pre><code>-- 查询每个学生的学号和平均成绩(分组和聚合函数)-分组后计算每个分组的数据
+-- group by 分组标准  round(数字,小数位数)—— 保留指定位数小数
+select sid, round(avg(score), 1) as avgscore from tb_record group by sid;</code></pre><pre><code>-- 查询男、女学生的数量(分组，筛选再操作)
+select stusex,count(stuid) as total from tb_student group by stusex order by total desc;</code></pre><pre><code>-- 查询学生平均大于90分的学生的平均成绩
+-- *分组前的筛选用where，分组后的筛选用having*
+select sid, round(avg(score), 1) as avgscore from tb_record group by sid having avgscore&gt;=90;</code></pre><pre><code>-- 查询年龄最大的学生姓名（子查询、嵌套查询）
+-- 将一个查询的结果作为另一个查询的的一个工具
+select stuname from tb_student where stubirth=(select min(stubirth) from tb_student);</code></pre><pre><code>-- 查询选了两门以上课程的学生姓名(子查询、分组、集合)
+-- 先把子查询写出：select sid from tb_record group by sid having count(sid)&gt;2;
+select stuname from tb_student where stuid in 
+(select sid from tb_record group by sid having count(sid)&gt;2);</code></pre><pre><code>-- 查询课程名称和授课老师(连表查询,需要查询2张表)
+-- 连接表时，如果没有给连接两张表的条件，就会形成笛卡尔积
+-- (1)写法一
+select couname, teaname from tb_course, tb_teacher 
+where tb_course.teaid=tb_teacher.teaid;
+-- (2)写法二
+select couname, teaname from tb_course t1 inner join tb_teacher t2
+on t1.teaid=t2.teaid;</code></pre><pre><code>-- 查询学生姓名、课程名称、以及成绩（连接查询，查3张表）
+select stuid, couname, score from tb_student, tb_course,tb_record 
+where stuid=sid and couid=cid  and score is not null;</code></pre><pre><code>-- 查询学生姓名、平均成绩（子查询、连接查询）
+-- **将子查询得到的表作为临时表，然后进行连接查询**
+select stuname, avgscore from tb_student t1,(select sid, round(avg(score),1) 
+as avgscore from tb_record group by sid) t2 where stuid=sid;</code></pre><pre><code>-- **外连接：outer join - 左外连接/右外连接 —— 不满足连表条件时，能够查完整
+-- 写在前边的表就是左表，后边的就是右表；左连接就是左边表查完整，右连接就是右表查完整，不满足连表条件补空值
+-- 查询学生姓名、选课数量（子查询、左连接查询）
+-- ifnull(num, N) —— 如果num不为空，num是多少这个函数的值就是num，num为空，就输出N
+-- MySQL只支持这一种写法
+select stuname, ifnull(total, 0) from tb_student left outer join (select sid, count(sid)
+as total from tb_record group by sid) t2 on stuid=sid order by total;</code></pre><pre><code>-- 分页查询
+-- 每次查4条
+select * from tb_student order by stuid limit 4;
+-- 跳过8条查4条
+select * from tb_student order by stuid limit 4 offset 8;
+select * from tb_student order by stuid limit 8, 4; </code></pre><p>/*<br>MySQL书写顺序：select …from….where … group by ……having ….. order by …limit…. offset….<br>根据实际情况后边的一些可以省略<br>*/</p>
+<h4 id="2-管理部门"><a href="#2-管理部门" class="headerlink" title="2.管理部门"></a>2.管理部门</h4><pre><code class="python">drop database if exists hrs;
+create database hrs default charset utf8;
+
+use hrs;
+
+drop table if exists tb_emp;
+drop table if exists tb_dept;
+
+create table tb_dept
+(
+dno int not null comment &#39;编号&#39;,
+dname varchar(10) not null comment &#39;名称&#39;,
+dloc varchar(20) not null comment &#39;所在地&#39;,
+primary key (dno)
+);
+
+insert into tb_dept values 
+    (10, &#39;会计部&#39;, &#39;北京&#39;),
+    (20, &#39;研发部&#39;, &#39;成都&#39;),
+    (30, &#39;销售部&#39;, &#39;重庆&#39;),
+    (40, &#39;运维部&#39;, &#39;深圳&#39;);
+
+create table tb_emp
+(
+eno int not null comment &#39;员工编号&#39;,
+ename varchar(20) not null comment &#39;员工姓名&#39;,
+job varchar(20) not null comment &#39;员工职位&#39;,
+mgr int comment &#39;主管编号&#39;,
+sal int not null comment &#39;员工月薪&#39;,
+comm int comment &#39;每月补贴&#39;,
+dno int comment &#39;所在部门编号&#39;,
+primary key (eno)
+);
+
+alter table tb_emp add constraint fk_emp_mgr foreign key (mgr) references tb_emp (eno);
+alter table tb_emp add constraint fk_emp_dno foreign key (dno) references tb_dept (dno);
+
+insert into tb_emp values 
+    (7800, &#39;张三丰&#39;, &#39;总裁&#39;, null, 9000, 1200, 20),
+    (2056, &#39;乔峰&#39;, &#39;分析师&#39;, 7800, 5000, 1500, 20),
+    (3088, &#39;李莫愁&#39;, &#39;设计师&#39;, 2056, 3500, 800, 20),
+    (3211, &#39;张无忌&#39;, &#39;程序员&#39;, 2056, 3200, null, 20),
+    (3233, &#39;丘处机&#39;, &#39;程序员&#39;, 2056, 3400, null, 20),
+    (3251, &#39;张翠山&#39;, &#39;程序员&#39;, 2056, 4000, null, 20),
+    (5566, &#39;宋远桥&#39;, &#39;会计师&#39;, 7800, 4000, 1000, 10),
+    (5234, &#39;郭靖&#39;, &#39;出纳&#39;, 5566, 2000, null, 10),
+    (3344, &#39;黄蓉&#39;, &#39;销售主管&#39;, 7800, 3000, 800, 30),
+    (1359, &#39;胡一刀&#39;, &#39;销售员&#39;, 3344, 1800, 200, 30),
+    (4466, &#39;苗人凤&#39;, &#39;销售员&#39;, 3344, 2500, null, 30),
+    (3244, &#39;欧阳锋&#39;, &#39;程序员&#39;, 3088, 3200, null, 20),
+    (3577, &#39;杨过&#39;, &#39;会计&#39;, 5566, 2200, null, 10),
+    (3588, &#39;朱九真&#39;, &#39;会计&#39;, 5566, 2500, null, 10);</code></pre>
+<pre><code>-- 查询月薪最高的员工姓名和工资(子查询)
+select ename,sal from tb_emp where sal=(select max(sal) from tb_emp);</code></pre><pre><code>-- 查询员工的姓名和年薪((月薪+补贴)*13)-要处理空值
+select ename,(sal+ifnull(comm,0))*13 as yearsal from tb_emp order by yearsal desc;</code></pre><pre><code>-- 查询有员工的部门的编号和人数
+select dno,count(eno) as total from tb_emp group by dno;</code></pre><pre><code>-- 查询所有部门的名称和人数(临时表、左外连接)
+select dname,ifnull(total,0) as total from tb_dept t1 left outer join
+(select dno,count(dno) as total from tb_emp group by dno) t2 
+on t1.dno=t2.dno;</code></pre><pre><code>-- 查询月薪最高的员工(Boss除外)的姓名和工资(排除mgr的空值)
+select ename,sal from tb_emp where sal=(select max(sal) from tb_emp where mgr is not null);</code></pre><pre><code>-- 查询薪水超过平均薪水的员工的姓名和工资
+-- 子查询
+select avg(sal) as avgsal from tb_emp;
+select ename,sal from tb_emp where sal&gt;(select avg(sal) as avgsal from tb_emp);</code></pre><pre><code>-- ================================================
+-- 查询薪水超过其所在部门平均薪水的员工的姓名、部门编号和工资
+​    -- 每个部门的平均薪水
+​    select dno, avg(sal) as avgsal from tb_emp group by dno;
+
+​    -- 要写清楚取的是哪个表里的dno，不然有歧义
+​    select ename, sal, t1.dno from tb_emp t1, 
+​    (select dno, avg(sal) as avgsal from tb_emp group by dno) t2 
+​    where t1.dno=t2.dno and sal&gt;avgsal;
+​    -- 或
+​    select ename, sal, t1.dno from tb_emp t1 inner join 
+​    (select dno, avg(sal) as avgsal from tb_emp group by dno) t2 
+​    on t1.dno=t2.dno where sal&gt;avgsal;
+-- ===============================================</code></pre><p>– 查询部门中薪水最高的人姓名、工资和所在部门名称</p>
+<pre><code>-- 查询主管的姓名和职位
+select ename, job from tb_emp where eno in (select distinct mgr from tb_emp where mgr is not null);</code></pre><pre><code>-- 查询月薪排名4~6名的员工姓名和工资
+-- 月薪排序
+select ename, sal from tb_emp order by sal desc;
+-- 只看4-6的
+select ename, sal from tb_emp order by sal desc limit 4, 3;</code></pre><h3 id="优化查询"><a href="#优化查询" class="headerlink" title="优化查询"></a>优化查询</h3><h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><p>1.使用MySQL的<strong>explain</strong>关键字来查看SQL的执行计划</p>
+<pre><code class="python">====写法
+explain select * from tb_student where stuname=&#39;林震南&#39;\G
+====效果
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: tb_student
+   partitions: NULL
+         type: ALL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 11
+     filtered: 10.00
+        Extra: Using where
+1 row in set, 1 warning (0.00 sec)</code></pre>
+<p>2.创建索引语法</p>
+<p>创建索引的规范：<strong>前缀+表名+列名 —&gt; idx_student_name</strong></p>
+<pre><code class="python"># 第一种
+create index idx_student_name on tb_student(stuname);
+# 第二种:创建再列的第一个名字的字符上
+create index idx_student_name on tb_student(stuname(1));</code></pre>
+<p>3.删除索引</p>
+<pre><code class="python">alter table tb_emp drop index idx_emp_ename;
+# 或
+drop index idx_emp_ename on tb_emp;</code></pre>
+<p>4.索引设计原则</p>
+<pre><code> **最适合**索引的列是出现在**WHERE子句**和连接子句中的列。
+
+ 索引列的基数越大（取值多重复值少），索引的效果就越好。
+
+ 使用**前缀索引**可以减少索引占用的空间，内存中可以缓存更多的索引。
+
+ **索引不是越多越好**，虽然索引加速了读操作（查询），但是写操作（增、删、改）都会变得更慢，因为数据的变化会导致索引的更新，就如同书籍章节的增删需要更新目录一样。
+
+   使用InnoDB存储引擎时，表的普通索引都会保存主键的值，所以**主键要尽可能选择较短的数据类型**，这样可以有效的减少索引占用的空间，利用提升索引的缓存效果。</code></pre><h3 id="MySQL创建远程连接："><a href="#MySQL创建远程连接：" class="headerlink" title="MySQL创建远程连接："></a>MySQL创建远程连接：</h3><p>1)创建远程连接的用户</p>
+<p><code>create user &#39;root&#39;@&#39;too&#39; identified by &#39;密码&#39;;</code></p>
+<p>​    – too是%的话，代表公网任何人都可以访问；too是特定的IP地址，表示只给这个IP可以访问连接</p>
+<p>2)给用户授予指定权限</p>
+<p><code>grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; with grant option;</code></p>
+<pre><code>         `-- *.*表示给予它超级管理员权限；也可以替换为某一个库，表示只给他访问这一个库的权限。%表示给予所有用户相应的权限，也可以给特定的用户；with grant option表示给予用户可以将这些权限给予别人的权限，获得真正的超级管理员权限`</code></pre><h3 id="老师的笔记"><a href="#老师的笔记" class="headerlink" title="老师的笔记"></a>老师的笔记</h3><p>使用MySQL管理数据</p>
+<pre><code>-- 显示所有数据库
+show databases;
+-- 如果存在名为school的数据库就删除它
+drop database if exists school;
+-- 创建名为school的数据库并指定默认的字符集为utf-8
+create database school default charset utf8;
+
+-- 切换到school数据库
+use school;
+-- 查看所有表
+show tables;
+-- 如果存在名为tb_student的表就删除它
+drop table if exists tb_student;
+-- 创建名为tb_student的表
+create table tb_student (
+    stuid integer not null comment &#39;学号&#39;,
+    stuname varchar(20) not null comment &#39;姓名&#39;,
+    stusex boolean default 1 comment &#39;性别&#39;,
+    stubirth date comment &#39;生日&#39;,
+    primary key (stuid)
+);
+
+-- not null 非空约束（列的值不能为空）
+-- defualt 默认值约束（如果没有给列赋值就使用默认值）
+-- primary key 主键约束（唯一标识一条记录的列就是主键，必须唯一）
+
+-- 修改tb_student表添加一个列
+alter table tb_student add column stuaddr varchar(255);
+-- 修改tb_student表删除一个列
+alter table tb_student drop column stuaddr;
+-- 修改tb_student表修改一个列
+alter table tb_student modify column stuaddr varchar(100);
+alter table tb_student change column stuaddr foo varchar(50);
+
+-- 向tb_student表插入数据
+insert into tb_student values (1001, &#39;骆昊&#39;, 1, &#39;1980-11-28&#39;, &#39;四川成都&#39;);
+insert into tb_student (stuid, stuname) values (1003, &#39;王大锤&#39;);
+insert into tb_student (stuid, stuname, stusex) values 
+    (1004, &#39;白元芳&#39;, 1), 
+    (1005, &#39;武则天&#39;, 0), 
+    (1006, &#39;狄仁杰&#39;, 1);
+-- 删除数据
+delete from tb_student where stuid=1002;
+delete from tb_student where stuid in (1004, 1006);
+-- 查看tb_student表
+select * from tb_student;
+select * from tb_student\G
+
+-- 错误：SQL语法错误
+ERROR 1064 (42000): You have an error in your SQL syntax
+-- 错误：列的数量跟值的数量不匹配
+ERROR 1136 (21S01): Column count doesn&#39;t match value count at row 1
+-- 错误：重复的主键
+ERROR 1062 (23000): Duplicate entry &#39;1001&#39; for key &#39;PRIMARY&#39;
+-- 错误：数据太长列装不下
+ERROR 1406 (22001): Data too long for column &#39;stuname&#39; at row 1</code></pre>]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>玩转MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pyMySQL三方库</title>
+    <url>/2019/10/29/pymysql%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>python中pymysql库的安装，如何连接MySQL数据库、如何给MySQL数据库增加数据、如何删除MySQL的数据、如何简单的查找MySQL的所有数据。以及开发时py文件的版本控制问题</p>
+<a id="more"></a>
+<h3 id="python对接使用pyMySQL库"><a href="#python对接使用pyMySQL库" class="headerlink" title="python对接使用pyMySQL库"></a>python对接使用pyMySQL库</h3><h4 id="安装PyMySQL三方库："><a href="#安装PyMySQL三方库：" class="headerlink" title="安装PyMySQL三方库："></a>安装PyMySQL三方库：</h4><pre><code>1. PyCharm ---&gt; (File---&gt;)Settings/Preferences ---&gt; Project Interpreter ---&gt; + -    --&gt; Install Package
+2. Terminal ---&gt; pip install pymysql -i https://pypi.doubanio.com/simple
+python装的库之间可能有冲突用：`pip check`  可以检测哪些库有冲突</code></pre><p><code>pip freeze</code> —— 看装了哪些三方库</p>
+<p><code>pip freeze &gt; requirements.txt</code>   —— 将安装三方库的信息重定向到requirements.txt ，团队开发时非常重要，他们克隆时，需要配置一样的虚拟环境</p>
+<p><code>pip install -r requirements.txt</code> ——其他开发者根据requirements.txt重建依赖项（所有需要的三方库）</p>
+<h4 id="连接MySQL时可能出现的错误："><a href="#连接MySQL时可能出现的错误：" class="headerlink" title="连接MySQL时可能出现的错误："></a><strong>连接MySQL时可能出现的错误</strong>：</h4><pre><code>    错误：连接被对端重置 - 阿里云封IP - 安全管控中添加IP白名单
+    Connection reset by peer
+
+    错误：无法连接指定的服务器 - IP地址或者端口写错
+    &quot;Can&#39;t connect to MySQL server on &#39;1.2.3.4&#39; (timed out)&quot;
+
+    错误：访问被拒绝 - 用户名或密码错误
+    &quot;Access denied for user &#39;root&#39;@&#39;1.2.3.4&#39; (using password: YES)&quot;)
+
+    错误：未知的数据库 - 数据库名字写错了
+    &quot;Unknown database &#39;...&#39;&quot;
+
+    错误：AttributeError - 字符集写错了
+    AttributeError: &#39;NoneType&#39; object has no attribute &#39;encoding&#39;</code></pre><hr>
+<h3 id="python中操作MySQL数据库"><a href="#python中操作MySQL数据库" class="headerlink" title="python中操作MySQL数据库"></a>python中操作MySQL数据库</h3><h4 id="1-导入MySQL库"><a href="#1-导入MySQL库" class="headerlink" title="1.导入MySQL库"></a><strong>1.导入MySQL库</strong></h4><pre><code>import pymysql</code></pre><h4 id="2-连接MySQL数据库"><a href="#2-连接MySQL数据库" class="headerlink" title="2.连接MySQL数据库"></a><strong>2.连接MySQL数据库</strong></h4><pre><code class="python">pymysql.connect(host=&#39;121.199.58.243&#39;, port=3306,
+                       user=&#39;root&#39;, password=&#39;z170116l&#39;,
+                       database=&#39;schools&#39;,charset=&#39;utf8&#39;,
+                       autocommit=True)
+# autocommit=True  - 表示自动提交，不写这个就代表手动提交
+# 使用时可以将这部分写进函数，避免代码重复</code></pre>
+<h4 id="2-1给MySQL添加数据"><a href="#2-1给MySQL添加数据" class="headerlink" title="2.1给MySQL添加数据"></a><strong>2.1给MySQL添加数据</strong></h4><pre><code class="python">stuid = int(input(&#39;学号：&#39;))
+sname = input(&#39;姓名：&#39;)
+stusex = int(input(&#39;性别：&#39;))
+stubir = input(&#39;生日：&#39;)
+stuaddr = input(&#39;地址：&#39;)
+acid = int(input(&#39;学院编号：&#39;))
+try:
+    # 1）获取游标
+    with conn.cursor() as cursor:
+        # 2）发出MySQL请求
+        # 类似于文件作用域的作用，离开这个区域，游标自动关闭
+        # ——插入信息，后边的元组与前边的%S一一对应
+        result = cursor.execute(&#39;insert into tb_student values (%s,%s,%s,%s,%s,%s)&#39;,(stuid,sname,stusex,stubir,stuaddr,acid))
+    if result == 1:
+        print(&#39;添加学生成功!!&#39;)
+    # 3）成功就提交
+    # conn.commit()   - 手动提交，让MySQL真正去执行，持久化上边的操作
+except pymysql.MySQLError as err:
+    # 3）失败就回滚
+    # conn.rollback()  - 回滚，如果上边操作失败，就恢复之前的操作状态
+    print(err,&#39;添加学生失败！&#39;)
+finally:
+    # 4）释放连接
+    # 连接被关闭，MySQL默认只能连接151个
+    conn.close()</code></pre>
+<h4 id="2-2删除数据库的数据"><a href="#2-2删除数据库的数据" class="headerlink" title="2.2删除数据库的数据"></a><strong>2.2删除数据库的数据</strong></h4><pre><code class="python">stu = int(input(&#39;输入删除学生的学号:&#39;))
+try:
+    # 2）获取游标
+    with conn.cursor() as cursor:
+        # 3）发出MySQL请求
+        # 类似于文件作用域的作用，离开这个区域，游标自动关闭
+        # ——删除数据
+        result = cursor.execute(&#39;delete from tb_student where stuid=%s&#39;,stu)
+    if result == 1:
+        print(&#39;删除学生成功!!&#39;)
+    # 4）成功就提交
+    # conn.commit()   - 手动提交，让MySQL真正去执行，持久化上边的操作
+except pymysql.MySQLError as err:
+    # 4）失败就回滚
+    # conn.rollback()  - 回滚，如果上边操作失败，就恢复之前的操作状态
+    print(err,&#39;添加学生失败！&#39;)
+finally:
+    # 5）释放连接
+    # 连接被关闭，MySQL默认只能连接151个
+    conn.close()</code></pre>
+<h4 id="2-3查找MySQL数据库的数据-比较重要"><a href="#2-3查找MySQL数据库的数据-比较重要" class="headerlink" title="2.3查找MySQL数据库的数据(比较重要)"></a><strong>2.3查找MySQL数据库的数据</strong>(比较重要)</h4><h5 id="查找所有数据"><a href="#查找所有数据" class="headerlink" title="查找所有数据"></a>查找所有数据</h5><pre><code class="python">try:
+    &quot;&quot;&quot;
+    如果想要字典型的游标，这样写:
+    -- with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+    如果想要元组型的游标，这样写:
+    -- with conn.cursor() as cursor:
+    &quot;&quot;&quot;
+    with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+        # 1.查所有的数据(游标，会游动)
+        cursor.execute(&#39;select * from tb_student&#39;)
+        # 2.拿到执行sql语句后的数据，去拿数据
+        # cursor.fetchmany(n) - 拿n个信息
+        # cursor.fetchone()  - 拿一个的信息
+        # cursor.fetchall()  - 拿所有的信息
+        studata1 = cursor.fetchmany(6)
+        # 可以遍历拿到每一个的信息
+        for row in studata1:
+            print(row)
+            print(&#39;=============&#39;)
+        studata2 = cursor.fetchone()
+        studata = cursor.fetchall()
+        # 展示拿到的数据(结果是元组，元组的元素是每一个表的每一个信息也是元组)
+        print(studata)
+        print(studata1)
+        print(studata2)
+except pymysql.MySQLError as err:
+    print(err, &#39;获取信息失败！&#39;)
+finally:
+    conn.close()</code></pre>
+<h5 id="查找需要的数据-非常重要"><a href="#查找需要的数据-非常重要" class="headerlink" title="查找需要的数据(非常重要)"></a>查找需要的数据(非常重要)</h5><p>筛选(精确和模糊) /排序/分组和统计/子查询(嵌套查询)/连接查询/分页查询 </p>
+<p>——详情见<code>MySQL数据库.md</code>文档</p>
+<h3 id="将查询到的数据处理成对象"><a href="#将查询到的数据处理成对象" class="headerlink" title="将查询到的数据处理成对象"></a>将查询到的数据处理成对象</h3><pre><code class="python"># 新建一个学生类
+class Student:
+    def __init__(self, no, name, sex, birth, addr, college):
+        self.no = no
+        self.name = name
+        self.sex = sex
+        self.birth = birth
+        self.addr = addr
+        self.college = college
+    def __str__(self):
+        return f&#39;{self.no}: {self.name}&#39;
+conn = pymysql.connect(host=&#39;121.199.58.243&#39;, port=3306,
+                       user=&#39;root&#39;, password=&#39;z170116l&#39;,
+                       database=&#39;schools&#39;,charset=&#39;utf8&#39;,
+                       autocommit=True)
+try:
+    with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+        # 查询所有数据，得到游标，现在是字典形式的游标
+        cursor.execute(&#39;select stuid as no, stuname as name, &#39;
+                       &#39;stusex as sex, stubirth as birth, &#39;
+                       &#39;stuaddr as addr, acid as college &#39;
+                       &#39;from tb_student&#39;)
+        for row in cursor.fetchall():
+            # 为每一个学生建立学生对象(如果得到的游标是元组就*row，得到的游标是字典，就**row)
+            student = Student(**row)
+            print(student)
+except pymysql.MySQLError as err:
+    print(err)
+finally:
+    conn.close()</code></pre>
+<hr>
+<h3 id="python版本控制"><a href="#python版本控制" class="headerlink" title="python版本控制"></a>python版本控制</h3><p>1.在Github或Gitee上新建一个仓库，用作存储你的代码</p>
+<p>2.复制你新建的仓库的ssh网址</p>
+<p>3.打开pycharm,点击check，选中Git</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C1.check.png" srcset="/img/loading.gif" alt="1.check"></p>
+<p>4.输入复制的仓库ssh地址</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C2.paste.png" srcset="/img/loading.gif" alt="2.paste"></p>
+<p>5.点击file下的settings，在选择project interpreter</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C3.create.png" srcset="/img/loading.gif" alt="3.create"></p>
+<p>6.主界面点击右上角的√，提交到一个栈空间</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C4.png" srcset="/img/loading.gif" alt="4"></p>
+<p>7.点击push提交到仓库中</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C5.png" srcset="/img/loading.gif" alt="5"></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>玩转pyMySQL库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客搭建</title>
     <url>/2019/10/24/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<p>hexo博客搭建的步骤以及注意事项，以及如何更改主题以及主题的配置</p>
-<a id="more"></a>]]></content>
+<a id="more"></a>
+
+
+<h3 id="1-搭建博客"><a href="#1-搭建博客" class="headerlink" title="1. 搭建博客"></a>1. 搭建博客</h3><p>使用hexo搭建个人博客前需要先在自己的电脑上装好git和node.js   </p>
+<ol>
+<li>首先在自己的电脑上创建一个空的文件夹’Hexo’  </li>
+<li>在gitbash中终端中通过<code>cd</code>指令进入到刚才创建的文件夹中   </li>
+<li>输入指令 <code>npm install -g hexo</code> 安装Hexo  </li>
+<li>输入指令 <code>hexo init</code> 进行初始化  </li>
+<li>依次输入指令<code>npm install</code> <code>hexo server</code> 启动服务器<br>博客内容发生改变后可以通过<code>hexo clean</code> <code>hexo generate</code> <code>hexo deploy</code> <code>hexo server</code>刷新后重新启动    </li>
+</ol>
+<h3 id="2-部署博客"><a href="#2-部署博客" class="headerlink" title="2. 部署博客"></a>2. 部署博客</h3><ol>
+<li><p>在github上创建一个空的仓库，仓库名： <code>用户名.github.io</code>  </p>
+</li>
+<li><p>修改博客本地仓库中的配置文件（Hexo目录下的_config.yml文件）,在文件末尾添加一下选中内容</p>
+</li>
+<li><p>使用git部署, 输入指令<code>npm install hexo-deployer-git --save</code>  </p>
+</li>
+<li><p>输入指令<code>hexo clean</code> <code>hexo generate</code> <code>hexo deploy</code> 对博客进行提交</p>
+</li>
+<li><p>将仓库地址的最后一部分去掉.git作为博客地址, 例如: ‘<a href="https://tingzai.github.io/" target="_blank" rel="noopener">https://tingzai.github.io/</a>‘</p>
+</li>
+</ol>
+]]></content>
       <categories>
-        <category>methods</category>
+        <category>博客搭建</category>
       </categories>
       <tags>
         <tag>hexo博客搭建步骤</tag>
       </tags>
   </entry>
   <entry>
-    <title>vim编辑器</title>
-    <url>/2019/10/23/vim%E7%BC%96%E8%BE%91%E5%99%A8/</url>
+    <title>Git版本控制</title>
+    <url>/2019/10/23/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</url>
     <content><![CDATA[<p>主要讲述Linux操作系统的安装和使用和git的版本控制问题及注意事项</p>
  <a id="more"></a>
 
-<h2 id="Linux操作系统"><a href="#Linux操作系统" class="headerlink" title="Linux操作系统"></a>Linux操作系统</h2><h3 id="1-连接云服务器"><a href="#1-连接云服务器" class="headerlink" title="1.连接云服务器"></a>1.连接云服务器</h3><h3 id="2-日常操作"><a href="#2-日常操作" class="headerlink" title="2.日常操作"></a>2.日常操作</h3><p>1）cd指令</p>
+<h3 id="1-连接云服务器"><a href="#1-连接云服务器" class="headerlink" title="1.连接云服务器"></a>1.连接云服务器</h3><h3 id="2-日常操作"><a href="#2-日常操作" class="headerlink" title="2.日常操作"></a>2.日常操作</h3><p>1）cd指令</p>
 <p> <strong><em>cd 目录</em></strong>   —— 进入指定目录</p>
 <p><strong><em>cd ..</em></strong>      返回上层目录</p>
 <p><strong>cd ~</strong>     回到根目录</p>
@@ -168,7 +3370,7 @@ uniq -c  ——去重时，统计每个的重复个数</code></pre><p><code>owk 
 <li>给可执行文件添加软连接到usr/bin目录下            -添加快捷方式</li>
 </ol>
 <h3 id="8-远程发送文件"><a href="#8-远程发送文件" class="headerlink" title="8.远程发送文件"></a>8.远程发送文件</h3><p><code>scp  文件 root@接收端的IP:服务器上保存发送文件的路径</code></p>
-<h2 id="git的使用-版本控制"><a href="#git的使用-版本控制" class="headerlink" title="git的使用-版本控制"></a>git的使用-版本控制</h2><p><img src="E:%5C%E5%8D%83%E5%B3%B0python%E8%B5%84%E6%96%99%5C%E6%AF%8F%E6%97%A5%E8%AF%BE%E7%A8%8B%E7%BB%83%E4%B9%A0%E8%B5%84%E6%96%99%5Chexoblogs%5Csource%5Cimage%5C%E4%BB%93%E5%BA%93.png" srcset="/img/loading.gif" alt="本地仓库和远程仓库的创建、关系、操作"></p>
+<h2 id="git的使用-版本控制"><a href="#git的使用-版本控制" class="headerlink" title="git的使用-版本控制"></a>git的使用-版本控制</h2><p><img src="E:%5C%E5%8D%83%E5%B3%B0python%E8%B5%84%E6%96%99%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C%E4%BB%93%E5%BA%93.png" srcset="/img/loading.gif" alt="仓库"></p>
 <h3 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h3><p><code>git init</code> —— 新建git仓库</p>
 <p><code>git add 文件/文件夹</code>  —— 将指定文件或文件夹添加的缓存区</p>
 <p><code>git add -A</code>   —— 将所有文件添加到缓存区</p>
@@ -197,10 +3399,97 @@ uniq -c  ——去重时，统计每个的重复个数</code></pre><p><code>owk 
 <p>注意：切换分之、pull、push之前必须保证工作区为clean</p>
 ]]></content>
       <categories>
-        <category>methods</category>
+        <category>Linux系统</category>
       </categories>
       <tags>
         <tag>vim编辑器的使用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis数据库</title>
+    <url>/2019/10/23/Redis%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<p>主要讲述Redis数据库的操作方法</p>
+ <a id="more"></a>
+<h3 id="Redis常用命令"><a href="#Redis常用命令" class="headerlink" title="Redis常用命令"></a>Redis常用命令</h3><p>给Redis数据库设置口令密码：</p>
+<pre><code>pgrep redis-server ---&gt; 查看Redis进程是否在运行 ---&gt; 运行中先关闭
+redis-server --requirepass 密码 &gt; redis.log &amp;  ---&gt; 设置开启Redis的口令密码
+redis-cli ---&gt; auth 密码 ---&gt; 进入Redis成功</code></pre><p>jobs —— 查看后台进程</p>
+<p>ctrl + z —— 到后台运行</p>
+<p>Redis默认开启16个库，select 库的编号(0-15)</p>
+<p>存储：set key values  —— 键值对的形式</p>
+<pre><code>set tel 15524577927 ---&gt; {tel:15524577927}</code></pre><p>获取：get key  </p>
+<pre><code>get tel---&gt; &quot;15524577927&quot;</code></pre><pre><code>查看所有键：keys *    查看是否存在目标键：exists 键
+查看键值对个数：dbsize</code></pre><pre><code>清空所有键值对：flushdb</code></pre><pre><code>定时销毁设置
+1.已存在的键值：expire 键
+2.创建键时：</code></pre><pre><code>关闭Redis服务器：
+—— 关闭前最好执行一次 save
+—— 如果之前没有执行save，再执行shutdown 时可以选择nosave / save ---&gt; shutdown save/nosave</code></pre><p><strong>Redis中也有事务</strong>：</p>
+<p>multi —&gt; 开启事务</p>
+<p>exec —&gt; 提交(成功事务)</p>
+<p>discard —&gt; 回滚(失败事务)</p>
+<h3 id="Redis最重要的五种数据类型"><a href="#Redis最重要的五种数据类型" class="headerlink" title="Redis最重要的五种数据类型"></a>Redis最重要的五种数据类型</h3><p><strong>字符串</strong></p>
+<p>mset —&gt; 一次可以存储多个键值对</p>
+<p><code>mset name lucy age 19 addr 南充</code></p>
+<p>mget —&gt; 一次可以拿多个键</p>
+<p><code>mget name age addr</code></p>
+<p>append —&gt; 追加到指定键的值得后边</p>
+<p><code>append age 10</code></p>
+<p>getset —&gt; 拿到存在的键并修改键的名字</p>
+<p><code>getset name jobs</code></p>
+<pre><code>setnx ---&gt;不存在这个键才能放进这个键值对
+
+setex ---&gt;存在这个键才能放进这个键值对</code></pre><p><strong>哈希(表)类型</strong></p>
+<p>哈希数据类似于字典里再套一个字典</p>
+<pre><code class="python"># 添加数据
+hset stu:01 name jobs age 18 height 173 weight 70kg  
+    ---&gt;{&#39;stu:01&#39;:{name:jobs, age:18, height:173, weight:70kg}}
+
+# 获得所有数据
+hgetall stu:01
+    ---&gt; 1) &quot;name&quot;
+    2) &quot;jobs&quot;
+    3) &quot;age&quot;
+    4) &quot;18&quot;
+    5) &quot;height&quot;
+    6) &quot;173&quot;
+    7) &quot;weight&quot;
+    8) &quot;70kg&quot;
+
+# 获得所有的值
+hvals stu:01
+    ---&gt;1) &quot;jobs&quot;
+    2) &quot;18&quot;
+    3) &quot;173&quot;
+    4) &quot;70kg&quot;
+
+# 获得所有的键
+hkeys stu:01
+    ---&gt;1) &quot;name&quot;
+    2) &quot;age&quot;
+    3) &quot;height&quot;
+    4) &quot;weight&quot;
+
+# 看是否存在某个键
+hexists stu:01 age
+    ---&gt;(integer) 1</code></pre>
+<p><strong>列表</strong></p>
+<pre><code># 每次放在左边
+lpush list1 10 20 30 40
+    ---&gt;</code></pre><p><strong>集合</strong></p>
+<p><strong>有序集合</strong></p>
+<pre><code class="python"># 新建集合，先给集合命名，再给集合的每个元素绑定一个数据
+zadd names 10 yuting 20 luohao 30 wanghai 25 luowei
+
+# 取出集合的元素时自动排序
+</code></pre>
+<p><strong>geo类型（地理位置）</strong></p>
+<pre><code></code></pre><p>python操作Redis数据库需要Redis三方库</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Redis数据库</tag>
       </tags>
   </entry>
   <entry>

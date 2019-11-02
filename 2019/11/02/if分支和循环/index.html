@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>if分之和循环 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 2:18 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>分支结构：<em><code>python中分之结构只有if，没有switch</code></em>，主要学习if分之和while循环、for循环的语法、使用场景、注意的问题</p>
+<a id="more"></a>
+<h3 id="if分之"><a href="#if分之" class="headerlink" title="if分之"></a>if分之</h3><pre><code>1）语法：
+if  条件语句：
+    代码块   
+2）说明：
+if — 关键字，固定写法
+条件语句 — 有结果的表达式（不要是赋值语句），一般结果是布尔值
+：（冒号） — 固定写法
+代码块 — 和if保持一个缩进的一条或者多条语句（至少一条）；满足上边的条件才会执行
+3）执行过程：
+先判断条件语句结果是否为True（如果不是布尔值，先转换成布尔在判断（所有0或空值才会
+转成False，否则都会转换成True）），如果结果为True就执行代码块，否则不执行代码块
+
+if  0/空值：
+    代码块
+    （代码块不执行）</code></pre><pre><code class="python"># 练习：如果num的值是偶数，就打印偶数，否则不打印
+num = int (input(&#39;请输入数字：&#39;,))
+result = num &amp; 1
+if result == 0:
+    print(&#39;偶数&#39;)
+# 或者
+if not result:
+    print(&#39;偶数&#39;)
+if result:
+    print(&#39;奇数&#39;)</code></pre>
+<h4 id="if-else-结构（重要）"><a href="#if-else-结构（重要）" class="headerlink" title="if else 结构（重要）"></a>if else 结构（重要）</h4><pre><code>1）语法：
+if 条件语句：
+    代码块1
+else：
+    代码块2 
+2）说明：
+    同上
+3）执行过程：
+先判断条件语句结果是否为True（如果不是布尔值，先转换成布尔在判断（所有0或空值才会
+转成False，否则都会转换成True）），如果结果为True就执行代码块1，否则执行代码块2</code></pre><pre><code class="python"># 练习：判断一个人是否成年
+age = int(input(&#39;请输入年龄：&#39;,))
+if age &gt;= 18:
+    print(&#39;成年&#39;)
+else:
+    print(&#39;未成年&#39;)</code></pre>
+<h4 id="if-elif-else-结构"><a href="#if-elif-else-结构" class="headerlink" title="if - elif - else 结构"></a>if - elif - else 结构</h4><pre><code>1）语法：
+if 条件语句1：
+    代码块1
+elif 条件语句2：
+     代码块2
+elif 条件语句3：
+     代码块3
+(elif数量可以根据需要).....
+else:     # else 这部分根据情况可以省略，不是必须的
+    代码块n   
+2)执行过程
+先判断条件语句结果是否为True，如果结果为True就执行代码块1（整个if结构结束），否则判断条件语句2，结构为True就执行代码块2；
+否则继续判断条件语句3.......，所有条件语句都为False，执行else：</code></pre><pre><code class="python"># 练习：将成绩分类
+score = int(input(&#39;请输入分数：&#39;,))
+grade = None
+if score &lt; 60:
+    grade = &#39;不及格&#39;
+elif score &lt; 70:
+    grade = &#39;及格&#39;
+elif score &lt; 90:
+    grade = &#39;良好&#39;
+else:
+    grade = &#39;优秀&#39;
+print(grade)</code></pre>
+<pre><code class="python"># 练习1：判断一个三位数是否是水仙花数
+num = int(input(&#39;请输入三位数：&#39;,))
+ge = num % 10
+shi = (num//10) % 10
+bai = num // 100
+if num == bai**3 + shi**3 + ge**3:
+    print(&#39;是水仙花数&#39;)
+else:
+    print(&#39;不是水仙花数&#39;)
+# 练习2：判断一个数是否是偶数，是偶数打印偶数，奇数就打印奇数，如果这个数能被4整除，打印4的倍数
+num = int(input(&#39;请输入三位数：&#39;,))
+if num &amp; 1 == 0:
+    print(&#39;偶数&#39;)
+    if num % 4 == 0:
+        print(&#39;4的倍数&#39;)
+else:
+    print(&#39;奇数&#39;)</code></pre>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>python中循环分为两种：for循环和while循环</p>
+<h4 id="1-for循环"><a href="#1-for循环" class="headerlink" title="1.for循环"></a>1.for循环</h4><p>1）语法：<br><strong>for 变量名 in 序列：</strong><br>​       <strong>循环体（难点）</strong></p>
+<p>2）说明：<br>for — 关键字，固定写法<br>变量名 — 和声明变量时的变量名要求一致<br>in — 关键字，固定写法<br>序列 — <code>序列就是python中容器型数据类型</code>，常见有：字符串、列表、字典、元祖、集合、迭代器、生成器、range<br>：— 固定写法<br>循环体 — 和for保持一个缩进的一条或多条需要被重复执行的代码，至少有一条代码</p>
+<p>3）执行过程</p>
+<p>让变量去取序列中的值，一个一个的取，每取一个值执行一次循环体，取完为止；<br>——（注意：<strong>只能通过控制序列中元素的个数来控制循环次数</strong>）</p>
+<pre><code class="python"># 执行过程验证
+for da in &#39;hello&#39;:
+    print(da, end=&#39;&#39;)
+# 结果
+# h e l l o
+</code></pre>
+<p><strong>———— ——————range函数 ————————————</strong><br>用法1：range(n) —— 产生一个0 — n-1的数字序列<br>用法2：range(m , n) — 产生一个m到n-1的区间序列<br>用法3：range(m, n, step) — 产生一个m到n-step，公差为step的区间序列；例如range(4, 10, 2) — 4，6，8</p>
+<pre><code class="python"># 用法1
+for x in range(10):
+    print(&#39;da&#39;, end=&#39;&#39;)
+
+# 用法2
+for zi in range(100, 1000):
+    print(zi)</code></pre>
+<pre><code class="python"># 累计求和练习：计算是1 + 2 + 3 + ....+ 100（——累计求和默认套路——）
+# 先声明一个变量
+nu = 0     # 保存最后的和
+for n in range(1, 101):
+    # 求和循环公式
+    nu += n
+print(nu)
+# ————————套路————————</code></pre>
+<p><strong>注意：其他有规律的累计求和都用这个套路</strong></p>
+<h4 id="2-while循环"><a href="#2-while循环" class="headerlink" title="2.while循环"></a>2.while循环</h4><p>1)语法<br><strong>while 条件语句：</strong><br>​    <strong>循环体</strong></p>
+<p>2）声明<br>while — 关键字，固定写法<br>条件语句 — <strong>任何有结果的表达式，不能是赋值语句</strong><br>： — 固定写法<br>循环体 — 与while保持一个缩进的一条或多条需要重复执行的代码</p>
+<p>3）执行过程</p>
+<pre><code>先判断条件语句是否为True（不是布尔，先转换成布尔），为True就执行循环体；
+执行完循环体再回头判断条件语句是否为True，为True继续执行循环体.......
+直到条件语句为False，整个循环结束</code></pre><pre><code class="python"># 应用情况1：控制次数
+# 先在while外边定义一个变量
+x = 0
+n = 5    # n表示次数
+while x &lt; n:
+    # 循环需要执行的操作，不断接近False
+    x += 1
+print(x)</code></pre>
+<pre><code class="python"># 情况2：产生数字序列(麻烦一点，用的少)
+start = 100
+end = 999
+while start &lt;= end:
+    print(start)
+    start += 1</code></pre>
+<h4 id="如何选择使用for循环还是while循环"><a href="#如何选择使用for循环还是while循环" class="headerlink" title="如何选择使用for循环还是while循环"></a>如何选择使用for循环还是while循环</h4><p><strong>当<code>循环次数确定</code>的时候，就用for循环（写不了无限循环）</strong><br><strong>当<code>循环次数不确定</code>的时候，就用while循环</strong></p>
+<pre><code class="python">练习：不断输入密码，直到密码正确位置(循环次数不确定)
+pw = &#39;123456&#39;
+key = &#39;&#39;  # 定义最开始的输入密码是个空值
+while key != pw:
+    # 取出输入的密码，input()会暂停程序，让输入密码
+    key = input(&#39;请重新输入密码：&#39;)
+print(&#39;正确&#39;)</code></pre>
+<h4 id="循环中的两个关键字"><a href="#循环中的两个关键字" class="headerlink" title="循环中的两个关键字"></a>循环中的两个关键字</h4><h5 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h5><pre><code>continue是循环体中的关键字，只能写在循环体里；用的时候直接写continue，前后不用加东西
+
+执行循环体时如果遇到continue，直接结束当次循环，进入下次循环的判断</code></pre><p>例如：</p>
+<pre><code class="python">for x in range(100):
+    print(x)
+    print(&#39;000000&#39;)
+    if x &lt; 50:
+        continue
+    print(&#39;222222&#39;)</code></pre>
+<h5 id="break"><a href="#break" class="headerlink" title="break"></a>break</h5><pre><code>break是循环体中的关键字，只能写在循环体里；用的时候直接写break，前后不用加东西
+
+如果在执行循环体时遇到break，那么整个循环直接结束，且不会在判断条件语句</code></pre><p>例如：</p>
+<pre><code class="python">for x in range(5):
+    print(x)
+    print(&#39;22222&#39;)
+    if x &amp; 1:
+        break
+    print(&#39;555&#39;)</code></pre>
+<h5 id="else"><a href="#else" class="headerlink" title="else"></a>else</h5><pre><code>for循环的完整结构：当for循环上部分（for x in 序列：循环体）自然结束（不是因为continue、break）
+                   后，会自动执行下部分（else：代码块）
+注意：主要关注else后的代码段会不会执行
+for x in 序列：
+    循环体
+else：
+    代码块</code></pre><p>例如：</p>
+<pre><code class="python">for x in range(5):
+    print(x)
+    if x &gt; 3:
+        break
+else:
+    print(&#39;666&#39;)</code></pre>
+<h4 id="循环嵌套"><a href="#循环嵌套" class="headerlink" title="循环嵌套"></a>循环嵌套</h4><pre><code class="python">for x in range(5):
+    for y in range(5):
+        print(x, y)
+# 外边的循环执行一次，里边的循环全部执行</code></pre>
+<h3 id="python数字数据"><a href="#python数字数据" class="headerlink" title="python数字数据"></a>python数字数据</h3><h4 id="支持的数据类型"><a href="#支持的数据类型" class="headerlink" title="支持的数据类型"></a>支持的数据类型</h4><p><strong><em>1、python中和数字相关的数据类型有：int、float、bool、complex</em></strong></p>
+<pre><code>1）int —— 整型，数字中所有整数对应的数据类型，例如：23，45，-65
+
+2）float —— 浮点型，数字中所有小数对应的数据类型；支持科学计数法
+
+3）bool —— 布尔，只有True和False两个值，True的本质就是数字1，False的本质就是数字0
+print(True + 1)
+print(False + 1)
+
+4)complex —— 复数，包含所有的复数：形如a + bj的数就是复数，j是虚数单位，j*j == -1
+    支持复数相关的运算（与数学中复数运算一致）
+print(10 + 1j)     # 虚部为1时，不能省略</code></pre><p><strong><em>2、数据类型相关方法</em></strong></p>
+<pre><code>1）type(数据) —— 获取指定数据的类型
+2)isinstance（数据，类型） —— 判断指定的数据是否是指定的数据类型（判断）
+print(isinstance(100, int))</code></pre><p><strong><em>3、数据类型转换</em></strong></p>
+<p>格式：类型（数据） —— 将数据转换成指定类型</p>
+<pre><code class="python">int(12.5)  # 转换成整型
+float(12)   # 转换成浮点数</code></pre>
+<p><strong>任何类型的数据都可以转换成布尔</strong>；所有为0或空的值，都会转换成False，其他都转成True<br>转换成False的情况：bool(0),bool(0.0),bool(‘’),bool([]),bool({}),bool(()),bool(None)</p>
+<pre><code class="python">print(bool(0),bool(0.0),bool(&#39;&#39;),bool([]),bool({}),bool(()),bool(None))</code></pre>
+<h4 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a><em>随机数</em></h4><p>1)随机挑选<br>​    random.choice(序列) —— 在序列中随机挑选一个元素</p>
+<pre><code class="python">result = random.choice(&#39;2089234&#39;)
+print(result)</code></pre>
+<p>2)在指定范围内随机取一个数<br>​    random.randrange(开始，结束，步长)</p>
+<pre><code class="python">result = random.randrange(0, 20, 2)
+print(result)</code></pre>
+<p>3)产生[0,1)的随机数(要记住)<br>​    random.random()</p>
+<pre><code class="python">result = random.random()
+print(result)
+
+result = random.random()*100
+print(&#39;0到100的随机数&#39;, result)
+
+result = random.random()*10 + 10
+print(&#39;10到20的随机数&#39;, result)</code></pre>
+<p>4)随机排序<br>​    random.shuffle(序列) —— 将序列中的元素随机排序（序列必须是可变的）</p>
+<pre><code class="python">list1 = [1, 2, 3, 4, 5, 6]
+result1 = random.shuffle(list1)
+print(list1)</code></pre>
+<p>5)产生随机浮点数<br>​    random.uniform(m, n ) —— 产生m到n的随机浮点数</p>
+<pre><code class="python">result = random.uniform(6, 10)
+print(result)</code></pre>
+<p>6)产生随机整数<br>​    random.randint(m, n) —— 产生m到n的随机整数</p>
+<pre><code class="python">result = random.randint(1, 12)
+print(result)</code></pre>
+<p><em>练习：猜数字游戏，速记产生一个数字，玩家来猜（输入数字），猜中游戏结束，没猜中，继续，知道猜中为止</em></p>
+<pre><code class="python">num = random.randint(1, 100)
+sz = int(input(&#39;输入一个数：&#39;))
+n = 0
+# 不确定循环次数用while循环
+while True:
+    n += 1
+    if n &gt; 10:
+        print(&#39;你输了&#39;)
+        break
+    elif sz &gt; num:
+        print(&#39;猜大了&#39;)
+        sz = int(input(&#39;输入一个数：&#39;))
+    elif sz &lt; num:
+        print(&#39;猜小了&#39;)
+        sz = int(input(&#39;输入一个数：&#39;))
+    else:
+        print(&#39;猜对了&#39;)
+        break</code></pre>
+<h4 id="补充：python中的三目运算符"><a href="#补充：python中的三目运算符" class="headerlink" title="补充：python中的三目运算符"></a>补充：python中的三目运算符</h4><pre><code class="python"># 格式：  
+num =  a  if  条件语句  else  b
+# if 条件语句为True，则返回结果a，否则返回结果b</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%ACif%E5%88%86%E4%B9%8B%E5%92%8C%E5%BE%AA%E7%8E%AF">玩转if分之和循环</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/if分支和循环/';
+      this.page.identifier = '/2019/11/02/if分支和循环/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "if分之和循环&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

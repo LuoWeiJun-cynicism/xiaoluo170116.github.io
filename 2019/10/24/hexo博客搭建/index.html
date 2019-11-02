@@ -133,6 +133,29 @@
           <div class="markdown-body">
             <p>hexo博客搭建的步骤以及注意事项，以及如何更改主题以及主题的配置</p>
 <a id="more"></a>
+
+
+<h3 id="1-搭建博客"><a href="#1-搭建博客" class="headerlink" title="1. 搭建博客"></a>1. 搭建博客</h3><p>使用hexo搭建个人博客前需要先在自己的电脑上装好git和node.js   </p>
+<ol>
+<li>首先在自己的电脑上创建一个空的文件夹’Hexo’  </li>
+<li>在gitbash中终端中通过<code>cd</code>指令进入到刚才创建的文件夹中   </li>
+<li>输入指令 <code>npm install -g hexo</code> 安装Hexo  </li>
+<li>输入指令 <code>hexo init</code> 进行初始化  </li>
+<li>依次输入指令<code>npm install</code> <code>hexo server</code> 启动服务器<br>博客内容发生改变后可以通过<code>hexo clean</code> <code>hexo generate</code> <code>hexo deploy</code> <code>hexo server</code>刷新后重新启动    </li>
+</ol>
+<h3 id="2-部署博客"><a href="#2-部署博客" class="headerlink" title="2. 部署博客"></a>2. 部署博客</h3><ol>
+<li><p>在github上创建一个空的仓库，仓库名： <code>用户名.github.io</code>  </p>
+</li>
+<li><p>修改博客本地仓库中的配置文件（Hexo目录下的_config.yml文件）,在文件末尾添加一下选中内容</p>
+</li>
+<li><p>使用git部署, 输入指令<code>npm install hexo-deployer-git --save</code>  </p>
+</li>
+<li><p>输入指令<code>hexo clean</code> <code>hexo generate</code> <code>hexo deploy</code> 对博客进行提交</p>
+</li>
+<li><p>将仓库地址的最后一部分去掉.git作为博客地址, 例如: ‘<a href="https://tingzai.github.io/" target="_blank" rel="noopener">https://tingzai.github.io/</a>‘</p>
+</li>
+</ol>
+
             <hr>
           </div>
           <br>
@@ -141,7 +164,7 @@
               <p>
                 <i class="iconfont icon-inbox"></i>
                 
-                  <a class="hover-with-bg" href="/categories/methods">methods</a>
+                  <a class="hover-with-bg" href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA">博客搭建</a>
                   &nbsp;
                 
               </p>
@@ -339,5 +362,5 @@
   <!--崩溃欺骗-->
   <script type="text/javascript" src="/js/crash_cheat.js"></script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618},"display":{"superSample":2,"width":200,"height":400,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":true},"react":{"opacity":0.8},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>

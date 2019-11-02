@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>Redis数据库 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期三, 十月 23日 2019, 7:02 晚上</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>主要讲述Redis数据库的操作方法</p>
+ <a id="more"></a>
+<h3 id="Redis常用命令"><a href="#Redis常用命令" class="headerlink" title="Redis常用命令"></a>Redis常用命令</h3><p>给Redis数据库设置口令密码：</p>
+<pre><code>pgrep redis-server ---&gt; 查看Redis进程是否在运行 ---&gt; 运行中先关闭
+redis-server --requirepass 密码 &gt; redis.log &amp;  ---&gt; 设置开启Redis的口令密码
+redis-cli ---&gt; auth 密码 ---&gt; 进入Redis成功</code></pre><p>jobs —— 查看后台进程</p>
+<p>ctrl + z —— 到后台运行</p>
+<p>Redis默认开启16个库，select 库的编号(0-15)</p>
+<p>存储：set key values  —— 键值对的形式</p>
+<pre><code>set tel 15524577927 ---&gt; {tel:15524577927}</code></pre><p>获取：get key  </p>
+<pre><code>get tel---&gt; &quot;15524577927&quot;</code></pre><pre><code>查看所有键：keys *    查看是否存在目标键：exists 键
+查看键值对个数：dbsize</code></pre><pre><code>清空所有键值对：flushdb</code></pre><pre><code>定时销毁设置
+1.已存在的键值：expire 键
+2.创建键时：</code></pre><pre><code>关闭Redis服务器：
+—— 关闭前最好执行一次 save
+—— 如果之前没有执行save，再执行shutdown 时可以选择nosave / save ---&gt; shutdown save/nosave</code></pre><p><strong>Redis中也有事务</strong>：</p>
+<p>multi —&gt; 开启事务</p>
+<p>exec —&gt; 提交(成功事务)</p>
+<p>discard —&gt; 回滚(失败事务)</p>
+<h3 id="Redis最重要的五种数据类型"><a href="#Redis最重要的五种数据类型" class="headerlink" title="Redis最重要的五种数据类型"></a>Redis最重要的五种数据类型</h3><p><strong>字符串</strong></p>
+<p>mset —&gt; 一次可以存储多个键值对</p>
+<p><code>mset name lucy age 19 addr 南充</code></p>
+<p>mget —&gt; 一次可以拿多个键</p>
+<p><code>mget name age addr</code></p>
+<p>append —&gt; 追加到指定键的值得后边</p>
+<p><code>append age 10</code></p>
+<p>getset —&gt; 拿到存在的键并修改键的名字</p>
+<p><code>getset name jobs</code></p>
+<pre><code>setnx ---&gt;不存在这个键才能放进这个键值对
+
+setex ---&gt;存在这个键才能放进这个键值对</code></pre><p><strong>哈希(表)类型</strong></p>
+<p>哈希数据类似于字典里再套一个字典</p>
+<pre><code class="python"># 添加数据
+hset stu:01 name jobs age 18 height 173 weight 70kg  
+    ---&gt;{&#39;stu:01&#39;:{name:jobs, age:18, height:173, weight:70kg}}
+
+# 获得所有数据
+hgetall stu:01
+    ---&gt; 1) &quot;name&quot;
+    2) &quot;jobs&quot;
+    3) &quot;age&quot;
+    4) &quot;18&quot;
+    5) &quot;height&quot;
+    6) &quot;173&quot;
+    7) &quot;weight&quot;
+    8) &quot;70kg&quot;
+
+# 获得所有的值
+hvals stu:01
+    ---&gt;1) &quot;jobs&quot;
+    2) &quot;18&quot;
+    3) &quot;173&quot;
+    4) &quot;70kg&quot;
+
+# 获得所有的键
+hkeys stu:01
+    ---&gt;1) &quot;name&quot;
+    2) &quot;age&quot;
+    3) &quot;height&quot;
+    4) &quot;weight&quot;
+
+# 看是否存在某个键
+hexists stu:01 age
+    ---&gt;(integer) 1</code></pre>
+<p><strong>列表</strong></p>
+<pre><code># 每次放在左边
+lpush list1 10 20 30 40
+    ---&gt;</code></pre><p><strong>集合</strong></p>
+<p><strong>有序集合</strong></p>
+<pre><code class="python"># 新建集合，先给集合命名，再给集合的每个元素绑定一个数据
+zadd names 10 yuting 20 luohao 30 wanghai 25 luowei
+
+# 取出集合的元素时自动排序
+</code></pre>
+<p><strong>geo类型（地理位置）</strong></p>
+<pre><code></code></pre><p>python操作Redis数据库需要Redis三方库</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/Redis%E6%95%B0%E6%8D%AE%E5%BA%93">Redis数据库</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/10/23/Redis数据库/';
+      this.page.identifier = '/2019/10/23/Redis数据库/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Redis数据库&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>类和对象 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 3:26 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>python中类和对象非常重要，最优的编程思想就是面向对象编程。在这个阶段中主要学了类的声明、使用和继承；对象的声明和利用对象进行编程的方法</p>
+<a id="more"></a>
+
+<h3 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h3><p>​    面向过程编程 —— 以逻辑和算法为工具<br>​    函数式编程 —— 以函数为工具<br>​    <strong>面向对象编程 —— 以类和对象为工具</strong></p>
+<p>什么是类和对象：</p>
+<p>类是拥有相同功能、相同属性的对象的集合 —— 类是一个抽象的概念<br>对象是类的实例 —— 对象是具体的</p>
+<h3 id="类和对象的声明"><a href="#类和对象的声明" class="headerlink" title="类和对象的声明"></a>类和对象的声明</h3><p>什么是类：</p>
+<p>​    类就是拥有<strong>相同功能（函数）、相同属性（保存数据的变量，也叫属性）</strong>的对象的集合</p>
+<h4 id="类的声明："><a href="#类的声明：" class="headerlink" title="类的声明："></a>类的声明：</h4><p>1）语法<br>    class 类名：<br>        类的说明文档<br>        类的内容</p>
+<p>2）说明：<br>class —— 关键字，固定写法<br>类名 —— 自主命名；要求：必须是标识符，不能是关键字<br>​                     规范：见名知义；驼峰式命名，首字母大写；<br>​                     不能是系统的函数名、模块名、类名</p>
+<p>类的说明文档 —— 注释，主要说明类提供的功能，不会影响类的功能<br>类的内容 —— 函数（方法）和属性<br>​            方法：<strong>对象方法、类方法、静态方法</strong><br>​            属性：<strong>类的字段和对象属性</strong></p>
+<pre><code class="python">class Person:
+    &quot;&quot;&quot;人类：吃饭、学习、睡觉三个功能&quot;&quot;&quot;
+    def study(self):
+        print(&#39;学习&#39;)
+    def eat(self):
+        print(&#39;吃火锅&#39;)
+    def sleep(self):
+        print(&#39;睡瞌睡&#39;)</code></pre>
+<p>====================================================================</p>
+<h4 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h4><p>1）语法：<br>​    <code>类（）</code> —— 创建指定类对应的对象<br>2）说明：<br>类 —— 必须是已经声明过的类</p>
+<pre><code class="python">per1 = Person()  # 创建person类的对象p1</code></pre>
+<h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><p>1）怎么声明：<strong>直接声明在类中的函数就是对象方法</strong><br>2）特点：自带一个参数self（系统默认的是参数名self，但他并不是一个关键字，自己可以更改）；<br>​        当通过对象调用对象方法时self不用传参；<br>​        系统会自动将当前对象传给当前方法的self（谁调用当前方法（方法），谁就是当前对象）<br>3）怎么调用：通过对象来调用<br>​             调用：<strong><code>对象.方法名（）</code></strong></p>
+<pre><code class="python">class Person:
+    # 对象方法：eat（）
+    def eat(self):
+        print(&#39;吃点东西&#39;)
+p1 = Person()  # 创建person的对象
+p1.eat()  # 调用eat（）方法
+# p1传给self</code></pre>
+<h3 id="构造方法和init方法"><a href="#构造方法和init方法" class="headerlink" title="构造方法和init方法"></a>构造方法和init方法</h3><p>1.构造方法<br>构造方法是用来创建对象函数（方法），构造方法的名字和类名一样<br>1）python中的构造方法：<br>a.当声明类时，系统会自动创建一个函数名和类名同名的构造方法<br>b.当通过构造方法创建对象时，会自动调用<strong>init</strong>方法来对对象进行初始化操作</p>
+<pre><code class="python">class Person:
+    pass
+p1 = Person()</code></pre>
+<p>2.init方法</p>
+<p><strong>必须掌握：</strong></p>
+<p>​    通过构造方法创建对象时，<strong><strong>init</strong></strong>会自动被调用<br>​    __ init__方法可以不写，也可以写；写的话函数名和参数self不能更改，可以添加其他参数；<br>​    如果<strong><strong>init</strong></strong>方法中有除self以外的参数，必须通过构造方法创建对象时给这些参数传参</p>
+<pre><code class="python">class Person:
+    def __init__(self, name,age):
+        print(&#39;haah&#39;)
+p2 = Person(&#39;luo&#39;, 23)   # 创建对象时传参</code></pre>
+<h3 id="对象属性的增删查改"><a href="#对象属性的增删查改" class="headerlink" title="对象属性的增删查改"></a>对象属性的增删查改</h3><h4 id="1-查-——-获取对象属性的值"><a href="#1-查-——-获取对象属性的值" class="headerlink" title="1.查 —— 获取对象属性的值"></a>1.查 —— 获取对象属性的值</h4><p>a.<br><code>对象.属性</code> —— 获取指定对象属性的值属性，不存在时会报错<br>b.<br><code>getattr(对象，属性名)</code> —— 属性不存在时也会报错;属性名要是字符串<br><code>getattr(对象，属性名, 默认值)</code> —— 属性不存在时不会报错，而是返回指定的默认值</p>
+<pre><code class="python">class Dog:
+    def __init__(self, name1, age1, color1):
+        self.name = name1
+        self.age = age1
+        self.color = color1
+dog1 = Dog(&#39;哈士奇&#39;, 3, &#39;黄色&#39;)
+# a.
+print(dog1.name)
+# b.
+print(getattr(dog1, &#39;name&#39;))</code></pre>
+<h4 id="2-增改"><a href="#2-增改" class="headerlink" title="2.增改"></a>2.增改</h4><p>a.<br><code>对象.属性 = 值</code> —— 当属性存在时，修改指定对象属性的值；属性不存在时，添加此对象属性<br>b.<br><code>setattr(对象，属性名，值)</code> —— 当属性存在时，修改指定属性的值；属性不存在时，添加对象属性</p>
+<pre><code class="python">class Dog:
+    def __init__(self, name1, age1, color1):
+        self.name = name1
+        self.age = age1
+        self.color = color1
+dog2 = Dog(&#39;哈士奇&#39;, 3, &#39;黄色&#39;)
+# a.
+dog2.name = &#39;牧羊犬&#39;
+print(dog2.name)
+dog2.breed = &#39;藏獒&#39;
+print(dog2.breed)
+# b.
+setattr(dog2, &#39;age&#39;, 6)
+print(dog2.age)</code></pre>
+<h4 id="3-删-——-删除对象属性"><a href="#3-删-——-删除对象属性" class="headerlink" title="3.删 —— 删除对象属性"></a>3.删 —— 删除对象属性</h4><p>a.<br><code>del 对象.属性</code> —— 删除对象中指定的属性<br>b.<br><code>delattr(对象，属性名)</code> —— 删除对象中指定的属性</p>
+<pre><code class="python">class Dog:
+    def __init__(self, name1, age1, color1):
+        self.name = name1
+        self.age = age1
+        self.color = color1
+dog2 = Dog(&#39;哈士奇&#39;, 3, &#39;黄色&#39;)
+del dog2.age
+print(dog2.age)
+delattr(dog2, &#39;color&#39;)</code></pre>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><h4 id="1-属性是声明在类中的变量"><a href="#1-属性是声明在类中的变量" class="headerlink" title="1.属性是声明在类中的变量"></a>1.属性是声明在类中的变量</h4><p>python中类的属性分为类的字段和对象属性</p>
+<h4 id="2-类的字段（要了解）"><a href="#2-类的字段（要了解）" class="headerlink" title="2.类的字段（要了解）"></a>2.类的字段（要了解）</h4><p>直接声明在类中、但在函数（方法）外的变量就是类的字段<br>1）怎么声明：直接声明在类中<br>2）怎么使用：通过类来使用；以“类.字段”的方式<br>3)什么时候用：保存的属性不会因为对象的不同而改变时</p>
+<pre><code class="python">class Person:
+    # num1就是字段
+    num1 = 1
+    def eat(self):
+        print(&#39;lala&#39;)
+Person.num1</code></pre>
+<h4 id="3-对象属性（超重点）"><a href="#3-对象属性（超重点）" class="headerlink" title="3.对象属性（超重点）"></a>3.对象属性（超重点）</h4><p>1）怎么声明：直接声明在类中的<strong><strong>init</strong></strong>方法中；<br>    格式：“self.属性 = 值”<br>2）怎么使用：通过对象来使用；以“<code>对象.属性</code>”来使用<br>3)什么时候用：保存的属性会因为对象的不同而改变时，需要声明对象属性<br>注意：<strong>init</strong>方法中如果要给对象属性赋值时，可以添加其他的参数，并与对象属性一一对应</p>
+<pre><code class="python">class Person:
+    def __init__(self, name1, age1):
+        self.name = name1
+        self.age = age1
+        print(&#39;lala&#39;)
+p1 = Person(&#39;luo&#39;, 23)
+print(p1.name, p1.age)</code></pre>
+<p>练习：给Person类添加一个学习的对象方法，要求实现打印：“xx在学习”</p>
+<pre><code class="python">class Person:
+    def __init__(self, name1, age1=19):
+        self.name = name1
+        self.age = age1
+        # print(name1+&#39;在学习！&#39;)
+    def study(self):
+        print(&#39;%s在学习&#39; % self.name)
+p1 = Person(&#39;扎西德勒&#39;)
+p1.study()</code></pre>
+<h4 id="slots魔法"><a href="#slots魔法" class="headerlink" title="slots魔法"></a>slots魔法</h4><p><strong><strong><strong>slots</strong></strong>赋值后可以约束类中的对象属性，防止误操作</strong></p>
+<p>注意：如果类中设置了<strong><strong>slots</strong></strong>，那这个类中的对象就不能使用<strong><strong>dict</strong></strong></p>
+<pre><code class="python">class Person:
+    # __slots__是控制类能够有哪些对象属性,当添加其他对象属性时就会报错
+    __slots__ = (&#39;name&#39;, &#39;age&#39;, &#39;gender&#39;)
+
+    def __init__(self,name1,age1):
+        self.name = name1
+        self.age = age1
+p1 = Person(&#39;罗&#39;,23)</code></pre>
+<h3 id="内置类属性"><a href="#内置类属性" class="headerlink" title="内置类属性"></a>内置类属性</h3><p>创建类的时候，系统自动添加的属性就是内置类属性</p>
+<h4 id="常见内置类属性"><a href="#常见内置类属性" class="headerlink" title="常见内置类属性"></a>常见内置类属性</h4><pre><code class="python">class Dog:
+    &quot;&quot;&quot;狗类&quot;&quot;&quot;
+    num1 = 10
+    def __init__(self,name1,age1,weight1):
+        self.name = name1
+        self.age = age1
+        self.weight = weight1
+    def eat(self,food):
+        print(&#39;%s在吃%s&#39; % (self.name, food))
+    # 定制当前类的对象的打印方式===========打印对象时，自动调用
+    # 法1：
+    def __str__(self):
+        return &#39;&lt;%s&gt;&#39; % str(self.__dict__)[1: -1]
+    # 法2：
+    def __repr__(self):
+        return &#39;&lt;%s&gt;&#39; % str(self.__dict__)[1:-1]
+    # =========================================================
+p1 = Dog(&#39;哈士奇&#39;, 3, 20)</code></pre>
+<p>1)<strong><strong>name</strong></strong><br>它是一个字段<br><code>类.__name__</code> —— 获取当前类的类名</p>
+<pre><code class="python"># 取类名
+print(Dog)  # &lt;class &#39;__main__.Dog&#39;&gt;
+print(&#39;他的类型是%s类型&#39; % Dog.__name__)    # 他的类型是Dog类型</code></pre>
+<p>2)<strong><strong>doc</strong></strong><br>它是一个字段<br><code>类.__doc__</code> —— 获取类的说明文档</p>
+<pre><code class="python">print(Dog.__doc__)    # 狗类</code></pre>
+<p>3)<strong><strong>class</strong></strong><br>它是一个对象属性<br><code>对象.__class__</code> —— 获取指定对象对应的类（和type功能类似）</p>
+<pre><code class="python">print(p1.__class__)</code></pre>
+<p>4)<strong><strong>dict</strong></strong><br><code>类.__dict__</code> —— 获取指定类中所有的字段和每个字段对应的值，并以字典的形式返回<br>===================重点（面试可能会考到）<br><code>对象.__dict__</code> —— 获取指定对象的所有属性和对应的值，以字典的形式返回</p>
+<pre><code class="python">print(p1.__dict__)
+print(Dog.__dict__)</code></pre>
+<p>5）<strong>str</strong>   或者 <strong>repr</strong><br>可以用来<strong>定制对象打印方式</strong>,打印对象时，自动调用<br>    def <strong>str</strong>(self):<br>        return 定制打印内容<br>    # 法2：推荐2<br>    def <strong>repr</strong>(self):<br>        return 定制打印内容</p>
+<h4 id="字典转对象"><a href="#字典转对象" class="headerlink" title="字典转对象"></a>字典转对象</h4><pre><code class="python">class Dog0:
+    def __init__(self,dict1):
+        for key in dict1:
+            setattr(self, key, dict1[key])  # 添加属性
+    def __repr__(self):
+        return &#39;&lt;%s&gt;&#39; % str(self.__dict__)[1: -1]
+
+dict1 = {&#39;name&#39;: &#39;哈士奇&#39;, &#39;age&#39;: 3, &#39;weight&#39;: 20}
+p2 = Dog0(dict1)
+print(p2)</code></pre>
+<p>6)<strong><strong>module</strong></strong><br><code>类.__module__</code> —— 获取指定类的对应的模块名</p>
+<p>7)<strong><strong>bases</strong></strong><br><code>类.__bases__</code> —— 获取指定类的父类<br>object —— 基类</p>
+<h3 id="类中的方法"><a href="#类中的方法" class="headerlink" title="类中的方法"></a>类中的方法</h3><p>类中的方法有三种:对象方法、类方法、静态方法</p>
+<h4 id="1）对象方法"><a href="#1）对象方法" class="headerlink" title="1）对象方法"></a>1）对象方法</h4><p>怎么声明：直接声明在类中<br>特点：自带参数self，调用时不用传参，系统自动将当前对象传给self<br>怎么调用：对象.方法名（）<br>什么时候用：实现函数功能需要对象（对象属性）</p>
+<h4 id="2-类方法"><a href="#2-类方法" class="headerlink" title="2)类方法"></a>2)类方法</h4><p>怎么声明：声明前加@classmethod<br>特点：有默认参数cls，cls在调用时不用传参，系统会自动将当前类传给它；在类中，类能做的，cls都能做<br>怎么调用：类.方法名（）<br>什么时候用：实现函数功能不需要对象</p>
+<h4 id="3）静态方法"><a href="#3）静态方法" class="headerlink" title="3）静态方法"></a>3）静态方法</h4><p>怎么声明：声明前加@staticmethod<br>特点：没有默认参数<br>怎么调用：类.方法名（）<br>什么时候用：实现函数功能不需要对象和类</p>
+<pre><code class="python">class Student:
+    def __init__(self,name,score):
+        self.name = name
+        self.score = score
+    # 对象方法
+    def func1(self):
+        print(&#39;lala&#39;)
+    # 类方法
+    @classmethod
+    def func2(cls):
+        # cls与self类似
+        print(&#39;haha&#39;)
+    # 静态方法
+    @staticmethod
+    def func3():
+        print(&#39;gua&#39;)
+p1 = Student(&#39;luo&#39;, 98)
+Student.func2()</code></pre>
+<h3 id="私有化"><a href="#私有化" class="headerlink" title="私有化"></a>私有化</h3><h4 id="1-访问权限"><a href="#1-访问权限" class="headerlink" title="1.访问权限"></a>1.访问权限</h4><p>类中的属性和方法因访问权限的不同分为三种：公开的、保护的、私有的<br>​    public：类的内部和外部都可以使用，可以被继承<br>​    protect：类的内部可以用，外部不可以使用，可以被继承<br>​    private：只有类的内部可以使用，无法被继承</p>
+<h4 id="2-python中属性和方法的访问权限"><a href="#2-python中属性和方法的访问权限" class="headerlink" title="2.python中属性和方法的访问权限"></a>2.python中属性和方法的访问权限</h4><p>python中所有的属性和方法<strong>本质上只有公开的这一种访问权限</strong><br>私有化是假的私有化，只是告诉使用者这个属性和方法是私有的，不要在外部使用</p>
+<h4 id="3-私有化的方式"><a href="#3-私有化的方式" class="headerlink" title="3.私有化的方式"></a>3.私有化的方式</h4><p><strong>在需要私有化的属性名或者方法名前加两个下划线；“__”</strong><br>私有化的原理：设置带有两个下划线”__“开头的属性名和变量名，系统在保存时会自动在前面加‘_类名’，导致直接访问不了</p>
+<pre><code class="python">class Person:
+    def __init__(self,name,age):
+        self.__name = name
+        self.__age = age
+p1 = Person(&#39;luo&#39;,23)
+print(p1.name)  # AttributeError: &#39;Person&#39; object has no attribute &#39;name&#39;</code></pre>
+<h3 id="属性的getter和setter"><a href="#属性的getter和setter" class="headerlink" title="属性的getter和setter"></a>属性的getter和setter</h3><h4 id="1-getter和setter的作用"><a href="#1-getter和setter的作用" class="headerlink" title="1.getter和setter的作用"></a>1.getter和setter的作用</h4><p>如果需要在<strong>获取属性值之前做别的事情</strong>，就给这个属性添加getter<br>如果需要在<strong>给属性赋值之前做别的事情</strong>，就给这个属性添加setter</p>
+<h4 id="2-怎么添加getter和setter"><a href="#2-怎么添加getter和setter" class="headerlink" title="2.怎么添加getter和setter"></a>2.怎么添加getter和setter</h4><p>1）添加getter<br>​    a.在需要添加getter的属性名前加一个下划线“<em>”<br>​    b.第二步在类中声明一个函数（方法），声明前加<code>@property</code>.函数名就是不带下划线”</em>“的属性名;除了自带参数self，不能在添加其他参数；需要一个返回值（表达式），返回值就是你需要的返回值<br>​    c.在类的外边使用时，不需要给属性名前添加下划线;类中使用都要加下划线</p>
+<p>2）添加setter<br>注意：<strong>属性要添加setter，必须先添加getter</strong><br>​    a.保证属性名前有一个下划线；“_”<br>​    b.声明一个函数(不带下划线的属性名)，声明前加“<code>@属性名.setter</code>”<br>​    c.<strong>除了自带参数self，还需要添加一个参数；没有返回值，需要完成给属性赋值</strong><br>​    d.在类的外边使用时，也不需要给属性名前加下划线</p>
+<pre><code class="python">class Person:
+    def __init__(self,name):
+        self.name = name
+        self._age = 18
+    @property   # ===============添加getter，获得age之前让他执行下边的代码
+    def age(self):
+        if self._age &lt; 18:
+            return &#39;未成年&#39;
+        else:
+            return &#39;成年&#39;
+    @age.setter   # ==============添加setter，给age赋值之前先执行下边的代码
+    def age(self,value):
+        if isinstance(value,int):
+            if 0 &lt;= value &lt;= 100:
+                p1._age = value
+            else:
+                raise ValueError
+        else:
+            raise ValueError
+p1 = Person(&#39;大红&#39;)
+print(p1.age) # 希望输出想要的内容
+p1.age = 23  # 给age赋值时，自动调用age（self，value）</code></pre>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h4 id="1-什么是继承"><a href="#1-什么是继承" class="headerlink" title="1.什么是继承"></a>1.什么是继承</h4><p>让一个类直接拥有另一个类的属性和方法，这个过程就是继承<br>父类：被继承的类，又叫超类<br>子类：去继承别人的类（继承者）</p>
+<h4 id="2-怎么继承"><a href="#2-怎么继承" class="headerlink" title="2.怎么继承"></a>2.怎么继承</h4><p>语法：<br>    class 类名（父类1，父类2，….）:<br>        类的说明文档<br>        类的内容<br>说明：<br>（）—— 可以省略，相当于“（object）”；object是python中所有类直接或间接父类，也叫基类<br>父类 —— 有（）时，括号内可以写一个或多个父类</p>
+<h4 id="3-能继承哪些内容"><a href="#3-能继承哪些内容" class="headerlink" title="3.能继承哪些内容"></a>3.能继承哪些内容</h4><p>所有的属性和方法（<strong>slots不能被继承</strong>）</p>
+<pre><code class="python">class Person:
+    # __slots__不能被继承，只能约束当前类的属性
+    __slots__ = (&#39;name&#39;, &#39;age&#39;)
+    num = 101
+    def __init__(self):
+        self.name = &#39;麻子&#39;
+        self.age = 18
+    def eat(self,food):
+        print(&#39;%s在吃%s&#39; % (self.name,food))
+
+
+class Student(Person):
+    pass
+stu = Student()
+print(Student.num) # 使用Person类的字段
+print(stu.name)</code></pre>
+<h4 id="4-子类添加属于自己的专有属性和方法"><a href="#4-子类添加属于自己的专有属性和方法" class="headerlink" title="4.子类添加属于自己的专有属性和方法"></a>4.子类添加属于自己的专有属性和方法</h4><p>子类继承父类会拥有父类所有的属性和方法，还需要添加属于自己的专有属性和方法，否则继承父类没有意义<br>1）添加字段<br>​    在子类中直接写</p>
+<p>2）添加对象属性<br>​    <strong>需要在子类的init方法中通过super()去调用父类的init方法，来保留从父类继承下来的对象属性</strong><br>​    <strong>当父类有参数时</strong>：将父类的所有参数写进子类的init方法的参数里，子类有参数时，将子类参数一起写进子类的init方法的参数中，后分别将父类和子类对应的参数赋给super（）.<strong>init</strong>(父类参数)、self.属性 = 子类参数<br>​    <strong>当父类无参数时</strong>：直接在子类的init方法中通过super()调用父类的init方法，不需要给父类的inti方法赋参数</p>
+<h5 id="父类无参"><a href="#父类无参" class="headerlink" title="父类无参"></a>父类无参</h5><pre><code class="python">class Person:
+    num = 101
+    def __init__(self):
+        self.name = &#39;麻子&#39;
+        self.age = 18
+    def eat(self,food):
+        print(&#39;%s在吃%s&#39; % (self.name,food))
+    @classmethod
+    def count(cls):
+        print(Person.num)
+
+# 子类
+class Student(Person):
+    identity = &#39;学生&#39;
+    def __init__(self):
+        super().__init__()   # 调用父类的属性（固定写法）;父类有参数时，参数要写上
+        self.score = 98
+    def play_game(self):
+        print(&#39;%s玩游戏&#39; % self.name)
+    # 重新父类功能
+    @classmethod
+    def count(cls):
+        super().count()   # super().父类函数；调用父类的此功能时，必须用super()，接着再写新功能
+        print(&#39;haha&#39;)
+
+# ==========如果要重写父类功能的方法，直接在子类中重写就行
+stu = Student()
+print(Student.num) # 使用Person类的字段
+print(stu.name)
+stu.play_game()
+print(Student.identity)</code></pre>
+<h5 id="父类有参"><a href="#父类有参" class="headerlink" title="父类有参"></a>父类有参</h5><pre><code class="python">class Person:
+    num = 101
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+    def eat(self,food):
+        print(&#39;%s在吃%s&#39; % (self.name, food))
+    @classmethod
+    def count(cls):
+        print(Person.num)
+
+# 子类
+class Student(Person):
+    identity = &#39;学生&#39;
+    def __init__(self,name,age,score):
+        super().__init__(name,age)   # 调用父类的属性（固定写法）;父类有参数，参数要写上
+        self.score = score
+    def play_game(self):
+        print(&#39;%s玩游戏&#39; % self.name)
+    # 重新父类功能
+    @classmethod
+    def count(cls):
+        super().count()   # super().父类函数；调用父类的此功能时，必须用super()，接着再写新功能
+        print(&#39;haha&#39;)
+
+stu = Student(&#39;麻子&#39;,23,98)
+print(stu)</code></pre>
+<p><strong>补充：类中的函数调用过程</strong></p>
+<p>当通过类和对象取调用函数时，是先看当前类中有没有声明这个函数，如果有直接调用自己的；当前类没有就去父类看有没有，父类有就调用父类的；如果父类也没有，就看父类的父类有没有……，以此类推；如果找到object都没有声明这个函数，才报错</p>
+<p>####多继承</p>
+<p>不要用多继承</p>
+<h3 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h3><p>java/c++/c#/objective_c等语言的重载：<br>​    指的是函数名相同，但是参数不一样的多个函数；<br>​    <strong>python不支持函数的重载，支持运算符的重载</strong></p>
+<p><code>在类中写出对应的方法，让不支持的数据计算方式，变成支持的数据运算方式</code></p>
+<p>python中使用不同的运算符对数据进行运算的时候，本质是在调用相应的方法。<br>当不同类型的数据使用相同的运算符时，调用方法的方法名一样，但是方法不一样</p>
+<p><strong>看数据是否支持某种运算符，就看这种运算符对应的类中是否实现了相应的方法</strong></p>
+<pre><code class="python">class Person:
+    def __init__(self,name,age,gender=&#39;男&#39;):
+        self.name = name
+        self.age = age
+        self.gender = gender
+    # 定制对象的打印方式
+    def __repr__(self):
+        return str(self.__dict__)
+    # 运算符对应的方法
+    &quot;&quot;&quot;
+    self —— 运算符前边的那个数据
+    other —— 运算符后边的数据
+    返回值 —— 运算结果
+    &quot;&quot;&quot;
+    # 重载加法
+    def __add__(self, other):
+        return self.name + other.name
+    #  重载&lt;符号
+    # &gt; &lt;比较运算符只需要重载一个，另一个会自动重载
+    def __lt__(self, other):
+        return self.age &lt; other.age
+
+p1 = Person(&#39;小明&#39;,20)
+p2 = Person(&#39;小花&#39;,19,&#39;女&#39;)
+print(p1+p2)
+Persons = [p1, p2]
+Persons.sort()
+print(Persons)</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%AC%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1">玩转类和对象</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/类和对象/';
+      this.page.identifier = '/2019/11/02/类和对象/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "类和对象&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

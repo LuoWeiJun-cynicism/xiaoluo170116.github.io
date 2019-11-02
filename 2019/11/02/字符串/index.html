@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>字符串 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 2:48 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>python中字符串的定义、查找以及相关方法</p>
+<a id="more"></a>
+
+<h2 id="字符串和字符"><a href="#字符串和字符" class="headerlink" title="字符串和字符"></a>字符串和字符</h2><h3 id="1-什么是字符串（str）"><a href="#1-什么是字符串（str）" class="headerlink" title="1.什么是字符串（str）"></a>1.什么是字符串（str）</h3><p>字符串是容器型数据类型（序列），将’ ‘或” “作为容器标志，多个字符（元素）直接包含在引号中<br>字符串是<strong>不可变（不支持增、删、改），且有序的</strong></p>
+<pre><code class="python">str1 = &#39;halabashabi♥&#39;</code></pre>
+<h3 id="2-字符串中的元素（字符）"><a href="#2-字符串中的元素（字符）" class="headerlink" title="2.字符串中的元素（字符）"></a>2.字符串中的元素（字符）</h3><h4 id="1）普通字符："><a href="#1）普通字符：" class="headerlink" title="1）普通字符："></a>1）普通字符：</h4><h4 id="2）特殊字符"><a href="#2）特殊字符" class="headerlink" title="2）特殊字符"></a>2）特殊字符</h4><h5 id="a-转义字符"><a href="#a-转义字符" class="headerlink" title="a.转义字符"></a>a.<code>转义字符</code></h5><p><strong>在指定符号或字母前加 \ 来表示特殊功能或者特殊意义的字符</strong><br>​    &#39; —— 表示一个单引号<br>​    &quot; —— 表示一个双引号<br>​    \n —— 换行符<br>​    \t —— 制表符(缩进)<br>​    \\ —— 表示一个\（普通的反斜杠）<br>注意：一个转义字符的长度是1</p>
+<pre><code class="python">str2 = &#39;123\&#39;a\&quot;16&#39;
+print(str2)
+str3 = &#39;床前明月光，\n疑似地上霜&#39;
+print(str3)
+str4 = &#39;\t床前明月光，\n\t疑似地上霜&#39;
+print(str4)
+str5 = &#39;123\\1314&#39;
+print(str5)</code></pre>
+<p>补充：r语法 —— 在字符串的最前边加r/R，会让字符串中所有的转义字符功能消失（一般在正则表达式中使用）</p>
+<pre><code class="python">str2 = r&#39;lala\nla\tmm&#39;</code></pre>
+<h5 id="b-编码字符"><a href="#b-编码字符" class="headerlink" title="b.编码字符"></a>b.<code>编码字符</code></h5><p><strong><em>\u加4位的十六进制数表示一个字符；数字对应值是字符对应的编码值</em></strong><br>字符编码:计算机在存储数据时只能存储数字。计算机存储文字（字符）时实质存的是文字对<br>​        应的数字，每个数字都会对应一个固定的数字，这个数字就是字符的编码<br>编码表：每个字符和数字的一一对应关系；<br>​        常见编码表：ASCII表、Unicode表（Unicode表中文范围：4E00-9FA5）（Unicode表是    对ASCII表的扩展）</p>
+<p><code>chr(编码值)</code> —— 获取编码值对应的字符<br><code>ord(字符)</code> —— 获取字符对应的编码值</p>
+<pre><code class="python">str6 = &#39;一\u9AF5&#39;
+print(str6)
+print(chr(1314), ord(&#39;罗&#39;), ord(&#39;维&#39;), ord(&#39;君&#39;))  # Ԣ 32599 32500 21531</code></pre>
+<h3 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h3><h4 id="1-字符串操作（查）"><a href="#1-字符串操作（查）" class="headerlink" title="1.字符串操作（查）"></a>1.字符串操作（查）</h4><p>1）获取单个字符：字符串[下标]</p>
+<p>2)字符串切片：字符串[开始下标：结束下标：步长]</p>
+<p>3）遍历字符串：可以直接遍历下标，再拿到每个字符或者直接遍历字符串</p>
+<pre><code># 1)
+str1 = &#39;hello,guys&#39;
+str2 = &#39;shg\u4321la&#39;
+print(str1[-3], str2[3])  # u 䌡
+print(str1[2:5])          # llo
+# 2）
+str3 = &#39;hello,python!&#39;
+print(str3[1:7])  # &#39;ello,p&#39;
+print(str3[-1:7])  # None
+print(str3[-2:2:-1])   # &#39;nohtyp,ol&#39;
+print(str3[:5:2])    # &#39;hlo&#39;
+print(str3[2::-1])  # &#39;leh&#39;
+# 3)
+for x in str3:
+    print(x)</code></pre><h4 id="2-字符串相关操作方法"><a href="#2-字符串相关操作方法" class="headerlink" title="2.字符串相关操作方法"></a>2.字符串相关操作方法</h4><p>————数学运算符：+，*</p>
+<p>1)字符串1 + 字符串2 —— 两个字符串拼接在一起，产生一个新的字符串</p>
+<pre><code>str1 = &#39;hello&#39;
+str2 = &#39;guys&#39;
+print(str1 + str2)   # helloguys</code></pre><p>2)字符串 * N —— 相当于N个字符串相加</p>
+<pre><code>print(str1 * 3)</code></pre><p> ——比较运算符：&gt;, &lt;, &gt;=, &lt;=, ==, !=</p>
+<p>跟比较列表大小一样，相同位置一对字符比较，比较两个字符的编码值大小</p>
+<pre><code>print(&#39;agjf&#39; &gt; &#39;hjhs&#39;)   # False</code></pre><p>字符串比较运算应用：</p>
+<pre><code>判断字符是否是大写字母：&#39;A&#39; &lt;= 字符 &lt;= &#39;Z&#39;
+
+判断字符是否是小写字母：&#39;a&#39; &lt;= 字符 &lt;= &#39;z&#39;
+
+判断字符是否是数字：48 &lt;= ord(字符) &lt;= 57
+
+判断字符是否是中文字符：4e00 &lt;= ord(字符) &lt;= 9fa5
+
+# 练习1：统计输入字符串中数字字符的个数
+str1 = &#39;hjf454jf549kfk&#39;
+num = 0
+for x in str1:
+    if 48 &lt;= ord(x) &lt;= 57:
+        num += 1
+print(&#39;个数&#39;, num)
+# 练习2：将输入的字符串中的字母取出来
+str1 = &#39;kj451fj5FG789F56&#39;
+str2 = &#39;&#39;
+for x in str1:
+    if &#39;a&#39; &lt; x &lt; &#39;z&#39; or &#39;A&#39; &lt;= x &lt;= &#39;Z&#39;:
+        str2 += x
+print(str2)</code></pre><h4 id="3-in-和-not-in"><a href="#3-in-和-not-in" class="headerlink" title="3.in 和 not in"></a>3.in 和 not in</h4><p>字符串1 in 字符串2—— 判断字符串2是否包含字符串1（字符串2中的字符串段顺序也要一样）</p>
+<pre><code>str1 = &#39;fsfe123jkfj&#39;
+str2 = &#39;123&#39;
+str3 = &#39;gfhjg123iory&#39;
+print(str1 in str3, str2 in str3)   # False True</code></pre><h4 id="4-相关函数"><a href="#4-相关函数" class="headerlink" title="4.相关函数"></a>4.相关函数</h4><p>len()、 max()、 min()、 sorted()、str()</p>
+<pre><code>str(数据) —— 将指定数据转换成字符串，所有数据类型都可以转换，转换时直接在数据外加引号
+
+字符串转整型：字符串去掉引号后本身就是整数才能转换成整型
+字符串转浮点型：字符串去掉引号后本身就是数字才能转换成浮点型</code></pre><h4 id="5-字符串相关方法"><a href="#5-字符串相关方法" class="headerlink" title="5.字符串相关方法"></a>5.字符串相关方法</h4><p>什么是格式字符串？</p>
+<p>格式字符串 —— 字符串中使用格式占位符来代替字符串中变化的部分</p>
+<p>1）第一种</p>
+<p>语法：</p>
+<p>带有格式占位符的字符串 % （值1，值2，值3，…..）</p>
+<p>说明：</p>
+<pre><code>% —— 固定写法
+
+() —— 固定写法（当格式占位符只有一个时，括号可以省略）
+
+值 —— 值的个数、类型与前边格式占位符的个数、类型一样</code></pre><p>格式占位符（不是python特有）：</p>
+<pre><code>%s —— 格式化字符串
+
+%d —— 格式化整数
+
+%f —— 格式化浮点数可指定小数点后的精度（%.Nf——让数字保留N位小数,四舍五入）
+
+%c —— 格式化字符（将字符编码转换成字符，拼接到字符串中）
+
+name = input(&#39;请输入姓名：&#39;)
+age = 12
+sex = &#39;男&#39;
+weight = 75.3
+message = &#39;%s今年%d岁，性别%s，体重%.2fkg&#39; % (name, age, sex, weight)
+print(message)</code></pre><p>2)第二种</p>
+<p><code>带有{}的格式字符串.format(值1，值2， 值3，........)</code></p>
+<pre><code>message = &#39;{},今年{}岁&#39;.format(name, age)
+print(message)
+# ===========================
+message = &#39;{1}{0}{2}{1}&#39;.format(10, 20, &#39;abc&#39;)
+print(message)
+# 前边大括号内可以写后边小括号对应值的下标，表示前边的括号填后边下标对应的值
+# ============================</code></pre><p>数字格式</p>
+<p>注意：格式字符串中约束小数位数（%.Nf）的时候采用的是四舍五入</p>
+<pre><code>message = &#39;{:.2f}&#39;.format(3.1419256)
+print(message)</code></pre><h3 id="字符串相关方法"><a href="#字符串相关方法" class="headerlink" title="字符串相关方法"></a>字符串相关方法</h3><h4 id="1-小写字母和大写字母间的转换"><a href="#1-小写字母和大写字母间的转换" class="headerlink" title="1.小写字母和大写字母间的转换"></a>1.小写字母和大写字母间的转换</h4><p>a,b,c = 97,98,99</p>
+<p>A,B,C = 65,66,67</p>
+<p>不利用转换函数的情况：</p>
+<pre><code># 小写转大写
+str1 = &#39;w&#39;
+big_str1 = chr(ord(&#39;w&#39;)-32)
+print(big_str1)
+# 大写转小写
+str2 = &#39;W&#39;
+big_str2 = chr(ord(&#39;W&#39;)+32)
+print(big_str2)</code></pre><p>利用转换函数的情况：</p>
+<p>字符串.lower() —— 大写转小写，产生一个新的列表</p>
+<pre><code>str9 = &#39;LAbaba&#39;
+str10 = str9.lower()
+print(str10)</code></pre><p>字符串.upper() —— 小写转大写，产生一个新的列表</p>
+<h4 id="2-字符串对齐"><a href="#2-字符串对齐" class="headerlink" title="2.字符串对齐"></a>2.字符串对齐</h4><p>字符串.center(长度，fillchar)</p>
+<p>——产生一个指定的宽度 width 且原字符串居中的字符串，fillchar 为填充的字符，默认为空格。</p>
+<p>字符串.ljust(长度，fillchar)</p>
+<p>——产生一个指定的宽度 width 且原字符串居左的字符串，fillchar 为填充的字符，默认为空格。</p>
+<p>字符串.rjust(长度，fillchar)</p>
+<p>——产生一个指定的宽度 width 且原字符串居右的字符串，fillchar 为填充的字符，默认为空格。</p>
+<p>字符串.zfill(长度)          ========这个用的很多</p>
+<p>——产生一个指定长度字符串，原字符串放在右边的字符串，剩下的部分用0填充</p>
+<pre><code>str3 = &#39;guys&#39;
+str4 = str3.center(7, &#39;+&#39;)
+str5 = str3.ljust(7, &#39;l&#39;)
+str6 = str3.rjust(7, &#39;0&#39;)
+print(str4, str5, str6)    # ++guys+ guyslll 000guys
+str8 = str3.zfill(8)
+print(str8)   # 0000guys</code></pre><h4 id="3-字符串查找"><a href="#3-字符串查找" class="headerlink" title="3.字符串查找"></a>3.字符串查找</h4><p>字符串1.find(字符串2) —— 获取字符串2第一次在字符串1出现的位置，如果有返回下标，没有返回-1</p>
+<p>字符串1.index(字符串2) —— 没有时会报错</p>
+<p>字符串1.find(字符串2,开始下标,结束下标) —— 在开始下标和结束下标前的范围内查找字符串2</p>
+<p>字符串1.index(字符串2,开始下标,结束下标) —— 在开始下标和结束下标前的范围内查找字符串2</p>
+<pre><code>str9 = &#39;lalababa&#39;
+str10 = &#39;ba&#39;
+print(str9.find(str10))  # 4</code></pre><h4 id="4-join-重点"><a href="#4-join-重点" class="headerlink" title="4.join()重点"></a>4.join()重点</h4><p>字符串1.join(序列) —— 将序列中的元素用字符串1连接在一起产生一个新的字符串（序列中的元素必须都是字符串）</p>
+<pre><code>list1 = [&#39;我&#39;, &#39;是&#39;, &#39;谁&#39;]
+str11 = &#39;!&#39;.join(list1)
+print(str11)   # 我!是!谁</code></pre><h4 id="5-字符串替换"><a href="#5-字符串替换" class="headerlink" title="5.字符串替换"></a>5.字符串替换</h4><p>1）只能替换单个字符</p>
+<p>字符串1.replace(old,new) —— 将字符串1中的old替换成new，产生一个新的字符串2</p>
+<p>2）——搭配配合使用</p>
+<p>——创建映射表（map）</p>
+<p>str.maketrans(字符串1，字符串2) —— 创建字符串1和字符串2一一对应的映射表，</p>
+<pre><code>                                字符串1是需要被替换的字符，字符串2是目标字符（新字符）</code></pre><p>字符串.translate(映射表) —— 按照映射表将字符串中的字符进行替换，产生一个新的字符串</p>
+<pre><code>tabel1 = str.maketrans(&#39;abc&#39;, &#39;154&#39;)
+str1 = &#39;fsfea12b3jkfcj&#39;
+new_str = str1.translate(tabel1)
+print(new_str)</code></pre><h4 id="6-字符串切割"><a href="#6-字符串切割" class="headerlink" title="6.字符串切割"></a>6.字符串切割</h4><p>字符串1.split(字符串2) —— 将字符串1中的字符串2作为切点，切割字符串1（返回一个列表）</p>
+<pre><code>str1 = &#39;fsf ea12b 3jk fcj&#39;
+list1 = str1.split(&#39; &#39;)
+print(list1)  # [&#39;fsf&#39;, &#39;ea12b&#39;, &#39;3jk&#39;, &#39;fcj&#39;]</code></pre>
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2">玩转字符串</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/字符串/';
+      this.page.identifier = '/2019/11/02/字符串/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "字符串&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>文件操作和异常捕获 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 3:16 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>python中对文件的操作，读、写等；以及异常的捕获，错误类型的定制</p>
+<a id="more"></a>
+
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="1-数据存储和数据本地化（数据持久化）"><a href="#1-数据存储和数据本地化（数据持久化）" class="headerlink" title="1.数据存储和数据本地化（数据持久化）"></a>1.数据存储和数据本地化（数据持久化）</h4><p>​    程序中产生的数据默认都是存储在运行内存，这些数据在程序运行结束后自动销毁<br>​    如果希望数据在程序结束后不销毁，就必须将数据存储在硬盘上（通过文件保存）</p>
+<p>txt文件、json文件、plist文件、各种数据库文件<br>图片文件（png、jpg、jpeg）、视频文件、音频文件</p>
+<h4 id="2-怎么把数据保存在硬盘中"><a href="#2-怎么把数据保存在硬盘中" class="headerlink" title="2.怎么把数据保存在硬盘中"></a>2.怎么把数据保存在硬盘中</h4><p>基本步骤：打开文件（创建文件）——&gt; 操作文件（读文件/写文件）——&gt; 关闭文件</p>
+<h5 id="1）打开文件"><a href="#1）打开文件" class="headerlink" title="1）打开文件"></a>1）打开文件</h5><pre><code>方法：
+open(file,mode,encoding) —— 以指定方式打开指定文件并返回文件对象
+说明：
+file —— 字符串（文件路径，可以是绝对路径(文件在电脑的全路径)，也可以是相对路径）
+          相对路径：相对当前目录
+                    .\ —— 代表当前目录
+                    ..\ —— 代表当前目录的上一级目录
+mode —— 字符串（读写方式）；决定打开文件后能做什么，以及读写的数据类型
+          mode有默认值：‘r’，‘w’，‘a’，‘b’，‘t’
+          ‘r’—— 只读；‘w’—— 只写（清空源文件）；‘a’——只写，接着写；
+          ‘b’——读写数据类型（二进制）；‘t’——读写数据类型（文本）
+          ====注意：‘b’‘t’必须有一个，如果不写，默认为‘t’
+          ===========写法：
+          ‘r’/‘rt’—— 只读，读到的数据类型是字符串
+          ‘rb’/‘br’—— 只读，读到的数据类型是二进制
+          ‘wt’/‘tw’—— 只写，清空原文件的内容，后写入文件的数据只能是字符串
+          ‘wb’/‘bw’—— 只写，清空原文件的内容，后写入文件的数据只能是二进制
+          ‘at’/‘ta’—— 只写，写入文件的数据只能是字符串
+          ‘ab’/‘ba’—— 只写，写入文件的数据只能是二进制
+encoding —— 字符串（文本文件的编码方式）；一般使用‘utf-8’
+              注意：1.二进制数据不能设置encoding（mode带b不能设置）
+                    2.同一文件创建和读写文件的编码方式都必须一样 </code></pre><pre><code class="python">file_f =open(&#39;./text.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;)</code></pre>
+<h5 id="2）操作文件"><a href="#2）操作文件" class="headerlink" title="2）操作文件"></a>2）操作文件</h5><p>（1）读操作——获取文件内容<br>  a.  *<em><code>文件对象.read()</code> *</em> —— 可以写入参数，指定每次读的数据的大小–&gt;<code>文件对象.read(1024)</code></p>
+<p>，如果读取的文件很大，就采用循环的方式去读，免得程序崩溃，知直到读完为止</p>
+<p>—— 获取指定文件对象中的所有内容（从文件读写位置开始到文件结束）,并返回<br>  b.  <strong><code>文件对象.readline()</code></strong><br>—— 读一行的内容（一行读完后，光标移动到第二行开头）<br>（2）写操作——修改文件内容<br>   *<em><code>文件对象.write(数据)</code> *</em><br>—— 将指定的数据写入指定的文件；数据只能是字符串或二进制</p>
+<p>============================读操作===============================</p>
+<pre><code class="python">f = file_f.read()
+file_f.seek(0)   # 将文件读写位置设置在开头==========
+f1 = file_f.readline()
+print(f)
+print(&#39;==========&#39;, f1)</code></pre>
+<p>练习：将文件中的内容一行一行的读，读完位置</p>
+<pre><code class="python">file_ =open(&#39;./text.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;)
+while True:
+    f2 = file_.readline()
+    if not f2:
+        break
+    print(f2)</code></pre>
+<p>=========================写操作======================</p>
+<pre><code class="python">file_txt =open(&#39;./text.txt&#39;, &#39;a&#39;, encoding=&#39;utf-8&#39;)
+file_txt.write(&#39;\n Hei,Guys!&#39;)</code></pre>
+<h5 id="3）关闭文件"><a href="#3）关闭文件" class="headerlink" title="3）关闭文件"></a>3）关闭文件</h5><p>语法：<code>文件对象.close()</code></p>
+<pre><code class="python">file_txt.close()</code></pre>
+<h4 id="3-文件作用域"><a href="#3-文件作用域" class="headerlink" title="3.文件作用域"></a>3.文件作用域</h4><pre><code>with open(file,mode,encoding) as 文件对象：
+    文件作用域</code></pre><p>文件作用域 —— 只有在这个文件作用域范围内才能操作文件；离开文件作用域，文件会自动关闭</p>
+<pre><code class="python">with open(&#39;./text.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;) as file_t:
+    print(file_t.readline())
+#=============================
+file_t.seek(0)   # ValueError: I/O operation on closed file.在文件作用域外，文件已经关闭</code></pre>
+<h3 id="数据本地化"><a href="#数据本地化" class="headerlink" title="数据本地化"></a>数据本地化</h3><h4 id="1-怎么将数据持久化"><a href="#1-怎么将数据持久化" class="headerlink" title="1.怎么将数据持久化"></a>1.怎么将数据持久化</h4><p>步骤：<br>1）将需要持久化的数据保存到本地文件中<br>2）需要使用这个数据时从文件中去读这个数据<br>3）数据发生改变后，要将最新的数据保存在本地文件</p>
+<h4 id="2-打开不存在文件"><a href="#2-打开不存在文件" class="headerlink" title="2.打开不存在文件"></a>2.打开不存在文件</h4><p>如果以读的方式打开不存在的文件，程序会报错；<br>如果以写的方式打开不存在的文件，程序不会报错，而是会自动创建这个文件再打开<br>注意：如果路径中的文件夹不存在，以写的方式打开也会报错<br>====<strong>列表转字符串:</strong></p>
+<pre><code>str(列表)</code></pre><p>====<strong>字符串转列表、字典:</strong></p>
+<pre><code>eval(字符串)
+    要求：去掉引号后，本身就是列表或字典</code></pre><pre><code class="python">str1 = &#39;[2, 6, 8, 45]&#39;
+list1 = eval(str1)
+print(list1)</code></pre>
+<p>练习：输入学生姓名和成绩，输入完成后打印学生信息，之前的学生信息要一起打印</p>
+<pre><code class="python">要先创建一个本地文件
+name = input(&#39;请输入姓名：&#39;)
+age = int(input(&#39;请输入年龄：&#39;))
+st = [{&#39;name&#39;: name, &#39;age&#39;: age}]
+with open(&#39;./信息.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;) as f1:
+    f2 = eval(f1.read())
+    f2.append(st)
+with open(&#39;./信息.txt&#39;, &#39;w&#39;, encoding=&#39;utf-8&#39;) as f3:
+    f3.write(str(f2))</code></pre>
+<h3 id="json数据"><a href="#json数据" class="headerlink" title="json数据"></a>json数据</h3><h4 id="1-json数据"><a href="#1-json数据" class="headerlink" title="1.json数据"></a>1.json数据</h4><p><strong>json是一种数据格式</strong><br>——json的数据格式：一个json有且只有一个数据；这个数据必须是json支持的数据类型<br>——json支持的数据类型：<br>    a、数字类型：包含所有的数字；小数支持科学计数法，如89，45，3e4<br>    b、字符串：使用双引号引起来的数据。如”hello”,”guys”<br>    c、布尔：只有true和false两个值<br>    d、空值：null<br>    e、数组：相当于python中的列表；<br>             [元素1，元素2，元素3，….],元素必须都是json支持的数据类型<br>    f、字典：相当于python中的字典；<br>             {key1:value1,key2:value2,….},key必须是字符串</p>
+<h4 id="2-json和python互相转换-——json模块"><a href="#2-json和python互相转换-——json模块" class="headerlink" title="2.json和python互相转换 ——json模块"></a>2.json和python互相转换 ——json模块</h4><h5 id="1）json数据转换成python数据（爬虫、数据可视化、数据分析方向）"><a href="#1）json数据转换成python数据（爬虫、数据可视化、数据分析方向）" class="headerlink" title="1）json数据转换成python数据（爬虫、数据可视化、数据分析方向）"></a>1）json数据转换成python数据（爬虫、数据可视化、数据分析方向）</h5><p>方法：<code>json.loads(数据)</code><br>——数据必须是字符串；字符串的内容必须是json格式的数据<br>| json | ——&gt;  | python                          |<br>| —- | —- | ——————————- |<br>| 数字   | ——&gt;  | int/float                       |<br>| 字符串  | ——&gt;  | str;可能键双引号变成单引号                 |<br>| 布尔   | ——&gt;  | bool；true ——True，false —— False |<br>| 空值   | ——&gt;  | null —— None                    |<br>| 数组   | ——&gt;  | list                            |<br>| 字典   | ——&gt;  | dict                            |</p>
+<pre><code class="python">import json
+str1 = json.loads(&#39;&quot;ha&quot;&#39;)
+print(str1)   # ha</code></pre>
+<h5 id="2-python数据转换成json数据（wen后端开发——写服务器程序、接口）"><a href="#2-python数据转换成json数据（wen后端开发——写服务器程序、接口）" class="headerlink" title="2) python数据转换成json数据（wen后端开发——写服务器程序、接口）"></a>2) python数据转换成json数据（wen后端开发——写服务器程序、接口）</h5><p>写法：<code>json.dumps(数据)</code><br>——将python数据转换成json格式的字符串<br>| python     | ——&gt;  | json                       |<br>| ———- | —- | ————————– |<br>| int/float  | ——&gt;  | 数字                         |<br>| str        | ——&gt;  | 字符串；单引号变成双引号               |<br>| bool       | ——&gt;  | 布尔；True——true、False——false |<br>| None       | ——&gt;  | null                       |<br>| list，tuple | ——&gt;  | 数组                         |<br>| dict       | ——&gt;  | 字典                         |</p>
+<pre><code class="python">import json
+str2 = json.dumps(&#39;13&#39;)
+str3 = json.dumps((1, &#39;辣鸡&#39;))
+print(str2, str3)  # &quot;13&quot; [1, &quot;\u8fa3\u9e21&quot;]</code></pre>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><h4 id="1-异常捕获"><a href="#1-异常捕获" class="headerlink" title="1.异常捕获"></a>1.异常捕获</h4><p>异常 —— 程序执行过程中出现错误（报错）<br>异常捕获 —— 让程序出现异常时不崩溃，还可以接着往后执行<br><strong>什么时候需要捕获异常</strong> —— 明知道某个位置程序可能会出现异常，但没办法通过程序来控制，就需要异常捕获</p>
+<h5 id="异常捕获语法："><a href="#异常捕获语法：" class="headerlink" title="异常捕获语法："></a><strong>异常捕获语法：</strong></h5><p>===语法1：能<strong>捕获任何异常，除了语法错误</strong><br>    try:<br>        代码块1<br>    except:<br>        代码块2<br>    其他语句<br>说明：try: —— 关键字，固定写法<br>​       代码块1 —— 和try保持一个缩进的一条或多条语句（需要捕获异常的语句）<br>​       except: —— 关键字，固定写法<br>​       代码块2 —— 和except保持一个缩进的一条或多条语句（出现异常后对异常进行处理的代码）<br>执行过程：<br>​    先执行代码块1，如果代码块1没有出现异常，跳过代码块2，直接继续执行其他语句；<br>​    如果代码块1出现异常，会接着执行代码块2，后再接着执行其他语句；<br>===语法2：<strong>捕获指定类型的异常</strong><br>    try:<br>        代码块1<br>    except 异常类型:<br>        代码块2<br>    其他语句<br>说明：try: —— 关键字，固定写法<br>​    代码块1 —— 和try保持一个缩进的一条或多条语句（需要捕获异常的语句）<br>​    except: —— 关键字，固定写法<br>​    异常类型 —— 指定一个错误的类型<br>​    代码块2 —— 和except保持一个缩进的一条或多条语句（出现异常后对异常进行处理的代码）<br>执行过程：<br>​    先执行代码块1，如果代码块1没出现异常，跳过except，直接执行后边的其他语句；<br>​    如果代码块1出现异常，且代码块1中的第一个异常类型和except中的异常类型一样，程序不崩溃，接着执行代码块2<br>​    如果代码块1出现异常，且代码块1中的第一个异常类型和except中的异常类型不一样，程序直接崩溃，后边所有代码不再执行</p>
+<p>===语法3、语法4：<strong>同时捕获指定的多种异常类型</strong><br>==语法3<br>    try：<br>        代码块1<br>    except (异常类型1，异常类型2，…….):<br>        代码块2<br>    其他语句<br>说明：<br>执行过程：<br>​    只会捕获到第一个出现的异常，不管第一个出现的异常类型except中异常类型的哪一种，执行的都是代码块2<br>==语法4<br>    try:<br>        代码块1<br>    except 异常类型1:<br>        代码块2<br>    except 异常类型2:<br>        代码块3<br>    except 异常类型3:<br>        代码块4<br>    ………<br>    其他语句<br>说明：<br>执行过程：<br>​    只会捕获到第一个出现的异常，并根据下边except中对应的异常类型，执行相应的代码块</p>
+<h5 id="finally关键字，只能写在异常捕获的后边"><a href="#finally关键字，只能写在异常捕获的后边" class="headerlink" title="finally关键字，只能写在异常捕获的后边"></a><strong>finally关键字，只能写在异常捕获的后边</strong></h5><p>以上所有的异常捕获语法结构的最后都可以加一个finally，加了不会影响原结构的功能<br>功能：<br><strong>try后面的代码块不管会不会发生异常，有没有被捕获到,程序会不会崩溃，finally后面的代码都会执行</strong></p>
+<pre><code class="python"># 语法1 和 finally
+print(&#39;lalalallalallalal&#39;)
+# 如果程序出现异常，那么程序就会直接结束，不再执行后边的其他代码
+try:
+    num = int(input(&#39;请输入年龄：&#39;))
+    # 上一行代码输入错误时，后边代码就停止执行，直接执行except后边的代码
+    print(&#39;输入完成！&#39;)
+except:
+    print(&#39;年龄输入有误，请正确输入！&#39;)
+finally:
+    print(&#39;finally=================&#39;)</code></pre>
+<h4 id="2-抛出异常-——-主动让程序崩溃"><a href="#2-抛出异常-——-主动让程序崩溃" class="headerlink" title="2.抛出异常 —— 主动让程序崩溃"></a>2.<strong>抛出异常 —— 主动让程序崩溃</strong></h4><h5 id="定制错误类型"><a href="#定制错误类型" class="headerlink" title="定制错误类型"></a>定制错误类型</h5><pre><code>class 错误名(Exception):
+    def __str__(self):
+    return &#39;提示的信息(只能是中文)&#39;</code></pre><p>语法：<br>​    <strong><code>raise 异常类型</code></strong><br>——还可以自定义异常类型</p>
+<pre><code class="python">age = int(input(&#39;请输入年龄：&#39;))
+if age &lt; 0 or age &gt; 100:
+    raise ValueError</code></pre>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h4 id="1-什么是模块"><a href="#1-什么是模块" class="headerlink" title="1.什么是模块"></a>1.什么是模块</h4><p>​    python中一个py文件就是一个模块；模块名就是py文件的文件名</p>
+<h4 id="2-模块间的相互引用"><a href="#2-模块间的相互引用" class="headerlink" title="2.模块间的相互引用"></a>2.模块间的相互引用</h4><p>怎么在一个模块中使用另一个模块的内容：导入模块(3种导入方式)<br>语法：</p>
+<pre><code>a. import 模块名
+                功能：导入指定的模块，导入后可以使用指定模块的所有全局变量
+                使用方式：模块名.变量名
+
+例如：
+    import test   
+    使用被导入的变量 
+    test.a
+    test.func1  </code></pre><pre><code>b. from 模块名 import 变量名/函数名
+                功能：导入指定模块中的指定全局变量，导入后只能使用被导入的全局变量
+                使用方式（直接使用）：变量名
+例如：
+    from test import func1,a
+    使用被导入的变量  
+    a
+    func1  </code></pre><pre><code>c. from 模块名 import *
+                功能：导入指定的模块，导入后可以使用指定模块的所有全局变量
+                使用方式（直接使用）：变量名          
+例如：
+    from test import *
+    使用被导入的变量  
+    a
+    func1 
+    func2</code></pre><pre><code>d. 当需要导入的指定模块名字与当前模块里的变量名有冲突时，可以修改要导入的指定模块名
+        import 模块名 as 修改后的模块名
+        使用方式：修改后的模块名.变量
+   当导入模块中的变量与当前模块中的变量有冲突时，可以修改要导入当前模块的变量名
+        from 模块名 import 变量名1 as 新变量名1,变量名2 as 新变量名2,.......</code></pre><h4 id="3-导入模块的原理"><a href="#3-导入模块的原理" class="headerlink" title="3.导入模块的原理"></a>3.导入模块的原理</h4><p><strong>通过import 或 from import导入一个模块时，会将这个模块的代码全部执行一遍</strong></p>
+<p>=========<strong>如何在导入模块时选择性执行部分代码：</strong><br>语法：<br>    代码段1<br>    if <strong>name</strong> == ‘<strong>main</strong>‘:<br>        代码段2<br>说明：<br>​    导入时只执行代码段1，不会执行if后边的代码段2（代码段1可以被导入，代码段2不会被导入）<br>但是运行本模块时，if后边的代码段2就会执行<br>​<br><strong>导入模块时选择性执行代码的原理：</strong><br>​    创建模块时，每个模块都会自动产生一个<strong>name</strong>属性，用来保存当前模块的模块名，它的值默认就是py文件的文件名；<br>​    当直接运行这个模块时，模块中的’<strong>name</strong>‘属性会临时变成’<strong>main</strong>‘，从而<strong>name</strong> == ‘<strong>main</strong>‘，可以执行代码段2</p>
+<h3 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a>hashlib模块</h3><h4 id="1-什么是hashlib"><a href="#1-什么是hashlib" class="headerlink" title="1.什么是hashlib"></a>1.什么是hashlib</h4><p><strong>python用来提供产生摘要算法（哈希算法、离散算法）的模块；例如 md5、sha算法</strong></p>
+<h4 id="2-哈希算法特点"><a href="#2-哈希算法特点" class="headerlink" title="2.哈希算法特点"></a>2.<strong>哈希算法特点</strong></h4><p>​    1）算法不可逆 —— 根据摘要（密文）不能获取/推导出原文<br>​    2）使用相同算法对一样的数据加密后的结果是一致的<br>​    3）不同长度的原文数据通过相同的算法加密后获得的密文长度是一样的</p>
+<h4 id="3-怎么生成数据对应的摘要（密文）"><a href="#3-怎么生成数据对应的摘要（密文）" class="headerlink" title="3.怎么生成数据对应的摘要（密文）"></a>3.怎么生成数据对应的摘要（密文）</h4><p>1）根据算法创建hash对象</p>
+<p>语法：<code>hashlib.算法名（）</code></p>
+<pre><code class="python">hash1 = hashlib.md5()</code></pre>
+<p>2）对数据进行加密</p>
+<p>语法：<code>哈希对象.update(数据)</code></p>
+<p>要求 —— 指定加密数据，数据必须是二进制数据<br>补充：二进制数据与字符串的相互转换<br>​    二进制数据：bytes<br>​    字符串转二进制： bytes（字符串,encoding=’utf-8’） 或  字符串.encode（）<br>​    二进制转字符串：str(二进制数据,encoding=’utf-8’)  或  二进制.decode(encoding=’utf-8’)</p>
+<pre><code class="python">hash1.update(password.encode())</code></pre>
+<p>3）获取摘要（密文）</p>
+<p>语法：</p>
+<p><code>哈希对象.digest()</code> —— 获取二进制形式的密文（摘要），数据类型是字符串</p>
+<p><code>哈希对象.hexdigest()</code> —— 获取十六进行形式的密文（摘要），数据类型是字符串</p>
+<pre><code class="python">sc = hash1.digest()
+sc1 = hash1.hexdigest()
+print(sc)    # b&#39;J\xa5\xa13\x18\xe1\x0bu\x01\xc2l\x163d\xfe\x87&#39;
+print(sc1)   # 4aa5a13318e10b7501c26c163364fe87</code></pre>
+<h3 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h3><h4 id="什么是时间戳"><a href="#什么是时间戳" class="headerlink" title="什么是时间戳"></a>什么是时间戳</h4><p>时间戳：<strong>指的是一个时间到1970年1月1日0点0分0秒之间的时间差，用秒表示</strong></p>
+<pre><code class="python"># t1就是一个时间戳
+t1 = time.time()</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%AC%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%92%8C%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7">玩转文件操作和异常捕获</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/文件操作和异常捕获/';
+      this.page.identifier = '/2019/11/02/文件操作和异常捕获/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "文件操作和异常捕获&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

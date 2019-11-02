@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>MySQL数据库 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期四, 十月 31日 2019, 4:57 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>MySQL的安装、数据库的分类，以及MySQL中如何创建库、表，并修改表的数据</p>
+<a id="more"></a>
+
+<p>序列化：把对象变成字符串或字节串(pickle、json模块)</p>
+<p>反序列化：把字符串或字节串还原成对象</p>
+<p>数据库 —— 数据的集散地-数据持久化,可以很好的管理数据，方便将来对数据的检索</p>
+<p>大多数的数据库都能够保证数据的一致性、完整性并减少数据的冗余.</p>
+<p>连接服务器：XShell / FinalShell</p>
+<p>类和类之间的关系：is-a关系（继承关系）、has-a（关联关系：聚合、合成）、use-a（依赖关系）</p>
+<h3 id="数据库分类"><a href="#数据库分类" class="headerlink" title="数据库分类"></a>数据库分类</h3><p>——关系型数据库和非关系型数据库</p>
+<p>1970年-IBM研究院发表了论述关系模型的论文</p>
+<p>####关系型数据库</p>
+<h5 id="关系型数据库的特点"><a href="#关系型数据库的特点" class="headerlink" title="关系型数据库的特点"></a><strong>关系型数据库的特点</strong></h5><p>1.理论基础：集合论+关系代数</p>
+<p>2.具体表象：用二维表来保存数据(行-记录 、列-字段)</p>
+<p>3.编程语言：SQL (结构化查询语言) —— 数据库通用编程语言</p>
+<p>​    <code>—DDL(数据定义语言) :create / drop(删库) /alter</code></p>
+<p>​    <code>—DML(数据操作语言) : insert / delete / update / select</code></p>
+<p>​    —DCL(数据控制语言) :grant / revoke</p>
+<h5 id="关系型数据库的产品"><a href="#关系型数据库的产品" class="headerlink" title="关系型数据库的产品"></a><strong>关系型数据库的产品</strong></h5><p>1.Oracle — 银行、电子政务、大型电商</p>
+<p>2.MySQL — 中小企业</p>
+<p>3.DB2 — IBM</p>
+<h5 id="数据的完整性和一致性"><a href="#数据的完整性和一致性" class="headerlink" title="数据的完整性和一致性"></a><strong>数据的完整性和一致性</strong></h5><p>完整性：</p>
+<pre><code>1.实体完整性— 每条记录都是独一无二的没有冗余-主键/唯一索引
+
+2.参照完整性— 一张表参照另一张表的数据 - 外键
+
+3.域完整性 — 数据是有效正确的 - 数据类型(长度)/非空约束/默认值约束/检查约束(MySQL不支持，其他数据库支持)
+
+    检查约束写法：.....check (条件)</code></pre><p>一致性：通过锁保护数据</p>
+<p>MySQL —&gt; InnoDB存储引擎(MySQL默认使用这个) —&gt; 能够支持互联网的高并发业务—&gt;行级锁/表级锁—&gt; 支持事务操作</p>
+<h5 id="事务"><a href="#事务" class="headerlink" title="事务"></a><strong>事务</strong></h5><p>对数据的多个操作是不可分割的，要么全部成功，要么全失败</p>
+<p>1.开启事务环境：begin / start transaction</p>
+<p>2……..多个SQL操作语句</p>
+<p>3.commit; – 成功就提交(提交事务) / rollback; – 失败就回滚(回滚事务)</p>
+<h5 id="事务的面试题-重要，面试问"><a href="#事务的面试题-重要，面试问" class="headerlink" title="事务的面试题(重要，面试问)"></a>事务的面试题(重要，面试问)</h5><p>事务的ACID特性： </p>
+<p>Atomicity —— 原子性，不可分割</p>
+<p>Consistency —— 一致性，事务前后的状态要一致</p>
+<p>Isolation —— 隔离性，多个并发的事务不知道彼此的中间状态（不能看到张数据）</p>
+<p>Duration —— 持久性，事务完成后数据要持久化</p>
+<h3 id="Linux环境下安装MySQL-—-使用包管理工具"><a href="#Linux环境下安装MySQL-—-使用包管理工具" class="headerlink" title="Linux环境下安装MySQL — 使用包管理工具"></a>Linux环境下安装MySQL — 使用包管理工具</h3><p>1.yum -install /erase(卸载)/update(更新)</p>
+<p>​    安装：yum install -y mariadb mariadb-server</p>
+<p>​    查看：yum list installed | grep marisdb</p>
+<p>​    卸载：yum erase -y mariadb mariadb-server mariadb-libs</p>
+<p>2.rpm -ivh / -e / -qa</p>
+<p>​    下载：wget / tar -xvf</p>
+<p>​    补包：yum install -y libaio</p>
+<p>​     安装：</p>
+<pre><code>    rpm -ivh mysql-community-common-5.7.26-1.el7.x86_64.rpm
+    rpm -ivh mysql-community-libs-5.7.26-1.el7.x86_64.rpm
+    rpm -ivh mysql-community-client-5.7.26-1.el7.x86_64.rpm
+    rpm -ivh mysql-community-server-5.7.26-1.el7.x86_64.rpm</code></pre><p><strong>启动/停止/重启MySQL服务器</strong></p>
+<pre><code>    systemctl start mysqld
+    systemctl stop mysqld
+    systemctl restart mysqld
+    systemctl status mysqld - 查看状态
+    systemctl enable mysqld  - 开机自启
+    netstat - ntlp/</code></pre><p><strong>通过MySQL客户端连接服务器</strong></p>
+<p>​    <code>mysql -u root -p</code></p>
+<p><strong>准备工作</strong></p>
+<p>​    set global validate_password_policy=0;</p>
+<p>​    set global validate_password_length=8;</p>
+<p>​    alter user ‘root’@’localhost’ identified by ‘修改后的密码’</p>
+<h3 id="使用MySQL管理数据"><a href="#使用MySQL管理数据" class="headerlink" title="使用MySQL管理数据"></a>使用MySQL管理数据</h3><h4 id="1-展示数据库"><a href="#1-展示数据库" class="headerlink" title="1.展示数据库"></a>1.展示数据库</h4><p><code>show databases;</code></p>
+<h4 id="2-删除存在的库"><a href="#2-删除存在的库" class="headerlink" title="2.删除存在的库"></a>2.删除存在的库</h4><p><code>drop database if exists 库名;</code></p>
+<h4 id="3-创建自己的数据库"><a href="#3-创建自己的数据库" class="headerlink" title="3.创建自己的数据库"></a>3.创建自己的数据库</h4><p><code>create database 库名 default charset utf8;   例如：creat database schools</code></p>
+<h4 id="4-切换到指定库"><a href="#4-切换到指定库" class="headerlink" title="4.切换到指定库"></a>4.切换到指定库</h4><p><code>use 库名；</code></p>
+<h4 id="5-查看指定库的表"><a href="#5-查看指定库的表" class="headerlink" title="5.查看指定库的表"></a>5.查看指定库的表</h4><p><code>show tables;</code></p>
+<h4 id="6-创建表"><a href="#6-创建表" class="headerlink" title="6.创建表"></a>6.创建表</h4><p>——表名一般命名规范：根据表的内容命名；例如：tb_表的内容</p>
+<p>​    例如：学生的选课系统</p>
+<pre><code>create table tb_student(
+    stuid integer not null comment &#39;学号&#39;,
+    stuname varchar(10) not null comment &#39;姓名&#39;,
+    stusex boolean default 1 comment &#39;性别&#39;,    
+    stubirth date comment &#39;生日&#39;,
+    primary key (stuid)
+);     </code></pre><p>​    说明: –  <strong>not null</strong>表示非空约束，<strong>comment ‘学号’</strong>   是注释</p>
+<p>​         – <strong>varchar(20)</strong>表示输入字符最长为10；<strong>not null</strong>表示非空约束</p>
+<p>​         – <strong>default</strong> 表示默认值约束(没有给列赋值就使用默认值)</p>
+<p>​        – <strong>primary key</strong>  主键约束    :</p>
+<p>如果存在指定表，则删除表：<strong><code>drop table if exists 表名;</code></strong></p>
+<h4 id="7-修改表"><a href="#7-修改表" class="headerlink" title="7.修改表"></a>7.修改表</h4><pre><code>添加列：alter table 表名 add column stuaddr varchar(255);
+    -- stuaddr  新的列名
+
+删除列：alter table 表名 drop column stuaddr;
+    -- stuaddr 列名
+
+修改列的数据类型：alter table 表名 modify column stuaddr varchar(100);
+
+修改列的名字和数据类型：alter table 表名 change column stuaddr foo varchar(50);
+    -- foo 新的列名</code></pre><p><strong>向指定表插入数据</strong>：</p>
+<pre><code>    -- 按表的列的顺序插入
+insert into 表名 values (1001, &#39;梨花&#39;, 1, &#39;1988-9-3&#39;, &#39;成都&#39;);
+    -- 按自己指定的顺序插入
+insert into 表名 (stuid,stuname) values (1003, &#39;菊花&#39;);
+    -- 批量插入
+insert into 表名 (stuid,stuname) values (1004, &#39;菊花&#39;),(1005,&#39;荷花&#39;);</code></pre><p><strong>删除数据</strong>：</p>
+<pre><code>        delete from 表名 where 条件;
+
+        delete from 表名 where stuid=1002;
+
+        或：delete from 表名 where stuid in (1003, 1002);</code></pre><p><strong>更新数据</strong>：</p>
+<pre><code>-- where 条件    表示在判断的基础上执行操作，防止误操作
+
+update 表名 set stuaddr=&#39;南充&#39; where stuid=&#39;1001&#39;;
+
+update 表名 set stuaddr=&#39;南充&#39;,stubirth=&#39;1998-3-25&#39; where stuid=&#39;1001&#39;;</code></pre><p><strong>查看整个表</strong>：<code>select * from 表名</code>   或  <code>/select * from 表名\G</code></p>
+<p><strong>错误类型</strong>：</p>
+<pre><code>    -- 列的数量跟值的数量不匹配
+
+    ERROR 1136 (21S01): Column count doesn&#39;t match value count at row 1
+
+    -- 重复的主键
+
+    ERROR 1062 (23000): Duplicate entry &#39;1001&#39; for key &#39;PRIMARY&#39;
+
+    -- 数据太长列装不下
+
+    ERROR 1406 (22001): Data too long for column &#39;stuname&#39; at row 1</code></pre><p><strong>创建学院表</strong>：</p>
+<pre><code>create table tb_academy(
+    acid integer not null comment &#39;学院编号&#39;,
+    acname varchar(10) not null comment &#39;学院名称&#39;,
+    acbossname varchar(10) not null comment &#39;院长名字&#39;,
+    primary key(acid)
+);</code></pre><p>​     insert into tb_academy(acname,acbossname,acid) values (‘艺术学院’,’罗伊’,’1’),(‘软件学院’,’罗里’,’2’),(‘外国语学院’,’华北’,’3’);</p>
+<p>– 修改学生表，建立学生对学院的多对一关系</p>
+<p>​    alter table tb_student add column acid integer;</p>
+<p>– 通过<strong>添加外键约束</strong>来建立学生表对学院表的参照关系(学生表的学员编号要参照学院表)   ——<strong><code>多对1，在多的一方加外键列</code></strong></p>
+<p>​    alter table tb_student add constraint fk_student_acid </p>
+<p>​    foreign key (acid) references tb_academy (acid);</p>
+<p>​    如果输错了：</p>
+<p>创建老师表：</p>
+<pre><code>create table tb_teacher(
+    teaid integer not null comment &#39;工号&#39;,
+    teaname varchar(20) not null comment &#39;名字&#39;,
+    tattitle varchar(20) not null comment &#39;职称&#39;,
+    acid integer not null comment &#39;所属学院&#39;,
+    primary key (teaid),
+    foreign key (acid) references tb_academy (acid)
+);</code></pre><p>创建课程表：</p>
+<pre><code>create table tb_course(
+    courseid integer not null comment &#39;课程编号&#39;,
+    coursename varchar(50) not null comment &#39;课程名称&#39;,
+    coursescore integer not null comment &#39;课程学分&#39;,
+    teaid integer not null comment &#39;课程老师编号&#39;,
+    primary key (courseid),
+    foreign key (teaid) references tb_teacher(teaid)
+);</code></pre><p>– 创建学生选课记录表：</p>
+<pre><code>create table tb_record (
+     recid integer not null auto_increment comment &#39;选课记录号&#39;,
+     sid integer not null comment &#39;选课学生id&#39;,
+     cid integer not null comment &#39;被选课程id&#39;,
+     seldate datetime default now() comment &#39;选课时间&#39;,
+     score decimal(4, 1) comment &#39;分数&#39;,
+      primary key (recid)
+);</code></pre><p>– 修改选课记录表 ，添加外键约束(也可以建表的时候就加上)</p>
+<pre><code>alter table tb_record add constraint fk_record_sid foreign key (sid) references tb_student (stuid);
+alter table tb_record add constraint fk_record_cid foreign key (cid) references tb_course (courseid);</code></pre><p>– 修改选课记录表添加唯一约束</p>
+<pre><code>alter table tb_record add constraint uni_record_sid_cid unique (sid, cid);</code></pre><h3 id="有条件查找需要的数据（非常重要）"><a href="#有条件查找需要的数据（非常重要）" class="headerlink" title="有条件查找需要的数据（非常重要）"></a>有条件查找需要的数据（非常重要）</h3><h4 id="1-学生选课系统"><a href="#1-学生选课系统" class="headerlink" title="1.学生选课系统"></a>1.学生选课系统</h4><pre><code class="python">-- 如果存在名为school的数据库就删除它
+drop database if exists school;
+-- 创建名为school的数据库并设置默认的字符集和排序方式
+create database school default charset utf8;
+-- 切换到school数据库上下文环境
+use school;
+-- 创建学院表
+create table tb_college
+(
+collid         int auto_increment comment &#39;编号&#39;,
+collname     varchar(50) not null comment &#39;名称&#39;,
+collintro     varchar(500) default &#39;&#39; comment &#39;介绍&#39;,
+primary key (collid)
+);
+-- 创建学生表
+create table tb_student
+(
+stuid         int not null comment &#39;学号&#39;,
+stuname     varchar(20) not null comment &#39;姓名&#39;,
+stusex         boolean default 1 comment &#39;性别&#39;,
+stubirth     date not null comment &#39;出生日期&#39;,
+stuaddr     varchar(255) default &#39;&#39; comment &#39;籍贯&#39;,
+collid         int not null comment &#39;所属学院&#39;,
+primary key (stuid),
+foreign key (collid) references tb_college (collid)
+);
+-- 创建教师表
+create table tb_teacher
+(
+teaid         int not null comment &#39;工号&#39;,
+teaname     varchar(20) not null comment &#39;姓名&#39;,
+teatitle     varchar(10) default &#39;助教&#39; comment &#39;职称&#39;,
+collid         int not null comment &#39;所属学院&#39;,
+primary key (teaid),
+foreign key (collid) references tb_college (collid)
+);
+-- 创建课程表
+create table tb_course
+(
+couid         int not null comment &#39;编号&#39;,
+couname     varchar(50) not null comment &#39;名称&#39;,
+coucredit     int not null comment &#39;学分&#39;,
+teaid         int not null comment &#39;授课老师&#39;,
+primary key (couid),
+foreign key (teaid) references tb_teacher (teaid)
+);
+-- 创建选课记录表
+create table tb_record
+(
+recid         int auto_increment comment &#39;选课记录编号&#39;,
+sid         int not null comment &#39;选课学生&#39;,
+cid         int not null comment &#39;所选课程&#39;,
+seldate     datetime default now() comment &#39;选课时间日期&#39;,
+score         decimal(4,1) comment &#39;考试成绩&#39;,
+primary key (recid),
+foreign key (sid) references tb_student (stuid),
+foreign key (cid) references tb_course (couid),
+unique (sid, cid)
+);
+
+-- 插入学院数据
+insert into tb_college (collname, collintro) values 
+(&#39;计算机学院&#39;, &#39;创建于1956年是我国首批建立计算机专业。学院现有计算机科学与技术一级学科和网络空间安全一级学科博士学位授予权，其中计算机科学与技术一级学科具有博士后流动站。计算机科学与技术一级学科在2017年全国第四轮学科评估中评为A；2019 U.S.News全球计算机学科排名26名；ESI学科排名0.945‰，进入全球前1‰，位列第43位。&#39;),
+(&#39;外国语学院&#39;, &#39;1998年浙江大学、杭州大学、浙江农业大学、浙江医科大学四校合并，成立新的浙江大学。1999年原浙江大学外语系、原杭州大学外国语学院、原杭州大学大外部、原浙江农业大学公外部、原浙江医科大学外语教学部合并，成立浙江大学外国语学院。2003年学院更名为浙江大学外国语言文化与国际交流学院。&#39;),
+(&#39;经济管理学院&#39;, &#39;四川大学经济学院历史悠久、传承厚重，其前身是创办于1905年的四川大学经济科,距今已有100多年的历史。已故著名经济学家彭迪先、张与九、蒋学模、胡寄窗、陶大镛、胡代光，以及当代著名学者刘诗白等曾先后在此任教或学习。在长期的办学过程中，学院坚持以马克思主义的立场、观点、方法为指导，围绕建设世界一流经济学院的奋斗目标，做实“两个伟大”深度融合，不断提高党的建设质量与科学推进一流事业深度融合。&#39;);
+
+-- 插入学生数据
+insert into tb_student (stuid, stuname, stusex, stubirth, stuaddr, collid) values
+(1001, &#39;杨逍&#39;, 1, &#39;1990-3-4&#39;, &#39;四川成都&#39;, 1),
+(1002, &#39;任我行&#39;, 1, &#39;1992-2-2&#39;, &#39;湖南长沙&#39;, 1),
+(1033, &#39;王语嫣&#39;, 0, &#39;1989-12-3&#39;, &#39;四川成都&#39;, 1),
+(1572, &#39;岳不群&#39;, 1, &#39;1993-7-19&#39;, &#39;陕西咸阳&#39;, 1),
+(1378, &#39;纪嫣然&#39;, 0, &#39;1995-8-12&#39;, &#39;四川绵阳&#39;, 1),
+(1954, &#39;林平之&#39;, 1, &#39;1994-9-20&#39;, &#39;福建莆田&#39;, 1),
+(2035, &#39;东方不败&#39;, 1, &#39;1988-6-30&#39;, null, 2),
+(3011, &#39;林震南&#39;, 1, &#39;1985-12-12&#39;, &#39;福建莆田&#39;, 3),
+(3755, &#39;项少龙&#39;, 1, &#39;1993-1-25&#39;, null, 3),
+(3923, &#39;杨不悔&#39;, 0, &#39;1985-4-17&#39;, &#39;四川成都&#39;, 3),
+(4040, &#39;隔壁老王&#39;, 1, &#39;1989-1-1&#39;, &#39;四川成都&#39;, 2);
+
+-- 删除学生数据
+delete from tb_student where stuid=4040;
+
+-- 更新学生数据
+update tb_student set stuname=&#39;杨过&#39;, stuaddr=&#39;湖南长沙&#39; where stuid=1001;
+
+-- 插入老师数据
+insert into tb_teacher (teaid, teaname, teatitle, collid) values 
+(1122, &#39;张三丰&#39;, &#39;教授&#39;, 1),
+(1133, &#39;宋远桥&#39;, &#39;副教授&#39;, 1),
+(1144, &#39;杨逍&#39;, &#39;副教授&#39;, 1),
+(2255, &#39;范遥&#39;, &#39;副教授&#39;, 2),
+(3366, &#39;韦一笑&#39;, &#39;讲师&#39;, 3);
+
+-- 插入课程数据
+insert into tb_course (couid, couname, coucredit, teaid) values 
+(1111, &#39;Python程序设计&#39;, 3, 1122),
+(2222, &#39;Web前端开发&#39;, 2, 1122),
+(3333, &#39;操作系统&#39;, 4, 1122),
+(4444, &#39;计算机网络&#39;, 2, 1133),
+(5555, &#39;编译原理&#39;, 4, 1144),
+(6666, &#39;算法和数据结构&#39;, 3, 1144),
+(7777, &#39;经贸法语&#39;, 3, 2255),
+(8888, &#39;成本会计&#39;, 2, 3366),
+(9999, &#39;审计学&#39;, 3, 3366);
+
+-- 插入选课数据
+insert into tb_record (sid, cid, seldate, score) values 
+(1001, 1111, &#39;2017-09-01&#39;, 95),
+(1001, 2222, &#39;2017-09-01&#39;, 87.5),
+(1001, 3333, &#39;2017-09-01&#39;, 100),
+(1001, 4444, &#39;2018-09-03&#39;, null),
+(1001, 6666, &#39;2017-09-02&#39;, 100),
+(1002, 1111, &#39;2017-09-03&#39;, 65),
+(1002, 5555, &#39;2017-09-01&#39;, 42),
+(1033, 1111, &#39;2017-09-03&#39;, 92.5),
+(1033, 4444, &#39;2017-09-01&#39;, 78),
+(1033, 5555, &#39;2017-09-01&#39;, 82.5),
+(1572, 1111, &#39;2017-09-02&#39;, 78),
+(1378, 1111, &#39;2017-09-05&#39;, 82),
+(1378, 7777, &#39;2017-09-02&#39;, 65.5),
+(2035, 7777, &#39;2018-09-03&#39;, 88),
+(2035, 9999, default, null),
+(3755, 1111, default, null),
+(3755, 8888, default, null),
+(3755, 9999, &#39;2017-09-01&#39;, 92);</code></pre>
+<pre><code>-- 查询所有学生的信息
+select * from tb_student;`
+-- 这样才是精确地查找
+`select stuid,stuname,stusex,stubirth,stuaddr,collid from tb_student;</code></pre><pre><code>-- 查询所有课程名称及学分(投影、别名)
+-- 投影
+select couname,coucredit from tb_course;
+-- 别名，一般是与别的查询项区分，as可以省略
+select couname as 课程名称,coucredit as 学分 from tb_course;</code></pre><pre><code>-- 查询学生姓名、性别、生日
+select stuname,stusex,stubirth from tb_student;
+-- (1)1显示男，0显示女;数据库通用方法
+select stuname,(case stusex when 1 then &#39;男&#39; else &#39;女&#39; end) as stusex,
+stubirth from tb_student;
+-- (2)MySQL专用
+select stuname, if(stusex, &#39;男&#39;, &#39;女&#39;) as stusex,stubirth from tb_student;
+-- (3)将学生的生日变成年龄;datediff(now(),学生出生日期)- 获得的是学生出生的天数；floor代表向下取整
+select floor(datediff(now(), stubirth) / 365) as stuage from tb_student;</code></pre><pre><code>-- 给查到的数据后加字；concat(查找项,字符串)
+select concat(stuname,‘牛逼’) as stuname from tb_student;</code></pre><pre><code>-- 查询所有女学生的姓名和出生日期
+select stuname,stubirth from tb_student where stusex=0;</code></pre><pre><code>-- 查询80后的姓名和出生日期
+-- (1)
+select stuname,stubirth from tb_student where stubirth&gt;=&#39;1980-1-1&#39; and stubirth&lt;=&#39;1989-12-31&#39;;
+-- (2)更直观简洁
+select stuname,stubirth from tb_student where stubirth between &#39;1980-1-1&#39; and &#39;1989-12-31&#39;;
+-- 查询80后女生的姓名和出生日期
+select stuname,stubirth from tb_student where stubirth between &#39;1980-1-1&#39; and &#39;1989-12-31&#39; and stusex=0;</code></pre><pre><code>-- 查询姓杨的学生姓名和性别(模糊)- %是通配符，表示一个字两个字或三个字...
+select stuname,stusex from tb_student where stuname like &#39;杨%&#39;;
+-- 查询姓杨名字两个字的学生姓名和性别(模糊)- _匹配一个字符
+select stuname,stusex from tb_student where stuname like &#39;杨_&#39;;
+
+-- 查询名字中有“不”，“嫣”的学生姓名—— 条件要给全
+select stuname from tb_student where stuname like &#39;%不%&#39; or stuname like &#39;%嫣%&#39;;</code></pre><pre><code>-- 查询没有录入家庭住址的学生姓名;—— 判断是否为null，不能用=，而是用 is 和 is not
+select stuname from tb_student where stuaddr is null;
+select stuname from tb_student where stuaddr is not null;</code></pre><pre><code>-- 查询学生的家庭住址(去重)——  distinct-内置的一个去重函数、关键字
+select distinct stuaddr from tb_student where stuaddr is not null;</code></pre><pre><code>-- 查询男学生的姓名和生日，按生日从大到小排序(先筛选在排序)
+-- (order by 排序标准 升序/降序)-排序标准可以指定多个，用逗号隔开，默认是升序 
+-- 降序：desc   升序：asc
+select stuname, stubirth from tb_student where stusex=1 order by stubirth;
+select floor(datediff(now(), stubirth) / 365) as stuage from tb_student where stusex=1 order by stuage desc, stuid;</code></pre><pre><code>-- 查询年龄最小、最大的学生的出生日期(聚合函数);可以加筛选条件
+select min(stubirth) from tb_student;
+select max(stubirth) from tb_student where stusex=1;</code></pre><pre><code>-- 求选编号1111课程的学生成绩的平均分,以及多少人选择了1111课程
+-- avg(),count() 都会忽略空值
+select avg(score) as avgscore from tb_record where  cid=1111;
+select count(sid) as total from tb_record where cid=1111;</code></pre><pre><code>-- 查询学号为1001的学生所有课程的平均分(筛选和聚合函数)
+select avg(score) as avgscore from tb_record where sid=1001;</code></pre><pre><code>-- 查询每个学生的学号和平均成绩(分组和聚合函数)-分组后计算每个分组的数据
+-- group by 分组标准  round(数字,小数位数)—— 保留指定位数小数
+select sid, round(avg(score), 1) as avgscore from tb_record group by sid;</code></pre><pre><code>-- 查询男、女学生的数量(分组，筛选再操作)
+select stusex,count(stuid) as total from tb_student group by stusex order by total desc;</code></pre><pre><code>-- 查询学生平均大于90分的学生的平均成绩
+-- *分组前的筛选用where，分组后的筛选用having*
+select sid, round(avg(score), 1) as avgscore from tb_record group by sid having avgscore&gt;=90;</code></pre><pre><code>-- 查询年龄最大的学生姓名（子查询、嵌套查询）
+-- 将一个查询的结果作为另一个查询的的一个工具
+select stuname from tb_student where stubirth=(select min(stubirth) from tb_student);</code></pre><pre><code>-- 查询选了两门以上课程的学生姓名(子查询、分组、集合)
+-- 先把子查询写出：select sid from tb_record group by sid having count(sid)&gt;2;
+select stuname from tb_student where stuid in 
+(select sid from tb_record group by sid having count(sid)&gt;2);</code></pre><pre><code>-- 查询课程名称和授课老师(连表查询,需要查询2张表)
+-- 连接表时，如果没有给连接两张表的条件，就会形成笛卡尔积
+-- (1)写法一
+select couname, teaname from tb_course, tb_teacher 
+where tb_course.teaid=tb_teacher.teaid;
+-- (2)写法二
+select couname, teaname from tb_course t1 inner join tb_teacher t2
+on t1.teaid=t2.teaid;</code></pre><pre><code>-- 查询学生姓名、课程名称、以及成绩（连接查询，查3张表）
+select stuid, couname, score from tb_student, tb_course,tb_record 
+where stuid=sid and couid=cid  and score is not null;</code></pre><pre><code>-- 查询学生姓名、平均成绩（子查询、连接查询）
+-- **将子查询得到的表作为临时表，然后进行连接查询**
+select stuname, avgscore from tb_student t1,(select sid, round(avg(score),1) 
+as avgscore from tb_record group by sid) t2 where stuid=sid;</code></pre><pre><code>-- **外连接：outer join - 左外连接/右外连接 —— 不满足连表条件时，能够查完整
+-- 写在前边的表就是左表，后边的就是右表；左连接就是左边表查完整，右连接就是右表查完整，不满足连表条件补空值
+-- 查询学生姓名、选课数量（子查询、左连接查询）
+-- ifnull(num, N) —— 如果num不为空，num是多少这个函数的值就是num，num为空，就输出N
+-- MySQL只支持这一种写法
+select stuname, ifnull(total, 0) from tb_student left outer join (select sid, count(sid)
+as total from tb_record group by sid) t2 on stuid=sid order by total;</code></pre><pre><code>-- 分页查询
+-- 每次查4条
+select * from tb_student order by stuid limit 4;
+-- 跳过8条查4条
+select * from tb_student order by stuid limit 4 offset 8;
+select * from tb_student order by stuid limit 8, 4; </code></pre><p>/*<br>MySQL书写顺序：select …from….where … group by ……having ….. order by …limit…. offset….<br>根据实际情况后边的一些可以省略<br>*/</p>
+<h4 id="2-管理部门"><a href="#2-管理部门" class="headerlink" title="2.管理部门"></a>2.管理部门</h4><pre><code class="python">drop database if exists hrs;
+create database hrs default charset utf8;
+
+use hrs;
+
+drop table if exists tb_emp;
+drop table if exists tb_dept;
+
+create table tb_dept
+(
+dno int not null comment &#39;编号&#39;,
+dname varchar(10) not null comment &#39;名称&#39;,
+dloc varchar(20) not null comment &#39;所在地&#39;,
+primary key (dno)
+);
+
+insert into tb_dept values 
+    (10, &#39;会计部&#39;, &#39;北京&#39;),
+    (20, &#39;研发部&#39;, &#39;成都&#39;),
+    (30, &#39;销售部&#39;, &#39;重庆&#39;),
+    (40, &#39;运维部&#39;, &#39;深圳&#39;);
+
+create table tb_emp
+(
+eno int not null comment &#39;员工编号&#39;,
+ename varchar(20) not null comment &#39;员工姓名&#39;,
+job varchar(20) not null comment &#39;员工职位&#39;,
+mgr int comment &#39;主管编号&#39;,
+sal int not null comment &#39;员工月薪&#39;,
+comm int comment &#39;每月补贴&#39;,
+dno int comment &#39;所在部门编号&#39;,
+primary key (eno)
+);
+
+alter table tb_emp add constraint fk_emp_mgr foreign key (mgr) references tb_emp (eno);
+alter table tb_emp add constraint fk_emp_dno foreign key (dno) references tb_dept (dno);
+
+insert into tb_emp values 
+    (7800, &#39;张三丰&#39;, &#39;总裁&#39;, null, 9000, 1200, 20),
+    (2056, &#39;乔峰&#39;, &#39;分析师&#39;, 7800, 5000, 1500, 20),
+    (3088, &#39;李莫愁&#39;, &#39;设计师&#39;, 2056, 3500, 800, 20),
+    (3211, &#39;张无忌&#39;, &#39;程序员&#39;, 2056, 3200, null, 20),
+    (3233, &#39;丘处机&#39;, &#39;程序员&#39;, 2056, 3400, null, 20),
+    (3251, &#39;张翠山&#39;, &#39;程序员&#39;, 2056, 4000, null, 20),
+    (5566, &#39;宋远桥&#39;, &#39;会计师&#39;, 7800, 4000, 1000, 10),
+    (5234, &#39;郭靖&#39;, &#39;出纳&#39;, 5566, 2000, null, 10),
+    (3344, &#39;黄蓉&#39;, &#39;销售主管&#39;, 7800, 3000, 800, 30),
+    (1359, &#39;胡一刀&#39;, &#39;销售员&#39;, 3344, 1800, 200, 30),
+    (4466, &#39;苗人凤&#39;, &#39;销售员&#39;, 3344, 2500, null, 30),
+    (3244, &#39;欧阳锋&#39;, &#39;程序员&#39;, 3088, 3200, null, 20),
+    (3577, &#39;杨过&#39;, &#39;会计&#39;, 5566, 2200, null, 10),
+    (3588, &#39;朱九真&#39;, &#39;会计&#39;, 5566, 2500, null, 10);</code></pre>
+<pre><code>-- 查询月薪最高的员工姓名和工资(子查询)
+select ename,sal from tb_emp where sal=(select max(sal) from tb_emp);</code></pre><pre><code>-- 查询员工的姓名和年薪((月薪+补贴)*13)-要处理空值
+select ename,(sal+ifnull(comm,0))*13 as yearsal from tb_emp order by yearsal desc;</code></pre><pre><code>-- 查询有员工的部门的编号和人数
+select dno,count(eno) as total from tb_emp group by dno;</code></pre><pre><code>-- 查询所有部门的名称和人数(临时表、左外连接)
+select dname,ifnull(total,0) as total from tb_dept t1 left outer join
+(select dno,count(dno) as total from tb_emp group by dno) t2 
+on t1.dno=t2.dno;</code></pre><pre><code>-- 查询月薪最高的员工(Boss除外)的姓名和工资(排除mgr的空值)
+select ename,sal from tb_emp where sal=(select max(sal) from tb_emp where mgr is not null);</code></pre><pre><code>-- 查询薪水超过平均薪水的员工的姓名和工资
+-- 子查询
+select avg(sal) as avgsal from tb_emp;
+select ename,sal from tb_emp where sal&gt;(select avg(sal) as avgsal from tb_emp);</code></pre><pre><code>-- ================================================
+-- 查询薪水超过其所在部门平均薪水的员工的姓名、部门编号和工资
+​    -- 每个部门的平均薪水
+​    select dno, avg(sal) as avgsal from tb_emp group by dno;
+
+​    -- 要写清楚取的是哪个表里的dno，不然有歧义
+​    select ename, sal, t1.dno from tb_emp t1, 
+​    (select dno, avg(sal) as avgsal from tb_emp group by dno) t2 
+​    where t1.dno=t2.dno and sal&gt;avgsal;
+​    -- 或
+​    select ename, sal, t1.dno from tb_emp t1 inner join 
+​    (select dno, avg(sal) as avgsal from tb_emp group by dno) t2 
+​    on t1.dno=t2.dno where sal&gt;avgsal;
+-- ===============================================</code></pre><p>– 查询部门中薪水最高的人姓名、工资和所在部门名称</p>
+<pre><code>-- 查询主管的姓名和职位
+select ename, job from tb_emp where eno in (select distinct mgr from tb_emp where mgr is not null);</code></pre><pre><code>-- 查询月薪排名4~6名的员工姓名和工资
+-- 月薪排序
+select ename, sal from tb_emp order by sal desc;
+-- 只看4-6的
+select ename, sal from tb_emp order by sal desc limit 4, 3;</code></pre><h3 id="优化查询"><a href="#优化查询" class="headerlink" title="优化查询"></a>优化查询</h3><h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><p>1.使用MySQL的<strong>explain</strong>关键字来查看SQL的执行计划</p>
+<pre><code class="python">====写法
+explain select * from tb_student where stuname=&#39;林震南&#39;\G
+====效果
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: tb_student
+   partitions: NULL
+         type: ALL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 11
+     filtered: 10.00
+        Extra: Using where
+1 row in set, 1 warning (0.00 sec)</code></pre>
+<p>2.创建索引语法</p>
+<p>创建索引的规范：<strong>前缀+表名+列名 —&gt; idx_student_name</strong></p>
+<pre><code class="python"># 第一种
+create index idx_student_name on tb_student(stuname);
+# 第二种:创建再列的第一个名字的字符上
+create index idx_student_name on tb_student(stuname(1));</code></pre>
+<p>3.删除索引</p>
+<pre><code class="python">alter table tb_emp drop index idx_emp_ename;
+# 或
+drop index idx_emp_ename on tb_emp;</code></pre>
+<p>4.索引设计原则</p>
+<pre><code> **最适合**索引的列是出现在**WHERE子句**和连接子句中的列。
+
+ 索引列的基数越大（取值多重复值少），索引的效果就越好。
+
+ 使用**前缀索引**可以减少索引占用的空间，内存中可以缓存更多的索引。
+
+ **索引不是越多越好**，虽然索引加速了读操作（查询），但是写操作（增、删、改）都会变得更慢，因为数据的变化会导致索引的更新，就如同书籍章节的增删需要更新目录一样。
+
+   使用InnoDB存储引擎时，表的普通索引都会保存主键的值，所以**主键要尽可能选择较短的数据类型**，这样可以有效的减少索引占用的空间，利用提升索引的缓存效果。</code></pre><h3 id="MySQL创建远程连接："><a href="#MySQL创建远程连接：" class="headerlink" title="MySQL创建远程连接："></a>MySQL创建远程连接：</h3><p>1)创建远程连接的用户</p>
+<p><code>create user &#39;root&#39;@&#39;too&#39; identified by &#39;密码&#39;;</code></p>
+<p>​    – too是%的话，代表公网任何人都可以访问；too是特定的IP地址，表示只给这个IP可以访问连接</p>
+<p>2)给用户授予指定权限</p>
+<p><code>grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; with grant option;</code></p>
+<pre><code>         `-- *.*表示给予它超级管理员权限；也可以替换为某一个库，表示只给他访问这一个库的权限。%表示给予所有用户相应的权限，也可以给特定的用户；with grant option表示给予用户可以将这些权限给予别人的权限，获得真正的超级管理员权限`</code></pre><h3 id="老师的笔记"><a href="#老师的笔记" class="headerlink" title="老师的笔记"></a>老师的笔记</h3><p>使用MySQL管理数据</p>
+<pre><code>-- 显示所有数据库
+show databases;
+-- 如果存在名为school的数据库就删除它
+drop database if exists school;
+-- 创建名为school的数据库并指定默认的字符集为utf-8
+create database school default charset utf8;
+
+-- 切换到school数据库
+use school;
+-- 查看所有表
+show tables;
+-- 如果存在名为tb_student的表就删除它
+drop table if exists tb_student;
+-- 创建名为tb_student的表
+create table tb_student (
+    stuid integer not null comment &#39;学号&#39;,
+    stuname varchar(20) not null comment &#39;姓名&#39;,
+    stusex boolean default 1 comment &#39;性别&#39;,
+    stubirth date comment &#39;生日&#39;,
+    primary key (stuid)
+);
+
+-- not null 非空约束（列的值不能为空）
+-- defualt 默认值约束（如果没有给列赋值就使用默认值）
+-- primary key 主键约束（唯一标识一条记录的列就是主键，必须唯一）
+
+-- 修改tb_student表添加一个列
+alter table tb_student add column stuaddr varchar(255);
+-- 修改tb_student表删除一个列
+alter table tb_student drop column stuaddr;
+-- 修改tb_student表修改一个列
+alter table tb_student modify column stuaddr varchar(100);
+alter table tb_student change column stuaddr foo varchar(50);
+
+-- 向tb_student表插入数据
+insert into tb_student values (1001, &#39;骆昊&#39;, 1, &#39;1980-11-28&#39;, &#39;四川成都&#39;);
+insert into tb_student (stuid, stuname) values (1003, &#39;王大锤&#39;);
+insert into tb_student (stuid, stuname, stusex) values 
+    (1004, &#39;白元芳&#39;, 1), 
+    (1005, &#39;武则天&#39;, 0), 
+    (1006, &#39;狄仁杰&#39;, 1);
+-- 删除数据
+delete from tb_student where stuid=1002;
+delete from tb_student where stuid in (1004, 1006);
+-- 查看tb_student表
+select * from tb_student;
+select * from tb_student\G
+
+-- 错误：SQL语法错误
+ERROR 1064 (42000): You have an error in your SQL syntax
+-- 错误：列的数量跟值的数量不匹配
+ERROR 1136 (21S01): Column count doesn&#39;t match value count at row 1
+-- 错误：重复的主键
+ERROR 1062 (23000): Duplicate entry &#39;1001&#39; for key &#39;PRIMARY&#39;
+-- 错误：数据太长列装不下
+ERROR 1406 (22001): Data too long for column &#39;stuname&#39; at row 1</code></pre>
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%ACMySQL">玩转MySQL</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/10/31/MySQL数据库/';
+      this.page.identifier = '/2019/10/31/MySQL数据库/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MySQL数据库&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

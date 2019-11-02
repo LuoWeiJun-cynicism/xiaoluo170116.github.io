@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>Linux系统常用指令 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 3:56 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>Linux系统指令，方便灵活快捷操作Linux系统</p>
+<a id="more"></a>
+
+
+<p>命令名称 [命名参数][命令对象]</p>
+<h3 id="日常操作"><a href="#日常操作" class="headerlink" title="日常操作"></a>日常操作</h3><p>1.cd指令       - 进入指定文件夹</p>
+<pre><code>cd  目录     - 进入指定目录(也可以是文件夹对应的路径)
+               ~相对路径 — 绝对路径
+cd  ..       - 返回上层目录
+cd  ~    - 回到根目录
+cd  /    - 进入系统根目录</code></pre><p>2.ls指令        - 查看当前目录中的内容</p>
+<pre><code>ls
+ls  -l/-lh              -  查看详情
+ls -a               - 隐藏文件也一起显示
+ls -R            - 递归显示所有内容
+ls -S/-t            - 按大小/时间排序</code></pre><p>注意: 多个功能不冲突的参数可以同时使用，中间用空格隔开, 例如 -  (ls -lh -S)</p>
+<p>3.pwd指令         - 显示当前完整目录<br><code>pwd</code></p>
+<p>4.文件操作指令</p>
+<pre><code>touch  文件名        - 新建文件
+cat 文件名           - 查看文件内容
+vim/vi  文件名          -打开文件
+rm    文件名        - 删除文件(询问是否删除)
+rm -f  文件名  - 强制删除文件(不询问)
+rm - r 目录        - 删除文件夹
+rm -rf   目录、 rm -r  -f 目录       -  删除文件夹(不询问)
+
+cp  文件名1  文件名2    - 将文件1中的内容拷贝到文件2中
+cp  文件  目录    -  将指定文件拷贝到指定目录中
+cp -r  文件名/目录名   目录2    - 将文件/目录拷贝到目录2中
+
+mv    文件名1  文件名2    - 将文件1中的内容移动到文件2中 ,并且删除文件1（文件重命名）
+mv  文件1路径   文件2路径
+mv 文件名1  新文件名    -   重命名
+mv    文件名1  文件目录    - 将文件1移动到指定目录中  
+注意: mv指令不能加-r来操作目录
+(注意：cp/mv/rm 后面可以跟： -i询问  -f强制  -n不覆盖)
+
+mkdir  目录名        - 新建文件夹
+mkdir -p a/b/c        - 按层级创建a,b,c三个文件夹
+mkdir -p a/{b,c}/{d,e,f}    -同一层级常见多个
+
+rmdir  目录名        - 删除指定空目录</code></pre><p>5.history        - 显示历史指令记录</p>
+<pre><code>bashrc 配置显示时间：export  HISTTIMEFORMAT=&quot;[%y‐%m‐%d_%T] &quot; 
+修改bashrc 后使其生效:  source ~/.bashrc  或 ..bashrc  </code></pre><p>6.链接</p>
+<pre><code>ln -s 源路径  目标路径        - 给源路径对应的文件在目标路径下创建一个软链接(可以看成是快捷键)(源路径是绝对路径) (掌握！)
+
+ln 源路径  目标路径            - 给源路径对应的文件在目标路径下创建一个硬链接(看成一个数据的多个引用)（了解）
+
+注意: 源文件不存在的时候，软件无效，硬链接变成普通文件</code></pre><p>8.快捷键</p>
+<pre><code>ctr + f         - 前进一个字符
+ctr + b        - 后退一个字符
+ctr + a        - 回到行首
+ctr + e         - 回到行尾
+ctr + w        - 向左删除一个单词
+ctr + u        - 向左删除全部
+ctr + k        - 向右删除全部
+ctr + y        - 粘贴上次删除的内容
+ctr + l        - 清屏  </code></pre><h3 id="进程相关指令-用得较少"><a href="#进程相关指令-用得较少" class="headerlink" title="进程相关指令(用得较少)"></a>进程相关指令(用得较少)</h3><p>1.ps指令</p>
+<pre><code>ps                        - 进程状态
+ps -aux  或者  ps ex            - 查看进程
+ps -aux|grep 进程名        - 查看指定进程
+ps grep  进程ID</code></pre><p>2.top指令</p>
+<pre><code>top                         - 动态监控进程
+top  -p PID1,PID2,….        - 动态监控指定进程</code></pre><p>3.free指令</p>
+<pre><code>free -单位                    - 以指定单位查看内存, 例如 free -m (以Mb为单位显示内存状况), -g,  -k等！</code></pre><p>4.kill指令</p>
+<pre><code>kill 进程号                    - 杀死指定的进程
+kill -1/-9/-15 进程号        - -1(HUP)不间断重启，-9(KILL)强制杀死进程, -15(TERM)正常终止进程  
+pkill  进程名                - 按名字处理进程
+killall 进程名                - 处理名字匹配的进程</code></pre><p>5.uptime                    - 查看系统状态</p>
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><p>1.user和group : 一个系统可以有多个用户和多个分组； 一个分组中可以有多个用户，一个用户在不同的分组中(多对多)</p>
+<pre><code>users                 - 查看当前用户
+groups                 - 查看当前分组
+groupadd  分组名      - 添加分组   (能在/etc/group文件中查看到新的分组, root才有的权限)
+
+useradd  用户名         - 创建新的用户(还是在home中自动创建这个用户对应的文件夹， root才有的权限)
+
+useradd ‐G 分组列表 ‐m ‐s /bin/bash 用户名        - 创建一个用户添加到指定的分组中(在home创建相应的文件夹)
+
+usermod -G 分组列表 用户名         - 修改分组(root才有的权限)
+passwd 用户名        - 修改密码（root才有权限）
+passwd            - 修改当前账号密码
+su  用户名            - 切换用户身份(root不需要密码，其他用户需要密码)
+sudo            - 以管理员执行其他程序
+
+注意： a.在ubuntu需要将用户添加到sudo分组中，才能使用sudo以管理员的身份执行程序
+
+     b.在centOS中需要先执行vi 指令进入/etc/sudoers文件中在指定的位置添加内容
+
+        ## Allow root to run any commands anywhere
+        root    ALL=(ALL)       ALL
+        xiaoming ALL=(ALL)      ALL        (自己添加的，xiaoming是用户名)</code></pre><p>2.chmod(记住！) </p>
+<pre><code>chmod       权限值   文件    - 修改指定文件的权限
+chmod    [a,u,g,o][+,-][r,w,x]  文件    - 为指定文件，给所有用户添加相应的权限
+
+    (a:所有，u:自己，g:同组，o:其他；
+    +：添加， -: 取消；
+    r:读，w:写，x:执行)
+chown  用户名     文件            - 改变文件所有者</code></pre><p><a href="https://github.com/jackfrued/Python-100-Days/blob/master/Day31-35/res/file-mode.png" target="_blank" rel="noopener">![file-mode.png](/Users/yuting/Library/Application Support/typora-user-images/17C12B13-6680-4C3A-8E21-C9C9250DEAE1/file-mode.png)</a></p>
+<p>(权限制是三组二进制值)</p>
+<p>self      group    other</p>
+<p>rwx      rwx        rwx</p>
+<p>111       101        001            - 自己读写可执行，同一分组的只读可执行，其他的只可执行</p>
+<p>110      100        000</p>
+<p>chmod  644  文件</p>
+<p>chmod  777   文件</p>
+<p>chmod 666    文件</p>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><p>1.cat指令</p>
+<pre><code>cat       文件                - 查看文件内容</code></pre><p>2.查看部分</p>
+<pre><code>head -n  N  文件        - 查看前N行内容
+tail  -n  N    文件         - 查看后N行内容</code></pre><p>3.</p>
+<pre><code>less  文件
+    - 按 j 向下
+    - 按 k 向上
+    - 按 f 向下翻屏
+    - 按    b 向上翻屏
+    - 按 g 到全文开头
+    - 按 G 到全文结尾
+    - 按 Q 退出  
+more [-N]  文件            - 和less差不多，这个是尽可能多，less是尽可能少的加载</code></pre><p>4.处理(对通过其他指令获取的结果进行处理)</p>
+<pre><code>sort                  - 排序  (cat 文件 |sort)
+uniq                - 去重  (cat 文件 |uniq) - 只会去重相邻的重复是数据，一般结合sort一起使用:  |sort|uniq
+awk ‘{print $N}’    - 打印第N列的内容(netstat -natp|awk ‘{print $4}’)
+
+awk ‘{print $N1,$N2,$N3,…}’
+
+history |awk &#39;{print $4}&#39; |sort |uniq ‐c | sort ‐rnk 1 | head ‐n 3           -获取历史指令中，使用最频繁的三个指令
+
+uniq ‐c       -去重的时候统计每一行内容的重复出现的次数
+sort -nk 1    - 数值大小从小到大排序
+sort -nk 2   - 字符大小从小到大排序(默认)
+sort -rnk 1    - 数值大小从大到小排序
+sort -rnk 2   - 字符大小从大到小排序(默认)</code></pre><p>5.重定向</p>
+<pre><code>执行获取数据的指令  &gt; 文件  （将执行指定的结果存储到文件中 - 覆盖原文件中内容）
+
+执行获取数据的指令 &gt;&gt; 文件   (将执行指定的结果存储到文件中 - 在原文件的最后追加)</code></pre><p>5.统计  </p>
+<pre><code>wc -c(字符)/-w(单词)/-l(行)  文件</code></pre><p>6.查找</p>
+<pre><code>grep  查看对象    目录/文件  参数
+    参数：
+        -i    忽略大小写:         grep you bb.txt   -i
+        -n   显示行标号：      grep you bb.txt -n   /   grep you bb.txt -i -n
+
+        -E   通过正则表达式匹配:     grep -E  ‘正则表达式’  文件
+        注意： Linux中，正则不支持: \d, \s,\w,\b,\D,\S,\W,\B
+        支持：.   +, *, ?, {N,M}, [], ^, $
+        -v   忽略字段:   grep you bb.txt -v  (在bb.txt中找不包含you的所有行)
+
+        grep -E  &#39;[0-9]+\.[0-9]+&#39;  abb.txt  -v
+        -rn  递归查找目录，并打印行号
+        grep -r  you ./   (在当前文件夹下中所有文件中去找包行’you’的行)
+
+        // 对文件格式进行约束
+
+        —include=‘*.py’    仅包含 py文件: grep -r you ./ --include=‘*.txt&#39;
+
+        —exclude=‘*.js’    不包含 js 文件: grep -r you ./ --exclude=&#39;*.c&#39;
+
+    例如：
+        grep you bb.txt  
+        grep you bb.txt -i
+        grep you bb.txt -i -n
+        grep -E &#39;[0-9]+&#39; bb.txt 
+
+//  在文件夹下找满足条件的文件
+
+find       DIR    -name  ‘*.xxx’        找到目录下所有名字匹配的文件:  find a1 -name &#39;*.txt’(在文件夹a1中找所有txt文件)
+
+find 路径  -size  +/-文件大小      例如: find ./  +20k  (在当前目录下找文件大小大于20k的文件)
+
+    例：find ./ -size +20k -size -100k -name &#39;*.txt&#39;   (找当前目录下大于20k并且小于100k的所有txt文件)
+
+// 查指令
+
+which  指令        - 精确查找当前可执行的指令
+whereis  指令    - 查找所有匹配的命令
+man 指令   -使用指令手册</code></pre><h3 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h3><pre><code>ifconfig     查看网卡状态
+netstat   -natp                    - 查看网络连接状态
+netstat   -natp|grep  端口号            - 查看指定端口的网络连接状态
+*ping  地址 
+ping  -i   时间    地址
+ping  -c  次数    地址
+telnet  ip地址 端口  - 查看远程主机网络连接状况（需要telnet环境）
+dig 地址            - 查看DNS   (需要环境支持)
+** wget  地址            - 下载  </code></pre><h3 id="使用包管理工具-掌握"><a href="#使用包管理工具-掌握" class="headerlink" title="使用包管理工具(掌握)"></a>使用包管理工具(掌握)</h3><pre><code>包管理工具：yum 
+
+- yum search：搜索软件包，例如yum search nginx。
+- yum list installed：列出已经安装的软件包，例如yum list installed | grep zlib。
+- yum install：安装软件包，例如yum install nginx。
+- yum remove：删除软件包，例如yum remove nginx。
+- yum update：更新软件包，例如yum update可以更新所有软件包，而yum update tar只会更新tar。
+- yum check-update：检查有哪些可以更新的软件包。
+- yum info ：显示软件包的相关信息，例如yum info nginx。</code></pre><pre><code>源代码构建安装
+
+1. wget  安装包的路径        -下载安装包
+2. gunzip/tar  压缩包         - 解压、解归档
+3. (设置安装路径)
+4. cd 安装包目录 执行: make &amp;&amp; make install       -编译安装包程序
+5. 给可执行文件添加软连接到usr/bin目录下            -添加快捷方式</code></pre><pre><code>压缩/解压缩和归档/解归档 - **gzip** / **gunzip** / **xz** / **tar**</code></pre><p>发送远程文件 - scp指令：</p>
+<pre><code>scp 文件   root@IP地址:服务器上保存被发送文件的路径</code></pre>
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/Linux%E7%B3%BB%E7%BB%9F">Linux系统</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%ACLinux%E7%B3%BB%E7%BB%9F%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4">玩转Linux系统常用指令</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/常用Linux系统指令/';
+      this.page.identifier = '/2019/11/02/常用Linux系统指令/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Linux系统常用指令&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

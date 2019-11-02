@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>pyMySQL三方库 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期二, 十月 29日 2019, 5:12 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>python中pymysql库的安装，如何连接MySQL数据库、如何给MySQL数据库增加数据、如何删除MySQL的数据、如何简单的查找MySQL的所有数据。以及开发时py文件的版本控制问题</p>
+<a id="more"></a>
+<h3 id="python对接使用pyMySQL库"><a href="#python对接使用pyMySQL库" class="headerlink" title="python对接使用pyMySQL库"></a>python对接使用pyMySQL库</h3><h4 id="安装PyMySQL三方库："><a href="#安装PyMySQL三方库：" class="headerlink" title="安装PyMySQL三方库："></a>安装PyMySQL三方库：</h4><pre><code>1. PyCharm ---&gt; (File---&gt;)Settings/Preferences ---&gt; Project Interpreter ---&gt; + -    --&gt; Install Package
+2. Terminal ---&gt; pip install pymysql -i https://pypi.doubanio.com/simple
+python装的库之间可能有冲突用：`pip check`  可以检测哪些库有冲突</code></pre><p><code>pip freeze</code> —— 看装了哪些三方库</p>
+<p><code>pip freeze &gt; requirements.txt</code>   —— 将安装三方库的信息重定向到requirements.txt ，团队开发时非常重要，他们克隆时，需要配置一样的虚拟环境</p>
+<p><code>pip install -r requirements.txt</code> ——其他开发者根据requirements.txt重建依赖项（所有需要的三方库）</p>
+<h4 id="连接MySQL时可能出现的错误："><a href="#连接MySQL时可能出现的错误：" class="headerlink" title="连接MySQL时可能出现的错误："></a><strong>连接MySQL时可能出现的错误</strong>：</h4><pre><code>    错误：连接被对端重置 - 阿里云封IP - 安全管控中添加IP白名单
+    Connection reset by peer
+
+    错误：无法连接指定的服务器 - IP地址或者端口写错
+    &quot;Can&#39;t connect to MySQL server on &#39;1.2.3.4&#39; (timed out)&quot;
+
+    错误：访问被拒绝 - 用户名或密码错误
+    &quot;Access denied for user &#39;root&#39;@&#39;1.2.3.4&#39; (using password: YES)&quot;)
+
+    错误：未知的数据库 - 数据库名字写错了
+    &quot;Unknown database &#39;...&#39;&quot;
+
+    错误：AttributeError - 字符集写错了
+    AttributeError: &#39;NoneType&#39; object has no attribute &#39;encoding&#39;</code></pre><hr>
+<h3 id="python中操作MySQL数据库"><a href="#python中操作MySQL数据库" class="headerlink" title="python中操作MySQL数据库"></a>python中操作MySQL数据库</h3><h4 id="1-导入MySQL库"><a href="#1-导入MySQL库" class="headerlink" title="1.导入MySQL库"></a><strong>1.导入MySQL库</strong></h4><pre><code>import pymysql</code></pre><h4 id="2-连接MySQL数据库"><a href="#2-连接MySQL数据库" class="headerlink" title="2.连接MySQL数据库"></a><strong>2.连接MySQL数据库</strong></h4><pre><code class="python">pymysql.connect(host=&#39;121.199.58.243&#39;, port=3306,
+                       user=&#39;root&#39;, password=&#39;z170116l&#39;,
+                       database=&#39;schools&#39;,charset=&#39;utf8&#39;,
+                       autocommit=True)
+# autocommit=True  - 表示自动提交，不写这个就代表手动提交
+# 使用时可以将这部分写进函数，避免代码重复</code></pre>
+<h4 id="2-1给MySQL添加数据"><a href="#2-1给MySQL添加数据" class="headerlink" title="2.1给MySQL添加数据"></a><strong>2.1给MySQL添加数据</strong></h4><pre><code class="python">stuid = int(input(&#39;学号：&#39;))
+sname = input(&#39;姓名：&#39;)
+stusex = int(input(&#39;性别：&#39;))
+stubir = input(&#39;生日：&#39;)
+stuaddr = input(&#39;地址：&#39;)
+acid = int(input(&#39;学院编号：&#39;))
+try:
+    # 1）获取游标
+    with conn.cursor() as cursor:
+        # 2）发出MySQL请求
+        # 类似于文件作用域的作用，离开这个区域，游标自动关闭
+        # ——插入信息，后边的元组与前边的%S一一对应
+        result = cursor.execute(&#39;insert into tb_student values (%s,%s,%s,%s,%s,%s)&#39;,(stuid,sname,stusex,stubir,stuaddr,acid))
+    if result == 1:
+        print(&#39;添加学生成功!!&#39;)
+    # 3）成功就提交
+    # conn.commit()   - 手动提交，让MySQL真正去执行，持久化上边的操作
+except pymysql.MySQLError as err:
+    # 3）失败就回滚
+    # conn.rollback()  - 回滚，如果上边操作失败，就恢复之前的操作状态
+    print(err,&#39;添加学生失败！&#39;)
+finally:
+    # 4）释放连接
+    # 连接被关闭，MySQL默认只能连接151个
+    conn.close()</code></pre>
+<h4 id="2-2删除数据库的数据"><a href="#2-2删除数据库的数据" class="headerlink" title="2.2删除数据库的数据"></a><strong>2.2删除数据库的数据</strong></h4><pre><code class="python">stu = int(input(&#39;输入删除学生的学号:&#39;))
+try:
+    # 2）获取游标
+    with conn.cursor() as cursor:
+        # 3）发出MySQL请求
+        # 类似于文件作用域的作用，离开这个区域，游标自动关闭
+        # ——删除数据
+        result = cursor.execute(&#39;delete from tb_student where stuid=%s&#39;,stu)
+    if result == 1:
+        print(&#39;删除学生成功!!&#39;)
+    # 4）成功就提交
+    # conn.commit()   - 手动提交，让MySQL真正去执行，持久化上边的操作
+except pymysql.MySQLError as err:
+    # 4）失败就回滚
+    # conn.rollback()  - 回滚，如果上边操作失败，就恢复之前的操作状态
+    print(err,&#39;添加学生失败！&#39;)
+finally:
+    # 5）释放连接
+    # 连接被关闭，MySQL默认只能连接151个
+    conn.close()</code></pre>
+<h4 id="2-3查找MySQL数据库的数据-比较重要"><a href="#2-3查找MySQL数据库的数据-比较重要" class="headerlink" title="2.3查找MySQL数据库的数据(比较重要)"></a><strong>2.3查找MySQL数据库的数据</strong>(比较重要)</h4><h5 id="查找所有数据"><a href="#查找所有数据" class="headerlink" title="查找所有数据"></a>查找所有数据</h5><pre><code class="python">try:
+    &quot;&quot;&quot;
+    如果想要字典型的游标，这样写:
+    -- with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+    如果想要元组型的游标，这样写:
+    -- with conn.cursor() as cursor:
+    &quot;&quot;&quot;
+    with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+        # 1.查所有的数据(游标，会游动)
+        cursor.execute(&#39;select * from tb_student&#39;)
+        # 2.拿到执行sql语句后的数据，去拿数据
+        # cursor.fetchmany(n) - 拿n个信息
+        # cursor.fetchone()  - 拿一个的信息
+        # cursor.fetchall()  - 拿所有的信息
+        studata1 = cursor.fetchmany(6)
+        # 可以遍历拿到每一个的信息
+        for row in studata1:
+            print(row)
+            print(&#39;=============&#39;)
+        studata2 = cursor.fetchone()
+        studata = cursor.fetchall()
+        # 展示拿到的数据(结果是元组，元组的元素是每一个表的每一个信息也是元组)
+        print(studata)
+        print(studata1)
+        print(studata2)
+except pymysql.MySQLError as err:
+    print(err, &#39;获取信息失败！&#39;)
+finally:
+    conn.close()</code></pre>
+<h5 id="查找需要的数据-非常重要"><a href="#查找需要的数据-非常重要" class="headerlink" title="查找需要的数据(非常重要)"></a>查找需要的数据(非常重要)</h5><p>筛选(精确和模糊) /排序/分组和统计/子查询(嵌套查询)/连接查询/分页查询 </p>
+<p>——详情见<code>MySQL数据库.md</code>文档</p>
+<h3 id="将查询到的数据处理成对象"><a href="#将查询到的数据处理成对象" class="headerlink" title="将查询到的数据处理成对象"></a>将查询到的数据处理成对象</h3><pre><code class="python"># 新建一个学生类
+class Student:
+    def __init__(self, no, name, sex, birth, addr, college):
+        self.no = no
+        self.name = name
+        self.sex = sex
+        self.birth = birth
+        self.addr = addr
+        self.college = college
+    def __str__(self):
+        return f&#39;{self.no}: {self.name}&#39;
+conn = pymysql.connect(host=&#39;121.199.58.243&#39;, port=3306,
+                       user=&#39;root&#39;, password=&#39;z170116l&#39;,
+                       database=&#39;schools&#39;,charset=&#39;utf8&#39;,
+                       autocommit=True)
+try:
+    with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+        # 查询所有数据，得到游标，现在是字典形式的游标
+        cursor.execute(&#39;select stuid as no, stuname as name, &#39;
+                       &#39;stusex as sex, stubirth as birth, &#39;
+                       &#39;stuaddr as addr, acid as college &#39;
+                       &#39;from tb_student&#39;)
+        for row in cursor.fetchall():
+            # 为每一个学生建立学生对象(如果得到的游标是元组就*row，得到的游标是字典，就**row)
+            student = Student(**row)
+            print(student)
+except pymysql.MySQLError as err:
+    print(err)
+finally:
+    conn.close()</code></pre>
+<hr>
+<h3 id="python版本控制"><a href="#python版本控制" class="headerlink" title="python版本控制"></a>python版本控制</h3><p>1.在Github或Gitee上新建一个仓库，用作存储你的代码</p>
+<p>2.复制你新建的仓库的ssh网址</p>
+<p>3.打开pycharm,点击check，选中Git</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C1.check.png" srcset="/img/loading.gif" alt="1.check"></p>
+<p>4.输入复制的仓库ssh地址</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C2.paste.png" srcset="/img/loading.gif" alt="2.paste"></p>
+<p>5.点击file下的settings，在选择project interpreter</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C3.create.png" srcset="/img/loading.gif" alt="3.create"></p>
+<p>6.主界面点击右上角的√，提交到一个栈空间</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C4.png" srcset="/img/loading.gif" alt="4"></p>
+<p>7.点击push提交到仓库中</p>
+<p><img src="E:%5CpythonData%5CeveryDayCourseData%5Chexoblogs%5Csource%5Cimg%5C5.png" srcset="/img/loading.gif" alt="5"></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%ACpyMySQL%E5%BA%93">玩转pyMySQL库</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/10/29/pymysql库的使用/';
+      this.page.identifier = '/2019/10/29/pymysql库的使用/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "pyMySQL三方库&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

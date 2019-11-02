@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>socket网络编程 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 3:46 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>python中socket网络编程主要是进行网络通讯，程序向服务器发送请求，服务器再向程序发送数据</p>
+<a id="more"></a>
+
+
+<p>​    socket又称”套接字”，应用程序通常通过”套接字”向网络发出请求或者应答网络请求，使主机间或者一台计算机上的进程间可以通讯。</p>
+<p>​    <strong>套接字编程</strong> —— 给予传输层提供的传输服务来构建自己的网络应用套接字是操作系统提供的一套网络编程接口（函数），可以通过套接字编程来调用传输层甚至是IP层（寻址和路由）提供的传输服务</p>
+<p>python中用socket函数创建套接字：</p>
+<p>​    语法：*<em>socket.socket(family=,type=)  *</em></p>
+<p>​    说明：</p>
+<ul>
+<li>family: 套接字家族可以使哪种形式的地址：AF_UNIX或者AF_INET（代表IPv4）、AF_INET6（代表IPv6）</li>
+<li>type: 套接字类型使用哪种传输服务：<code>SOCK_STREAM 代表 TCP</code>或<code>SOCK_DGRAM 代表 UDP</code></li>
+<li>protocol: 一般不填默认为0.</li>
+</ul>
+<h3 id="1-服务器端套接字内建方法"><a href="#1-服务器端套接字内建方法" class="headerlink" title="1.服务器端套接字内建方法"></a>1.服务器端套接字内建方法</h3><h4 id="第一步：创建服务器套接字对象"><a href="#第一步：创建服务器套接字对象" class="headerlink" title="第一步：创建服务器套接字对象"></a>第一步：创建服务器套接字对象</h4><p><strong><code>socket.socket(family=, type=)</code></strong></p>
+<pre><code class="python">server = socket(family=AF_INET, type=SOCK_STREAM)
+# 指定使用哪种形式的地址和传输服务</code></pre>
+<h4 id="第二步：绑定服务器IP地址和端口"><a href="#第二步：绑定服务器IP地址和端口" class="headerlink" title="第二步：绑定服务器IP地址和端口"></a>第二步：绑定服务器IP地址和端口</h4><p>​    端口的取值范围：0-65535，建议使用1024以上的端口</p>
+<p>​    注意：同一个IP地址可以绑定多个不同的服务，端口就是用来区分这些服务的</p>
+<p><strong><code>套接字.bind(&#39;IP地址&#39;,端口)</code></strong></p>
+<pre><code class="python">server.bind((&#39;10.7.185.98&#39;, 3333))</code></pre>
+<h4 id="第三步：监听连接（等待其他的程序连接到该服务）"><a href="#第三步：监听连接（等待其他的程序连接到该服务）" class="headerlink" title="第三步：监听连接（等待其他的程序连接到该服务）"></a>第三步：监听连接（等待其他的程序连接到该服务）</h4><p><strong><code>套接字.listen(程序最大排队等待数)</code></strong></p>
+<pre><code class="python">server.listen(511)  # 排队等待</code></pre>
+<h4 id="第四步：接收连接到服务的客户端（返回一个二元组：（客户端-客户端IP地址））"><a href="#第四步：接收连接到服务的客户端（返回一个二元组：（客户端-客户端IP地址））" class="headerlink" title="第四步：接收连接到服务的客户端（返回一个二元组：（客户端,客户端IP地址））"></a>第四步：接收连接到服务的客户端（返回一个二元组：（客户端,客户端IP地址））</h4><p><strong><code>客户端,客户端IP地址 = 套接字.accept()</code></strong></p>
+<pre><code class="python">client, addr = server.accept()
+print(f&#39;{addr}成功！&#39;)</code></pre>
+<h4 id="第五步：给客户端发送数据"><a href="#第五步：给客户端发送数据" class="headerlink" title="第五步：给客户端发送数据"></a>第五步：给客户端发送数据</h4><p>注意：对于一个请求可以启动一个线程或一个进程来受理这个请求，这样才不会因为一个请求可能耗费比较多的时间而导致其他的请求被阻塞</p>
+<p><strong><code>客户端.send(发送的数据)</code></strong></p>
+<pre><code class="python">with open(&#39;./sol.png&#39;, &#39;rb&#39;) as f1:
+    content = f1.read()
+    size = len(content)
+client.send(str(size).encode())
+client.send(content)</code></pre>
+<h3 id="2-客户端套接字内建方法："><a href="#2-客户端套接字内建方法：" class="headerlink" title="2.客户端套接字内建方法："></a>2.客户端套接字内建方法：</h3><h4 id="第一步：创建客户端套接字"><a href="#第一步：创建客户端套接字" class="headerlink" title="第一步：创建客户端套接字"></a>第一步：创建客户端套接字</h4><p><strong><code>socket.socket(family=, type=)</code></strong></p>
+<pre><code class="python">client = socket(family=AF_INET, type=SOCK_STREAM)
+# client就是客户端套接字对象</code></pre>
+<h4 id="第二步：连接到服务器"><a href="#第二步：连接到服务器" class="headerlink" title="第二步：连接到服务器"></a>第二步：连接到服务器</h4><p><strong><code>客户端套接字.connect((&#39;服务器IP地址&#39;，端口))</code></strong></p>
+<pre><code class="python">client.connect((&#39;10.7.185.98&#39;, 3333))
+# 客户端连接到服务器</code></pre>
+<h4 id="第三步：客户端接收数据（每次接收1024），用循环接收大文件"><a href="#第三步：客户端接收数据（每次接收1024），用循环接收大文件" class="headerlink" title="第三步：客户端接收数据（每次接收1024），用循环接收大文件"></a>第三步：客户端接收数据（每次接收1024），用循环接收大文件</h4><p><strong><code>客户端套接字.recv(1024)</code></strong></p>
+<p>可以先接收大文件的大小信息，判断循环终止的条件</p>
+<pre><code class="python">data = client.recv(1024)
+total, size = 0, int(data.decode())
+with open(&#39;./yua.png&#39;, &#39;wb&#39;) as files:
+    while total &lt; size:
+        # 接收文件的内容
+        data = client.recv(1024)
+        f2 = files.write(data)
+        total += 1024</code></pre>
+<h4 id="第四步：客户端主动跟服务器断开连接"><a href="#第四步：客户端主动跟服务器断开连接" class="headerlink" title="第四步：客户端主动跟服务器断开连接"></a>第四步：客户端主动跟服务器断开连接</h4><p><strong><code>客户端套接字.close()</code></strong></p>
+<p>补充：格式化字符串的新方法,这样的写法更优美</p>
+<pre><code class="python">变量m = n
+f&#39;{变量m}字符串&#39;</code></pre>
+<pre><code class="python">name = &#39;小花&#39;
+print(f&#39;我的名字是{name}&#39;)</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%ACsocket%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B">玩转socket网络编程</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/socket网络编程/';
+      this.page.identifier = '/2019/11/02/socket网络编程/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "socket网络编程&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

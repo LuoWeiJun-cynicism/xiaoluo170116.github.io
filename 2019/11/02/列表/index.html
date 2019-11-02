@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>Python列表 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 2:35 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>什么是列表，列表元素的获取以及列表的操作</p>
+<a id="more"></a>
+
+<h3 id="认识列表"><a href="#认识列表" class="headerlink" title="认识列表"></a>认识列表</h3><h4 id="1、什么是列表"><a href="#1、什么是列表" class="headerlink" title="1、什么是列表"></a><em>1、什么是列表</em></h4><p>1）列表</p>
+<p>列表是容器型数据类型（序列），将[ ]作为容器的标志，每个元素用<strong>逗号</strong>隔开；[元素1，元素2，元素3，…..,元素n]</p>
+<p>列表特点：列表是可变（元素的值、顺序、数量可变）和有序（列表一旦确定，列表中<strong>元素的数据地址</strong>是确定的不可变）的<br>​<br>2）列表中的元素<br>任何类型的数据都可以作为列表的元素，并且同一个列表的元素的<strong>数据类型可以不一样</strong><br>[90, 12.9, True, ‘abc’]</p>
+<pre><code class="python">list = [90, 12.9, True, &#39;abc&#39;, [1, 2], (1, 2)]</code></pre>
+<h4 id="2、获取列表元素"><a href="#2、获取列表元素" class="headerlink" title="2、获取列表元素"></a><em>2、获取列表元素</em></h4><h5 id="1）获取单个元素"><a href="#1）获取单个元素" class="headerlink" title="1）获取单个元素"></a>1）获取单个元素</h5><p>（1）语法：—— 只有这一种写法<br><strong>列表[下标] —— 获取列表中下标对应的元素</strong></p>
+<p>（2）说明：<br>列表 —— 结果是列表的表达式，例如：列表数据、存储列表的变量、结果是列表的运算表达式等<br>[] —— 固定写法<br>下标（索引） —— 列表中每个元素都有一个下标来表示这个元素在列表的位置—————超重点<br>    python中下标范围有两种：0 —— （长度 - 1）（解释：0表示第一个元素，从前往后取）<br>                          和 -1 —— 负长度（解释：-1表示最后一个元素，从后往前取）<br>列表的长度：列表中元素的个数<br>注意：下标不能超出范围<br>下标 —— index<br> ———————————————————————————————————————<br>列表数据：[1, 2, 3, 5, 8, 9, 56][-3]——取出的是8<br>存储列表的变量：list[3]——取出的是’abc’<br>结果是列表的运算表达式：</p>
+<h5 id="2）获取部分元素（列表切片）"><a href="#2）获取部分元素（列表切片）" class="headerlink" title="2）获取部分元素（列表切片）"></a>2）获取部分元素（列表切片）</h5><p>语法：<br><strong>列表[开始下标:结束下标:步长]</strong><br>——————与range（m, n, step）方法类似</p>
+<p>说明:<br>——————从开始下标开始取，每次下标值增加步长去取下一个元素，直到取到结束<br>​              下标的前一个元素，取不到结束下标的元素。———返回的数据一定是列表<br>​<br>注意：当步长为正（从前往后取），开始下标元素的位置要在结束下标元素的位置的前面，否则               结果为空；<br>​            当步长为负（从后往前取），开始下标元素的位置要在结束下标元素的位置的后面，否则结果为空；</p>
+<pre><code class="python">films = [&#39;速度与激情&#39;, &#39;哪吒&#39;, &#39;肖申克的救赎&#39;, &#39;小鬼当家&#39;, &#39;功夫&#39;, &#39;扫毒2&#39;, &#39;杀生&#39;]
+print(films[1: 3: 1])
+print(films[-1: 4: -1])</code></pre>
+<h5 id="3）获取部分元素（切片）"><a href="#3）获取部分元素（切片）" class="headerlink" title="3）获取部分元素（切片）"></a>3）获取部分元素（切片）</h5><p>切片语法的变形：<br>（1）省略步长<br><strong>列表[开始下标:结束下标]</strong> —— 默认步长为1<br>（2）省略开始下标<br><strong>列表[:结束下标:步长] *<em>—— 步长为正从第一个元素开始；步长为负从最后一个元素开始取<br>（3）省略结束下标<br>*</em>列表[开始下标::步长] *<em>—— 步长为正取到最后一个元素为止；步长为负取到第一个元素为止<br>（4）开始下标和结束下标都省略<br>*</em>列表[:: 步长]</strong> —— 从第一个取到最后一个</p>
+<pre><code class="python">films = [&#39;速度与激情&#39;, &#39;哪吒&#39;, &#39;肖申克的救赎&#39;, &#39;小鬼当家&#39;, &#39;功夫&#39;, &#39;扫毒2&#39;, &#39;杀生&#39;]
+# （1）
+print(films[1: 3])
+# （2）
+print(films[: 3: 1])
+# （3）
+print(films[2:: 1])
+print(films[2:: -1])
+# （4）
+print(films[:: -1])
+print(films[:: 1])</code></pre>
+<pre><code class="python"># 练习
+print(films[:: -2][-1])   # 速度与激情</code></pre>
+<h4 id="3、遍历列表"><a href="#3、遍历列表" class="headerlink" title="3、遍历列表"></a><em>3、遍历列表</em></h4><h5 id="1-直接遍历列表"><a href="#1-直接遍历列表" class="headerlink" title="1)直接遍历列表"></a>1)直接遍历列表</h5><pre><code>语法：
+for 变量 in 列表：
+    代码块
+变量取到的就是列表中的每个元素</code></pre><pre><code class="python">name_2 = [1, 2, 3, 4, 5]
+for name in name_2:
+    print(name)</code></pre>
+<h5 id="2）通过遍历下标来遍历列表元素"><a href="#2）通过遍历下标来遍历列表元素" class="headerlink" title="2）通过遍历下标来遍历列表元素"></a>2）通过遍历下标来遍历列表元素</h5><pre><code>语法：
+for 下标 in range(列表长度)：
+    元素 = 列表[下标]</code></pre><pre><code class="python"># 获取列表长度：len(列表)
+for index in range(len(name_2)):
+    print(index, name_2[index])</code></pre>
+<h3 id="4、列表的增、删、减"><a href="#4、列表的增、删、减" class="headerlink" title="4、列表的增、删、减"></a><em>4、列表的增、删、减</em></h3><h4 id="1-增（增加元素）"><a href="#1-增（增加元素）" class="headerlink" title="1.增（增加元素）"></a>1.增（增加元素）</h4><p>1）添加</p>
+<p>*<em>列表.append(元素) *</em>—— 在列表最后的位置添加指定的元素（直接影响原列表，不会产生新的列表）</p>
+<pre><code class="python">num_list = [1, 2, &#39;3&#39;, &#39;4&#39;, 5, &#39;6&#39;, &#39;12&#39;, 32, &#39;17&#39;]
+num_list.append(20)
+print(num_list)</code></pre>
+<p>2）插入</p>
+<p>*<em>列表.insert(下标, 元素) *</em>—— 在列表指定下标的位置插入指定元素</p>
+<pre><code class="python">num_list.insert(3, 52)
+print(num_list)</code></pre>
+<h4 id="2-删（删除元素）——-3种方法"><a href="#2-删（删除元素）——-3种方法" class="headerlink" title="2.删（删除元素）—— 3种方法"></a>2.删（删除元素）—— 3种方法</h4><p>1） del 列表[下标] —— 删除列表中指定下标对应的元素<br>​                    （del 列表  ——删除整个列表）<br>2） 列表.remove(元素) —— 删除列表中指定的元素（不用找下标）;如果元素有重复的，只删除第一个指定元素；移除列表里没有的元素，会报错</p>
+<p>3）列表.pop() —— 取出列表最后一个元素；<strong>返回被取出的元素</strong>    </p>
+<p>​      列表.pop(下标) —— 取出列表中指定下标对应的元素；<strong>返回被取出的元素</strong>    </p>
+<p><strong>注意：用pop删除列表后，会返回被取出的元素，还可以使用</strong>_</p>
+<pre><code class="python"># 1)
+del num_list[4]
+print(num_list)
+# 2)
+num_list.remove(2)
+print(num_list)
+# 3）
+num_list = [1, 2, &#39;3&#39;, &#39;4&#39;, 5, &#39;6&#39;, &#39;12&#39;, 32, &#39;17&#39;]
+num_list.pop(2)
+print(num_list)</code></pre>
+<h4 id="3-改"><a href="#3-改" class="headerlink" title="3.改"></a>3.改</h4><p>列表[下标] = 新值 —— 功能：将列表中指定下标对应的元素改成新值</p>
+<pre><code class="python">num_list = [1, 2, &#39;3&#39;, &#39;4&#39;, 5, &#39;6&#39;, &#39;12&#39;, 32, &#39;17&#39;]
+num_list[5] = 21
+print(num_list)</code></pre>
+<h3 id="列表相关运算和操作"><a href="#列表相关运算和操作" class="headerlink" title="列表相关运算和操作"></a>列表相关运算和操作</h3><h4 id="1-数学运算符（只支持加法和乘法运算）：-，"><a href="#1-数学运算符（只支持加法和乘法运算）：-，" class="headerlink" title="1.数学运算符（只支持加法和乘法运算）：+ ， *"></a>1.数学运算符（只支持加法和乘法运算）：+ ， *</h4><p>1）<em>列表1 + 列表2</em> —— 将两个列表的元素合并，产生一个新的列表</p>
+<pre><code class="python">zimi = [&#39;a&#39;, &#39;h&#39;, &#39;l&#39;, &#39;u&#39;]
+num = [1, 5, 6, 8]
+new = zimi + num
+print(new)</code></pre>
+<p>2)列表 * n —— 列表中的元素重复n次，产生一个新列表(相当于n个列表相加)</p>
+<pre><code class="python">num = [1, 5, 6, 8]
+new_num = num * 2
+print(new_num)  # [1, 5, 6, 8, 1, 5, 6, 8]</code></pre>
+<p><code>比较运算：&gt;,&lt;,&gt;=,&lt;=,==,!=</code><br>1）==, !=  —— 判断两个列表相等（<strong>两个列表的元素值、个数、顺序一样</strong>）或是不相等<br>2）比较大小（<strong>不支持字符串</strong>） —— 直接比较两个列表从<strong>左往右的第一个元素的大小</strong>；<br>​                                  如果第一个元素相等，则继续比第二个，比出为止</p>
+<h4 id="2-in-和-not-in"><a href="#2-in-和-not-in" class="headerlink" title="2.in 和 not in"></a>2.in 和 not in</h4><p>写法：<strong>元素 in 列表</strong> —— 判断列表是否存在指定的元素<br>写法：<strong>元素 not in 列表</strong> —— 判断列表是否不存在指定的元素</p>
+<pre><code class="python">num = [1, 5, 6, 8]
+if 1 in num:
+     print(&#39;haha&#39;)
+elif 10 not in num:
+    print(&#39;baibai&#39;)</code></pre>
+<h4 id="3-列表相关的函数"><a href="#3-列表相关的函数" class="headerlink" title="3.列表相关的函数"></a>3.列表相关的函数</h4><p><code>len(序列)</code> —— 统计序列中元素的个数（迭代器和生成器不行）<br><code>max（序列）/min（序列）</code> —— 求序列的最大值或最小值（迭代器和生成器不行）<br>​    注意：序列中元素类型必须一致，而且支持比较运算符</p>
+<pre><code>求最大值最小值的套路:先声明一个变量保存最大值，默认第一个元素为最大值，依次取出序列
+                      中的元素，和默认的最大值进行比较。如果出现比默认最大值大的值，
+                      则更新最大值的变量。否则继续比;最小值反过来</code></pre><pre><code class="python">scores = [1, 56, 78, 98, 63, 57]
+max1 = scores[0]
+for num in scores[1:]:
+    if num &gt; max1:
+        max1 = num
+print(max1)</code></pre>
+<p><code>list(数据)</code> —— 将指定数据转换成列表<br>注意：——所有的序列都能转换成列表,数字不可以——将序列中的元素作为列表中的元素，生成（返回）新的列表</p>
+<pre><code class="python">n = list(&#39;hello&#39;)
+print(n)
+num = list(range(6))
+print(num)</code></pre>
+<h4 id="判断一个列表是否为空-存在"><a href="#判断一个列表是否为空-存在" class="headerlink" title="判断一个列表是否为空/存在"></a>判断一个列表是否为空/存在</h4><pre><code class="python">if num:
+    print(&#39;num列表不为空&#39;)</code></pre>
+<p><code>sum(序列)</code> —— 求序列中所有元素（元素只能是数字）的和</p>
+<pre><code class="python">scores = [1, 56, 78, 98, 63, 57]
+print(sum(scores))</code></pre>
+<h3 id="列表相关方法"><a href="#列表相关方法" class="headerlink" title="列表相关方法"></a>列表相关方法</h3><p>1）<code>列表.count(元素)</code> —— 统计列表中指定元素的个数；返回值是数值</p>
+<pre><code class="python">scores = [102, 56, 78, 98, 63, 56]
+num = scores.count(56)
+print(num)</code></pre>
+<p>2)<code>列表.extend(序列/元素)</code> —— 将序列中的所有元素添加到列表或将元素的基本单元加到列表</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+b = [&#39;ha&#39;, 23]
+a.extend(b)
+a.extend(&#39;ha&#39;)
+print(a)</code></pre>
+<p>3)<code>列表.index(元素)</code> —— 获取指定元素在列表的下标（正值）<br>​                     如果元素不存在会报错；如果元素有多个，只获取第一个元素的下标</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+a.index(2)</code></pre>
+<p>4)<code>列表.reverse()</code> —— 将列表方向（不会产生新列表）</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+a. reverse()
+print(a)    # [6, 3, 2, 1]</code></pre>
+<p>5)<code>列表.clear()</code> —— 清空列表</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+a.clear()
+print(a)</code></pre>
+<p>6)<code>列表.copy()</code> —— 复制/拷贝列表中的元素，产生一个新列表与’列表[:]‘功能一样；这个拷贝是浅拷贝</p>
+<pre><code class="python">a = [1, 2, 3, 6]
+c = a.copy()
+print(c)</code></pre>
+<p>7)——————对列表中元素的排序（用的非常多）<br>===列表专用<br><code>列表.sort()</code> —— （升序）将列表中元素从小到大排序，不产生新列表<br><code>列表.sort(reverse=True)</code> —— （降序）将列表中元素从大到小排序，不产生新列表<br>注意：列表中元素类型必须一致，且支持比较运算</p>
+<p>===序列、列表可用——————都可以用来排序——————<br><code>sorted(序列/列表)</code> —— （升序）除了给列表排序之外，对其他序列也可以排序；会产生一个新的列表<br><code>sorted(序列，reverse=True)</code> —— （降序）</p>
+<pre><code class="python"># ——————————————列表专用
+a = [1, 2, 9, 3, 12, 6, 7]
+a.sort()
+print(a)   # [1, 2, 3, 6, 7, 9, 12]
+a.sort(reverse=True)
+print(a)   # [12, 9, 7, 6, 3, 2, 1]
+#——————————————序列、列表可用
+a = [1, 2, 9, 3, 12, 6, 7]
+d = sorted(a)
+print(d)
+e = sorted(&#39;hello&#39;)
+print(e)</code></pre>
+<p>8) set(列表)————— 删除列表中重复数据，只保留一个,创建一个无序不重复元素集</p>
+<pre><code class="python">a = [1, 2, 9, 2, 12, 9, 7]
+b = set(a)
+print(b)  # {1, 2, 7, 9, 12}</code></pre>
+<h4 id="了解排序算法（选择排序、冒泡排序、二分法、快速排序）"><a href="#了解排序算法（选择排序、冒泡排序、二分法、快速排序）" class="headerlink" title="了解排序算法（选择排序、冒泡排序、二分法、快速排序）"></a>了解排序算法（选择排序、冒泡排序、二分法、快速排序）</h4><h5 id="冒泡排序法："><a href="#冒泡排序法：" class="headerlink" title="冒泡排序法："></a>冒泡排序法：</h5><p>1.默认第一个值为最大值或最小值，比较相邻的元素。如果第一个比第二个大，就交换他们两个。<br>2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。<br>3.针对所有的元素重复以上的步骤，除了最后一个。<br>4.持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/MQ4FoG1HmnIounJsWSXZfDLJt1kG3t5VL4nZJtTUPSe7voA0tTiaHt9ZDshJic0SM9bapHg31OHOGjQiclbQjl1QA/640?wx_fmt=gif" srcset="/img/loading.gif" alt="冒泡法演示"></p>
+<h5 id="选择排序法："><a href="#选择排序法：" class="headerlink" title="选择排序法："></a>选择排序法：</h5><p>1.首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置<br>2.再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。<br>3.重复第二步，直到所有元素均排序完毕。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/MQ4FoG1HmnIounJsWSXZfDLJt1kG3t5VoKfh7759sP997ylM8eZBYibOGiaKTicEviaKmbsjCYBzIbKic3icibZ6VYxpA/640?wx_fmt=gif" srcset="/img/loading.gif" alt="选择"></p>
+<h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5><p>1.从数列中挑出一个元素，称为 “基准”（pivot）;<br>2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；<br>3.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；</p>
+<p><img src="https://images2018.cnblogs.com/blog/1356867/201803/1356867-20180321091055290-1438407463.png" srcset="/img/loading.gif" alt=""></p>
+<h5 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h5><p>假设列表第一个值为最大值，让假设的最大值n依次和列表中其他的元素做比较。如果列表中其他值m大于假设的最大值，则将将m的值赋给n，继续与其他元素比较，一直比到最后一个元素</p>
+<pre><code class="python">scores = [1, 56, 78, 98, 63, 57]
+max1 = scores[0]
+for num in scores[1:]:
+    if num &gt; max1:
+        max1 = num
+print(max1)</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%ACPython%E5%88%97%E8%A1%A8">玩转Python列表</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/列表/';
+      this.page.identifier = '/2019/11/02/列表/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Python列表&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

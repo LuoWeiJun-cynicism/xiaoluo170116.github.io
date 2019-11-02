@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>多线程 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 3:51 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>python中多线程操作是为了增加整个程序的效率，多线程并发</p>
+<a id="more"></a>
+
+<p>进程：系统中正在运行的程序；每个进程都是独立的<br>线程：一个进程执行任务必须至少有一条线程<br>一个进程（程序）的所有任务都在线程中执行<br>一个线程中任务的执行是串行的，同一时间内，一个线程只能执行一个任务</p>
+<p>多线程：一个进程有多条线程，每条线程可以并行，同一时间执行不同的任务</p>
+<h3 id="多线程原理"><a href="#多线程原理" class="headerlink" title="多线程原理"></a><strong>多线程原理</strong></h3><p>（利用CPU空闲时间去快速调度）<br>···同一时间，CPU只能处理一条线程，只有一条线程在工作（执行）<br>···多线程并发（同时）执行，其实是CPU快速的在多条线程间“调度”<br>···CPU调度线程的速度足够快，就造成了多线程并发执行的假象</p>
+<pre><code>默认情况下一个程序都有一个线程，这个线程叫做主线程；主线程以外的线程叫子线程</code></pre><pre><code class="python">threading模块提供了python中相关的多线程方法和类；继承Thread类的对象就是线程对象</code></pre>
+<h3 id="设置多线程第一种"><a href="#设置多线程第一种" class="headerlink" title="设置多线程第一种"></a>设置多线程第一种</h3><h4 id="1）导入threading模块"><a href="#1）导入threading模块" class="headerlink" title="1）导入threading模块"></a>1）导入threading模块</h4><pre><code class="python">import threading</code></pre>
+<h4 id="2-声明一个实现线程功能的函数"><a href="#2-声明一个实现线程功能的函数" class="headerlink" title="2) 声明一个实现线程功能的函数"></a>2) 声明一个实现线程功能的函数</h4><pre><code class="python">def 函数名(参数):
+    实现函数功能的代码</code></pre>
+<h4 id="3）创建线程对象"><a href="#3）创建线程对象" class="headerlink" title="3）创建线程对象"></a>3）创建线程对象</h4><p><strong><code>threading.Thread(target,args)</code></strong><br>​    <strong>必须用关键字传参</strong><br>​    target —— 函数，需要在子线程调用的函数<br>​    args —— 元组，接收子线程中被调用函数的实参（调用函数无参时，args不用赋值）</p>
+<pre><code class="python">线程对象 = threading.Thread(target=实现线程功能的函数, args=(函数的参数))</code></pre>
+<h4 id="4）启动线程"><a href="#4）启动线程" class="headerlink" title="4）启动线程"></a>4）启动线程</h4><p><strong><code>线程对象.start（）</code></strong></p>
+<h3 id="设置多线程第二种"><a href="#设置多线程第二种" class="headerlink" title="设置多线程第二种"></a>设置多线程第二种</h3><h4 id="1）导入threading模块-1"><a href="#1）导入threading模块-1" class="headerlink" title="1）导入threading模块"></a>1）导入threading模块</h4><pre><code class="python">import threading</code></pre>
+<h4 id="2）通过创建Thread的子类对象来创建线程"><a href="#2）通过创建Thread的子类对象来创建线程" class="headerlink" title="2）通过创建Thread的子类对象来创建线程"></a>2）通过创建Thread的子类对象来创建线程</h4><pre><code class="python">class 类名(Thread):
+    def __init__(self, 参数1，参数2...):
+        super().__init__()  # 获取父类对象属性
+        self.参数1 = 参数1
+        ......
+
+    def run(self) -&gt; None:  # -&gt; None 起提示返回值的作用
+        实现线程功能的代码</code></pre>
+<h4 id="3）创建子类对象"><a href="#3）创建子类对象" class="headerlink" title="3）创建子类对象"></a>3）创建子类对象</h4><p>子类对象（线程对象） = 类名(参数)</p>
+<h4 id="4-启动线程"><a href="#4-启动线程" class="headerlink" title="4)启动线程"></a>4)启动线程</h4><p>子类对象.start()</p>
+<h3 id="join的使用——非常重要"><a href="#join的使用——非常重要" class="headerlink" title="join的使用——非常重要"></a>join的使用——非常重要</h3><p><code>线程对象.join()</code> —— 当线程对象中的任务全部完成后，在执行这条语句后面的其他语句</p>
+<pre><code class="python">t1.start()
+t2.start()
+t1.join()
+t2.join()
+print(&#39;下载完成&#39;)
+---&gt; 先执行t1，t1执行完成后再执行t2</code></pre>
+<h4 id="创建多个线程示例"><a href="#创建多个线程示例" class="headerlink" title="创建多个线程示例"></a>创建多个线程示例</h4><pre><code class="python">import socket
+import threading
+
+# 写一个向客户端接收数据、发送数据的函数
+def creat_client(connection):
+    while True:
+        # 接收客户端消息
+        re_data = connection.recv(1024)
+        # 给客户端发送数据
+        connection.send(&#39;hello,guys&#39;.encode())
+
+# 创建套接字对象
+server = socket.socket()
+# 服务器绑定IP和端口
+server.bind((&#39;10.7.185.98&#39;, 3333))
+# 开始监听，等待连接
+server.listen(511)
+# 让服务器持续运行
+# 加入多线程
+while True:
+    # 接收连接客户端（对象）—— 每次都是不同的客户端
+    connection, addr = server.accept()
+    while True:
+        # 创建线程对象
+        t1 = threading.Thread(target=creat_client, args=(connection,))
+        t1.start()</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%AC%E5%A4%9A%E7%BA%BF%E7%A8%8B">玩转多线程</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/多线程/';
+      this.page.identifier = '/2019/11/02/多线程/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "多线程&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>

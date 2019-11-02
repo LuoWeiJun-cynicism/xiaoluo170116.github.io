@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/3.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="凭君莫话封侯事，一将功成万骨枯。传闻一战百神愁，两岸强兵过未休。">
+  <meta name="author" content="xiaoluo">
+  <meta name="keywords" content="弱水三千只取一瓢饮">
+  <title>元组和字典 ❤ 小罗</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  
+  <link rel="stylesheet" href="/css/main.css"  >
+
+  
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Miss Luo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">AboutUs</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/4.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期六, 十一月 2日 2019, 2:35 下午</p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fa fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto">
+          <div class="markdown-body">
+            <p>元组的定义，操作及方法；字典的操作及方法和函数</p>
+<a id="more"></a>
+
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><h4 id="1-什么是元组（tuple）"><a href="#1-什么是元组（tuple）" class="headerlink" title="1.什么是元组（tuple）"></a>1.什么是元组（tuple）</h4><p>1）元组<br>——<strong>元组就是不可变的列表（除了列表中的增、删、改以及‘列表.’的相关方法，</strong><br>​    <strong>元组不能使用（可以查），其他的都跟列表一样）</strong><br>——元组是容器型数据类型（序列）；将（）作为容器的标志，多个元素用逗号隔开：（元素1,元                          素2,元素3）<br>——<strong>元组不可变，有序</strong><br>2）元组元素的要求<br>——和列表要求一致</p>
+<pre><code class="python">tuple1 = (2, 5, 6, 8, 1)</code></pre>
+<h4 id="2-元组特殊情况"><a href="#2-元组特殊情况" class="headerlink" title="2.元组特殊情况"></a>2.元组特殊情况</h4><p>1）只有一个元素的元组（表示方法：<strong>（元素，）—— 元素后边加个逗号</strong>）<br>2）没有歧义的情况下，<strong>元组符号可以省略,直接用逗号隔开</strong>；例如：tuple1 = 10, 15, 9</p>
+<h4 id="3-获取元组元素"><a href="#3-获取元组元素" class="headerlink" title="3.获取元组元素"></a>3.获取元组元素</h4><p>1）<strong>元组[下标]</strong><br>2）让变量的个数与元组中元素的个数保持一致（适合元组元素少）<br>3）用多个变量去获取元组元素时，在其中一个变量前加<em>；（这个变量就变成列表）<br>​      这时变量个数可以比元组元素少。取元素时先让没有**</em>的取，剩下的变量都是带****的变量的元素</p>
+<pre><code class="python">#1）
+tuple2 = (15, 25, 10)
+a = tuple2[0]
+print(a)
+#2）
+x, y, z = 15, 25, 10
+print(x)
+print(y)
+#3）
+tuple2 = (15, 25, 10, &#39;man&#39;, 23)
+*num, sex, age = tuple2
+print(*num, sex, age)</code></pre>
+<h4 id="的特殊用法（拆包-将容器包装拆开）"><a href="#的特殊用法（拆包-将容器包装拆开）" class="headerlink" title="*的特殊用法（拆包:将容器包装拆开）"></a>*的特殊用法（拆包:将容器包装拆开）</h4><pre><code class="python">num = (1, 3, 6)
+print(*num)   # 1 3 6</code></pre>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><h4 id="1-什么是字典"><a href="#1-什么是字典" class="headerlink" title="1.什么是字典"></a>1.什么是字典</h4><p>1）字典<br>——字典是容器型数据类型（序列），将{}作为容器的标志，多个元素（元素是键值对，写法{键1：值1，键2：值2，…}）间用逗号隔开<br>——<strong>字典是可变，无序的</strong><br>2）字典元素<br>字典中的元素必须都是<strong>键值对，即’键：值’的形式</strong>存在（存数据实质是想存值，键用来区分不同的值）<br>键的要求 —— <strong>不可变（一般用字符串，可以是元组，列表不行）</strong>，唯一（不能重复出现）<br>值的要求 —— 任何类型的数据</p>
+<pre><code class="python">dict1 = {&#39;name&#39;: 10, &#39;height&#39;: 180, 13: 14}</code></pre>
+<h4 id="2-元素的增、删、改、查"><a href="#2-元素的增、删、改、查" class="headerlink" title="2.元素的增、删、改、查"></a>2.元素的增、删、改、查</h4><p>1）查 —— 获取字典中键值对的值<br>a.获取单个元素：<br><code>字典[key]</code>——获取指定key（键）对应的值；key不存在会报错<br><code>字典.get(key)/字典.get(key, 默认值)</code> —— 获取指定key（键）对应的值；<br>​                                      key不存在不会报错,并返回默认值（没有默认值，返回None）</p>
+<pre><code class="python">dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+print(dog1[&#39;color&#39;])
+print(dog1.get(&#39;lala&#39;))  # None</code></pre>
+<p>b.遍历字典<br>——遍历字典取到的是字典中所有的key<br><strong>for 变量 in 字典：</strong>   # 取出的是key（键）<br>​    <strong>循环体</strong></p>
+<pre><code class="python"># ——————直接遍历字典，拿到key，再通过key取值(推荐)——————
+dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+for key in dog1:
+    print(key, dog1[key])</code></pre>
+<p>2）增、改（增、改写法一致，区别在于key是否存在）<br>*<em><code>字典[key] = 值</code> *</em>—— 当key存在时，修改key对应的值;当key不存在，添加‘key：值’的键值对</p>
+<pre><code class="python">dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+dog1[&#39;age&#39;] = 15
+dog1[&#39;speed&#39;] = 45
+print(dog1)  # {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 15, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;, &#39;speed&#39;: 45}</code></pre>
+<p>3）删<br>a. <strong><code>del 字典[key]</code></strong> —— 删除字典中，指定key对应的键值对<br>b. *<em><code>字典.pop(key)</code> *</em>—— 取出字典中指定key对应的值；返回被取出的值</p>
+<pre><code class="python"># ——————del 字典[key]
+dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+del dog1[&#39;color&#39;]
+print(dog1)
+# ——————字典.pop(key)
+dog1 = {&#39;name&#39;: &#39;wangwang&#39;, &#39;age&#39;: 3, &#39;color&#39;: &#39;yellow&#39;, &#39;gender&#39;: &#39;公狗&#39;}
+word = dog1.pop(&#39;age&#39;)
+print(word)</code></pre>
+<h4 id="3-字典相关操作"><a href="#3-字典相关操作" class="headerlink" title="3.字典相关操作"></a>3.字典相关操作</h4><h5 id="1-运算符"><a href="#1-运算符" class="headerlink" title="1.运算符"></a>1.运算符</h5><p>字典不支持 +，*，&gt;, &lt;, &gt;=, &lt;= ；只支持 ==，!=</p>
+<h5 id="2-in-和-not-in"><a href="#2-in-和-not-in" class="headerlink" title="2.in 和 not in"></a>2.in 和 not in</h5><p>键 in / not in 字典 —— 判断字典中是否存在/不存在指定的键</p>
+<h5 id="3-相关函数"><a href="#3-相关函数" class="headerlink" title="3.相关函数"></a>3.相关函数</h5><p>len() —— 求键值对的个数</p>
+<p>dict(数据) —— 将其他序列转换成字典（数据必须是序列，序列中的元素必须是小序列，</p>
+<pre><code>          每个小序列有且只有两个元素，且小序列第一个元素不可变）</code></pre><p>字典不能转换成数字，可以转换成布尔；</p>
+<p>字典转换成列表时，是将字典的key作为元素</p>
+<pre><code>#——列表转字典
+seq = [(1, 3), (&#39;la&#39;, 3)]
+print(dict(seq))  # {1: 3, &#39;la&#39;: 3}
+
+# ——转列表
+seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq2 = list(seq1)
+print(seq2)  # [&#39;ha&#39;, &#39;lala&#39;]</code></pre><h5 id="4-相关方法"><a href="#4-相关方法" class="headerlink" title="4.相关方法"></a>4.相关方法</h5><p>1）字典.clear() —— 清空字典</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.clear()
+print(seq1)</code></pre><p>2)字典.copy() —— 拷贝产生一个薪字典（浅拷贝）</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq3 = seq1.copy()
+print(seq3)</code></pre><p>3)dict.fromkeys(序列,指定值) —— 创建一个字典，将序列中的元素作为key，key对应的值都是指定的值</p>
+<pre><code>dict2 = dict.fromkeys((&#39;lala&#39;, &#39;haha&#39;, &#39;baba&#39;), 13)
+print(dict2)   # {&#39;lala&#39;: 13, &#39;haha&#39;: 13, &#39;baba&#39;: 13}</code></pre><p>4)字典.items() —— 将字典中每个键值对转换成对应的元组，作为一个序列的元素(获取字典中所        有的key和value，返回的是一个列表中嵌套的小元组[(key1,value1),(key2,value2),…])</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.items()
+print(seq1.items())  # dict_items([(&#39;ha&#39;, 12), (&#39;lala&#39;, 23)])</code></pre><p>5)字典.values() —— 获取字典中所有的值，返回一个列表</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.values()
+print(seq1.values())  # dict_values([12, 23])</code></pre><p>6) 字典.keys() —— 获取字典中所有的key，返回一个列表</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.keys()
+print(seq1.keys())  # dict_keys([&#39;ha&#39;, &#39;lala&#39;])</code></pre><p>7)字典.setdefault(key, 值) —— 当key不存在时添加键值对（无法修改）</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq1.setdefault(&#39;zizi&#39;, 14)
+print(seq1)  # {&#39;ha&#39;: 12, &#39;lala&#39;: 23, &#39;zizi&#39;: 14}</code></pre><p>8)字典1.update(字典2) —— 将字典2的键值对添加到字典1</p>
+<pre><code>seq1 = {&#39;ha&#39;: 12, &#39;lala&#39;: 23}
+seq2 = {&#39;zizi&#39;: 14}
+seq1.update(seq2)
+print(seq1)   # {&#39;ha&#39;: 12, &#39;lala&#39;: 23, &#39;zizi&#39;: 14}</code></pre>
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5">基础阶段</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/%E7%8E%A9%E8%BD%AC%E5%85%83%E7%BB%84%E5%92%8C%E5%AD%97%E5%85%B8">玩转元组和字典</a>
+              
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      <div class="disqus" style="width:100%">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_shortname = 'luo sir';
+    var disqus_config = function () {
+      this.page.url = 'http://yoursite.com/2019/11/02/元组和字典/';
+      this.page.identifier = '/2019/11/02/元组和字典/';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Disqus.</a></noscript>
+</div>
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener">京ICP证123456号</a>
+      
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+           target="_blank" rel="nofollow noopener"> | 京公网安备12345678号</a>
+      
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+  <script src="/js/lazyload.js" ></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "元组和字典&nbsp;",
+      ],
+      cursorChar: "❤",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "left",
+      visible: "true",
+      
+      icon: "@"
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) || (/Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent))) {
+      $("#background").css("background-attachment", "scroll");
+    }
+  </script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click.js"></script>
+
+  <!--崩溃欺骗-->
+  <script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+</body>
+</html>
